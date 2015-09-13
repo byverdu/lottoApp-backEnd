@@ -5,7 +5,10 @@ var mongoose = require('mongoose'),
 
 var LottoSchema = mongoose.Schema({
 
-  date: String
+  date: String,
+  lastResult: Array,
+  mostRepeated: Array,
+  statistics: Array
 });
 
 LottoSchema.methods.setNewDate = function() {
