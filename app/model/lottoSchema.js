@@ -13,7 +13,12 @@ var LottoSchema = mongoose.Schema({
 
 LottoSchema.methods.setNewDate = function() {
   console.log('setNewDate called');
-  this.date = helper.newFormatedDate();
+  try {
+    this.date = helper.newFormatedDate();
+  } catch (e) {
+    console.log('setNewDate exception', e.message);
+    this.date = new Date();
+  }
 };
 
 module.exports = LottoSchema;

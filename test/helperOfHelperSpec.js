@@ -1,13 +1,17 @@
 /*global before, describe, it*/
+
 'use strict';
 
 var chai     = require('chai'),
   expect     = chai.expect,
-  HelperDate = require('../helpers/helperDate'),
-  helperDate;
+  HelperDate = require('../app/helpers/helperDate'),
+  HelperArray = require('../app/helpers/helperArray'),
+  helperDate,
+  helperArray;
 
 before(()    => {
   helperDate = new HelperDate();
+  helperArray = new HelperArray();
 });
 
 describe('helper of helper?', () => {
@@ -54,6 +58,15 @@ describe('helper of helper?', () => {
     });
     it('#buildSpanishDate, returns a String', () => {
       expect(helperDate.buildSpanishDate()).to.be.a('String').and.have.length.least(5);
+    });
+  });
+
+  describe('HelperArray', () => {
+    it('#HelperArray, is defined', () => {
+      expect(helperArray).not.to.be.undefined;
+    });
+    it('#HelperArray, is defined', () => {
+      expect(helperArray).not.to.be.undefined;
     });
   });
 });

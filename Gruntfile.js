@@ -14,34 +14,22 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['Gruntfile.js', 'app/**/*.js'],
+      files: ['test/*.js','Gruntfile.js', 'app/**/*.js'],
 
       options: {
-
         curly: true,
         camelcase: true,
         eqeqeq: true,
         reporter: require('jshint-stylish'),
-        globalstrict: false,
+        globalstrict: true,
         undef: true,
         unused: true,
         node: true,
         mocha: true,
-        expr: true
+        expr: true,
+        esnext: true
       }
     },
-
-    // mochaTest: {
-    //   test: {
-    //     options: {
-    //       reporter: 'spec',
-    //       growl: true,
-    //       timeout: 1000
-    //     },
-    //     src: ['test/*.js']
-    //   }
-    // },
-
     watch: {
       options: {
         nospawn: true
@@ -53,26 +41,17 @@ module.exports = function(grunt) {
         tasks: ['develop', 'jshint']
       },
       js: {
-        files: ['Gruntfile.js','app/**/*.js'],
+        files: ['test/*.js','Gruntfile.js', 'app/**/*.js'],
         tasks: ['jshint'],
         options: {
 
         }
       }
-      // ,
-      // test: {
-      //   files: ['test/*.js'],
-      //   tasks: ['mochaTest'],
-      //   options: {
-      //     nospawn: false
-      //   }
-      // }
     }
   });
 
   grunt.registerTask('default', [
     'develop',
-    // 'mochaTest',
     'jshint',
     'watch'
   ]);

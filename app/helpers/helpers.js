@@ -3,8 +3,7 @@
 var HelperDate = require('./HelperDate'),
   helperDate = new HelperDate();
 
-function Helper() {
-
+module.exports = function Helper(){
   this.newFormatedDate = () => {
     return helperDate.buildSpanishDate();
   };
@@ -12,6 +11,4 @@ function Helper() {
   return {
     newFormatedDate: this.newFormatedDate
   };
-}
-
-module.exports = Helper;
+};

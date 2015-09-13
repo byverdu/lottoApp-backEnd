@@ -1,10 +1,10 @@
-/*global before, describe, it*/
+/*global before, it, describe*/
 'use strict';
 
 var chai     = require('chai'),
   expect     = chai.expect,
-  Helper     = require('../helpers/helpers'),
-  HelperDate = require('../helpers/helperDate'),
+  Helper     = require('../app/helpers/helpers'),
+  HelperDate = require('../app/helpers/helperDate'),
   helper,
   helperDate;
 
