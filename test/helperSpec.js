@@ -21,4 +21,10 @@ describe('Helper and methods', () => {
   it('#Helper.newFormatedDate, returns a String', () => {
     expect(helper.newFormatedDate()).to.be.a('String').and.have.length.least(5);
   });
+  it('#Helper.addStringNumZero, is defined', () => {
+    expect(helper.addStringNumZero).to.be.a('Function');
+  });
+  it('#Helper.addStringNumZero, returns "08" for 8', () => {
+    expect(helper.addStringNumZero('8')).to.eq('08');
+  });
 });

@@ -1,4 +1,6 @@
 'use strict';
+var bonoJsonFile = require('../jsonResult/bono');
+console.log(bonoJsonFile,'bonoJsonFile console ');
 module.exports = () => {
   return {
     globals: {

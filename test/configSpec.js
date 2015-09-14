@@ -2,8 +2,8 @@
 
 'use strict';
 
-var chai     = require('chai'),
-  expect     = chai.expect,
+var chai = require('chai'),
+  expect = chai.expect,
   config = require('../app/config/config');
 
 describe('Configuration file', () => {

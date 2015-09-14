@@ -13,8 +13,14 @@ module.exports = function(grunt) {
       }
     },
 
+    nodemon: {
+      dev: {
+        script: 'app/server.js'
+      }
+    },
+
     jshint: {
-      files: ['test/*.js','Gruntfile.js', 'app/**/*.js'],
+      files: ['test/*.js', 'Gruntfile.js', 'app/**/*.js'],
 
       options: {
         curly: true,
@@ -36,12 +42,13 @@ module.exports = function(grunt) {
       },
       server: {
         files: [
-          'app/bin/init'
+          'app/bin/init',
+          'app/server'
         ],
         tasks: ['develop', 'jshint']
       },
       js: {
-        files: ['test/*.js','Gruntfile.js', 'app/**/*.js'],
+        files: ['test/*.js', 'Gruntfile.js', 'app/**/*.js'],
         tasks: ['jshint'],
         options: {
 
@@ -52,6 +59,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [
     'develop',
+    'nodemon',
     'jshint',
     'watch'
   ]);

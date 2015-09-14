@@ -7,10 +7,10 @@ HelperDate.prototype.getValuesNewDate = () => {
   let date = new Date();
 
   return {
-    getDayWeek: date.getDay(),
+    getDayWeek : date.getDay(),
     getDayMonth: date.getDate(),
-    getMonth: date.getMonth(),
-    getYear: date.getFullYear()
+    getMonth   : date.getMonth(),
+    getYear    : date.getFullYear()
   };
 };
 
@@ -20,7 +20,7 @@ HelperDate.prototype.getSpanishValues = (array,
 };
 
 HelperDate.prototype.spanishValues = {
-  days: [
+  days  : [
     'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado',
   ],
   months: [
@@ -36,12 +36,11 @@ HelperDate.prototype.buildSpanishDate = () => {
     year,
     helper;
 
-  helper = new HelperDate();
-
-  day = helper.getSpanishValues(helper.spanishValues.days, helper.getValuesNewDate().getDayWeek);
+  helper    = new HelperDate();
+  day       = helper.getSpanishValues(helper.spanishValues.days, helper.getValuesNewDate().getDayWeek);
   dayNumber = helper.getValuesNewDate().getDayMonth;
-  month = helper.getSpanishValues(helper.spanishValues.months, helper.getValuesNewDate().getMonth);
-  year = helper.getValuesNewDate().getYear;
+  month     = helper.getSpanishValues(helper.spanishValues.months, helper.getValuesNewDate().getMonth);
+  year      = helper.getValuesNewDate().getYear;
 
   return `${day}, ${dayNumber}-${month}-${year}`;
 };

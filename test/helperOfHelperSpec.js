@@ -65,7 +65,7 @@ describe('helper of helper?', () => {
     it('#HelperArray, is defined', () => {
       expect(helperArray).not.to.be.undefined;
     });
-    it('#HelperArray, is defined', () => {
+    it('#HelperArray, has a sort', () => {
       expect(helperArray).not.to.be.undefined;
     });
   });
