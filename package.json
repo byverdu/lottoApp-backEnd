@@ -7,12 +7,15 @@
     "type": "git",
     "url": "https://bitbucket.org/byverdu/lottoappmongodb/src"
   },
-  "script": {
+  "scripts": {
+    "babel-node": "babel-node --stage 0 --ignore='foo|bar|baz'",
+    "test": "mocha --compilers js:babel/register",
     "start": "node ./bin/init"
   },
   "author": "Albert Vallverdu <byverdu@gmail.com>",
   "license": "no",
   "dependencies": {
+    "babel": "^5.8.23",
     "express": "^4.13.3",
     "mongodb": "^2.0.40",
     "mongodb-uri": "^0.9.7",
@@ -30,7 +33,7 @@
     "grunt-nodemon": "^0.4.0",
     "jshint-stylish": "^2.0.1",
     "load-grunt-tasks": "^3.2.0",
-    "mocha": "^2.2.4",
+    "mocha": "*2.2.4",
     "time-grunt": "^1.2.1"
   }
 }

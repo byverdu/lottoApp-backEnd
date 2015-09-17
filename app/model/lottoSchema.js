@@ -1,8 +1,9 @@
 'use strict';
-var mongoose = require('mongoose'),
-  Helper = require('../helpers/helpers'),
-  helper = new Helper();
 
+import mongoose   from 'mongoose';
+import { Helper } from '../helpers/helpers';
+
+var helper = new Helper();
 var LottoSchema = mongoose.Schema({
 
   date: String,
@@ -16,7 +17,7 @@ LottoSchema.methods.setNewDate = function() {
   try {
     this.date = helper.newFormatedDate();
   } catch (e) {
-    console.log('setNewDate exception', e.message);
+    console.log('setNewDate exception called', e.message);
     this.date = new Date();
   }
 };

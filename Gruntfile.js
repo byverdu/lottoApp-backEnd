@@ -23,6 +23,7 @@ module.exports = function(grunt) {
       files: ['test/*.js', 'Gruntfile.js', 'app/**/*.js'],
 
       options: {
+        // expr: true,
         curly: true,
         camelcase: true,
         eqeqeq: true,
@@ -32,7 +33,6 @@ module.exports = function(grunt) {
         unused: true,
         node: true,
         mocha: true,
-        expr: true,
         esnext: true
       }
     },

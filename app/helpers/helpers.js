@@ -1,9 +1,12 @@
 'use strict';
 
-var HelperDate = require('./HelperDate'),
-  helperDate   = new HelperDate();
+// var HelperDate = require('./preHelpers'),
+//   helperDate   = new HelperDate();
 
-module.exports = function Helper(){
+import { HelperDate } from './preHelpers';
+var helperDate = new HelperDate();
+
+export function Helper(){
 
   this.newFormatedDate = () => {
     return helperDate.buildSpanishDate();
@@ -17,4 +20,4 @@ module.exports = function Helper(){
     newFormatedDate: this.newFormatedDate,
     addStringNumZero: this.addStringNumZero
   };
-};
+}
