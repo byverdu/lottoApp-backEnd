@@ -67,8 +67,27 @@ function HelperDate() {
   };
 }
 
-function HelperArray(){
+function HelperArray() {
 
+  this.sortFirstToLast = (array) => {
+    return array.sort( (a, b) => {
+      return (a-b);
+    });
+  };
+
+  this.concatString = (array) => {
+
+    var result = '';
+    array.map((el) => {
+      result = result.concat(el,',');
+    });
+    return result.slice(0, -1);
+  };
+
+  return {
+    concatString: this.concatString,
+    sortFirstToLast: this.sortFirstToLast
+  };
 }
 
 export {

@@ -1,4 +1,4 @@
-/*global before, describe, it*/
+/*global before, describe, it, xit*/
 
 'use strict';
 
@@ -96,8 +96,17 @@ describe('helper of helper?', () => {
     it('#HelperArray, is defined', () => {
       expect(_Array).not.to.equal(undefined);
     });
-    it('#HelperArray, has a sort', () => {
-      expect(_Array).not.to.equal(undefined);
+    it('#HelperArray.sortFirstToLast', () => {
+      expect(_Array.sortFirstToLast).not.to.equal(undefined);
+    });
+    it('#HelperArray.sortFirstToLast(["06","34","03","12"]) returns ["03","06","12","34"]', () => {
+      expect(_Array.sortFirstToLast(['06','34','03','12'])).to.be.eql(['03','06','12','34']);
+    });
+    it('#HelperArray.concatString is defined', () => {
+      expect(_Array.concatString).not.to.equal(undefined);
+    });
+    it('#HelperArray.concatString(["04","06","34"]) returns "04,06,34"', () => {
+      expect(_Array.concatString(['04','06','34'])).to.eql('04,06,34');
     });
   });
 

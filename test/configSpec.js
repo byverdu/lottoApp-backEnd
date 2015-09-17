@@ -9,7 +9,7 @@ var chai = require('chai'),
 describe('Configuration file', () => {
 
   it('Is defined', () => {
-    expect(config).to.be.defined;
+    expect(config).not.to.equal(undefined);
   });
   it('It has a "globals" property that is an object with global settings', () => {
     expect(config()).to.have.property('globals').and.is.an('Object');
