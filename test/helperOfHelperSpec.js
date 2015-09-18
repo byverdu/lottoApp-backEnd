@@ -9,7 +9,8 @@ from '../app/helpers/preHelpers';
 
 import chai from 'chai';
 
-var expect = chai.expect,
+var data = require('./sampleData')(),
+  expect = chai.expect,
   _Date,
   _String,
   _Array;
@@ -24,64 +25,43 @@ describe('helper of helper?', () => {
 
   describe('HelperDate', () => {
 
-    var spanishValues = {
-      days: [
-        'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado',
-      ],
-      months: [
-        'Dic', 'Ene', 'Feb', 'Mar', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov',
-      ]
-    };
+    var SPvalues = data.spanishValues,
+      getSPValues = data.getSpanishValues;
 
-    var getSpanishValues = (array, index) => {
-      return array[index];
-    };
-
-    var getValuesNewDate = () => {
-
-      let date = new Date();
-
-      return {
-        getDayWeek: date.getDay(),
-        getDayMonth: date.getDate(),
-        getMonth: date.getMonth(),
-        getYear: date.getFullYear()
-      };
-    };
     it('#getValuesNewDate, is defined', () => {
-      expect(getValuesNewDate).to.be.a('Function');
+      expect(data.getValuesNewDate).to.be.a('Function');
     });
     it('#getValuesNewDate, returns and object', () => {
-      expect(getValuesNewDate()).is.an('Object');
+      expect(data.getValuesNewDate()).is.an('Object');
     });
     it('#getValuesNewDate, has a getDayWeek property', () => {
-      expect(getValuesNewDate()).to.have.property('getDayWeek').and.be.a('Number');
+      expect(data.getValuesNewDate()).to.have.property('getDayWeek').and.be.a('Number');
     });
     it('#getValuesNewDate, has a getDayMonth property', () => {
-      expect(getValuesNewDate()).to.have.property('getDayMonth').and.be.a('Number');
+      expect(data.getValuesNewDate()).to.have.property('getDayMonth').and.be.a('Number');
     });
     it('#getValuesNewDate, has a getMonth property', () => {
-      expect(getValuesNewDate()).to.have.property('getMonth').and.be.a('Number');
+      expect(data.getValuesNewDate()).to.have.property('getMonth').and.be.a('Number');
     });
     it('#getValuesNewDate, has a getYear property', () => {
-      expect(getValuesNewDate()).to.have.property('getYear').and.be.a('Number');
+      expect(data.getValuesNewDate()).to.have.property('getYear').and.be.a('Number');
     });
 
     it('#getSpanishValues, is defined', () => {
-      expect(getSpanishValues).to.be.a('Function');
+      expect(getSPValues).to.be.a('Function');
     });
 
     it('#getSpanishValues, returns Domingo with index 0', () => {
-      expect(getSpanishValues(spanishValues.days, 0)).to.eq('Domingo');
+      expect(getSPValues(SPvalues.days, 0)).to.eq('Domingo');
     });
     it('#getSpanishValues, returns Jueves with index 4', () => {
-      expect(getSpanishValues(spanishValues.days, 4)).to.eq('Jueves');
+      expect(getSPValues(SPvalues.days, 4)).to.eq('Jueves');
     });
     it('#getSpanishValues, returns Dic with index 0', () => {
-      expect(getSpanishValues(spanishValues.months, 0)).to.eq('Dic');
+      expect(getSPValues(SPvalues.months, 0)).to.eq('Dic');
     });
     it('#getSpanishValues, returns Ago with index 7', () => {
-      expect(getSpanishValues(spanishValues.months, 7)).to.eq('Ago');
+      expect(getSPValues(SPvalues.months, 7)).to.eq('Ago');
     });
 
     it('#buildSpanishDate, is defined', () => {
@@ -100,13 +80,13 @@ describe('helper of helper?', () => {
       expect(_Array.sortFirstToLast).not.to.equal(undefined);
     });
     it('#HelperArray.sortFirstToLast(["06","34","03","12"]) returns ["03","06","12","34"]', () => {
-      expect(_Array.sortFirstToLast(['06','34','03','12'])).to.be.eql(['03','06','12','34']);
+      expect(_Array.sortFirstToLast(['06', '34', '03', '12'])).to.be.eql(['03', '06', '12', '34']);
     });
     it('#HelperArray.concatString is defined', () => {
       expect(_Array.concatString).not.to.equal(undefined);
     });
     it('#HelperArray.concatString(["04","06","34"]) returns "04,06,34"', () => {
-      expect(_Array.concatString(['04','06','34'])).to.eql('04,06,34');
+      expect(_Array.concatString(['04', '06', '34'])).to.eql('04,06,34');
     });
   });
 
