@@ -19,10 +19,10 @@ describe('Helper and methods', () => {
   it('#Helper.newFormatedDate, returns a String', () => {
     expect(helper.newFormatedDate()).to.be.a('String').and.have.length.least(5);
   });
-  it('#Helper.addStringNumZero, is defined', () => {
-    expect(helper.addStringNumZero).to.be.a('Function');
+  it('#Helper.prepareArrayXrayToSave, is defined', () => {
+    expect(helper.prepareArrayXrayToSave).to.be.a('Function');
   });
-  xit('#Helper.addStringNumZero, returns "08" for 8', () => {
-    expect(helper.addStringNumZero('8')).to.eq('08');
+  it('#Helper.prepareArrayXrayToSave(["34", "9", "23"," 7", "5"]), returns "05,07,09,23,34"', () => {
+    expect(helper.prepareArrayXrayToSave(['34', '9', '23',' 7', '5'])).to.eq('05,07,09,23,34');
   });
 });
