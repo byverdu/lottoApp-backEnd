@@ -88,6 +88,15 @@ describe('helper of helper?', () => {
     it('#HelperArray.concatString(["04","06","34"]) returns "04,06,34"', () => {
       expect(_Array.concatString(['04', '06', '34'])).to.eql('04,06,34');
     });
+    it('#HelperArray.splitAllResultArray is defined', () => {
+      expect(_Array.splitAllResultArray).not.to.equal(undefined);
+    });
+    it('#HelperArray.splitAllResultArray(), returns and [] with the split items', () => {
+      expect(_Array.splitAllResultArray(data.allResultShort)).not.to.be.empty;
+    });
+    it('#HelperArray.splitAllResultArray() is defined', () => {
+      expect(_Array.splitAllResultArray(data.allResultShort)).to.eql([['18','28','30','31','34','40'],['01','15','35','36','37','40'],['02','11','29','30','32','45']]);
+    });
   });
 
   describe('HelperString', () => {

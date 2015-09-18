@@ -84,9 +84,20 @@ function HelperArray() {
     return result.slice(0, -1);
   };
 
+  this.splitAllResultArray = (array) => {
+
+    let tempArray = [];
+    array.map( (el, ind ,arr) => {
+      tempArray.push(el.split(','));
+    });
+
+    return tempArray;
+  };
+
   return {
     concatString: this.concatString,
-    sortFirstToLast: this.sortFirstToLast
+    sortFirstToLast: this.sortFirstToLast,
+    splitAllResultArray: this.splitAllResultArray
   };
 }
 
