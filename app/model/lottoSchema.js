@@ -19,15 +19,16 @@ var LottoSchema = mongoose.Schema({
 LottoSchema.methods.setNewDate = function() {
   console.log('setNewDate called');
   try {
-    this.date = helper.newFormatedDate();
+    this.date = helper.setNewFormatedDate();
   } catch (e) {
+  
     console.log('setNewDate exception called', e.message);
     this.date = new Date();
   }
 };
 
 LottoSchema.methods.setLastResult = function(array) {
-  this.lastResult = helper.prepareArrayXrayToSave(array);
+  this.lastResult = helper.setXrayArrayToSave(array);
 
   return this.lastResult;
 };
@@ -38,6 +39,10 @@ LottoSchema.methods.setMostRepeated = function() {
 
 LottoSchema.methods.setAllResults = function(lastResult) {
   return this.allResults.push(lastResult);
+};
+
+LottoSchema.methods.getAllResults = function() {
+  return helper.setAllResulstArrayToCount(this.allResults);
 };
 
 module.exports = LottoSchema;

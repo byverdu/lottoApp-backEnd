@@ -84,23 +84,27 @@ function HelperArray() {
     return result.slice(0, -1);
   };
 
-  this.splitAllResultArray = (array) => {
+  this.splitArray = (array) => {
 
     let tempArray = [];
-    array.map( (el, ind ,arr) => {
+    array.map( (el) => {
       tempArray.push(el.split(','));
     });
-
     return tempArray;
   };
 
   return {
     concatString: this.concatString,
     sortFirstToLast: this.sortFirstToLast,
-    splitAllResultArray: this.splitAllResultArray
+    splitArray: this.splitArray
   };
 }
 
+function HelperObject(){
+
+  
+}
+
 export {
-  HelperString, HelperDate, HelperArray
+  HelperString, HelperDate, HelperArray, HelperObject
 };

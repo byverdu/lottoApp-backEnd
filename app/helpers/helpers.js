@@ -1,22 +1,22 @@
 'use strict';
 
-// var HelperDate = require('./preHelpers'),
-//   helperDate   = new HelperDate();
-
-import { HelperDate, HelperString, HelperArray } from './preHelpers';
+import {
+  HelperDate, HelperString, HelperArray
+}
+from './preHelpers';
 var _Date = new HelperDate(),
   _String = new HelperString(),
-  _Array = new HelperArray;
+  _Array = new HelperArray();
 
-export function Helper(){
+export function Helper() {
 
-  this.newFormatedDate = () => {
+  this.setNewFormatedDate = () => {
     return _Date.buildSpanishDate();
   };
 
-  this.prepareArrayXrayToSave = (array) => {
+  this.setXrayArrayToSave = (array) => {
 
-    array.map( (el, ind, arr) => {
+    array.map((el, ind, arr) => {
       arr[ind] = _String.deleteWhiteSpace(arr[ind]);
       arr[ind] = _String.addStringNumZero(arr[ind]);
 
@@ -26,8 +26,22 @@ export function Helper(){
     return _Array.concatString(_Array.sortFirstToLast(array));
   };
 
+  this.setAllResulstArrayToCount = (array) => {
+
+    let tempArray = _Array.splitArray(array),
+      result = [];
+
+    tempArray.map((outerEl) => {
+      outerEl.map((innerEl) => {
+        result.push(innerEl);
+      });
+    });
+    return _Array.sortFirstToLast(result);
+  };
+
   return {
-    newFormatedDate: this.newFormatedDate,
-    prepareArrayXrayToSave: this.prepareArrayXrayToSave
+    setNewFormatedDate: this.setNewFormatedDate,
+    setXrayArrayToSave: this.setXrayArrayToSave,
+    setAllResulstArrayToCount: this.setAllResulstArrayToCount
   };
 }

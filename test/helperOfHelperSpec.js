@@ -3,7 +3,7 @@
 'use strict';
 
 import {
-  HelperString, HelperDate, HelperArray
+  HelperString, HelperDate, HelperArray, HelperObject
 }
 from '../app/helpers/preHelpers';
 
@@ -13,12 +13,14 @@ var data = require('./sampleData')(),
   expect = chai.expect,
   _Date,
   _String,
-  _Array;
+  _Array,
+  _Object;
 
 before(() => {
   _Date = new HelperDate();
   _Array = new HelperArray();
   _String = new HelperString();
+  _Object = new HelperObject
 });
 
 describe('helper of helper?', () => {
@@ -88,14 +90,14 @@ describe('helper of helper?', () => {
     it('#HelperArray.concatString(["04","06","34"]) returns "04,06,34"', () => {
       expect(_Array.concatString(['04', '06', '34'])).to.eql('04,06,34');
     });
-    it('#HelperArray.splitAllResultArray is defined', () => {
-      expect(_Array.splitAllResultArray).not.to.equal(undefined);
+    it('#HelperArray.splitArray is defined', () => {
+      expect(_Array.splitArray).not.to.equal(undefined);
     });
-    it('#HelperArray.splitAllResultArray(), returns and [] with the split items', () => {
-      expect(_Array.splitAllResultArray(data.allResultShort)).not.to.be.empty;
+    it('#HelperArray.splitArray(), returns and []', () => {
+      expect(_Array.splitArray(data.allResultShort)).to.be.an('Array');
     });
-    it('#HelperArray.splitAllResultArray() is defined', () => {
-      expect(_Array.splitAllResultArray(data.allResultShort)).to.eql([['18','28','30','31','34','40'],['01','15','35','36','37','40'],['02','11','29','30','32','45']]);
+    it('#HelperArray.splitArray(), returns and [] with the split items', () => {
+      expect(_Array.splitArray(data.allResultShort)).to.eql([['18','28','30','31','34','40'],['01','15','35','36','37','40'],['02','11','29','30','32','45']]);
     });
   });
 
@@ -115,8 +117,32 @@ describe('helper of helper?', () => {
     it('#HelperString.addStringNumZero("9"), returns "09"', () => {
       expect(_String.addStringNumZero('9')).to.eq('09');
     });
+    it('#HelperString.addStringNumZero("19"), returns "19"', () => {
+      expect(_String.addStringNumZero('19')).to.eq('19');
+    });
     it('#HelperString.addStringNumZero("0"), returns "00"', () => {
       expect(_String.addStringNumZero('0')).to.eq('00');
+    });
+  });
+
+  describe('HelperObject', () => {
+    it('#HelperObject, is defined', () => {
+      expect(_Object).not.to.equal(undefined);
+    });
+    it('#HelperObject has a prepareArrayForCount method', () => {
+      expect(data.prepareArrayForCount).not.to.equal(undefined);
+    });
+    xit('#HelperObject, has a deleteWhiteSpace method', () => {
+      expect(_Object.deleteWhiteSpace).not.to.equal(undefined);
+    });
+    xit('#HelperObject, has a addStringNumZero method', () => {
+      expect(_Object.addStringNumZero).not.to.equal(undefined);
+    });
+    xit('#HelperObject.addStringNumZero("9"), returns "09"', () => {
+      expect(_Object.addStringNumZero('9')).to.eq('09');
+    });
+    xit('#HelperObject.addStringNumZero("0"), returns "00"', () => {
+      expect(_Object.addStringNumZero('0')).to.eq('00');
     });
   });
 });

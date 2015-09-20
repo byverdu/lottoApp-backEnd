@@ -4,7 +4,8 @@
 import { Helper } from '../app/helpers/helpers';
 import chai from 'chai';
 
-var expect     = chai.expect,
+var data = require('./sampleData')(),
+expect     = chai.expect,
   helper;
 
 before(()    => {
@@ -13,16 +14,25 @@ before(()    => {
 
 describe('Helper and methods', () => {
 
-  it('#Helper.newFormatedDate, is defined', () => {
-    expect(helper.newFormatedDate).to.be.a('Function');
+  it('#Helper.setNewFormatedDate, is defined', () => {
+    expect(helper.setNewFormatedDate).to.be.a('Function');
   });
-  it('#Helper.newFormatedDate, returns a String', () => {
-    expect(helper.newFormatedDate()).to.be.a('String').and.have.length.least(5);
+  it('#Helper.setNewFormatedDate, returns a String', () => {
+    expect(helper.setNewFormatedDate()).to.be.a('String').and.have.length.least(5);
   });
-  it('#Helper.prepareArrayXrayToSave, is defined', () => {
-    expect(helper.prepareArrayXrayToSave).to.be.a('Function');
+  it('#Helper.setXrayArrayToSave, is defined', () => {
+    expect(helper.setXrayArrayToSave).to.be.a('Function');
   });
-  it('#Helper.prepareArrayXrayToSave(["34", "9", "23"," 7", "5"]), returns "05,07,09,23,34"', () => {
-    expect(helper.prepareArrayXrayToSave(['34', '9', '23',' 7', '5'])).to.eq('05,07,09,23,34');
+  it('#Helper.setXrayArrayToSave(["34", "9", "23"," 7", "5"]), returns "05,07,09,23,34"', () => {
+    expect(helper.setXrayArrayToSave(['34', '9', '23',' 7', '5'])).to.eq('05,07,09,23,34');
+  });
+  it('#Helper.setAllResulstArrayToCount, is defined', () => {
+    expect(helper.setAllResulstArrayToCount).to.be.a('Function');
+  });
+  it('#Helper.setAllResulstArrayToCount(), returns an instance of []', () => {
+    expect(helper.setAllResulstArrayToCount(data.allResultShort)).to.be.an('Array');
+  });
+  it('#Helper.setAllResulstArrayToCount(array), returns [] with sorted and single Strings', () => {
+    expect(helper.setAllResulstArrayToCount(data.allResultShort)).to.eql(['01', '02', '11', '15', '18', '28', '29', '30', '30', '31', '32', '34', '35', '36', '37', '40', '40', '45']);
   });
 });
