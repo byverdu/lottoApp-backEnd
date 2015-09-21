@@ -41,9 +41,11 @@ export function Helper() {
   };
 
   this.createObjectCount = (index, count) => {
-
-    return {"index": index, "count": count}
-  }
+    // let obj = {};
+    // obj.index = index;
+    // obj.count = count;
+    return {'index': index, 'count': count};
+  };
 
   return {
     setNewFormatedDate: this.setNewFormatedDate,

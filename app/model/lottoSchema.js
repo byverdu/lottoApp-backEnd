@@ -45,26 +45,35 @@ LottoSchema.methods.getAllResults = function() {
   return helper.setAllResulstArrayToCount(this.allResults);
 };
 
-LottoSchema.methods.setStatisticsCount = function(){
+LottoSchema.methods.getCountAllResults = function() {
   var values = this.getAllResults(),
-   copy = values.slice(0,-1),
-   result = [];
+    copy = values.slice(0),
+    result = [];
 
-   values.map( (outerEl, outerInd, outerArr) => {
-     var count = 0;
-     copy.map( (innerEl, innerInd, innerArr) => {
+  values.forEach((outerEl, outerInd, outerArr) => {
+    var count = 0;
+    copy.forEach((innerEl, innerInd, innerArr) => {
 
-       if(outerArr[outerInd] == innerArr[innerInd]){
-         count++;
-         if(count>0){
-           result.push(helper.createObjectCount(outerEl, count));
-         }
-       }
+      if (outerArr[outerInd] === innerArr[innerInd]) {
+        count++;
+        delete innerArr[innerInd];
+      }
+    });
+    if (count > 0) {
+      result.push(helper.createObjectCount(outerEl, count));
+    }
+  });
 
-     });
-   });
+	return result;
+};
 
-  return result;
+LottoSchema.methods.setStatistics = function(){
+	this.statistics = this.getCountAllResults();
+	return this.statistics;
+};
+
+LottoSchema.methods.getStatistics = function(){
+	return this.statistics;
 };
 
 module.exports = LottoSchema;

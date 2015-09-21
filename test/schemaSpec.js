@@ -12,6 +12,11 @@ var data = require('./sampleData')(),
   lotto,
   jsonFile = require('../app/jsonResult/bono.json');
 
+function createDummyData(){
+	data.allResultLong.map( (el) => {
+			lotto.setAllResults(el);
+	});
+}
 
 before(done => {
   connection = mongoose.createConnection('mongodb://127.0.0.1/example-test');
@@ -72,24 +77,44 @@ describe('LottoSchema methods and properties', () => {
     lotto.setAllResults('01,15,35,36,37,40');
     lotto.setAllResults('02,11,29,30,32,45');
     expect(lotto.getAllResults(data.allResultShort)).to.eql(['01', '02', '11', '15', '18', '28', '29', '30', '30', '31', '32', '34', '35', '36', '37', '40', '40', '45']);
+		lotto.allResults = [];
     done();
   });
 
-  it('LottoSchema has a setStatisticsCount method', () => {
-    expect(lotto.setStatisticsCount).not.to.equal(undefined);
+  it('LottoSchema has a getCountAllResults method', done => {
+    expect(lotto.getCountAllResults).not.to.equal(undefined);
+		done();
   });
-  it('LottoSchema.setStatisticsCount(allResults) returns []', () => {
-    expect(lotto.setStatisticsCount()).to.be.an('Array');
+  it('LottoSchema.getCountAllResults(allResults) returns []', done => {
+    expect(lotto.getCountAllResults()).to.be.an('Array');
+		done();
   });
-  it('LottoSchema.setStatisticsCount(allResults) returns [{}]', () => {
-    expect(lotto.setStatisticsCount()).to.include({});
+  it('LottoSchema.getCountAllResults(allResults) returns ordered objects [{index: "12",count: 4}...]', done => {
+    createDummyData();
+    expect(lotto.getCountAllResults()).to.eql(data.allResultLongObjOrdered);
+		done();
+		lotto.allResults = [];
   });
-  it('LottoSchema.setStatisticsCount(allResults) returns ordered objects [{index: "12",count: 4}...]', () => {
-    data.allResultLong.map( (el) => {
-        lotto.setAllResults(el);
-    });
-    expect(lotto.setStatisticsCount()).to.eq(data.allResultLongObjOrdered);
+	it('LottoSchema has a setStatistics method', done => {
+    expect(lotto.setStatistics).not.to.equal(undefined);
+		done();
   });
+	it('LottoSchema.setStatistics() sets lotto.statistics', done => {
+			createDummyData();
+			lotto.setStatistics();
+    expect(lotto.statistics).to.have.length.above(12);
+    lotto.allResults = [];
+		done();
+  });
+  it('LottoSchema has a getStatistics method', done => {
+    expect(lotto.getStatistics).not.to.equal(undefined);
+		done();
+  });
+  it('LottoSchema.getStatistics() returns the statistics', done => {
+    expect(lotto.getStatistics()).to.have.length.above(12);
+		done();
+  });
+
 
 
   it('LottoSchema.date, is defined and is a String', done => {

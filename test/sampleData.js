@@ -46,7 +46,7 @@ module.exports = function() {
       };
     },
 
-    allResultLongObjOrdered: [{index: '07', count: 1},{index: '12', count: 4}, {index: '13', count: 1}, {index: '15', count: 3}, {index: '16', count: 3}, {index: '19', count: 1}, {index: '20', count: 1}, {index: '23', count: 3}, {index: '24', count: 1}, {index: '27', count: 1}, {index: '28', count: 3}, {index: '30', count: 1}, {index: '33', count: 1}, {index: '37', count: 1}, {index: '38', count: 1}, {index: '39', count: 2}, {index: '41', count: 1}, {index: '42', count: 1}, {index: '43', count: 1}, {index: '41', count: 1},{index: '44', count: 1},{index: '46', count: 1},{index: '47', count: 1}, {index: '49', count: 2}
+    allResultLongObjOrdered: [{index: '07', count: 1},{index: '12', count: 4}, {index: '13', count: 1}, {index: '15', count: 3}, {index: '16', count: 3}, {index: '19', count: 1}, {index: '20', count: 1}, {index: '23', count: 3}, {index: '24', count: 1}, {index: '27', count: 1}, {index: '28', count: 3}, {index: '30', count: 1}, {index: '33', count: 1}, {index: '37', count: 1}, {index: '38', count: 1}, {index: '39', count: 2}, {index: '41', count: 1}, {index: '42', count: 1}, {index: '43', count: 1}, {index: '44', count: 1},{index: '46', count: 1},{index: '47', count: 1}, {index: '49', count: 2}
     ]
   };
 };
