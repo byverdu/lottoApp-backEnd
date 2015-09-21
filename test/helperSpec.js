@@ -35,4 +35,10 @@ describe('Helper and methods', () => {
   it('#Helper.setAllResulstArrayToCount(array), returns [] with sorted and single Strings', () => {
     expect(helper.setAllResulstArrayToCount(data.allResultShort)).to.eql(['01', '02', '11', '15', '18', '28', '29', '30', '30', '31', '32', '34', '35', '36', '37', '40', '40', '45']);
   });
+  it('#Helper, has a createObjectCount method', () => {
+    expect(helper.createObjectCount).not.to.equal(undefined);
+  });
+  it('#Helper.createObjectCount(index, count) returns {index: "12",count: 4}', () => {
+    expect(helper.createObjectCount()).to.have.keys('index', 'count');
+  });
 });

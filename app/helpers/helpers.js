@@ -1,12 +1,13 @@
 'use strict';
 
 import {
-  HelperDate, HelperString, HelperArray
+  HelperDate, HelperString, HelperArray, HelperObject
 }
 from './preHelpers';
 var _Date = new HelperDate(),
   _String = new HelperString(),
-  _Array = new HelperArray();
+  _Array = new HelperArray(),
+  _Object = new HelperObject();
 
 export function Helper() {
 
@@ -39,9 +40,15 @@ export function Helper() {
     return _Array.sortFirstToLast(result);
   };
 
+  this.createObjectCount = (index, count) => {
+
+    return {"index": index, "count": count}
+  }
+
   return {
     setNewFormatedDate: this.setNewFormatedDate,
     setXrayArrayToSave: this.setXrayArrayToSave,
-    setAllResulstArrayToCount: this.setAllResulstArrayToCount
+    setAllResulstArrayToCount: this.setAllResulstArrayToCount,
+    createObjectCount: this.createObjectCount
   };
 }

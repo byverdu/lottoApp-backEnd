@@ -21,7 +21,7 @@ LottoSchema.methods.setNewDate = function() {
   try {
     this.date = helper.setNewFormatedDate();
   } catch (e) {
-  
+
     console.log('setNewDate exception called', e.message);
     this.date = new Date();
   }
@@ -43,6 +43,28 @@ LottoSchema.methods.setAllResults = function(lastResult) {
 
 LottoSchema.methods.getAllResults = function() {
   return helper.setAllResulstArrayToCount(this.allResults);
+};
+
+LottoSchema.methods.setStatisticsCount = function(){
+  var values = this.getAllResults(),
+   copy = values.slice(0,-1),
+   result = [];
+
+   values.map( (outerEl, outerInd, outerArr) => {
+     var count = 0;
+     copy.map( (innerEl, innerInd, innerArr) => {
+
+       if(outerArr[outerInd] == innerArr[innerInd]){
+         count++;
+         if(count>0){
+           result.push(helper.createObjectCount(outerEl, count));
+         }
+       }
+
+     });
+   });
+
+  return result;
 };
 
 module.exports = LottoSchema;

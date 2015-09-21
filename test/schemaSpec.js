@@ -5,7 +5,7 @@ import chai from 'chai';
 import mongoose from 'mongoose';
 import LottoSchema from '../app/model/lottoSchema';
 
-var data = require('./sampleData'),
+var data = require('./sampleData')(),
   expect = chai.expect,
   connection,
   Lotto,
@@ -73,6 +73,22 @@ describe('LottoSchema methods and properties', () => {
     lotto.setAllResults('02,11,29,30,32,45');
     expect(lotto.getAllResults(data.allResultShort)).to.eql(['01', '02', '11', '15', '18', '28', '29', '30', '30', '31', '32', '34', '35', '36', '37', '40', '40', '45']);
     done();
+  });
+
+  it('LottoSchema has a setStatisticsCount method', () => {
+    expect(lotto.setStatisticsCount).not.to.equal(undefined);
+  });
+  it('LottoSchema.setStatisticsCount(allResults) returns []', () => {
+    expect(lotto.setStatisticsCount()).to.be.an('Array');
+  });
+  it('LottoSchema.setStatisticsCount(allResults) returns [{}]', () => {
+    expect(lotto.setStatisticsCount()).to.include({});
+  });
+  it('LottoSchema.setStatisticsCount(allResults) returns ordered objects [{index: "12",count: 4}...]', () => {
+    data.allResultLong.map( (el) => {
+        lotto.setAllResults(el);
+    });
+    expect(lotto.setStatisticsCount()).to.eq(data.allResultLongObjOrdered);
   });
 
 

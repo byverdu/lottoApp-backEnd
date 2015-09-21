@@ -1,4 +1,4 @@
-/*global before, describe, it, xit*/
+/*global before, describe, it, xit */
 
 'use strict';
 
@@ -128,15 +128,6 @@ describe('helper of helper?', () => {
   describe('HelperObject', () => {
     it('#HelperObject, is defined', () => {
       expect(_Object).not.to.equal(undefined);
-    });
-    it('#HelperObject has a prepareArrayForCount method', () => {
-      expect(data.prepareArrayForCount).not.to.equal(undefined);
-    });
-    xit('#HelperObject, has a deleteWhiteSpace method', () => {
-      expect(_Object.deleteWhiteSpace).not.to.equal(undefined);
-    });
-    xit('#HelperObject, has a addStringNumZero method', () => {
-      expect(_Object.addStringNumZero).not.to.equal(undefined);
     });
     xit('#HelperObject.addStringNumZero("9"), returns "09"', () => {
       expect(_Object.addStringNumZero('9')).to.eq('09');
