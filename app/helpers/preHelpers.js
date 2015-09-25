@@ -69,9 +69,15 @@ function HelperDate() {
 
 function HelperArray() {
 
-  this.sortFirstToLast = (array) => {
+  this.sortArrayFromFirstToLast = (array) => {
     return array.sort( (a, b) => {
       return (a-b);
+    });
+  };
+
+  this.sortArrayByCount = (array) => {
+    return array.sort(function(a,b){
+      return (b.count-a.count);
     });
   };
 
@@ -93,16 +99,34 @@ function HelperArray() {
     return tempArray;
   };
 
+  this.sliceArrayByLottoCount = (array, count) => {
+    return array.slice(0, count);
+  };
+
   return {
+    sortArrayFromFirstToLast: this.sortArrayFromFirstToLast,
+    sortArrayByCount: this.sortArrayByCount,
     concatString: this.concatString,
-    sortFirstToLast: this.sortFirstToLast,
-    splitArray: this.splitArray
+    splitArray: this.splitArray,
+    sliceArrayByLottoCount: this.sliceArrayByLottoCount
   };
 }
 
 function HelperObject(){
 
+  this.extractValueIndex = (array) => {
+    let mostRepeated = [];
 
+    array.map( el => {
+      mostRepeated.push(el.index);
+    });
+
+    return mostRepeated;
+  };
+
+  return {
+    extractValueIndex: this.extractValueIndex
+  };
 }
 
 export {

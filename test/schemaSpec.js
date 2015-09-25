@@ -57,6 +57,13 @@ describe('LottoSchema methods and properties', () => {
     expect(lotto.setMostRepeated).to.be.a('Function');
     done();
   });
+  it('LottoSchema.setMostRepeated, returns the most repeated sliced by count', done => {
+    createDummyData();
+    lotto.setStatistics();
+    console.log(lotto.statistics);
+    expect(lotto.setMostRepeated(data.sliceCountBall)).to.eql('12,15,16,23,28,49');
+    done();
+  });
   it('LottoSchema.setAllResults, is defined', done => {
     expect(lotto.setAllResults).to.be.a('Function');
     done();
@@ -91,7 +98,7 @@ describe('LottoSchema methods and properties', () => {
   });
   it('LottoSchema.getCountAllResults(allResults) returns ordered objects [{index: "12",count: 4}...]', done => {
     createDummyData();
-    expect(lotto.getCountAllResults()).to.eql(data.allResultLongObjOrdered);
+    expect(lotto.getCountAllResults()).to.eql(data.allResultLongObjCounted);
 		done();
 		lotto.allResults = [];
   });
@@ -127,7 +134,8 @@ describe('LottoSchema methods and properties', () => {
     expect(lotto.lastResult).to.be.a('String');
     done();
   });
-  xit('LottoSchema.mostRepeated, is defined and is a String', done => {
+  it('LottoSchema.mostRepeated, is defined and is a String', done => {
+    lotto.setMostRepeated(data.allResultLongObjCounted, data.sliceCountBall);
     expect(lotto.mostRepeated).to.be.an('String');
     done();
   });

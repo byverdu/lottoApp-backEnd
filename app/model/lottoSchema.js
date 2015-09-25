@@ -33,8 +33,9 @@ LottoSchema.methods.setLastResult = function(array) {
   return this.lastResult;
 };
 
-LottoSchema.methods.setMostRepeated = function() {
-
+LottoSchema.methods.setMostRepeated = function(count) {
+  this.mostRepeated = helper.findMostRepeatedValues(this.statistics, count);
+  return this.mostRepeated;
 };
 
 LottoSchema.methods.setAllResults = function(lastResult) {
@@ -46,13 +47,13 @@ LottoSchema.methods.getAllResults = function() {
 };
 
 LottoSchema.methods.getCountAllResults = function() {
-  var values = this.getAllResults(),
-    copy = values.slice(0),
+  var allResults = this.getAllResults(),
+    copyAllResults = allResults.slice(0),
     result = [];
 
-  values.forEach((outerEl, outerInd, outerArr) => {
+  allResults.forEach((outerEl, outerInd, outerArr) => {
     var count = 0;
-    copy.forEach((innerEl, innerInd, innerArr) => {
+    copyAllResults.forEach((innerEl, innerInd, innerArr) => {
 
       if (outerArr[outerInd] === innerArr[innerInd]) {
         count++;

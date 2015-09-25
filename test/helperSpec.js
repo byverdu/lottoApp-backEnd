@@ -41,4 +41,10 @@ describe('Helper and methods', () => {
   it('#Helper.createObjectCount(index, count) returns {index: "12",count: 4}', () => {
     expect(helper.createObjectCount()).to.have.keys('index', 'count');
   });
+  it('#Helper, has a findMostRepeatedValues method', () => {
+    expect(helper.findMostRepeatedValues).not.to.equal(undefined);
+  });
+  it('#Helper.findMostRepeatedValues(array) returns index value for most repeated', () => {
+    expect(helper.findMostRepeatedValues(data.allResultLongObjCounted, data.sliceCountBall)).to.eql('12,15,16,23,28,49');
+  });
 });

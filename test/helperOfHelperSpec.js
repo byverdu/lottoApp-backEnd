@@ -78,11 +78,11 @@ describe('helper of helper?', () => {
     it('#HelperArray, is defined', () => {
       expect(_Array).not.to.equal(undefined);
     });
-    it('#HelperArray.sortFirstToLast', () => {
-      expect(_Array.sortFirstToLast).not.to.equal(undefined);
+    it('#HelperArray.sortArrayFromFirstToLast', () => {
+      expect(_Array.sortArrayFromFirstToLast).not.to.equal(undefined);
     });
-    it('#HelperArray.sortFirstToLast(["06","34","03","12"]) returns ["03","06","12","34"]', () => {
-      expect(_Array.sortFirstToLast(['06', '34', '03', '12'])).to.be.eql(['03', '06', '12', '34']);
+    it('#HelperArray.sortArrayFromFirstToLast(["06","34","03","12"]) returns ["03","06","12","34"]', () => {
+      expect(_Array.sortArrayFromFirstToLast(['06', '34', '03', '12'])).to.be.eql(['03', '06', '12', '34']);
     });
     it('#HelperArray.concatString is defined', () => {
       expect(_Array.concatString).not.to.equal(undefined);
@@ -98,6 +98,24 @@ describe('helper of helper?', () => {
     });
     it('#HelperArray.splitArray(), returns and [] with the split items', () => {
       expect(_Array.splitArray(data.allResultShort)).to.eql([['18','28','30','31','34','40'],['01','15','35','36','37','40'],['02','11','29','30','32','45']]);
+    });
+    it('#HelperArray.sortArrayByCount is defined', () => {
+      expect(_Array.sortArrayByCount).not.to.equal(undefined);
+    });
+    it('#HelperArray.sortArrayByCount(array) returns an Array', () => {
+      expect(_Array.sortArrayByCount(data.allResultLongObjCounted)).to.be.an('Array');
+    });
+    it('#HelperArray.sortArrayByCount(array) returns the statistics ordered by count property', () => {
+      expect(_Array.sortArrayByCount(data.allResultLongObjCounted)[0]).to.eql({index: '12', count: 4});
+    });
+    it('#HelperArray.sliceArrayByLottoCount is defined', () => {
+      expect(_Array.sliceArrayByLottoCount).not.to.equal(undefined);
+    });
+    it('#HelperArray.sliceArrayByLottoCount() returns an Array', () => {
+      expect(_Array.sliceArrayByLottoCount(data.allResultLongObjOrdered, data.sliceCountBall)).to.be.an('Array');
+    });
+    it('#HelperArray.sliceArrayByLottoCount(array, count) returns "x" first most repeated values ', () => {
+      expect(_Array.sliceArrayByLottoCount(data.allResultLongObjOrdered, data.sliceCountBall)).to.contain({ index: '12', count: 4 },{ index: '16', count: 3 },{ index: '23', count: 3 },{ index: '28', count: 3 },{ index: '15', count: 3 },{ index: '49', count: 2 });
     });
   });
 
@@ -129,11 +147,15 @@ describe('helper of helper?', () => {
     it('#HelperObject, is defined', () => {
       expect(_Object).not.to.equal(undefined);
     });
-    xit('#HelperObject.addStringNumZero("9"), returns "09"', () => {
-      expect(_Object.addStringNumZero('9')).to.eq('09');
+    it('#HelperObject.extractValueIndex, is defined"', () => {
+      expect(_Object.extractValueIndex).not.to.equal(undefined);
     });
-    xit('#HelperObject.addStringNumZero("0"), returns "00"', () => {
-      expect(_Object.addStringNumZero('0')).to.eq('00');
+    it('#HelperObject.extractValueIndex(),  returns an Array', () => {
+      expect(_Object.extractValueIndex([])).to.be.an('Array');
+    });
+    it('#HelperObject.extractValueIndex(),  returns an Array', () => {
+      let dataToExtract = _Array.sliceArrayByLottoCount(data.allResultLongObjOrdered, data.sliceCountBall);
+      expect(_Object.extractValueIndex(dataToExtract)).to.eql(['12', '16', '23', '28', '15', '49']);
     });
   });
 });

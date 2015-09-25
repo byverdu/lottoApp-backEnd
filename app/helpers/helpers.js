@@ -24,7 +24,7 @@ export function Helper() {
       return arr;
     });
 
-    return _Array.concatString(_Array.sortFirstToLast(array));
+    return _Array.concatString(_Array.sortArrayFromFirstToLast(array));
   };
 
   this.setAllResulstArrayToCount = (array) => {
@@ -37,20 +37,26 @@ export function Helper() {
         result.push(innerEl);
       });
     });
-    return _Array.sortFirstToLast(result);
+    return _Array.sortArrayFromFirstToLast(result);
   };
 
   this.createObjectCount = (index, count) => {
-    // let obj = {};
-    // obj.index = index;
-    // obj.count = count;
     return {'index': index, 'count': count};
+  };
+
+  this.findMostRepeatedValues = (array, count) => {
+    let sortedArray = _Array.sortArrayByCount(array);
+    let slicedArray = _Array.sliceArrayByLottoCount(sortedArray, count);
+    let extractedArray =  _Object.extractValueIndex(slicedArray);
+
+    return _Array.concatString(extractedArray);
   };
 
   return {
     setNewFormatedDate: this.setNewFormatedDate,
     setXrayArrayToSave: this.setXrayArrayToSave,
     setAllResulstArrayToCount: this.setAllResulstArrayToCount,
-    createObjectCount: this.createObjectCount
+    createObjectCount: this.createObjectCount,
+    findMostRepeatedValues: this.findMostRepeatedValues
   };
 }
