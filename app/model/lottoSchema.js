@@ -34,7 +34,7 @@ LottoSchema.methods.setLastResult = function(array) {
 };
 
 LottoSchema.methods.setMostRepeated = function(count) {
-  this.mostRepeated = helper.findMostRepeatedValues(this.statistics, count);
+  this.mostRepeated = helper.findMostRepeatedValues(this.getStatistics(), count);
   return this.mostRepeated;
 };
 

@@ -1,6 +1,6 @@
 // 'use strict';
-// // var mongoose = require('mongoose');
-// // var uriUtil = require('mongodb-uri');
+var mongoose = require('mongoose');
+var uriUtil = require('mongodb-uri');
 // // var Lotto = require('./model/lottoModel');
 // // var xRay = require('x-ray');
 // // var scrapper = xRay();
@@ -15,24 +15,24 @@
 // var bonoJsonFile = require('../jsonResult/bono.json');
 // console.log(bonoJsonFile,'bonoJsonFile console ');
 //
-// // var options = {
-// // 	server: {
-// // 		socketOptions: {
-// // 			keepAlive: 1,
-// // 			connectTimeoutMS: 30000
-// // 		}
-// // 	},
-// // 	replset: {
-// // 		socketOptions: {
-// // 			keepAlive: 1,
-// // 			connectTimeoutMS: 30000
-// // 		}
-// // 	}
-// // };
-// //
-// // var mongoUri = 'mongodb://localhost/test';
-// // var mongooseUri = uriUtil.formatMongoose(mongoUri);
-// // mongoose.connect(mongooseUri, options);
+var options = {
+	server: {
+		socketOptions: {
+			keepAlive: 1,
+			connectTimeoutMS: 30000
+		}
+	},
+	replset: {
+		socketOptions: {
+			keepAlive: 1,
+			connectTimeoutMS: 30000
+		}
+	}
+};
+
+var mongoUri = 'mongodb://localhost/test';
+var mongooseUri = uriUtil.formatMongoose(mongoUri);
+mongoose.connect(mongooseUri, options);
 //
 // console.log(configBono,'this console ');
 // // console.log(bonoJsonFile,'bonoJsonFile console ');
@@ -40,13 +40,13 @@
 // module.exports = require('express')();
 //
 // // var x = [];
-// // var db = mongoose.connection;
-// // // console.log(db);
-// // db.on('error', console.error.bind(console, 'connection error:'));
-// // db.once('open', function () {
-//
-// //   console.log('open connection');
-// // });
+var db = mongoose.connection;
+console.log(db);
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+
+  console.log('open connection');
+});
 // // scrapper(configBono.url, {numbers:[configBono.numbers],extras:[configBono.extras]}).write('./app/jsonResult/bono.json');
 // //
 // // fs.readFile('./app/jsonResult/bono.json', 'utf8', (err, data) => {
@@ -78,8 +78,34 @@
 // // };
 // //
 // // //  usage.js
-// // import Xray from './xray';
-// //
-// // let xray = new Xray;
-// //
-// // xray.get(url, data).then(result => { });
+import Xray from './helpers/xray';
+var config = require('./config/config');
+var configBono = config().lotto.bonoloto;
+var fs = require('fs');
+var path = require('path');
+import Lotto from './model/lottoModel';
+var bono = new Lotto();
+
+var writeData = data => {
+  console.log('vvvvvvvvvvvvvv');
+
+  fs.writeFile(path.join(__dirname, './json/bono.json'), JSON.stringify(data), err => {
+    if(err){
+      console.log(err);
+    } else {
+      console.log('file saved');
+    }
+  });
+
+};
+
+
+
+
+
+// let xray = new Xray;
+//
+// xray.get(configBono.url, {numbers:[configBono.numbers],extras:[configBono.extras]}).then(result => {
+//   console.log(result);
+//   writeData(result);
+// });

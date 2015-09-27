@@ -10,7 +10,7 @@ var data = require('./sampleData')(),
   connection,
   Lotto,
   lotto,
-  jsonFile = require('../app/jsonResult/bono.json');
+  jsonFile = require('../app/json/bono.json');
 
 function createDummyData(){
 	data.allResultLong.map( (el) => {
@@ -50,7 +50,7 @@ describe('LottoSchema methods and properties', () => {
     done();
   });
   it('LottoSchema.setLastResult(["34", "9", "23"," 7", "5"]), returns "05,07,09,23,34"', done => {
-    expect(lotto.setLastResult(jsonFile.numbers)).to.eq('01,05,06,28,33,40');
+    expect(lotto.setLastResult(jsonFile.numbers)).to.have.length.least(data.sliceCountBall);
     done();
   });
   it('LottoSchema.setMostRepeated, is defined', done => {
@@ -60,7 +60,6 @@ describe('LottoSchema methods and properties', () => {
   it('LottoSchema.setMostRepeated, returns the most repeated sliced by count', done => {
     createDummyData();
     lotto.setStatistics();
-    console.log(lotto.statistics);
     expect(lotto.setMostRepeated(data.sliceCountBall)).to.eql('12,15,16,23,28,49');
     done();
   });
@@ -80,10 +79,10 @@ describe('LottoSchema methods and properties', () => {
     done();
   });
   it('LottoSchema.getAllResults(this.allResults), splits and sorts allResults', done => {
-    lotto.setAllResults('18,28,30,31,34,40');
-    lotto.setAllResults('01,15,35,36,37,40');
-    lotto.setAllResults('02,11,29,30,32,45');
-    expect(lotto.getAllResults(data.allResultShort)).to.eql(['01', '02', '11', '15', '18', '28', '29', '30', '30', '31', '32', '34', '35', '36', '37', '40', '40', '45']);
+    data.allResultShort.map( el => {
+      lotto.setAllResults(el);
+    });
+    expect(lotto.getAllResults()).to.eql(['01', '02', '11', '15', '18', '28', '29', '30', '30', '31', '32', '34', '35', '36', '37', '40', '40', '45']);
 		lotto.allResults = [];
     done();
   });
