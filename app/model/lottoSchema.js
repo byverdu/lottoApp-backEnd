@@ -77,4 +77,4 @@ LottoSchema.methods.getStatistics = function(){
 	return this.statistics;
 };
 
-module.exports = LottoSchema;
+module.exports = mongoose.model('Lotto', LottoSchema);
