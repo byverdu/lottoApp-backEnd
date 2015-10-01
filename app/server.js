@@ -1,34 +1,14 @@
-// 'use strict';
-var mongoose = require('mongoose');
-var uriUtil = require('mongodb-uri');
+'use strict';
 
-//
-var options = {
-	server: {
-		socketOptions: {
-			keepAlive: 1,
-			connectTimeoutMS: 30000
-		}
-	},
-	replset: {
-		socketOptions: {
-			keepAlive: 1,
-			connectTimeoutMS: 30000
-		}
-	}
-};
+var express = require('express');
+var dbConnect = require('./config/db');
+var lotto = require('./instances/bono');
+import mongoose from 'mongoose';
 
-var mongoUri = 'mongodb://localhost/test';
-var mongooseUri = uriUtil.formatMongoose(mongoUri);
-mongoose.connect(mongooseUri, options);
 
-var db = mongoose.connection;
-console.log(db);
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
 
-  console.log('open connection');
-});
+
+
 
 import Xray from './helpers/xray';
 var config = require('./config/config');
@@ -55,7 +35,7 @@ var writeData = data => {
 
 
 
-let xray = new Xray;
+let xray = new Xray();
 
 xray.get(configBono.url, {numbers:[configBono.numbers],extras:[configBono.extras]}).then(result => {
   console.log(result);

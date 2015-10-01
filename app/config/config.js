@@ -7,6 +7,7 @@ module.exports = () => {
     },
     lotto: {
       euromillions         : {
+        lottoID            : 'euromillions',
         url                : 'http://www.euro-millions.com/results',
         numbers            : '.latest-result .balls .ball',
         stars              : '.latest-result .lucky-star',
@@ -20,6 +21,7 @@ module.exports = () => {
         extraInfoPrice     : '.escrutinioBox_premios .ctrlFloat'
       },
       primitiva            : {
+        lottoID            : 'primitiva',
         url                : 'http://www.loteriasyapuestas.es/es/la-primitiva',
         numbers            : '.cuerpoRegionIzq li',
         extras             : '.bolaPeq',
@@ -32,6 +34,7 @@ module.exports = () => {
         extraInfoPrice     : '.escrutinioBox_premios .ctrlFloat'
       },
       bonoloto             : {
+        lottoID            : 'bonoloto',
         url                : 'http://www.loteriasyapuestas.es/es/bonoloto',
         numbers            : '.cuerpoRegionIzq li',
         extras             : '.bolaPeq',

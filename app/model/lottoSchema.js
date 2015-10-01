@@ -6,9 +6,11 @@ import {
 }
 from '../helpers/helpers';
 
-var helper = new Helper();
-var LottoSchema = mongoose.Schema({
+var helper, lottoSchema, Lotto;
+helper= new Helper();
+lottoSchema = mongoose.Schema({
 
+  lottoID: String,
   date: String,
   lastResult: String,
   mostRepeated: String,
@@ -16,37 +18,36 @@ var LottoSchema = mongoose.Schema({
   allResults: Array
 });
 
-LottoSchema.methods.setNewDate = function() {
+lottoSchema.methods.setNewDate = function() {
   console.log('setNewDate called');
   try {
     this.date = helper.setNewFormatedDate();
   } catch (e) {
-
     console.log('setNewDate exception called', e.message);
     this.date = new Date();
   }
 };
 
-LottoSchema.methods.setLastResult = function(array) {
+lottoSchema.methods.setLastResult = function(array) {
   this.lastResult = helper.setXrayArrayToSave(array);
 
   return this.lastResult;
 };
 
-LottoSchema.methods.setMostRepeated = function(count) {
+lottoSchema.methods.setMostRepeated = function(count) {
   this.mostRepeated = helper.findMostRepeatedValues(this.getStatistics(), count);
   return this.mostRepeated;
 };
 
-LottoSchema.methods.setAllResults = function(lastResult) {
+lottoSchema.methods.setAllResults = function(lastResult) {
   return this.allResults.push(lastResult);
 };
 
-LottoSchema.methods.getAllResults = function() {
+lottoSchema.methods.getAllResults = function() {
   return helper.setAllResulstArrayToCount(this.allResults);
 };
 
-LottoSchema.methods.getCountAllResults = function() {
+lottoSchema.methods.getCountAllResults = function() {
   var allResults = this.getAllResults(),
     copyAllResults = allResults.slice(0),
     result = [];
@@ -68,13 +69,13 @@ LottoSchema.methods.getCountAllResults = function() {
 	return result;
 };
 
-LottoSchema.methods.setStatistics = function(){
+lottoSchema.methods.setStatistics = function(){
 	this.statistics = this.getCountAllResults();
 	return this.statistics;
 };
 
-LottoSchema.methods.getStatistics = function(){
+lottoSchema.methods.getStatistics = function(){
 	return this.statistics;
 };
 
-module.exports = mongoose.model('Lotto', LottoSchema);
+module.exports = mongoose.model('Lotto', lottoSchema);
