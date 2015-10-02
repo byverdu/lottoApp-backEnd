@@ -5,7 +5,7 @@
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/byverdu/lottoappmongodb/src"
+    "url": "https://github.com/byverdu/lottoApp-backEnd"
   },
   "scripts": {
     "babel-node": "babel-node --stage 0 --ignore='foo|bar|baz'",
