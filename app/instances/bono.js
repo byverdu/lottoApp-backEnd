@@ -23,7 +23,7 @@ var test = (lottoID, callback) => {
   });
 };
 
-console.log(JSONdata);
+console.log(JSONdata,'kekkekekekekekekekekkeke');
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {

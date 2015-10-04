@@ -20,7 +20,7 @@ before(() => {
   _Date = new HelperDate();
   _Array = new HelperArray();
   _String = new HelperString();
-  _Object = new HelperObject
+  _Object = new HelperObject();
 });
 
 describe('helper of helper?', () => {
@@ -161,7 +161,6 @@ describe('helper of helper?', () => {
     });
     it('#HelperObject.extractValueByIndex(),  returns an Array', () => {
       let dataToExtract = _Array.sliceArrayByLottoCount(data.allResultLongObjOrdered, data.sliceCountBall);
-      console.log(dataToExtract, 'dataToExtract');
       expect(_Object.extractValueByIndex(dataToExtract)).to.eql([ '12', '16', '23', '28', '15', '49' ]);
     });
   });

@@ -72,8 +72,6 @@ lottoSchema.methods.getCountAllResults = function() {
     }
   });
 
-  console.log(result);
-
 	return result;
 };
 

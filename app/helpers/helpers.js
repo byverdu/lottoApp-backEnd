@@ -56,12 +56,17 @@ export function Helper() {
     return _String.orderString(string, _Array.sortArrayFromFirstToLast, _Array.concatToSingleString);
   };
 
+  this.compare2arrays = () => {
+
+  };
+
   return {
     setNewFormatedDate: this.setNewFormatedDate,
     setXrayArrayToSave: this.setXrayArrayToSave,
     setAllResulstArrayToCount: this.setAllResulstArrayToCount,
     createObjectCount: this.createObjectCount,
     findMostRepeatedValues: this.findMostRepeatedValues,
-    orderStringMostRepeated: this.orderStringMostRepeated
+    orderStringMostRepeated: this.orderStringMostRepeated,
+    compare2arrays: this.compare2arrays
   };
 }

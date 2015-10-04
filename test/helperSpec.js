@@ -53,4 +53,7 @@ describe('Helper and methods', () => {
   it('#Helper.orderStringMostRepeated(index, count) returns {index: "12",count: 4}', () => {
     expect(helper.orderStringMostRepeated('11,05,28,03,10')).to.eq('03,05,10,11,28');
   });
+  it('#Helper, has a compare2arrays method', () => {
+    expect(helper.compare2arrays).not.to.equal(undefined);
+  });
 });
