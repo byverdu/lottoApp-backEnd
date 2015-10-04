@@ -84,11 +84,11 @@ describe('helper of helper?', () => {
     it('#HelperArray.sortArrayFromFirstToLast(["06","34","03","12"]) returns ["03","06","12","34"]', () => {
       expect(_Array.sortArrayFromFirstToLast(['06', '34', '03', '12'])).to.be.eql(['03', '06', '12', '34']);
     });
-    it('#HelperArray.concatString is defined', () => {
-      expect(_Array.concatString).not.to.equal(undefined);
+    it('#HelperArray.concatToSingleString is defined', () => {
+      expect(_Array.concatToSingleString).not.to.equal(undefined);
     });
-    it('#HelperArray.concatString(["04","06","34"]) returns "04,06,34"', () => {
-      expect(_Array.concatString(['04', '06', '34'])).to.eql('04,06,34');
+    it('#HelperArray.concatToSingleString(["04","06","34"]) returns "04,06,34"', () => {
+      expect(_Array.concatToSingleString(['04', '06', '34'])).to.eql('04,06,34');
     });
     it('#HelperArray.splitArray is defined', () => {
       expect(_Array.splitArray).not.to.equal(undefined);
@@ -141,21 +141,28 @@ describe('helper of helper?', () => {
     it('#HelperString.addStringNumZero("0"), returns "00"', () => {
       expect(_String.addStringNumZero('0')).to.eq('00');
     });
+    it('#HelperString, has a orderString method', () => {
+      expect(_String.orderString).not.to.equal(undefined);
+    });
+    it('#HelperString.orderString("11,05,28,03,10"), returns "03,05,10,11,28"', () => {
+      expect(_String.orderString('11,05,28,03,10',_Array.sortArrayFromFirstToLast,_Array.concatToSingleString)).to.eq('03,05,10,11,28');
+    });
   });
 
   describe('HelperObject', () => {
     it('#HelperObject, is defined', () => {
       expect(_Object).not.to.equal(undefined);
     });
-    it('#HelperObject.extractValueIndex, is defined"', () => {
-      expect(_Object.extractValueIndex).not.to.equal(undefined);
+    it('#HelperObject.extractValueByIndex, is defined"', () => {
+      expect(_Object.extractValueByIndex).not.to.equal(undefined);
     });
-    it('#HelperObject.extractValueIndex(),  returns an Array', () => {
-      expect(_Object.extractValueIndex([])).to.be.an('Array');
+    it('#HelperObject.extractValueByIndex(),  returns an Array', () => {
+      expect(_Object.extractValueByIndex([])).to.be.an('Array');
     });
-    it('#HelperObject.extractValueIndex(),  returns an Array', () => {
+    it('#HelperObject.extractValueByIndex(),  returns an Array', () => {
       let dataToExtract = _Array.sliceArrayByLottoCount(data.allResultLongObjOrdered, data.sliceCountBall);
-      expect(_Object.extractValueIndex(dataToExtract)).to.eql(['12', '16', '23', '28', '15', '49']);
+      console.log(dataToExtract, 'dataToExtract');
+      expect(_Object.extractValueByIndex(dataToExtract)).to.eql([ '12', '16', '23', '28', '15', '49' ]);
     });
   });
 });

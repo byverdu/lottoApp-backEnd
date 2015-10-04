@@ -24,7 +24,7 @@ export function Helper() {
       return arr;
     });
 
-    return _Array.concatString(_Array.sortArrayFromFirstToLast(array));
+    return _Array.concatToSingleString(_Array.sortArrayFromFirstToLast(array));
   };
 
   this.setAllResulstArrayToCount = (array) => {
@@ -47,9 +47,13 @@ export function Helper() {
   this.findMostRepeatedValues = (array, count) => {
     let sortedArray = _Array.sortArrayByCount(array);
     let slicedArray = _Array.sliceArrayByLottoCount(sortedArray, count);
-    let extractedArray =  _Object.extractValueIndex(slicedArray);
+    let extractedArray =  _Object.extractValueByIndex(slicedArray);
 
-    return _Array.concatString(extractedArray);
+    return _Array.concatToSingleString(extractedArray);
+  };
+
+  this.orderStringMostRepeated = (string) => {
+    return _String.orderString(string, _Array.sortArrayFromFirstToLast, _Array.concatToSingleString);
   };
 
   return {
@@ -57,6 +61,7 @@ export function Helper() {
     setXrayArrayToSave: this.setXrayArrayToSave,
     setAllResulstArrayToCount: this.setAllResulstArrayToCount,
     createObjectCount: this.createObjectCount,
-    findMostRepeatedValues: this.findMostRepeatedValues
+    findMostRepeatedValues: this.findMostRepeatedValues,
+    orderStringMostRepeated: this.orderStringMostRepeated
   };
 }

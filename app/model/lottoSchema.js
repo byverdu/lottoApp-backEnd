@@ -6,7 +6,7 @@ import {
 }
 from '../helpers/helpers';
 
-var helper, lottoSchema, Lotto;
+var helper, lottoSchema;
 helper= new Helper();
 lottoSchema = mongoose.Schema({
 
@@ -39,7 +39,9 @@ lottoSchema.methods.getLastResult = function(){
 };
 
 lottoSchema.methods.setMostRepeated = function(count) {
-  this.mostRepeated = helper.findMostRepeatedValues(this.getStatistics(), count);
+  let mostRepeated = helper.findMostRepeatedValues(this.getStatistics(), count);
+  this.mostRepeated = helper.orderStringMostRepeated(mostRepeated);
+
   return this.mostRepeated;
 };
 
@@ -69,6 +71,8 @@ lottoSchema.methods.getCountAllResults = function() {
       result.push(helper.createObjectCount(outerEl, count));
     }
   });
+
+  console.log(result);
 
 	return result;
 };

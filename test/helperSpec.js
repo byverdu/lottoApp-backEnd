@@ -1,4 +1,4 @@
-/*global before, it, xit, describe*/
+/*global before, it, describe*/
 'use strict';
 
 import { Helper } from '../app/helpers/helpers';
@@ -46,5 +46,11 @@ describe('Helper and methods', () => {
   });
   it('#Helper.findMostRepeatedValues(array) returns index value for most repeated', () => {
     expect(helper.findMostRepeatedValues(data.allResultLongObjCounted, data.sliceCountBall)).to.eql('12,15,16,23,28,49');
+  });
+  it('#Helper, has a orderStringMostRepeated method', () => {
+    expect(helper.orderStringMostRepeated).not.to.equal(undefined);
+  });
+  it('#Helper.orderStringMostRepeated(index, count) returns {index: "12",count: 4}', () => {
+    expect(helper.orderStringMostRepeated('11,05,28,03,10')).to.eq('03,05,10,11,28');
   });
 });

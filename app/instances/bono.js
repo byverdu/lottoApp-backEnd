@@ -8,13 +8,9 @@ import {
 }
 from '../helpers/helpers';
 var configBono = config().lotto.bonoloto,
-  // bono = new Lotto({lottoID: configBono.lottoID}),
-  db = mongoose.connection;
-  var JSONdata = require('../json/bono');
-var helper = new Helper();
-// bono.setNewDate();
-// console.log(Lotto, 'jojoiuhnjknkjnjnkjnknjk');
-// console.log(bono, 'outside');
+  db = mongoose.connection,
+  JSONdata = require('../json/bono'),
+  helper = new Helper();
 
 var test = (lottoID, callback) => {
 
@@ -38,17 +34,18 @@ db.once('open', function() {
     if (err) {
       console.log(err);
     } else {
-      // lotto.setNewDate();
       console.log(lotto.lastResult, 'outside if condition');
-      // data.allResultLong.map( el => {
-      //   lotto.setAllResults(el);
-      // });
+
       let oldXrayValue = helper.setXrayArrayToSave(JSONdata.numbers),
           storedLastResult = lotto.getLastResult();
 
       if (oldXrayValue !== storedLastResult){
 
+        lotto.date = new Date();
         lotto.setLastResult(JSONdata.numbers);
+        lotto.setAllResults(lotto.lastResult);
+        lotto.setStatistics();
+        lotto.setMostRepeated(configBono.sliceCountBall);
         lotto.save( (err, lotto) => {
           if (err) {
             console.log(err);

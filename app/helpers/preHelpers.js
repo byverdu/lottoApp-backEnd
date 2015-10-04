@@ -14,9 +14,16 @@ function HelperString() {
     return elem;
   };
 
+  this.orderString = (string, sortMethod, concatMethod) => {
+    let tempArray = string.split(',');
+    let sortedArray = sortMethod(tempArray);
+    return concatMethod(sortedArray);
+  };
+
   return {
     deleteWhiteSpace: this.deleteWhiteSpace,
-    addStringNumZero: this.addStringNumZero
+    addStringNumZero: this.addStringNumZero,
+    orderString: this.orderString
   };
 }
 
@@ -81,7 +88,7 @@ function HelperArray() {
     });
   };
 
-  this.concatString = (array) => {
+  this.concatToSingleString = (array) => {
 
     var result = '';
     array.map((el) => {
@@ -106,7 +113,7 @@ function HelperArray() {
   return {
     sortArrayFromFirstToLast: this.sortArrayFromFirstToLast,
     sortArrayByCount: this.sortArrayByCount,
-    concatString: this.concatString,
+    concatToSingleString: this.concatToSingleString,
     splitArray: this.splitArray,
     sliceArrayByLottoCount: this.sliceArrayByLottoCount
   };
@@ -114,7 +121,7 @@ function HelperArray() {
 
 function HelperObject(){
 
-  this.extractValueIndex = (array) => {
+  this.extractValueByIndex = (array) => {
     let mostRepeated = [];
 
     array.map( el => {
@@ -125,7 +132,7 @@ function HelperObject(){
   };
 
   return {
-    extractValueIndex: this.extractValueIndex
+    extractValueByIndex: this.extractValueByIndex
   };
 }
 

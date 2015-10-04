@@ -1,15 +1,5 @@
 'use strict';
 
-var express = require('express');
-var dbConnect = require('./config/db');
-var lotto = require('./instances/bono');
-import mongoose from 'mongoose';
-
-
-
-
-
-
 import Xray from './helpers/xray';
 var config = require('./config/config');
 var configBono = config().lotto.bonoloto;
@@ -30,10 +20,6 @@ var writeData = data => {
   });
 
 };
-
-
-
-
 
 let xray = new Xray();
 
