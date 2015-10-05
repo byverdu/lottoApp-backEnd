@@ -5,14 +5,14 @@ var config = require('./config/config');
 var configBono = config().lotto.bonoloto;
 var fs = require('fs');
 var path = require('path');
-var JSONdata = require('./json/bono');
+var bonoJSON = require('./json/bono');
 // import Lotto from './model/lottoModel';
 require('./instances/bono');
 
-var writeData = data => {
+var writeData = (pathJSON, data) => {
   console.log('vvvvvvvvvvvvvv');
 
-  fs.writeFile(path.join(__dirname, './json/bono.json'), JSON.stringify(data), err => {
+  fs.writeFile(path.join(__dirname, pathJSON), JSON.stringify(data), err => {
     if(err){
       console.log(err);
     } else {
@@ -45,9 +45,23 @@ let xray = new Xray();
 
 xray.get(configBono.url, {numbers:[configBono.numbers],extras:[configBono.extras]}).then(result => {
   console.log(result.numbers, 'result Xray');
-  if (compareArray(JSONdata.numbers, result.numbers)) {
+  if (compareArray(bonoJSON.numbers, result.numbers)) {
     console.log('papapappapapapap');
-    writeData(result);
+    writeData(configBono.pathJSON ,result);
   }
 });
-  console.log(JSONdata.numbers, 'JSONdata.numbers');
+  console.log(bonoJSON.numbers, 'bonoJSON.numbers');
+
+// fs.watch(configBono.pathJSON, function (curr, prev) {
+//   console.log('the current mtime is: ' + curr.mtime);
+//   console.log('the previous mtime was: ' + prev.mtime);
+// });
+
+// fs.watch('../README.md', function (event, filename) {
+//   console.log('event is: ' + event);
+//   if (filename) {
+//     console.log('filename provided: ' + filename);
+//   } else {
+//     console.log('filename not provided');
+//   }
+// });
