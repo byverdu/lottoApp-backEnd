@@ -3,14 +3,15 @@
 module.exports = () => {
   return {
     globals: {
-      mongoUrl: ''
+      mongoUrlTest: 'mongodb://localhost/lottoApp',
+      mongoUrlProduction: process.env.MONGO_CREDENTIALS
     },
     lotto: {
       euromillions         : {
         lottoID            : 'euromillions',
         url                : 'http://www.euro-millions.com/results',
         numbers            : '.latest-result .balls .ball',
-        pathJSON           : './json/euro.json',
+        pathJSON           : '../json/euro.json',
         stars              : '.latest-result .lucky-star',
         sliceCountBall     : 5,
         sliceCountBallStar : 2,
@@ -25,7 +26,7 @@ module.exports = () => {
         lottoID            : 'primitiva',
         url                : 'http://www.loteriasyapuestas.es/es/la-primitiva',
         numbers            : '.cuerpoRegionIzq li',
-        pathJSON           : './json/primi.json',
+        pathJSON           : '../json/primi.json',
         extras             : '.bolaPeq',
         joker              : '.cuerpoRegionIzq span',
         sliceCountBall     : 6,
@@ -39,7 +40,7 @@ module.exports = () => {
         lottoID            : 'bonoloto',
         url                : 'http://www.loteriasyapuestas.es/es/bonoloto',
         numbers            : '.cuerpoRegionIzq li',
-        pathJSON           : './json/bono.json',
+        pathJSON           : '../json/bono.json',
         extras             : '.bolaPeq',
         sliceCountBall     : 6,
         urlPrice           : 'http://bonoloto.combinacionganadora.com/',

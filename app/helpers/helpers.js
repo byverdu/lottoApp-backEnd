@@ -1,13 +1,12 @@
 'use strict';
 
-import {
-  HelperDate, HelperString, HelperArray, HelperObject
-}
-from './preHelpers';
+import { HelperDate, HelperString, HelperArray, HelperObject } from './preHelpers';
 var _Date = new HelperDate(),
   _String = new HelperString(),
   _Array = new HelperArray(),
-  _Object = new HelperObject();
+  _Object = new HelperObject(),
+  fs = require('fs'),
+  path = require('path');
 
 export function Helper() {
 
@@ -56,8 +55,40 @@ export function Helper() {
     return _String.orderString(string, _Array.sortArrayFromFirstToLast, _Array.concatToSingleString);
   };
 
-  this.compare2arrays = () => {
+  this.compare2arrays = (first, second) => {
+    var assertion = true,
+      count = 0;
 
+    for (var i = 0; i < first.length; i++) {
+      if (first[i].includes(second[i])) {
+        count++;
+        if (count === 6) {
+          assertion = false;
+        }
+      }
+    }
+    console.log(assertion, 'compare2arrays boolean');
+    return assertion;
+  };
+
+  this.saveScrappedDataToJson = (pathJSON, data) => {
+    fs.writeFile(path.join(__dirname, pathJSON), JSON.stringify(data), err => {
+      if(err){
+        console.log(err);
+      } else {
+        console.log('file saved');
+      }
+    });
+  };
+
+  this.customFindOneMongoose = (Model, ObjectQuery, callback) => {
+    Model.findOne(ObjectQuery, (err, lotto) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, lotto);
+      }
+    });
   };
 
   return {
@@ -67,6 +98,8 @@ export function Helper() {
     createObjectCount: this.createObjectCount,
     findMostRepeatedValues: this.findMostRepeatedValues,
     orderStringMostRepeated: this.orderStringMostRepeated,
-    compare2arrays: this.compare2arrays
+    compare2arrays: this.compare2arrays,
+    saveScrappedDataToJson: this.saveScrappedDataToJson,
+    customFindOneMongoose: this.customFindOneMongoose
   };
 }

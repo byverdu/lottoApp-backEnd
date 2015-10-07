@@ -12,25 +12,12 @@ var configBono = config().lotto.bonoloto,
   JSONdata = require('../json/bono'),
   helper = new Helper();
 
-var test = (lottoID, callback) => {
-
-  Lotto.findOne({ lottoID: lottoID }, (err, lotto) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, lotto);
-    }
-  });
-};
-
-console.log(JSONdata, 'kekkekekekekekekekekkeke');
-
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 
   console.log('open connection');
 
-  test('bonoloto', (err, lotto) => {
+  helper.customFindOneMongoose(Lotto, { lottoID: 'bonoloto' }, (err, lotto) => {
     if (err) {
       console.log(err);
     } else {
