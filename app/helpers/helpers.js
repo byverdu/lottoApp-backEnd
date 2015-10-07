@@ -8,6 +8,9 @@ var _Date = new HelperDate(),
   fs = require('fs'),
   path = require('path');
 
+/**
+ * Helper Class
+ */
 export function Helper() {
 
   this.setNewFormatedDate = () => {

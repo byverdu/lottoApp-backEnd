@@ -7,23 +7,22 @@ var config = require('../config/config');
 
 require('../config/db');
 
-console.log('instances file called bonoloto');
+console.log('instances file called primitiva');
 
-var configBono = config().lotto.bonoloto,
+var configPrimi = config().lotto.primitiva,
   db = mongoose.connection,
-  JSONdata = require('../json/bono'),
+  JSONdata = require('../json/primi'),
   helper = new Helper();
-
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 
-  console.log('open connection bonoloto');
+  console.log('open connection primitiva');
 
-  helper.customFindOneMongoose(Lotto, { lottoID: 'bonoloto' }, (err, lotto) => {
+  helper.customFindOneMongoose(Lotto, { lottoID: 'primitiva' }, (err, lotto) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(lotto.lastResult, 'outside if condition bonoloto');
+      console.log(lotto.lastResult, 'outside if condition primitiva');
 
       let oldXrayValue = helper.setXrayArrayToSave(JSONdata.numbers),
         storedLastResult = lotto.getLastResult();
@@ -34,12 +33,12 @@ db.once('open', function() {
         lotto.setLastResult(JSONdata.numbers);
         lotto.setAllResults(lotto.lastResult);
         lotto.setStatistics();
-        lotto.setMostRepeated(configBono.sliceCountBall);
+        lotto.setMostRepeated(configPrimi.sliceCountBall);
         lotto.save((err, lotto) => {
           if (err) {
             console.log(err);
           } else {
-            console.log(lotto, 'inside if condition bonoloto');
+            console.log(lotto, 'inside if condition primitiva');
           }
         });
       }

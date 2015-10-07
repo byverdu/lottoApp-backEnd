@@ -1,7 +1,16 @@
 'use strict';
 
+/**
+ * @constructor
+ * Helper Class for String manipulation
+ */
 function HelperString() {
 
+  /**
+   * Deletes white spaces for the element passed
+   * @param  {string} elem - string with white space ' 09'
+   * @return {string}        trimmed element '09'
+   */
   this.deleteWhiteSpace = (elem) => {
     elem = elem.trim();
     return elem;
