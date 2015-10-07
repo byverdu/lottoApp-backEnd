@@ -2,10 +2,12 @@
 
 import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
-import config from '../config/config';
 import {Helper} from '../helpers/helpers';
+var config = require('../config/config');
 
 require('../config/db');
+
+console.log('instances file called');
 
 var configBono = config().lotto.bonoloto,
   db = mongoose.connection,

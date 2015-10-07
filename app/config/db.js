@@ -2,9 +2,7 @@
 
 import uriUtil from 'mongodb-uri';
 import mongoose from 'mongoose';
-// import { config } from './config';
-var config = require('./config/config')().globals;
-console.log(config);
+var config = require('./config')().globals;
 var options = {
 	server: {
 		socketOptions: {
@@ -19,8 +17,9 @@ var options = {
 		}
 	}
 };
+var configUrl = [config.mongoUrlTest, config.mongoUrlProduction];
 
-var mongoUri = ( config.mongoUrlTest || config.mongoUrlProduction );
+var mongoUri =  configUrl[0];
 var mongooseUri = uriUtil.formatMongoose(mongoUri);
 mongoose.connect(mongooseUri, options);
 
