@@ -3,7 +3,7 @@
 import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
 import config from '../config/config';
-import Helper from '../helpers/helpers';
+import {Helper} from '../helpers/helpers';
 
 require('../config/db');
 
