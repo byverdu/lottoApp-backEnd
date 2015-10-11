@@ -31,6 +31,7 @@ db.once('open', function() {
 
         lotto.setNewDate();
         lotto.setLastResult(JSONdata.numbers);
+        lotto.setExtras(JSONdata.extras);
         lotto.setAllResults(lotto.lastResult);
         lotto.setStatistics();
         lotto.setMostRepeated(configPrimi.sliceCountBall);

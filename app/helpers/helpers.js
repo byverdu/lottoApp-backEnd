@@ -59,14 +59,14 @@ export function Helper() {
   };
 
   this.compare2arrays = (first, second) => {
-    var assertion = true,
+    var assertion = false,
       count = 0;
 
     for (var i = 0; i < first.length; i++) {
       if (first[i].includes(second[i])) {
         count++;
         if (count === 6) {
-          assertion = false;
+          assertion = true;
         }
       }
     }
@@ -79,7 +79,7 @@ export function Helper() {
       if(err){
         console.log(err);
       } else {
-        console.log('file saved');
+        console.log(`file saved ${pathJSON}`);
       }
     });
   };
@@ -94,6 +94,11 @@ export function Helper() {
     });
   };
 
+  this.modifyExtras = (array) => {
+    console.log(this.setXrayArrayToSave(array), 'this.setXrayArrayToSave(array)');
+      return this.setXrayArrayToSave(array);
+  };
+
   return {
     setNewFormatedDate: this.setNewFormatedDate,
     setXrayArrayToSave: this.setXrayArrayToSave,
@@ -103,6 +108,7 @@ export function Helper() {
     orderStringMostRepeated: this.orderStringMostRepeated,
     compare2arrays: this.compare2arrays,
     saveScrappedDataToJson: this.saveScrappedDataToJson,
-    customFindOneMongoose: this.customFindOneMongoose
+    customFindOneMongoose: this.customFindOneMongoose,
+    modifyExtras: this.modifyExtras
   };
 }

@@ -13,9 +13,9 @@ let helper = new Helper(),
 
 xray.get(configPrimi.url, {numbers:[configPrimi.numbers],extras:[configPrimi.extras]} ).then(result => {
   // console.log(result.numbers, 'latest-result Xray');
-  if (helper.compare2arrays(storedPrimiJSON.numbers, result.numbers)) {
-    helper.saveScrappedDataToJson(configPrimi.pathJSON ,result);
+  if (!helper.compare2arrays(storedPrimiJSON.numbers, result.numbers)) {
+    helper.saveScrappedDataToJson(configPrimi.pathJSON, result);
   }
-    require('../instances/primi');
-    console.log('after if Xray primi');
+      require('../instances/primi');
+      console.log('setTimeout Xray primi');
 });

@@ -56,4 +56,12 @@ describe('Helper and methods', () => {
   it('#Helper, has a compare2arrays method', () => {
     expect(helper.compare2arrays).not.to.equal(undefined);
   });
+  it('#Helper.modifyExtras, is defined', done => {
+    expect(helper.modifyExtras).to.be.a('Function');
+    done();
+  });
+  it('#Helper.modifyExtras(["9","7"]), returns "07,09"', done => {
+    expect(helper.modifyExtras(['9','7'])).to.be.eq('07,09');
+    done();
+  });
 });

@@ -10,9 +10,9 @@ module.exports = () => {
       euromillions         : {
         lottoID            : 'euromillions',
         url                : 'http://www.euro-millions.com/results',
-        numbers            : '.latest-result .balls .ball',
         pathJSON           : '../json/euro.json',
-        stars              : '.latest-result .lucky-star',
+        numbers            : '.latest-result .balls .ball',
+        extras             : '.latest-result .lucky-star',
         sliceCountBall     : 5,
         sliceCountBallStar : 2,
         urlPrice           : 'http://euromillones.combinacionganadora.com/',
@@ -25,8 +25,8 @@ module.exports = () => {
       primitiva            : {
         lottoID            : 'primitiva',
         url                : 'http://www.loteriasyapuestas.es/es/la-primitiva',
-        numbers            : '.cuerpoRegionIzq li',
         pathJSON           : '../json/primi.json',
+        numbers            : '.cuerpoRegionIzq li',
         extras             : '.bolaPeq',
         joker              : '.cuerpoRegionIzq span',
         sliceCountBall     : 6,
@@ -38,9 +38,9 @@ module.exports = () => {
       },
       bonoloto             : {
         lottoID            : 'bonoloto',
+        pathJSON           : '../json/bono.json',
         url                : 'http://www.loteriasyapuestas.es/es/bonoloto',
         numbers            : '.cuerpoRegionIzq li',
-        pathJSON           : '../json/bono.json',
         extras             : '.bolaPeq',
         sliceCountBall     : 6,
         urlPrice           : 'http://bonoloto.combinacionganadora.com/',

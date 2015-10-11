@@ -13,7 +13,7 @@ let helper = new Helper(),
 
 xray.get(configBono.url, {numbers:[configBono.numbers],extras:[configBono.extras]} ).then(result => {
   // console.log(result.numbers, 'latest-result Xray');
-  if (helper.compare2arrays(storedBonoJSON.numbers, result.numbers)) {
+  if (!helper.compare2arrays(storedBonoJSON.numbers, result.numbers)) {
     helper.saveScrappedDataToJson(configBono.pathJSON ,result);
   }
     require('../instances/bono');

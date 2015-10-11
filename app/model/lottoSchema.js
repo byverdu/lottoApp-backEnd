@@ -12,6 +12,7 @@ lottoSchema = mongoose.Schema({
 
   lottoID: String,
   date: String,
+  extras: String,
   lastResult: String,
   mostRepeated: String,
   statistics: Array,
@@ -32,6 +33,12 @@ lottoSchema.methods.setLastResult = function(array) {
   this.lastResult = helper.setXrayArrayToSave(array);
 
   return this.lastResult;
+};
+
+lottoSchema.methods.setExtras = function(array) {
+  this.extras = helper.modifyExtras(array);
+  console.log(this.extras, 'this.extras');
+  return this.extras;
 };
 
 lottoSchema.methods.getLastResult = function(){

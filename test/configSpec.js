@@ -15,7 +15,7 @@ describe('Configuration file', () => {
     expect(config()).to.have.property('globals').and.is.an('Object');
   });
   it('mongoUrl is a property for "globals"', () => {
-    expect(config().globals).to.have.deep.property('mongoUrl').and.is.a('String');
+    expect(config().globals).to.have.deep.property('mongoUrlTest').and.is.a('String');
   });
   it('It has a "lotto" property that is an object with lotto settings', () => {
     expect(config()).to.have.property('lotto').and.is.an('Object');

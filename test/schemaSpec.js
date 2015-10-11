@@ -53,6 +53,14 @@ describe('LottoSchema methods and properties', () => {
     expect(lotto.setLastResult(jsonFile.numbers)).to.have.length.least(data.sliceCountBall);
     done();
   });
+  it('LottoSchema.setExtras, is defined', done => {
+    expect(lotto.setExtras).to.be.a('Function');
+    done();
+  });
+  it('LottoSchema.setExtras(["9","7"]), returns "07,09"', done => {
+    expect(lotto.setExtras(['9','7'])).to.be.eq('07,09');
+    done();
+  });
   it('LottoSchema.setMostRepeated, is defined', done => {
     expect(lotto.setMostRepeated).to.be.a('Function');
     done();
@@ -131,6 +139,11 @@ describe('LottoSchema methods and properties', () => {
   it('LottoSchema.lastResult, is defined and is a String', done => {
     lotto.setLastResult(jsonFile.numbers);
     expect(lotto.lastResult).to.be.a('String');
+    done();
+  });
+  it('LottoSchema.extras, is defined', done => {
+    lotto.setExtras(['9','7']);
+    expect(lotto.extras).to.be.a('String');
     done();
   });
   it('LottoSchema.mostRepeated, is defined and is a String', done => {
