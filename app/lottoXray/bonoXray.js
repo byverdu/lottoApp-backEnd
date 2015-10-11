@@ -1,21 +1,21 @@
 'use strict';
 
 import Xray from '../helpers/xray';
-import {Helper} from '../helpers/helpers';
+import {GlobalHelper} from '../helpers/globalHelper';
 var config = require('../config/config');
 var storedBonoJSON = require('../json/bono');
 
 console.log('bonoXray file called');
 
-let helper = new Helper(),
+let globalHelper = new GlobalHelper(),
   configBono = config().lotto.bonoloto,
   xray = new Xray();
 
 xray.get(configBono.url, {numbers:[configBono.numbers],extras:[configBono.extras]} ).then(result => {
-  // console.log(result.numbers, 'latest-result Xray');
-  if (!helper.compare2arrays(storedBonoJSON.numbers, result.numbers)) {
-    helper.saveScrappedDataToJson(configBono.pathJSON ,result);
+  console.log(result.numbers, 'latest-result Xray');
+  if (!globalHelper.compare2arrays(storedBonoJSON.numbers, result.numbers)) {
+    globalHelper.saveScrappedDataToJson(configBono.pathJSON ,result);
   }
-    require('../instances/bono');
     console.log('after if Xray bono');
+    require('../instances/bono');
 });

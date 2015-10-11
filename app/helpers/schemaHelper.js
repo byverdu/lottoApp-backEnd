@@ -4,14 +4,12 @@ import { HelperDate, HelperString, HelperArray, HelperObject } from './preHelper
 var _Date = new HelperDate(),
   _String = new HelperString(),
   _Array = new HelperArray(),
-  _Object = new HelperObject(),
-  fs = require('fs'),
-  path = require('path');
+  _Object = new HelperObject();
 
 /**
  * Helper Class
  */
-export function Helper() {
+export function SchemaHelper() {
 
   this.setNewFormatedDate = () => {
     return _Date.buildSpanishDate();
@@ -58,44 +56,7 @@ export function Helper() {
     return _String.orderString(string, _Array.sortArrayFromFirstToLast, _Array.concatToSingleString);
   };
 
-  this.compare2arrays = (first, second) => {
-    var assertion = false,
-      count = 0;
-
-    for (var i = 0; i < first.length; i++) {
-      if (first[i].includes(second[i])) {
-        count++;
-        if (count === 6) {
-          assertion = true;
-        }
-      }
-    }
-    console.log(assertion, 'compare2arrays boolean');
-    return assertion;
-  };
-
-  this.saveScrappedDataToJson = (pathJSON, data) => {
-    fs.writeFile(path.join(__dirname, pathJSON), JSON.stringify(data), err => {
-      if(err){
-        console.log(err);
-      } else {
-        console.log(`file saved ${pathJSON}`);
-      }
-    });
-  };
-
-  this.customFindOneMongoose = (Model, ObjectQuery, callback) => {
-    Model.findOne(ObjectQuery, (err, lotto) => {
-      if (err) {
-        callback(err, null);
-      } else {
-        callback(null, lotto);
-      }
-    });
-  };
-
   this.modifyExtras = (array) => {
-    console.log(this.setXrayArrayToSave(array), 'this.setXrayArrayToSave(array)');
       return this.setXrayArrayToSave(array);
   };
 
@@ -106,9 +67,6 @@ export function Helper() {
     createObjectCount: this.createObjectCount,
     findMostRepeatedValues: this.findMostRepeatedValues,
     orderStringMostRepeated: this.orderStringMostRepeated,
-    compare2arrays: this.compare2arrays,
-    saveScrappedDataToJson: this.saveScrappedDataToJson,
-    customFindOneMongoose: this.customFindOneMongoose,
     modifyExtras: this.modifyExtras
   };
 }

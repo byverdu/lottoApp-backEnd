@@ -2,12 +2,12 @@
 
 import mongoose from 'mongoose';
 import {
-  Helper
+  SchemaHelper
 }
-from '../helpers/helpers';
+from '../helpers/schemaHelper';
 
-var helper, lottoSchema;
-helper= new Helper();
+var schemaHelper, lottoSchema;
+schemaHelper = new SchemaHelper();
 lottoSchema = mongoose.Schema({
 
   lottoID: String,
@@ -22,7 +22,7 @@ lottoSchema = mongoose.Schema({
 lottoSchema.methods.setNewDate = function() {
   console.log('setNewDate called');
   try {
-    this.date = helper.setNewFormatedDate();
+    this.date = schemaHelper.setNewFormatedDate();
   } catch (e) {
     console.log('setNewDate exception called', e.message);
     this.date = new Date();
@@ -30,14 +30,12 @@ lottoSchema.methods.setNewDate = function() {
 };
 
 lottoSchema.methods.setLastResult = function(array) {
-  this.lastResult = helper.setXrayArrayToSave(array);
-
+  this.lastResult = schemaHelper.setXrayArrayToSave(array);
   return this.lastResult;
 };
 
 lottoSchema.methods.setExtras = function(array) {
-  this.extras = helper.modifyExtras(array);
-  console.log(this.extras, 'this.extras');
+  this.extras = schemaHelper.modifyExtras(array);
   return this.extras;
 };
 
@@ -46,8 +44,8 @@ lottoSchema.methods.getLastResult = function(){
 };
 
 lottoSchema.methods.setMostRepeated = function(count) {
-  let mostRepeated = helper.findMostRepeatedValues(this.getStatistics(), count);
-  this.mostRepeated = helper.orderStringMostRepeated(mostRepeated);
+  let mostRepeated = schemaHelper.findMostRepeatedValues(this.getStatistics(), count);
+  this.mostRepeated = schemaHelper.orderStringMostRepeated(mostRepeated);
 
   return this.mostRepeated;
 };
@@ -57,7 +55,7 @@ lottoSchema.methods.setAllResults = function(lastResult) {
 };
 
 lottoSchema.methods.getAllResults = function() {
-  return helper.setAllResulstArrayToCount(this.allResults);
+  return schemaHelper.setAllResulstArrayToCount(this.allResults);
 };
 
 lottoSchema.methods.getCountAllResults = function() {
@@ -75,7 +73,7 @@ lottoSchema.methods.getCountAllResults = function() {
       }
     });
     if (count > 0) {
-      result.push(helper.createObjectCount(outerEl, count));
+      result.push(schemaHelper.createObjectCount(outerEl, count));
     }
   });
 

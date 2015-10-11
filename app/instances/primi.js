@@ -2,7 +2,8 @@
 
 import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
-import {Helper} from '../helpers/helpers';
+import {SchemaHelper} from '../helpers/schemaHelper';
+import {GlobalHelper} from '../helpers/globalHelper';
 var config = require('../config/config');
 
 require('../config/db');
@@ -12,19 +13,21 @@ console.log('instances file called primitiva');
 var configPrimi = config().lotto.primitiva,
   db = mongoose.connection,
   JSONdata = require('../json/primi'),
-  helper = new Helper();
+  globalHelper = new GlobalHelper(),
+  schemaHelper = new SchemaHelper();
+
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 
   console.log('open connection primitiva');
 
-  helper.customFindOneMongoose(Lotto, { lottoID: 'primitiva' }, (err, lotto) => {
+  globalHelper.customFindOneMongoose(Lotto, { lottoID: 'primitiva' }, (err, lotto) => {
     if (err) {
       console.log(err);
     } else {
       console.log(lotto.lastResult, 'outside if condition primitiva');
 
-      let oldXrayValue = helper.setXrayArrayToSave(JSONdata.numbers),
+      let oldXrayValue = schemaHelper.setXrayArrayToSave(JSONdata.numbers),
         storedLastResult = lotto.getLastResult();
 
       if (oldXrayValue !== storedLastResult) {
