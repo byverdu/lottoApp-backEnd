@@ -30,13 +30,16 @@ db.once('open', function() {
       let oldXrayValue = schemaHelper.setXrayArrayToSave(JSONdata.numbers),
         storedLastResult = lotto.getLastResult();
 
+        console.log(oldXrayValue, 'oldXrayValue');
+        console.log(storedLastResult, 'storedLastResult');
+
       if (oldXrayValue !== storedLastResult) {
 
         lotto.setNewDate();
         lotto.setLastResult(JSONdata.numbers);
         lotto.setExtras(JSONdata.extras);
         lotto.setAllResults(lotto.lastResult);
-        lotto.setStatistics();
+        lotto.setStatistics(lotto.getAllResults, 'lotto');
         lotto.setMostRepeated(configBono.sliceCountBall);
         lotto.save((err, lotto) => {
           if (err) {

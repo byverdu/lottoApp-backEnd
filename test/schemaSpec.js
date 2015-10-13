@@ -156,27 +156,27 @@ describe('LottoSchema methods and properties', () => {
   it('LottoSchema.getAllResultsStars(this.stars.allResults), splits and sorts allResults', done => {
     data.cretateDataStars(lotto);
     expect(lotto.getAllResultsStars()).to.eql(['07','09','18','28','30','30','34','37','40','40']);
-		lotto.stars.allResults = [];
+    lotto.stars.allResults = [];
     done();
   });
   it('LottoSchema has a setStatisticStars method', done => {
     expect(lotto.setStatisticStars).not.to.equal(undefined);
-		done();
+    done();
   });
   it('LottoSchema.setStatisticStars() sets lotto.statistics', done => {
-			data.cretateDataStars(lotto);
-			lotto.setStatisticStars(lotto.stars.allResults, 'stars');
+    data.cretateDataStars(lotto);
+    lotto.setStatisticStars(lotto.stars.allResults, 'stars');
     expect(lotto.stars.statistics).to.contain({'index':'34','count':1},{'index':'37','count':1});
     lotto.allResults = [];
-		done();
+    done();
   });
   it('LottoSchema has a getStatisticStars method', done => {
     expect(lotto.getStatisticStars).not.to.equal(undefined);
-		done();
+    done();
   });
   it('LottoSchema has a getStatisticStars method', done => {
     expect(lotto.getStatisticStars()).to.equal(lotto.stars.statistics);
-		done();
+    done();
   });
   it('LottoSchema.setMostRepeatedStars, is defined', done => {
     expect(lotto.setMostRepeatedStars).to.be.a('Function');

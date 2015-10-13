@@ -8,24 +8,24 @@ var config = require('../config/config');
 
 require('../config/db');
 
-console.log('instances file called primitiva');
+console.log('instances file called euromillions');
 
-var configPrimi = config().lotto.primitiva,
+var configEuro = config().lotto.euromillions,
   db = mongoose.connection,
-  JSONdata = require('../json/primi'),
+  JSONdata = require('../json/euro'),
   globalHelper = new GlobalHelper(),
   schemaHelper = new SchemaHelper();
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 
-  console.log('open connection primitiva');
+  console.log('open connection euromillions');
 
-  globalHelper.customFindOneMongoose(Lotto, { lottoID: 'primitiva' }, (err, lotto) => {
+  globalHelper.customFindOneMongoose(Lotto, { lottoID: 'euromillions' }, (err, lotto) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(lotto.lastResult, 'outside if condition primitiva');
+      console.log(lotto.lastResult, 'outside if condition euromillions');
 
       let oldXrayValue = schemaHelper.setXrayArrayToSave(JSONdata.numbers),
         storedLastResult = lotto.getLastResult();
@@ -34,15 +34,20 @@ db.once('open', function() {
 
         lotto.setNewDate();
         lotto.setLastResult(JSONdata.numbers);
-        lotto.setExtras(JSONdata.extras);
         lotto.setAllResults(lotto.lastResult);
-        lotto.setStatistics(lotto.getAllResults, 'lotto');
-        lotto.setMostRepeated(configPrimi.sliceCountBall);
+        lotto.setExtras(JSONdata.extras);
+        lotto.setStatistics(this.getAllResults, 'lotto');
+        lotto.setMostRepeated(configEuro.sliceCountBall);
+
+        lotto.setLastResultStars(JSONdata.extras);
+        lotto.setAllResultStars();
+        lotto.setStatisticStars(this.getAllResultsStars, 'stars');
+        lotto.setMostRepeatedStars(configEuro.sliceCountBallStar);
         lotto.save((err, lotto) => {
           if (err) {
             console.log(err);
           } else {
-            console.log(lotto, 'inside if condition primitiva');
+            console.log(lotto, 'inside if condition euromillions');
           }
         });
       }
