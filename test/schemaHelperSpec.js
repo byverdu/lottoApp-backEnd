@@ -61,4 +61,7 @@ describe('Helper and methods', () => {
     expect(schemaHelper.modifyExtras(['9','7'])).to.be.eq('07,09');
     done();
   });
+  it('#Helper.setXrayArrayToSave(["34", "9", "23"," 7", "5"]), returns "05,07,09,23,34"', () => {
+    expect(schemaHelper.setXrayArrayToSave(['34', '9', '23',' 7', '5'])).to.eq('05,07,09,23,34');
+  });
 });

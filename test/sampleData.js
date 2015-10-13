@@ -8,6 +8,8 @@ module.exports = function() {
 
     sliceCountBall: 6,
 
+    sliceStars: 2,
+
     allResultLong: [
       '07,12,15,23,39,46',
       '12,15,28,37,42,49',
@@ -22,6 +24,19 @@ module.exports = function() {
       '01,15,35,36,37,40',
       '02,11,29,30,32,45'
     ],
+
+    cretateDataStars: (lotto) => {
+      lotto.setLastResultStars(['07,09']);
+      lotto.setAllResultStars();
+      lotto.setLastResultStars(['37,40']);
+      lotto.setAllResultStars();
+      lotto.setLastResultStars(['18,28']);
+      lotto.setAllResultStars();
+      lotto.setLastResultStars(['30,30']);
+      lotto.setAllResultStars();
+      lotto.setLastResultStars(['34,40']);
+      lotto.setAllResultStars();
+    },
 
     spanishValues: {
       days: [

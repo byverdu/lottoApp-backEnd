@@ -16,7 +16,13 @@ lottoSchema = mongoose.Schema({
   lastResult: String,
   mostRepeated: String,
   statistics: Array,
-  allResults: Array
+  allResults: Array,
+  stars: {
+    lastResult: String,
+    mostRepeated: String,
+    allResults: Array,
+    statistics: Array
+  }
 });
 
 lottoSchema.methods.setNewDate = function() {
@@ -39,6 +45,11 @@ lottoSchema.methods.setExtras = function(array) {
   return this.extras;
 };
 
+lottoSchema.methods.setLastResultStars = function(array) {
+  this.stars.lastResult = this.setExtras(array);
+  return this.stars.lastResult;
+};
+
 lottoSchema.methods.getLastResult = function(){
   return this.lastResult;
 };
@@ -50,20 +61,43 @@ lottoSchema.methods.setMostRepeated = function(count) {
   return this.mostRepeated;
 };
 
+lottoSchema.methods.setMostRepeatedStars = function(count) {
+  let mostRepeated = schemaHelper.findMostRepeatedValues(this.getStatisticStars(), count);
+  this.stars.mostRepeated = schemaHelper.orderStringMostRepeated(mostRepeated);
+
+  return this.stars.mostRepeated;
+};
+
 lottoSchema.methods.setAllResults = function(lastResult) {
   return this.allResults.push(lastResult);
+};
+
+lottoSchema.methods.setAllResultStars = function() {
+  return this.stars.allResults.push(this.stars.lastResult);
 };
 
 lottoSchema.methods.getAllResults = function() {
   return schemaHelper.setAllResulstArrayToCount(this.allResults);
 };
 
-lottoSchema.methods.getCountAllResults = function() {
-  var allResults = this.getAllResults(),
-    copyAllResults = allResults.slice(0),
+lottoSchema.methods.getAllResultsStars = function() {
+  return schemaHelper.setAllResulstArrayToCount(this.stars.allResults);
+};
+
+lottoSchema.methods.getCountAllResults = function(array, string) {
+
+  switch (string) {
+    case 'lotto':
+      array = this.getAllResults();
+      break;
+      case 'stars':
+        array = this.getAllResultsStars();
+        break;
+    }
+  var copyAllResults = array.slice(0),
     result = [];
 
-  allResults.forEach((outerEl, outerInd, outerArr) => {
+  array.forEach((outerEl, outerInd, outerArr) => {
     var count = 0;
     copyAllResults.forEach((innerEl, innerInd, innerArr) => {
 
@@ -80,13 +114,22 @@ lottoSchema.methods.getCountAllResults = function() {
 	return result;
 };
 
-lottoSchema.methods.setStatistics = function(){
-	this.statistics = this.getCountAllResults();
+lottoSchema.methods.setStatistics = function(array, string){
+	this.statistics = this.getCountAllResults(array, string);
 	return this.statistics;
+};
+
+lottoSchema.methods.setStatisticStars = function(array, string){
+	this.stars.statistics = this.getCountAllResults(array, string);
+	return this.stars.statistics;
 };
 
 lottoSchema.methods.getStatistics = function(){
 	return this.statistics;
+};
+
+lottoSchema.methods.getStatisticStars = function(){
+	return this.stars.statistics;
 };
 
 module.exports = mongoose.model('Lotto', lottoSchema);
