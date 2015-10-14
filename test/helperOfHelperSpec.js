@@ -3,24 +3,26 @@
 'use strict';
 
 import {
-  HelperString, HelperDate, HelperArray, HelperObject
+  HelperString, HelperDate, HelperArray, HelperObject, HelperNumber
 }
 from '../app/helpers/preHelpers';
 
 import chai from 'chai';
+import sinon from  'sinon';
+import sinonChai from 'sinon-chai';
+chai.use(sinonChai);
 
 var data = require('./sampleData')(),
   expect = chai.expect,
-  _Date,
-  _String,
-  _Array,
-  _Object;
+  _Date, _String, _Array, _Object, _Number;
+
 
 before(() => {
   _Date = new HelperDate();
   _Array = new HelperArray();
   _String = new HelperString();
   _Object = new HelperObject();
+  _Number = new HelperNumber();
 });
 
 describe('helper of helper?', () => {
@@ -108,14 +110,14 @@ describe('helper of helper?', () => {
     it('#HelperArray.sortArrayByCount(array) returns the statistics ordered by count property', () => {
       expect(_Array.sortArrayByCount(data.allResultLongObjCounted)[0]).to.eql({index: '12', count: 4});
     });
-    it('#HelperArray.sliceArrayByLottoCount is defined', () => {
-      expect(_Array.sliceArrayByLottoCount).not.to.equal(undefined);
+    it('#HelperArray.sliceArrayByCount is defined', () => {
+      expect(_Array.sliceArrayByCount).not.to.equal(undefined);
     });
-    it('#HelperArray.sliceArrayByLottoCount() returns an Array', () => {
-      expect(_Array.sliceArrayByLottoCount(data.allResultLongObjOrdered, data.sliceCountBall)).to.be.an('Array');
+    it('#HelperArray.sliceArrayByCount() returns an Array', () => {
+      expect(_Array.sliceArrayByCount(data.allResultLongObjOrdered, data.sliceCountBall)).to.be.an('Array');
     });
-    it('#HelperArray.sliceArrayByLottoCount(array, count) returns "x" first most repeated values ', () => {
-      expect(_Array.sliceArrayByLottoCount(data.allResultLongObjOrdered, data.sliceCountBall)).to.contain({ index: '12', count: 4 },{ index: '16', count: 3 },{ index: '23', count: 3 },{ index: '28', count: 3 },{ index: '15', count: 3 },{ index: '49', count: 2 });
+    it('#HelperArray.sliceArrayByCount(array, count) returns "x" first most repeated values ', () => {
+      expect(_Array.sliceArrayByCount(data.allResultLongObjOrdered, data.sliceCountBall)).to.contain({ index: '12', count: 4 },{ index: '16', count: 3 },{ index: '23', count: 3 },{ index: '28', count: 3 },{ index: '15', count: 3 },{ index: '49', count: 2 });
     });
   });
 
@@ -159,9 +161,48 @@ describe('helper of helper?', () => {
     it('#HelperObject.extractValueByIndex(),  returns an Array', () => {
       expect(_Object.extractValueByIndex([])).to.be.an('Array');
     });
-    it('#HelperObject.extractValueByIndex(),  returns an Array', () => {
-      let dataToExtract = _Array.sliceArrayByLottoCount(data.allResultLongObjOrdered, data.sliceCountBall);
+    it('#HelperObject.extractValueByIndex(),  returns an Array with populated values from index property', () => {
+      let dataToExtract = _Array.sliceArrayByCount(data.allResultLongObjOrdered, data.sliceCountBall);
       expect(_Object.extractValueByIndex(dataToExtract)).to.eql([ '12', '16', '23', '28', '15', '49' ]);
+    });
+    it('#HelperObject.objectColorProp, is defined', () => {
+      expect(_Object.objectColorProp).to.be.an('Object');
+    });
+    it('#HelperObject.objectColorProp, returns an Object with 3 properties for colours', () => {
+      expect(_Object.objectColorProp).to.have.property('green').eq('greenItem');
+      expect(_Object.objectColorProp).to.have.property('orange').eq('orangeItem');
+      expect(_Object.objectColorProp).to.have.property('red').eq('redItem');
+    });
+    it('#HelperObject.setColorProp, is defined', () => {
+      expect(_Object.setColorProp).to.be.a('Function');
+    });
+    it('#HelperObject.setColorProp({ index: "12", count: 4 }), returns { index: "12", count: 4, color: "greenItem"}', () => {
+
+      expect(_Object.setColorProp([{ index: '12', count: 4 }], _Object.objectColorProp, 'green')).to.contain({ index: '12', count: 4, color: 'greenItem' });
+    });
+  });
+
+  describe('HelperNumber', () => {
+    it('#HelperNumber, is defined', () => {
+      expect(_Number).not.to.equal(undefined);
+    });
+    it('#HelperNumber.findFractionNumber, is defined"', () => {
+      expect(_Number.findFractionNumber).not.to.equal(undefined);
+    });
+    it('#HelperNumber.findFractionNumber(),  returns a Number', () => {
+      expect(_Number.findFractionNumber(23)).to.be.a('Number');
+    });
+    it('#HelperNumber.findFractionNumber(),  returns a Number', () => {
+      var stub = sinon.stub(_Number, 'findFractionNumber');
+      var array = new Array(data.totalNumberBalls);
+      _Number.findFractionNumber(array, data.fraction);
+
+      expect(_Number.findFractionNumber).to.have.been.calledWith(array, 3);
+      stub.restore();
+    });
+    it('#HelperNumber.findFractionNumber(array, data.fraction),  returns 17', () => {
+      var array = new Array(data.totalNumberBalls);
+      expect(_Number.findFractionNumber(array, data.fraction)).to.eq(17);
     });
   });
 });

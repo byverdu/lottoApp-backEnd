@@ -55,21 +55,34 @@ lottoSchema.methods.getLastResult = function(){
 };
 
 lottoSchema.methods.setMostRepeated = function(count) {
-  let mostRepeated = schemaHelper.findMostRepeatedValues(this.getStatistics(), count);
+  let newStatistics,
+    mostRepeated = schemaHelper.findMostRepeatedValues(this.getStatistics(), count);
+
   this.mostRepeated = schemaHelper.orderStringMostRepeated(mostRepeated);
+  newStatistics = this.setStatisticsAfterColorSet(this.getStatistics());
+  this.statistics = newStatistics;
 
   return this.mostRepeated;
 };
 
 lottoSchema.methods.setMostRepeatedStars = function(count) {
-  let mostRepeated = schemaHelper.findMostRepeatedValues(this.getStatisticStars(), count);
+  let newStatistics,
+  mostRepeated = schemaHelper.findMostRepeatedValues(this.getStatisticStars(), count);
+
   this.stars.mostRepeated = schemaHelper.orderStringMostRepeated(mostRepeated);
+  newStatistics = this.setStatisticsAfterColorSet(this.getStatisticStars());
+  this.stars.statistics = newStatistics;
 
   return this.stars.mostRepeated;
 };
 
 lottoSchema.methods.setAllResults = function(lastResult) {
   return this.allResults.push(lastResult);
+};
+
+lottoSchema.methods.setStatisticsAfterColorSet = function(array){
+  // console.log(schemaHelper.setColorPropStatistics(array),'schemaHelper.setColorPropStatistics(array)');
+  return schemaHelper.setColorPropStatistics(array);
 };
 
 lottoSchema.methods.setAllResultStars = function() {
@@ -84,16 +97,16 @@ lottoSchema.methods.getAllResultsStars = function() {
   return schemaHelper.setAllResulstArrayToCount(this.stars.allResults);
 };
 
-lottoSchema.methods.getCountAllResults = function(array, string) {
+lottoSchema.methods.getCountAllResults = function(array, kind) {
 
-  switch (string) {
+  switch (kind) {
     case 'lotto':
       array = this.getAllResults();
       break;
-      case 'stars':
-        array = this.getAllResultsStars();
-        break;
-    }
+    case 'stars':
+      array = this.getAllResultsStars();
+      break;
+  }
   var copyAllResults = array.slice(0),
     result = [];
 

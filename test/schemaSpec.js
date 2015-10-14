@@ -71,6 +71,15 @@ describe('LottoSchema methods and properties', () => {
     expect(lotto.setMostRepeated(data.sliceCountBall)).to.eql('12,15,16,23,28,49');
     done();
   });
+  it('After calling LottoSchema.setMostRepeated, new statistics are created', done => {
+    let result;
+    lotto.statistics = data.allResultLongObjOrdered;
+    result = lotto.setStatisticsAfterColorSet(lotto.statistics);
+
+    expect(result[0]).to.contain({ index: '12', count: 4, color: 'greenItem' });
+    expect(result[result.length - 1]).to.contain({ index: '19', count: 1, color: 'redItem' });
+    done();
+  });
   it('LottoSchema.setAllResults, is defined', done => {
     expect(lotto.setAllResults).to.be.a('Function');
     done();
@@ -182,10 +191,21 @@ describe('LottoSchema methods and properties', () => {
     expect(lotto.setMostRepeatedStars).to.be.a('Function');
     done();
   });
-  it('LottoSchema.setMostRepeatedStars, returns the most repeated sliced by count', done => {
+  it('LottoSchema.setMostRepeatedStars, sets the most repeated stars', done => {
     data.cretateDataStars(lotto);
     lotto.setStatisticStars(lotto.stars.allResults, 'stars');
     expect(lotto.setMostRepeatedStars(data.sliceStars)).to.eql('30,40');
+    done();
+  });
+  it('LottoSchema.setStatisticsAfterColorSet, is defined', done => {
+    expect(lotto.setStatisticsAfterColorSet).to.be.a('Function');
+    done();
+  });
+  it('LottoSchema.setStatisticsAfterColorSet, sets this.allResults with a new property', done => {
+
+    var result = lotto.setStatisticsAfterColorSet(data.allResultLongObjOrdered);
+    expect(result[0]).to.contain({ index: '12', count: 4, color: 'greenItem' });
+    expect(result[result.length - 1]).to.contain({ index: '19', count: 1, color: 'redItem' });
     done();
   });
 

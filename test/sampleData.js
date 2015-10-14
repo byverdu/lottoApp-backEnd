@@ -4,10 +4,9 @@ module.exports = function() {
 
   return {
 
-    totalNumberBalls: 49,
-
+    totalNumberBalls: 50,
+    fraction: 3,
     sliceCountBall: 6,
-
     sliceStars: 2,
 
     allResultLong: [

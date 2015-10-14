@@ -5,7 +5,7 @@ import { SchemaHelper } from '../app/helpers/schemaHelper';
 import chai from 'chai';
 
 var data = require('./sampleData')(),
-expect     = chai.expect,
+expect = chai.expect,
   schemaHelper;
 
 before(()    => {
@@ -53,15 +53,18 @@ describe('Helper and methods', () => {
   it('#Helper.orderStringMostRepeated(index, count) returns {index: "12",count: 4}', () => {
     expect(schemaHelper.orderStringMostRepeated('11,05,28,03,10')).to.eq('03,05,10,11,28');
   });
-  it('#Helper.modifyExtras, is defined', done => {
+  it('#Helper.modifyExtras, is defined', () => {
     expect(schemaHelper.modifyExtras).to.be.a('Function');
-    done();
   });
-  it('#Helper.modifyExtras(["9","7"]), returns "07,09"', done => {
+  it('#Helper.modifyExtras(["9","7"]), returns "07,09"', () => {
     expect(schemaHelper.modifyExtras(['9','7'])).to.be.eq('07,09');
-    done();
   });
-  it('#Helper.setXrayArrayToSave(["34", "9", "23"," 7", "5"]), returns "05,07,09,23,34"', () => {
-    expect(schemaHelper.setXrayArrayToSave(['34', '9', '23',' 7', '5'])).to.eq('05,07,09,23,34');
+  it('#Helper.setColorPropStatistics, is defined', () => {
+    expect(schemaHelper.setColorPropStatistics).to.be.a('Function');
+  });
+  it('#Helper.setColorPropStatistics(({[ index: "12", count: 4 },..]), returns [{ index: "12", count: 4, color: "greenItem"}...]', () => {
+    var result = schemaHelper.setColorPropStatistics(data.allResultLongObjOrdered, data.fraction);
+    expect(result[0]).to.contain({ index: '12', count: 4, color: 'greenItem' });
+    expect(result[result.length - 1]).to.contain({ index: '19', count: 1, color: 'redItem' });
   });
 });

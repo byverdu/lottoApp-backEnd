@@ -1,10 +1,12 @@
 'use strict';
 
-import { HelperDate, HelperString, HelperArray, HelperObject } from './preHelpers';
+import { HelperDate, HelperString, HelperArray, HelperObject, HelperNumber } from './preHelpers';
 var _Date = new HelperDate(),
   _String = new HelperString(),
   _Array = new HelperArray(),
-  _Object = new HelperObject();
+  _Object = new HelperObject(),
+  _Number = new HelperNumber(),
+  fractionNumber = require('../config/config')().lotto.fractionNumber;
 
 /**
  * Helper Class
@@ -46,7 +48,7 @@ export function SchemaHelper() {
 
   this.findMostRepeatedValues = (array, count) => {
     let sortedArray = _Array.sortArrayByCount(array);
-    let slicedArray = _Array.sliceArrayByLottoCount(sortedArray, count);
+    let slicedArray = _Array.sliceArrayByCount(sortedArray, count);
     let extractedArray =  _Object.extractValueByIndex(slicedArray);
 
     return _Array.concatToSingleString(extractedArray);
@@ -60,6 +62,20 @@ export function SchemaHelper() {
       return this.setXrayArrayToSave(array);
   };
 
+  this.setColorPropStatistics = (array) => {
+    let oneThird = _Number.findFractionNumber(array, fractionNumber),
+      greenItems = array.splice(0, oneThird),
+      orangeItems = array.splice(0, oneThird),
+      redItems = array,
+    result = [];
+
+    _Object.setColorProp(greenItems, _Object.objectColorProp, 'green');
+    _Object.setColorProp(orangeItems, _Object.objectColorProp, 'orange');
+    _Object.setColorProp(redItems, _Object.objectColorProp, 'red');
+
+    return result.concat(greenItems, orangeItems, redItems);
+  };
+
   return {
     setNewFormatedDate: this.setNewFormatedDate,
     setXrayArrayToSave: this.setXrayArrayToSave,
@@ -67,6 +83,7 @@ export function SchemaHelper() {
     createObjectCount: this.createObjectCount,
     findMostRepeatedValues: this.findMostRepeatedValues,
     orderStringMostRepeated: this.orderStringMostRepeated,
-    modifyExtras: this.modifyExtras
+    modifyExtras: this.modifyExtras,
+    setColorPropStatistics: this.setColorPropStatistics
   };
 }

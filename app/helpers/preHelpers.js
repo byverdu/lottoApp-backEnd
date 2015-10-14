@@ -55,76 +55,7 @@ function HelperString() {
     addStringNumZero: this.addStringNumZero,
     orderString: this.orderString
   };
-}
-
-/**
- * @class
- * Converts Date into a custom format
- */
-function HelperDate() {
-
-  /**
-   * Container for the Spanish date values
-   * @type {Object}
-   */
-  var spanishValues = {
-    days: [
-      'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado',
-    ],
-    months: [
-      'Dic', 'Ene', 'Feb', 'Mar', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov',
-    ]
-  };
-
-  /**
-   * Returns value per index
-   * @param  {Array}  array - Array with Spanish values
-   * @param  {Number} index - numeric value from getValuesNewDate()
-   * @return {String}       - Spanish value
-   */
-  var getSpanishValues = (array, index) => {
-    return array[index];
-  };
-
-  /**
-   * Getter for Date values [day,month...]
-   * @return {Object} Container with numeric values from calling Date() methods
-   */
-  var getValuesNewDate = () => {
-
-    let date = new Date();
-
-    return {
-      getDayWeek: date.getDay(),
-      getDayMonth: date.getDate(),
-      getMonth: date.getMonth(),
-      getYear: date.getFullYear()
-    };
-  };
-
-  /**
-   * Formats a Date instance to a custom string, uses all inner variables
-   * @memberof HelperDate
-   * @return {String} - A formatted Spanish date e.g 'Lunes, 12-Oct-2015'
-   */
-  this.buildSpanishDate = () => {
-
-    let day, dayNumber, month, year, DateValues;
-
-    DateValues = getValuesNewDate();
-
-    day = getSpanishValues(spanishValues.days, DateValues.getDayWeek);
-    dayNumber = DateValues.getDayMonth;
-    month = getSpanishValues(spanishValues.months, DateValues.getMonth);
-    year = DateValues.getYear;
-
-    return `${day}, ${dayNumber}-${month}-${year}`;
-  };
-
-  return {
-    buildSpanishDate: this.buildSpanishDate
-  };
-}
+};
 
 /**
  * @class
@@ -199,10 +130,10 @@ function HelperArray() {
    * @param  {Array} array - Array with objects ordered by "count" property
    * @param  {Number} count - Number of items to slice
    * @return {Array}      - Array sliced by the count specified
-   @example console.log(HelperArray.sliceArrayByLottoCount([{index: '12', count: 4},{index: '07', count: 8}]))
+   * @example console.log(HelperArray.sliceArrayByCount([{index: '12', count: 4},{index: '07', count: 8}]))
    * // [{index: '07', count: 8},{index: '12', count: 4}]
    */
-  this.sliceArrayByLottoCount = (array, count) => {
+  this.sliceArrayByCount = (array, count) => {
     return array.slice(0, count);
   };
 
@@ -211,7 +142,7 @@ function HelperArray() {
     sortArrayByCount: this.sortArrayByCount,
     concatToSingleString: this.concatToSingleString,
     splitArray: this.splitArray,
-    sliceArrayByLottoCount: this.sliceArrayByLottoCount
+    sliceArrayByCount: this.sliceArrayByCount
   };
 }
 
@@ -226,7 +157,7 @@ function HelperObject() {
    * @memberof HelperObject
    * @param  {Array} array - Array with objects ordered by "index" property
    * @return {Array}      - Array populated with values of property "index"
-   @example console.log(HelperObject.extractValueByIndex([{index: '07', count: 8},{index: '12', count: 4}])) // ['07','12']
+   * @example console.log(HelperObject.extractValueByIndex([{index: '07', count: 8},{index: '12', count: 4}])) // ['07','12']
    */
   this.extractValueByIndex = (array) => {
     let mostRepeated = [];
@@ -238,11 +169,137 @@ function HelperObject() {
     return mostRepeated;
   };
 
+  /**
+   * Container for color values
+   * @memberof HelperObject
+   */
+  this.objectColorProp = {
+      green: 'greenItem',
+      orange: 'orangeItem',
+      red: 'redItem'
+  };
+
+  /**
+   * Adds new "color" property to an object
+   * @memberof HelperObject
+   * @param  {Object} object   - Object containing other properties
+   * @param  {Object} objColor - Container with color values
+   * @param  {String} thisColor - Reference value as index for the container
+   * @return {Object}            - Object with new color property
+   * @example console.log(HelperObject.setColorProp({ index: '12', count: 4 }, HelperObject.objectColorProp, 'green'))
+   * // { index: '12', count: 4 , color: 'greenItem' }
+   */
+  this.setColorProp = (array, objColor, thisColor) => {
+    array.forEach((el, ind, arr) => {
+        arr[ind].color = objColor[thisColor];
+        return arr;
+    });
+    return array;
+  };
+
   return {
-    extractValueByIndex: this.extractValueByIndex
+    extractValueByIndex: this.extractValueByIndex,
+    objectColorProp: this.objectColorProp,
+    setColorProp: this.setColorProp
   };
 }
 
+/**
+ * @class
+ * Class for Number manipulation
+ */
+function HelperNumber() {
+
+  /**
+   * Divides a number
+   * @memberof HelperNumber
+   * @param  {Array} array     - Array with values
+   * @param  {Number} fraction - Number value to divide the array length
+   * @return {Number}          - Biggest number possible from the division
+   * @example var array = new Array(49);
+   * console.log(HelperNumber.findFractionNumber(array, 3)) // 17
+   */
+  this.findFractionNumber = (array, fraction) => {
+    let result = Math.ceil(array.length/fraction);
+    return result;
+  };
+
+  return {
+    findFractionNumber: this.findFractionNumber
+  };
+}
+
+
+/**
+ * @class
+ * Converts Date into a custom format
+ */
+function HelperDate() {
+
+  /**
+   * Container for the Spanish date values
+   * @type {Object}
+   */
+  var spanishValues = {
+    days: [
+      'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado',
+    ],
+    months: [
+      'Dic', 'Ene', 'Feb', 'Mar', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov',
+    ]
+  };
+
+  /**
+   * Returns value per index
+   * @param  {Array}  array - Array with Spanish values
+   * @param  {Number} index - numeric value from getValuesNewDate()
+   * @return {String}       - Spanish value
+   */
+  var getSpanishValues = (array, index) => {
+    return array[index];
+  };
+
+  /**
+   * Getter for Date values [day,month...]
+   * @return {Object} Container with numeric values from calling Date() methods
+   */
+  var getValuesNewDate = () => {
+
+    let date = new Date();
+
+    return {
+      getDayWeek: date.getDay(),
+      getDayMonth: date.getDate(),
+      getMonth: date.getMonth(),
+      getYear: date.getFullYear()
+    };
+  };
+
+  /**
+   * Formats a Date instance to a custom string, uses all inner variables
+   * @memberof HelperDate
+   * @return {String} - A formatted Spanish date e.g 'Lunes, 12-Oct-2015'
+   */
+  this.buildSpanishDate = () => {
+
+    let day, dayNumber, month, year, DateValues;
+
+    DateValues = getValuesNewDate();
+
+    day = getSpanishValues(spanishValues.days, DateValues.getDayWeek);
+    dayNumber = DateValues.getDayMonth;
+    month = getSpanishValues(spanishValues.months, DateValues.getMonth);
+    year = DateValues.getYear;
+
+    return `${day}, ${dayNumber}-${month}-${year}`;
+  };
+
+  return {
+    buildSpanishDate: this.buildSpanishDate
+  };
+}
+
+
 export {
-  HelperString, HelperDate, HelperArray, HelperObject
+  HelperString, HelperDate, HelperArray, HelperObject, HelperNumber
 };
