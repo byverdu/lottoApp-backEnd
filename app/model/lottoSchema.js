@@ -25,6 +25,10 @@ lottoSchema = mongoose.Schema({
   }
 });
 
+/**
+ * Setters for the Schema
+ */
+
 lottoSchema.methods.setNewDate = function() {
   console.log('setNewDate called');
   try {
@@ -48,10 +52,6 @@ lottoSchema.methods.setExtras = function(array) {
 lottoSchema.methods.setLastResultStars = function(array) {
   this.stars.lastResult = this.setExtras(array);
   return this.stars.lastResult;
-};
-
-lottoSchema.methods.getLastResult = function(){
-  return this.lastResult;
 };
 
 lottoSchema.methods.setMostRepeated = function(count) {
@@ -80,13 +80,32 @@ lottoSchema.methods.setAllResults = function(lastResult) {
   return this.allResults.push(lastResult);
 };
 
+lottoSchema.methods.setAllResultStars = function() {
+  return this.stars.allResults.push(this.stars.lastResult);
+};
+
+lottoSchema.methods.setStatistics = function(array, string){
+	this.statistics = this.getCountAllResults(array, string);
+	return this.statistics;
+};
+
+lottoSchema.methods.setStatisticStars = function(array, string){
+	this.stars.statistics = this.getCountAllResults(array, string);
+	return this.stars.statistics;
+};
+
 lottoSchema.methods.setStatisticsAfterColorSet = function(array){
-  // console.log(schemaHelper.setColorPropStatistics(array),'schemaHelper.setColorPropStatistics(array)');
   return schemaHelper.setColorPropStatistics(array);
 };
 
-lottoSchema.methods.setAllResultStars = function() {
-  return this.stars.allResults.push(this.stars.lastResult);
+
+/**
+ * Getters for the Schema
+ */
+
+
+lottoSchema.methods.getLastResult = function(){
+  return this.lastResult;
 };
 
 lottoSchema.methods.getAllResults = function() {
@@ -125,16 +144,6 @@ lottoSchema.methods.getCountAllResults = function(array, kind) {
   });
 
 	return result;
-};
-
-lottoSchema.methods.setStatistics = function(array, string){
-	this.statistics = this.getCountAllResults(array, string);
-	return this.statistics;
-};
-
-lottoSchema.methods.setStatisticStars = function(array, string){
-	this.stars.statistics = this.getCountAllResults(array, string);
-	return this.stars.statistics;
 };
 
 lottoSchema.methods.getStatistics = function(){
