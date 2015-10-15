@@ -76,6 +76,18 @@ export function SchemaHelper() {
     return result.concat(greenItems, orangeItems, redItems);
   };
 
+  this.setKindOfLotto = (array, kind, method_1, method_2) => {
+    switch (kind) {
+      case 'lotto':
+        array = method_1;
+        break;
+      case 'stars':
+        array = method_2;
+        break;
+    }
+    return array;
+  };
+
   return {
     setNewFormatedDate: this.setNewFormatedDate,
     setXrayArrayToSave: this.setXrayArrayToSave,
@@ -84,6 +96,7 @@ export function SchemaHelper() {
     findMostRepeatedValues: this.findMostRepeatedValues,
     orderStringMostRepeated: this.orderStringMostRepeated,
     modifyExtras: this.modifyExtras,
-    setColorPropStatistics: this.setColorPropStatistics
+    setColorPropStatistics: this.setColorPropStatistics,
+    setKindOfLotto: this.setKindOfLotto
   };
 }

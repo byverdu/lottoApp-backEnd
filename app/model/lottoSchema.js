@@ -117,19 +117,11 @@ lottoSchema.methods.getAllResultsStars = function() {
 };
 
 lottoSchema.methods.getCountAllResults = function(array, kind) {
-
-  switch (kind) {
-    case 'lotto':
-      array = this.getAllResults();
-      break;
-    case 'stars':
-      array = this.getAllResultsStars();
-      break;
-  }
-  var copyAllResults = array.slice(0),
+  let tempArray = schemaHelper.setKindOfLotto(array, kind, this.getAllResults(), this.getAllResultsStars()),
+    copyAllResults = tempArray.slice(0),
     result = [];
 
-  array.forEach((outerEl, outerInd, outerArr) => {
+  tempArray.forEach((outerEl, outerInd, outerArr) => {
     var count = 0;
     copyAllResults.forEach((innerEl, innerInd, innerArr) => {
 

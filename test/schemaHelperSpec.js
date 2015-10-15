@@ -67,4 +67,24 @@ describe('Helper and methods', () => {
     expect(result[0]).to.contain({ index: '12', count: 4, color: 'greenItem' });
     expect(result[result.length - 1]).to.contain({ index: '19', count: 1, color: 'redItem' });
   });
+  it('#Helper.setKindOfLotto, is defined', () => {
+    expect(schemaHelper.setKindOfLotto).to.be.a('Function');
+  });
+  it('#Helper.setKindOfLotto(), returns an Array', () => {
+    expect(schemaHelper.setKindOfLotto([])).to.be.an('Array')
+  });
+  it('#Helper.setKindOfLotto([]), first argument is an Array', () => {
+    var array = [];
+    schemaHelper.setKindOfLotto(array);
+
+    expect(array).to.be.argumnents;
+    expect(array).to.be.an('Array');
+  });
+  it('#Helper.setKindOfLotto([]), first argument is an Array', () => {
+    var string = 'string';
+    schemaHelper.setKindOfLotto(string);
+
+    expect(string).to.be.argumnents;
+    expect(string).to.be.an('String');
+  });
 });
