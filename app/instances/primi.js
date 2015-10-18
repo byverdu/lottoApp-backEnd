@@ -7,18 +7,17 @@ import {
   SchemaHelper
 }
 from '../helpers/schemaHelper';
-var configPrimi = require('../config/config')().lotto.primitiva;
+var configPrimi = require('../config/config')().lotto.primitiva,
+storage = require('../config/storage'),
+globalHelper = new GlobalHelper(),
+schemaHelper = new SchemaHelper();
 
 module.exports = () => {
   require('../config/db')();
 
   console.log('instances file called primitiva');
 
-    var db = mongoose.connection,
-    JSONdata = require('../json/primi'),
-    storage = require('../config/storage'),
-    globalHelper = new GlobalHelper(),
-    schemaHelper = new SchemaHelper();
+    var db = mongoose.connection;
 
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', function() {
@@ -43,7 +42,7 @@ module.exports = () => {
 
           lotto.setNewDate();
           lotto.setLastResult(primiStorage);
-          lotto.setExtras(JSONdata.extras);
+          lotto.setExtras(storage.getItem('primiExtras'));
           lotto.setAllResults(lotto.lastResult);
           lotto.setStatistics(lotto.getAllResults, 'lotto');
           lotto.setMostRepeated(configPrimi.sliceCountBall);

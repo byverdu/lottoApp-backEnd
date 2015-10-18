@@ -31,6 +31,7 @@ xray.get(configPrimi.url, {numbers:[configPrimi.numbers],extras:[configPrimi.ext
       function() {
         console.log('fuck it');
       });
+    storage.setItem('primiExtras', result.extras);
   }
       console.log('setTimeout Xray primi');
 });

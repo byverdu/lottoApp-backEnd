@@ -4,19 +4,18 @@ import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
 import {SchemaHelper} from '../helpers/schemaHelper';
 import {GlobalHelper} from '../helpers/globalHelper';
-var configBono = require('../config/config')().lotto.bonoloto;
+var configBono = require('../config/config')().lotto.bonoloto,
+  globalHelper = new GlobalHelper(),
+  storage = require('../config/storage'),
+  schemaHelper = new SchemaHelper();
 
 module.exports = () => {
 
-require('../config/db')();
+  require('../config/db')();
+  var db = mongoose.connection;
 
 console.log('instances file called bonoloto');
 
-  var db = mongoose.connection,
-    JSONdata = require('../json/bono'),
-    globalHelper = new GlobalHelper(),
-    storage = require('../config/storage'),
-    schemaHelper = new SchemaHelper();
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -40,7 +39,7 @@ db.once('open', function() {
 
         lotto.setNewDate();
         lotto.setLastResult(bonoStorage);
-        lotto.setExtras(JSONdata.extras);
+        lotto.setExtras(storage.getItem('bonoExtras'));
         lotto.setAllResults(lotto.lastResult);
         lotto.setStatistics(lotto.getAllResults, 'lotto');
         lotto.setMostRepeated(configBono.sliceCountBall);

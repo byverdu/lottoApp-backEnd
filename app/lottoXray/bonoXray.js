@@ -27,7 +27,6 @@ xray.get(thisUrl, {numbers:[configBono.numbers],extras:[configBono.extras]} ).th
   console.log(bonoStorage, 'presistent node-persist');
 
   if (!globalHelper.compare2arrays(bonoStorage, result.numbers)) {
-
     storage.setItem('bonoNumbers',result.numbers).then(
       function() {
         console.log('setItems for bonoNumbers');
@@ -36,6 +35,7 @@ xray.get(thisUrl, {numbers:[configBono.numbers],extras:[configBono.extras]} ).th
       function() {
         console.log('fuck it');
       });
+    storage.setItem('bonoExtras', result.extras);
   }
     console.log('after if Xray bono');
 
