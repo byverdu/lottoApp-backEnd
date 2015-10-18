@@ -1,8 +1,17 @@
 'use strict';
 
+//
+// require('./lottoXray/bonoXray');
+// // require('./lottoXray/euroXray');
+//
+// require('./config/db');
 
-require('./lottoXray/bonoXray');
-require('./lottoXray/primiXray');
-require('./lottoXray/euroXray');
-
+setInterval(()=>{
 console.log('server file called');
+
+require('./lottoXray/primiXray')();
+
+},6000);
+//
+
+module.exports = require('express')();

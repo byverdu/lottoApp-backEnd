@@ -2,50 +2,68 @@
 
 import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
-import {SchemaHelper} from '../helpers/schemaHelper';
-import {GlobalHelper} from '../helpers/globalHelper';
+import {
+  GlobalHelper
+}
+from '../helpers/globalHelper';
+import {
+  SchemaHelper
+}
+from '../helpers/schemaHelper';
 var config = require('../config/config');
 
-require('../config/db');
+module.exports = () => {
+  require('../config/db')();
 
-console.log('instances file called primitiva');
+  console.log('instances file called primitiva');
 
-var configPrimi = config().lotto.primitiva,
-  db = mongoose.connection,
-  JSONdata = require('../json/primi'),
-  globalHelper = new GlobalHelper(),
-  schemaHelper = new SchemaHelper();
+  var configPrimi = config().lotto.primitiva,
+    db = mongoose.connection,
+    JSONdata = require('../json/primi'),
+    storage = require('../config/storage'),
+    globalHelper = new GlobalHelper(),
+    schemaHelper = new SchemaHelper();
 
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('open', function() {
 
-  console.log('open connection primitiva');
 
-  globalHelper.customFindOneMongoose(Lotto, { lottoID: 'primitiva' }, (err, lotto) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(lotto.lastResult, 'outside if condition primitiva');
+    console.log('open connection primitiva');
 
-      let oldXrayValue = schemaHelper.setXrayArrayToSave(JSONdata.numbers),
-        storedLastResult = lotto.getLastResult();
+    globalHelper.customFindOneMongoose(Lotto, {
+      lottoID: 'primitiva'
+    }, (err, lotto) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(lotto.lastResult, 'outside if condition primitiva');
 
-      if (oldXrayValue !== storedLastResult) {
+        let primiStorage = storage.getItem('primiNumbers'),
+          storedLastResult = lotto.getLastResult(),
+          newPrimiStorage = schemaHelper.setXrayArrayToSave(primiStorage);
 
-        lotto.setNewDate();
-        lotto.setLastResult(JSONdata.numbers);
-        lotto.setExtras(JSONdata.extras);
-        lotto.setAllResults(lotto.lastResult);
-        lotto.setStatistics(lotto.getAllResults, 'lotto');
-        lotto.setMostRepeated(configPrimi.sliceCountBall);
-        lotto.save((err, lotto) => {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log(lotto, 'inside if condition primitiva');
-          }
-        });
+        console.log(newPrimiStorage, 'newPrimiStorage');
+
+        if (newPrimiStorage !== storedLastResult) {
+
+          lotto.setNewDate();
+          lotto.setLastResult(primiStorage);
+          lotto.setExtras(JSONdata.extras);
+          lotto.setAllResults(lotto.lastResult);
+          lotto.setStatistics(lotto.getAllResults, 'lotto');
+          lotto.setMostRepeated(configPrimi.sliceCountBall);
+          lotto.save((err, lotto) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log(lotto, 'inside if condition primitiva');
+            }
+          });
+        }
       }
-    }
+    });
   });
-});
+  setTimeout(() => {
+    mongoose.disconnect();
+  }, 1000);
+};
