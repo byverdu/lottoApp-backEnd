@@ -2,20 +2,42 @@
 
 import Xray from '../helpers/xray';
 import {GlobalHelper} from '../helpers/globalHelper';
-var config = require('../config/config');
-var storedBonoJSON = require('../json/bono');
+var configBono = require('../config/config')().lotto.bonoloto;
 
 console.log('bonoXray file called');
 
 let globalHelper = new GlobalHelper(),
-  configBono = config().lotto.bonoloto,
   xray = new Xray();
 
-xray.get(configBono.url, {numbers:[configBono.numbers],extras:[configBono.extras]} ).then(result => {
-  console.log(result.numbers, 'latest-result Xray');
-  if (!globalHelper.compare2arrays(storedBonoJSON.numbers, result.numbers)) {
-    globalHelper.saveScrappedDataToJson(configBono.pathJSON ,result);
+var storage = require('../config/storage');
+
+module.exports = () => {
+  function getRandomIntInclusive(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  let urls = ['http://www.loteriasyapuestas.es/es/la-primitiva',configBono.url];
+  let thisUrl = urls[getRandomIntInclusive(0,1)];
+  console.log(thisUrl);
+
+
+xray.get(thisUrl, {numbers:[configBono.numbers],extras:[configBono.extras]} ).then(result => {
+
+  var bonoStorage = storage.getItem('bonoNumbers');
+  console.log(result.numbers, 'result.numbers');
+  console.log(bonoStorage, 'presistent node-persist');
+
+  if (!globalHelper.compare2arrays(bonoStorage, result.numbers)) {
+
+    storage.setItem('bonoNumbers',result.numbers).then(
+      function() {
+        console.log('setItems for bonoNumbers');
+        require('../instances/bono')();
+      },
+      function() {
+        console.log('fuck it');
+      });
   }
     console.log('after if Xray bono');
-    require('../instances/bono');
+
 });
+};

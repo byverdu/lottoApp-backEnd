@@ -2,23 +2,19 @@
 
 import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
-import {
-  GlobalHelper
-}
-from '../helpers/globalHelper';
+import {GlobalHelper} from '../helpers/globalHelper';
 import {
   SchemaHelper
 }
 from '../helpers/schemaHelper';
-var config = require('../config/config');
+var configPrimi = require('../config/config')().lotto.primitiva;
 
 module.exports = () => {
   require('../config/db')();
 
   console.log('instances file called primitiva');
 
-  var configPrimi = config().lotto.primitiva,
-    db = mongoose.connection,
+    var db = mongoose.connection,
     JSONdata = require('../json/primi'),
     storage = require('../config/storage'),
     globalHelper = new GlobalHelper(),
@@ -30,9 +26,8 @@ module.exports = () => {
 
     console.log('open connection primitiva');
 
-    globalHelper.customFindOneMongoose(Lotto, {
-      lottoID: 'primitiva'
-    }, (err, lotto) => {
+    globalHelper.customFindOneMongoose(Lotto, {lottoID: 'primitiva'}, (err, lotto) => {
+
       if (err) {
         console.log(err);
       } else {

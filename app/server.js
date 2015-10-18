@@ -9,7 +9,7 @@
 setInterval(()=>{
 console.log('server file called');
 
-require('./lottoXray/primiXray')();
+require('./lottoXray/bonoXray')();
 
 },6000);
 //

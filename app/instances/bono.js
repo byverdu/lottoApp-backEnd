@@ -4,17 +4,19 @@ import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
 import {SchemaHelper} from '../helpers/schemaHelper';
 import {GlobalHelper} from '../helpers/globalHelper';
-var config = require('../config/config');
+var configBono = require('../config/config')().lotto.bonoloto;
 
-require('../config/db');
+module.exports = () => {
+
+require('../config/db')();
 
 console.log('instances file called bonoloto');
 
-var configBono = config().lotto.bonoloto,
-  db = mongoose.connection,
-  JSONdata = require('../json/bono'),
-  globalHelper = new GlobalHelper(),
-  schemaHelper = new SchemaHelper();
+  var db = mongoose.connection,
+    JSONdata = require('../json/bono'),
+    globalHelper = new GlobalHelper(),
+    storage = require('../config/storage'),
+    schemaHelper = new SchemaHelper();
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -27,16 +29,17 @@ db.once('open', function() {
     } else {
       console.log(lotto.lastResult, 'outside if condition bonoloto');
 
-      let oldXrayValue = schemaHelper.setXrayArrayToSave(JSONdata.numbers),
-        storedLastResult = lotto.getLastResult();
+      let bonoStorage = storage.getItem('bonoNumbers'),
+          storedLastResult = lotto.getLastResult(),
+          newPrimiStorage = schemaHelper.setXrayArrayToSave(bonoStorage);
 
-        console.log(oldXrayValue, 'oldXrayValue');
+        console.log(newPrimiStorage, 'newPrimiStorage');
         console.log(storedLastResult, 'storedLastResult');
 
-      if (oldXrayValue !== storedLastResult) {
+      if (newPrimiStorage !== storedLastResult) {
 
         lotto.setNewDate();
-        lotto.setLastResult(JSONdata.numbers);
+        lotto.setLastResult(bonoStorage);
         lotto.setExtras(JSONdata.extras);
         lotto.setAllResults(lotto.lastResult);
         lotto.setStatistics(lotto.getAllResults, 'lotto');
@@ -52,3 +55,7 @@ db.once('open', function() {
     }
   });
 });
+setTimeout(() => {
+    mongoose.disconnect();
+  }, 1000);
+};

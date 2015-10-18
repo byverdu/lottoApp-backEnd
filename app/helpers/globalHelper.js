@@ -27,7 +27,7 @@ export function GlobalHelper() {
 
   this.saveScrappedDataToJson = (pathJSON, data) => {
     fs.writeFile(path.join(__dirname, pathJSON), JSON.stringify(data), err => {
-      if(err){
+      if (err) {
         console.log(err);
       } else {
         console.log(`file saved ${pathJSON}`);
