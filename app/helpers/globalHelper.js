@@ -1,6 +1,5 @@
 'use strict';
 
-
 var fs = require('fs'),
   path = require('path');
 
@@ -14,7 +13,10 @@ export function GlobalHelper() {
       count = 0;
 
     for (var i = 0; i < first.length; i++) {
+      first[i] = first[i].trim();
+      second[i] = second[i].trim();
       if (first[i].includes(second[i])) {
+        console.log(first[i].length,second[i].length);
         count++;
         if (count === 6) {
           assertion = true;

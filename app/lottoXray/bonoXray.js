@@ -19,15 +19,20 @@ module.exports = () => {
   let thisUrl = urls[getRandomIntInclusive(0,1)];
   console.log(thisUrl);
 
-
 xray.get(thisUrl, {numbers:[configBono.numbers],extras:[configBono.extras]} ).then(result => {
 
-  var bonoStorage = storage.getItem('bonoNumbers');
+  var bonoStorage = storage.getItem('bonoNumbers').numbers;
+
   console.log(result.numbers, 'result.numbers');
   console.log(bonoStorage, 'presistent node-persist');
-
   if (!globalHelper.compare2arrays(bonoStorage, result.numbers)) {
-    storage.setItem('bonoNumbers',result.numbers).then(
+
+    let newStorage = {
+      numbers: result.numbers,
+      extras: result.extras
+    };
+
+    storage.setItem('bonoNumbers', newStorage).then(
       function() {
         console.log('setItems for bonoNumbers');
         require('../instances/bono')();
@@ -35,7 +40,6 @@ xray.get(thisUrl, {numbers:[configBono.numbers],extras:[configBono.extras]} ).th
       function() {
         console.log('fuck it');
       });
-    storage.setItem('bonoExtras', result.extras);
   }
     console.log('after if Xray bono');
 

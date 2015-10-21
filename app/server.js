@@ -1,17 +1,20 @@
 'use strict';
 
-//
-// require('./lottoXray/bonoXray');
-// // require('./lottoXray/euroXray');
-//
-// require('./config/db');
-
 setInterval(()=>{
 console.log('server file called');
 
 require('./lottoXray/bonoXray')();
+// require('./instances/bono')();
 
-},6000);
-//
+},60000);
+
+
+// var storage = require('./config/storage');
+// let newStorage = {
+//       numbers: ['15','4','15','4','15','4'],
+//       extras: ['15','4']
+//     };
+// storage.setItem('bonoNumbers', newStorage);
+// console.log(storage.getItem('bonoNumbers'));
 
 module.exports = require('express')();

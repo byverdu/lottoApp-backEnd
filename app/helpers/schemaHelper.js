@@ -76,13 +76,13 @@ export function SchemaHelper() {
     return result.concat(greenItems, orangeItems, redItems);
   };
 
-  this.setKindOfLotto = (array, kind, method_1, method_2) => {
+  this.setKindOfLotto = (array, kind, lottoMethod, starsMethod) => {
     switch (kind) {
       case 'lotto':
-        array = method_1;
+        array = lottoMethod;
         break;
       case 'stars':
-        array = method_2;
+        array = starsMethod;
         break;
     }
     return array;

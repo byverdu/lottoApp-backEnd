@@ -30,7 +30,7 @@ db.once('open', function() {
 
       let bonoStorage = storage.getItem('bonoNumbers'),
           storedLastResult = lotto.getLastResult(),
-          newPrimiStorage = schemaHelper.setXrayArrayToSave(bonoStorage);
+          newPrimiStorage = schemaHelper.setXrayArrayToSave(bonoStorage.numbers);
 
         console.log(newPrimiStorage, 'newPrimiStorage');
         console.log(storedLastResult, 'storedLastResult');
@@ -38,8 +38,8 @@ db.once('open', function() {
       if (newPrimiStorage !== storedLastResult) {
 
         lotto.setNewDate();
-        lotto.setLastResult(bonoStorage);
-        lotto.setExtras(storage.getItem('bonoExtras'));
+        lotto.setLastResult(bonoStorage.numbers);
+        lotto.setExtras(bonoStorage.extras);
         lotto.setAllResults(lotto.lastResult);
         lotto.setStatistics(lotto.getAllResults, 'lotto');
         lotto.setMostRepeated(configBono.sliceCountBall);
