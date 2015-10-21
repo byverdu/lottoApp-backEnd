@@ -3,7 +3,7 @@
 setInterval(()=>{
 console.log('server file called');
 
-require('./lottoXray/bonoXray')();
+require('./lottoXray/primiXray')();
 // require('./instances/bono')();
 
 },60000);
@@ -14,7 +14,7 @@ require('./lottoXray/bonoXray')();
 //       numbers: ['15','4','15','4','15','4'],
 //       extras: ['15','4']
 //     };
-// storage.setItem('bonoNumbers', newStorage);
-// console.log(storage.getItem('bonoNumbers'));
+// storage.setItem('primiNumbers', newStorage);
+// console.log(storage.getItem('primiNumbers'));
 
 module.exports = require('express')();

@@ -12,14 +12,8 @@ let globalHelper = new GlobalHelper(),
 var storage = require('../config/storage');
 
 module.exports = () => {
-  function getRandomIntInclusive(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-  let urls = ['http://www.loteriasyapuestas.es/es/la-primitiva',configBono.url];
-  let thisUrl = urls[getRandomIntInclusive(0,1)];
-  console.log(thisUrl);
 
-xray.get(thisUrl, {numbers:[configBono.numbers],extras:[configBono.extras]} ).then(result => {
+xray.get(configBono.url, {numbers:[configBono.numbers],extras:[configBono.extras]} ).then(result => {
 
   var bonoStorage = storage.getItem('bonoNumbers').numbers;
 

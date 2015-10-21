@@ -34,15 +34,16 @@ module.exports = () => {
 
         let primiStorage = storage.getItem('primiNumbers'),
           storedLastResult = lotto.getLastResult(),
-          newPrimiStorage = schemaHelper.setXrayArrayToSave(primiStorage);
+          newPrimiStorage = schemaHelper.setXrayArrayToSave(primiStorage.numbers);
 
         console.log(newPrimiStorage, 'newPrimiStorage');
+        console.log(storedLastResult, 'storedLastResult');
 
         if (newPrimiStorage !== storedLastResult) {
 
           lotto.setNewDate();
-          lotto.setLastResult(primiStorage);
-          lotto.setExtras(storage.getItem('primiExtras'));
+          lotto.setLastResult(primiStorage.numbers);
+          lotto.setExtras(primiStorage.extras);
           lotto.setAllResults(lotto.lastResult);
           lotto.setStatistics(lotto.getAllResults, 'lotto');
           lotto.setMostRepeated(configPrimi.sliceCountBall);
