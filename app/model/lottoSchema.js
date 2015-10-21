@@ -1,10 +1,7 @@
 'use strict';
 
 import mongoose from 'mongoose';
-import {
-  SchemaHelper
-}
-from '../helpers/schemaHelper';
+import {SchemaHelper} from '../helpers/schemaHelper';
 
 var schemaHelper, lottoSchema;
 schemaHelper = new SchemaHelper();

@@ -12,7 +12,6 @@ console.log('bonoXray file called');
 
 module.exports = () => {
 
-
     function getRandomIntInclusive(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -20,30 +19,29 @@ module.exports = () => {
     let thisUrl = urls[getRandomIntInclusive(0,1)];
     console.log(thisUrl);
 
+  xray.get(thisUrl, {numbers:[configBono.numbers],extras:[configBono.extras]} ).then(result => {
 
-xray.get(thisUrl, {numbers:[configBono.numbers],extras:[configBono.extras]} ).then(result => {
+    let bonoStorage = storage.getItem('bonoNumbers').numbers;
 
-  let bonoStorage = storage.getItem('bonoNumbers').numbers;
+    console.log(result.numbers, 'result.numbers');
+    console.log(bonoStorage, 'presistent node-persist');
+    if (!globalHelper.compare2arrays(bonoStorage, result.numbers, configBono.sliceCountBall)) {
 
-  console.log(result.numbers, 'result.numbers');
-  console.log(bonoStorage, 'presistent node-persist');
-  if (!globalHelper.compare2arrays(bonoStorage, result.numbers, configBono.sliceCountBall)) {
+      let newStorage = {
+        numbers: result.numbers,
+        extras: result.extras
+      };
 
-    let newStorage = {
-      numbers: result.numbers,
-      extras: result.extras
-    };
+      storage.setItem('bonoNumbers', newStorage).then(
+        function() {
+          console.log('setItems for bonoNumbers');
+          require('../instances/bono')();
+        },
+        function() {
+          console.log('fuck it');
+        });
+    }
+      console.log('after if Xray bono');
 
-    storage.setItem('bonoNumbers', newStorage).then(
-      function() {
-        console.log('setItems for bonoNumbers');
-        require('../instances/bono')();
-      },
-      function() {
-        console.log('fuck it');
-      });
-  }
-    console.log('after if Xray bono');
-
-});
+  });
 };

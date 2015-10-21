@@ -34,8 +34,56 @@ export function GlobalHelper() {
     });
   };
 
+  var setValuesObjectForWinners = (value, value2, value3, value4) => {
+    if (value4 === undefined) {
+      return {
+        category: value,
+        winners: value2,
+        price: value3
+      };
+    } else {
+      return {
+        category: value,
+        winners: value2,
+        spanish: value4,
+        price: value3
+      };
+    }
+  };
+
+  this.getPricesInfo = function(lottoObject) {
+
+    var resultArray = [];
+
+    lottoObject.categoryPrice.forEach((el, ind, arr) => {
+      var obj;
+
+      lottoObject.winnerPrice.forEach((el2, ind2, arr2) => {
+
+        lottoObject.moneyPrice.forEach((el3, ind3, arr3) => {
+
+          if (lottoObject.hasOwnProperty('spanishWinners')) {
+
+            lottoObject.spanishWinners.forEach((el, ind4, arr4) => {
+
+              obj = setValuesObjectForWinners(arr[ind], arr2[ind], arr3[ind], arr4[ind]);
+            });
+          } else {
+            obj = setValuesObjectForWinners(arr[ind], arr2[ind], arr3[ind]);
+          }
+
+        });
+      });
+      resultArray.push(obj);
+    });
+    resultArray.shift();
+
+    return resultArray;
+  };
+
   return {
     compare2arrays: this.compare2arrays,
-    customFindOneMongoose: this.customFindOneMongoose
+    customFindOneMongoose: this.customFindOneMongoose,
+    getPricesInfo: this.getPricesInfo
   };
 }
