@@ -3,18 +3,20 @@
 setInterval(()=>{
 console.log('server file called');
 
-require('./lottoXray/primiXray')();
-// require('./instances/bono')();
+// require('./lottoXray/euroXray')();
+// require('./lottoXray/primiXray')();
+// require('./lottoXray/bonoXray')();
 
-},60000);
 
+},9000);
 
+//
 // var storage = require('./config/storage');
 // let newStorage = {
-//       numbers: ['15','4','15','4','15','4'],
-//       extras: ['15','4']
+//       numbers: ['15','4','15','4','15'],
+//       extras: ['01','04']
 //     };
-// storage.setItem('primiNumbers', newStorage);
-// console.log(storage.getItem('primiNumbers'));
+// storage.setItem('euroNumbers', newStorage);
+// console.log(storage.getItem('euroNumbers'));
 
 module.exports = require('express')();

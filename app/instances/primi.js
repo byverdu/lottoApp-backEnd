@@ -3,10 +3,7 @@
 import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
 import {GlobalHelper} from '../helpers/globalHelper';
-import {
-  SchemaHelper
-}
-from '../helpers/schemaHelper';
+import {SchemaHelper} from '../helpers/schemaHelper';
 var configPrimi = require('../config/config')().lotto.primitiva,
 storage = require('../config/storage'),
 globalHelper = new GlobalHelper(),
@@ -17,7 +14,7 @@ module.exports = () => {
 
   console.log('instances file called primitiva');
 
-    var db = mongoose.connection;
+  var db = mongoose.connection;
 
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', function() {

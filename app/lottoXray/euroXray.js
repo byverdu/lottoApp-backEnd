@@ -2,21 +2,39 @@
 
 import Xray from '../helpers/xray';
 import {GlobalHelper} from '../helpers/globalHelper';
-var config = require('../config/config');
-var storedEuroJSON = require('../json/euro');
+var configEuro = require('../config/config')().lotto.euromillions,
+  storage = require('../config/storage');
+
+let globalHelper = new GlobalHelper(),
+  xray = new Xray();
 
 console.log('euroXray file called');
 
-let globalHelper = new GlobalHelper(),
-  configEuro = config().lotto.euromillions,
-  xray = new Xray();
+module.exports = () => {
 
-xray.get(configEuro.url, {numbers:[configEuro.numbers],extras:[configEuro.extras]} ).then(result => {
-  console.log(result.numbers, 'latest-result Xray euro');
-  console.log(storedEuroJSON.numbers, 'setColorProp');
-  if (!globalHelper.compare2arrays(storedEuroJSON.numbers, result.numbers)) {
-    globalHelper.saveScrappedDataToJson(configEuro.pathJSON, result);
-  }
-      require('../instances/euro');
-      console.log('setTimeout Xray euro');
-});
+  xray.get(configEuro.url, {numbers:[configEuro.numbers],extras:[configEuro.extras]} ).then(result => {
+
+    let euroStorage = storage.getItem('euroNumbers').numbers;
+
+    console.log(result.numbers, 'result.numbers');
+    console.log(euroStorage, 'presistent node-persist');
+
+    if (!globalHelper.compare2arrays(euroStorage, result.numbers, configEuro.sliceCountBall)) {
+
+      let newStorage = {
+        numbers: result.numbers,
+        extras: result.extras
+      };
+
+      storage.setItem('euroNumbers', newStorage).then(
+      function() {
+        console.log('setItems for euroNumbers');
+        require('../instances/euro')();
+      },
+      function() {
+        console.log('fuck it');
+      });
+    }
+        console.log('setTimeout Xray euro');
+  });
+};

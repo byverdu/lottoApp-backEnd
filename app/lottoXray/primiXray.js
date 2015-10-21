@@ -2,34 +2,24 @@
 
 import Xray from '../helpers/xray';
 import {GlobalHelper} from '../helpers/globalHelper';
-var configPrimi = require('../config/config')().lotto.primitiva;
-
-console.log('primiXray file called');
+var configPrimi = require('../config/config')().lotto.primitiva,
+  storage = require('../config/storage');
 
 let globalHelper = new GlobalHelper(),
   xray = new Xray();
 
-
-var storage = require('../config/storage');
+console.log('primiXray file called');
 
 module.exports = () => {
 
-  function getRandomIntInclusive(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-  let urls = ['http://www.loteriasyapuestas.es/es/bonoloto',configPrimi.url];
-  let thisUrl = urls[getRandomIntInclusive(0,1)];
-  console.log(thisUrl);
+xray.get(configPrimi.url, {numbers:[configPrimi.numbers],extras:[configPrimi.extras]} ).then(result => {
 
+  let primiStorage = storage.getItem('primiNumbers').numbers;
 
-xray.get(thisUrl, {numbers:[configPrimi.numbers],extras:[configPrimi.extras]} ).then(result => {
-
-  var primiStorage = storage.getItem('primiNumbers').numbers;
-  //
   console.log(result.numbers, 'result.numbers');
   console.log(primiStorage, 'presistent node-persist');
 
-  if (!globalHelper.compare2arrays(primiStorage, result.numbers)) {
+  if (!globalHelper.compare2arrays(primiStorage, result.numbers, configPrimi.sliceCountBall)) {
 
     let newStorage = {
       numbers: result.numbers,

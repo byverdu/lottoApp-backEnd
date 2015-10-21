@@ -1,14 +1,11 @@
 'use strict';
 
-var fs = require('fs'),
-  path = require('path');
-
 /**
  * Helper Class
  */
 export function GlobalHelper() {
 
-  this.compare2arrays = (first, second) => {
+  this.compare2arrays = (first, second, lottoCount) => {
     var assertion = false,
       count = 0;
 
@@ -18,23 +15,13 @@ export function GlobalHelper() {
       if (first[i].includes(second[i])) {
         console.log(first[i].length,second[i].length);
         count++;
-        if (count === 6) {
+        if (count === lottoCount) {
           assertion = true;
         }
       }
     }
     console.log(assertion, 'compare2arrays boolean');
     return assertion;
-  };
-
-  this.saveScrappedDataToJson = (pathJSON, data) => {
-    fs.writeFile(path.join(__dirname, pathJSON), JSON.stringify(data), err => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(`file saved ${pathJSON}`);
-      }
-    });
   };
 
   this.customFindOneMongoose = (Model, ObjectQuery, callback) => {
@@ -49,7 +36,6 @@ export function GlobalHelper() {
 
   return {
     compare2arrays: this.compare2arrays,
-    saveScrappedDataToJson: this.saveScrappedDataToJson,
     customFindOneMongoose: this.customFindOneMongoose
   };
 }
