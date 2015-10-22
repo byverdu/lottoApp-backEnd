@@ -12,9 +12,11 @@ export function GlobalHelper() {
     for (var i = 0; i < first.length; i++) {
       first[i] = first[i].trim();
       second[i] = second[i].trim();
+
       if (first[i].includes(second[i])) {
         console.log(first[i].length,second[i].length);
         count++;
+
         if (count === lottoCount) {
           assertion = true;
         }
@@ -81,9 +83,14 @@ export function GlobalHelper() {
     return resultArray;
   };
 
+  this.hackyDate = () => {
+    return new Date().toString().split('GMT').shift();
+  };
+
   return {
     compare2arrays: this.compare2arrays,
     customFindOneMongoose: this.customFindOneMongoose,
-    getPricesInfo: this.getPricesInfo
+    getPricesInfo: this.getPricesInfo,
+    hackyDate: this.hackyDate
   };
 }

@@ -9,37 +9,37 @@ globalHelper = new GlobalHelper();
 module.exports = () => {
   require('../config/db')();
 
-  console.log('instances file called primitivaWinner');
+  console.log('instances file called euromillionsWinner');
 
   var db = mongoose.connection;
 
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', function() {
 
-    console.log('open connection primitivaWinner');
+    console.log('open connection euromillionsWinner');
 
-    globalHelper.customFindOneMongoose(Winner, {lottoID: 'primitivaWinner'}, (err, winner) => {
+    globalHelper.customFindOneMongoose(Winner, {lottoID: 'euromillionsWinner'}, (err, winner) => {
 
       if (err) {
         console.log(err);
       } else {
 
-        let primiStorage = storage.getItem('primiWinners'),
+        let euroStorage = storage.getItem('euroWinners'),
           oldWinner = winner.allWinners[4].winners,
-          newWinner = primiStorage.allWinners[4].winners;
+          newWinner = euroStorage.allWinners[4].winners;
 
           console.log(oldWinner, newWinner);
 
         if (oldWinner !== newWinner) {
 
           winner.date = globalHelper.hackyDate();
-          winner.allWinners = primiStorage.allWinners;
-          winner.extraInfo = primiStorage.extraInfo;
+          winner.allWinners = euroStorage.allWinners;
+          winner.extraInfo = euroStorage.extraInfo;
           winner.save((err, winner) => {
             if (err) {
               console.log(err);
             } else {
-              console.log(winner, 'saved primitivaWinner');
+              console.log(winner, 'saved euromillionsWinner');
             }
           });
         }

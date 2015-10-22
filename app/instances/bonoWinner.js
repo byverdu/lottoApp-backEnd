@@ -32,7 +32,7 @@ module.exports = () => {
 
         if (oldWinner !== newWinner) {
 
-          winner.date = new Date();
+          winner.date = globalHelper.hackyDate();
           winner.allWinners = bonoStorage.allWinners;
           winner.extraInfo = bonoStorage.extraInfo;
           winner.save((err, winner) => {

@@ -17,14 +17,14 @@ module.exports = () => {
     extraInfoPrice: [configBono.extraInfoPrice]
   }).then(result => {
 
-    let newWinner = globalHelper.getPricesInfo(result),
-      fourthWinner = newWinner[4].winners,
-      oldWinner = storage.getItem('bonoWinners');
+    let convertedResult = globalHelper.getPricesInfo(result),
+      newWinner = convertedResult[4].winners,
+      oldWinner = storage.getItem('bonoWinners').allWinners[4].winners;
 
-      if (fourthWinner !== oldWinner.allWinners[4].winners){
+      if (oldWinner !== newWinner){
 
         let newStorage = {
-          allWinners: newWinner,
+          allWinners: convertedResult,
           extraInfo: result.extraInfoPrice
         };
 
