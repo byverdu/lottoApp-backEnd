@@ -25,12 +25,13 @@ module.exports = () => {
 
         let newStorage = {
           allWinners: newWinner,
-          extraInfo: result.extraInfo
+          extraInfo: result.extraInfoPrice
         };
 
         storage.setItem('primiWinners', newStorage).then(
           ()=>{
             console.log('setItem for primiWinners');
+            require('../instances/primiWinner')();
           },()=>{
             console.log('error setting primiWinners');
           });
