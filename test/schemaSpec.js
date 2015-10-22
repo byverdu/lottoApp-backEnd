@@ -10,7 +10,7 @@ var data = require('./sampleData')(),
   connection,
   Lotto,
   lotto,
-  jsonFile = require('../app/json/bono.json');
+  storage = require('../app/config/storage');
 
 function createDummyData(){
   data.allResultLong.map( (el) => {
@@ -50,7 +50,8 @@ describe('LottoSchema methods and properties', () => {
     done();
   });
   it('LottoSchema.setLastResult(["34", "9", "23"," 7", "5"]), returns "05,07,09,23,34"', done => {
-    expect(lotto.setLastResult(jsonFile.numbers)).to.have.length.least(data.sliceCountBall);
+    var newStorage = storage.getItem('bonoNumbers');
+    expect(lotto.setLastResult(newStorage.numbers)).to.have.length.least(data.sliceCountBall);
     done();
   });
   it('LottoSchema.setExtras, is defined', done => {
@@ -216,7 +217,8 @@ describe('LottoSchema methods and properties', () => {
     done();
   });
   it('LottoSchema.lastResult, is defined and is a String', done => {
-    lotto.setLastResult(jsonFile.numbers);
+    var newStorage = storage.getItem('bonoNumbers');
+    lotto.setLastResult(newStorage.numbers);
     expect(lotto.lastResult).to.be.a('String');
     done();
   });

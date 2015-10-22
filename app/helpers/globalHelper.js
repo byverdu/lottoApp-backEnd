@@ -14,7 +14,6 @@ export function GlobalHelper() {
       second[i] = second[i].trim();
 
       if (first[i].includes(second[i])) {
-        console.log(first[i].length,second[i].length);
         count++;
 
         if (count === lottoCount) {

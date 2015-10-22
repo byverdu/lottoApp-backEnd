@@ -16,7 +16,7 @@ module.exports = () => {
     moneyPrice: [configBono.moneyPrice],
     extraInfoPrice: [configBono.extraInfoPrice]
   }).then(result => {
-
+    console.log(result);
     let convertedResult = globalHelper.getPricesInfo(result),
       newWinner = convertedResult[4].winners,
       oldWinner = storage.getItem('bonoWinners').allWinners[4].winners;

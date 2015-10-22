@@ -7,8 +7,8 @@ setInterval(() => {
   // require('./lottoXray/primiXray')();
   // require('./lottoXray/bonoXray')();
   // require('./lottoXray/primiWinnerXray')();
-  // require('./lottoXray/bonoWinnerXray')();
-  require('./lottoXray/euroWinnerXray')();
+  require('./lottoXray/bonoWinnerXray')();
+  // require('./lottoXray/euroWinnerXray')();
 
 }, 6000);
 
