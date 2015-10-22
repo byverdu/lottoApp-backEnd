@@ -17,7 +17,7 @@ xray.get(configPrimi.url, {numbers:[configPrimi.numbers],extras:[configPrimi.ext
   let primiStorage = storage.getItem('primiNumbers').numbers;
 
   console.log(result.numbers, 'result.numbers');
-  console.log(primiStorage, 'presistent node-persist');
+  console.log(primiStorage, 'presistent node-persist primiNumbers');
 
   if (!globalHelper.compare2arrays(primiStorage, result.numbers, configPrimi.sliceCountBall)) {
 

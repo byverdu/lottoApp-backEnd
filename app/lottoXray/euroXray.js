@@ -17,7 +17,7 @@ module.exports = () => {
     let euroStorage = storage.getItem('euroNumbers').numbers;
 
     console.log(result.numbers, 'result.numbers');
-    console.log(euroStorage, 'presistent node-persist');
+    console.log(euroStorage, 'presistent node-persist euroNumbers');
 
     if (!globalHelper.compare2arrays(euroStorage, result.numbers, configEuro.sliceCountBall)) {
 

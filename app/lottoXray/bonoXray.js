@@ -2,7 +2,7 @@
 
 import Xray from '../helpers/xray';
 import {GlobalHelper} from '../helpers/globalHelper';
-var configBono = require('../config/config')().lotto.bonoloto,
+let configBono = require('../config/config')().lotto.bonoloto,
   storage = require('../config/storage');
 
 let globalHelper = new GlobalHelper(),
@@ -12,19 +12,12 @@ console.log('bonoXray file called');
 
 module.exports = () => {
 
-    function getRandomIntInclusive(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    let urls = ['http://www.loteriasyapuestas.es/es/la-primitiva',configBono.url];
-    let thisUrl = urls[getRandomIntInclusive(0,1)];
-    console.log(thisUrl);
-
-  xray.get(thisUrl, {numbers:[configBono.numbers],extras:[configBono.extras]} ).then(result => {
+  xray.get(configBono.url, {numbers:[configBono.numbers],extras:[configBono.extras]} ).then(result => {
 
     let bonoStorage = storage.getItem('bonoNumbers').numbers;
 
     console.log(result.numbers, 'result.numbers');
-    console.log(bonoStorage, 'presistent node-persist');
+    console.log(bonoStorage, 'presistent node-persist bonoNumbers');
     if (!globalHelper.compare2arrays(bonoStorage, result.numbers, configBono.sliceCountBall)) {
 
       let newStorage = {
