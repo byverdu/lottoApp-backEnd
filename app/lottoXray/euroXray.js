@@ -1,6 +1,6 @@
 'use strict';
 
-import Xray from '../helpers/xray';
+import Xray from '../config/xray';
 import {GlobalHelper} from '../helpers/globalHelper';
 var configEuro = require('../config/config')().lotto.euromillions,
   storage = require('../config/storage');

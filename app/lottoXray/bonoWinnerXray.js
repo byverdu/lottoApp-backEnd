@@ -1,6 +1,6 @@
 'use strict';
 
-import Xray from '../helpers/xray';
+import Xray from '../config/xray';
 import {GlobalHelper} from '../helpers/globalHelper';
 import storage from '../config/storage';
 let xray = new Xray(),
