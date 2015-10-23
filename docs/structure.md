@@ -39,6 +39,7 @@
     |   |-- api.md
     |   |-- lottoApp.js
     |   |-- structure.md
+    |   |-- workflow.md
     |-- test
         |-- configSpec.js
         |-- globalHelperSpec.js

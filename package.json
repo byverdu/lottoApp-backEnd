@@ -9,24 +9,19 @@
   },
   "scripts": {
     "babel-node": "babel-node --stage 0 --ignore='foo|bar|baz'",
-    "test": "mocha --compilers js:babel/register",
-    "start": "node ./app/bin/init"
+    "test": "mocha --compilers js:babel/register"
   },
   "author": "Albert Vallverdu <byverdu@gmail.com>",
   "license": "no",
   "dependencies": {
     "babel": "^5.8.23",
     "express": "^4.13.3",
-    "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git",
-    "jsdoc-to-markdown": "^1.2.0",
     "jshint": "^2.8.0",
-    "mddir": "^1.0.9",
     "mongodb": "^2.0.40",
     "mongodb-uri": "^0.9.7",
     "mongoose": "^4.1.1",
     "node-persist": "0.0.6",
     "nodemon": "^1.7.1",
-    "request": "^2.61.0",
     "x-ray": "^2.0.2"
   },
   "devDependencies": {

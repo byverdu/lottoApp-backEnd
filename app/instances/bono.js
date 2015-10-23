@@ -4,15 +4,15 @@ import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
 import {SchemaHelper} from '../helpers/schemaHelper';
 import {GlobalHelper} from '../helpers/globalHelper';
-var configBono = require('../config/config')().lotto.bonoloto,
+let configBono = require('../config/config')().lotto.bonoloto,
   globalHelper = new GlobalHelper(),
-  storage = require('../config/storage'),
-  schemaHelper = new SchemaHelper();
+  schemaHelper = new SchemaHelper(),
+  storage = require('../config/storage');
 
 module.exports = () => {
 
   require('../config/db')();
-  var db = mongoose.connection;
+  let db = mongoose.connection;
 
 console.log('instances file called bonoloto');
 
