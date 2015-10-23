@@ -76,7 +76,7 @@ Sorts an string in descendent order
 **See**
 
 - sortMethod() => [HelperArray.sortArrayFromFirstToLast](#HelperArray.this.sortArrayFromFirstToLast)
-- concatMethod() => [HelperArray](#HelperArray).concatToSingleString()
+- concatMethod() => [HelperArray.concatToSingleString](#HelperArray.this..concatToSingleString)
 
 
 | Param | Type | Description |
@@ -388,10 +388,10 @@ Formats array of numbers to a single String
 **Returns**: <code>String</code> - - Ordered and concatenated String from the array values  
 **See**
 
-- [HelperString](#HelperString).deleteWhiteSpace()
-- [HelperString](#HelperString).addStringNumZero()
-- [HelperArray](#HelperArray).concatToSingleString()
-- [HelperArray](#HelperArray).sortArrayFromFirstToLast()
+- [HelperString.deleteWhiteSpace](#HelperString.this.deleteWhiteSpace)
+- [HelperString.addStringNumZero](#HelperString.this.addStringNumZero)
+- [HelperArray.concatToSingleString](#HelperArray.this.concatToSingleString)
+- [HelperArray.sortArrayFromFirstToLast](#HelperArray.this.sortArrayFromFirstToLast)
 
 
 | Param | Type | Description |
@@ -406,8 +406,8 @@ Manipulates an array with strings separated by comma
 **Returns**: <code>Array</code> - - Array containing all the values from the initial Array  
 **See**
 
-- [HelperArray](#HelperArray).splitArray()
-- [HelperArray](#HelperArray).sortArrayFromFirstToLast()
+- [HelperArray.splitArray](#HelperArray.this.splitArray)
+- [HelperArray.sortArrayFromFirstToLast](#HelperArray.this.sortArrayFromFirstToLast)
 
 
 | Param | Type | Description |
@@ -439,10 +439,10 @@ Finds most repeated values for a raffle game
 **Returns**: <code>String</code> - - String made with numbers separated by comma with the same length than the count parameter  
 **See**
 
-- [HelperArray](#HelperArray).sortArrayByCount
-- [HelperArray](#HelperArray).sliceArrayByCount
-- [HelperObject](#HelperObject).extractValueByIndex
-- [HelperArray](#HelperArray).concatToSingleString
+- [HelperArray.sortArrayByCount](#HelperArray.this.sortArrayByCount)
+- [HelperArray.sliceArrayByCount](#HelperArray.this.sliceArrayByCount)
+- [HelperObject.extractValueByIndex](#HelperObject.this.extractValueByIndex)
+- [HelperArray.concatToSingleString](#HelperArray.this.concatToSingleString)
 
 
 | Param | Type | Description |
@@ -464,9 +464,9 @@ Sorts a string of numbers in ascendent order, splits the string then sorts it an
 **Returns**: <code>String</code> - - ordered string of numbers  
 **See**
 
-- [HelperString](#HelperString).orderString
-- [HelperArray](#HelperArray).sortArrayFromFirstToLast
-- [HelperArray](#HelperArray).concatToSingleString
+- [HelperString.orderString](#HelperString.this.orderString)
+- [HelperArray.sortArrayFromFirstToLast](#HelperArray.this.sortArrayFromFirstToLast)
+- [HelperArray.concatToSingleString](#HelperArray.this.concatToSingleString)
 
 
 | Param | Type | Description |
@@ -492,9 +492,9 @@ Modifies an Array of Objects by adding a new 'color' property, heavy internally 
 **Returns**: <code>Array</code> - - Single array with all the new properties populated  
 **See**
 
-- [HelperNumber](#HelperNumber).findFractionNumber
-- [HelperObject](#HelperObject).setColorProperty
-- [HelperObject](#HelperObject).objectColorProperty
+- [HelperNumber.findFractionNumber](#HelperNumber.this.findFractionNumber)
+- [HelperObject.setColorProperty](#HelperObject.this.setColorProperty)
+- [HelperObject.objectColorProperty](#HelperObject.this.objectColorProperty)
 
 
 | Param | Type | Description |
@@ -515,13 +515,34 @@ Switch statement that assigns a get method to the 'array' parameter depending on
 | lottoMethod | <code>function</code> | Gets all values for lotto |
 | starsMethod | <code>function</code> | Gets all values for lotto |
 
-<a name="lottoSchema"></a>
-## lottoSchema
+<a name="LottoSchema"></a>
+## LottoSchema
 Main mongoose Schema
 
 **Kind**: global class  
-<a name="new_lottoSchema_new"></a>
-### new lottoSchema(lottoID, date, extras, lastResult, mostRepeated, statistics, allResults, stars, lastResult-, mostRepeated, statistics, allResults)
+
+* [LottoSchema](#LottoSchema)
+  * [new LottoSchema({lottoID: lottoID})](#new_LottoSchema_new)
+  * [.this.setNewDate()](#LottoSchema.this.setNewDate) ⇒ <code>String</code>
+  * [.this.setLastResult(array)](#LottoSchema.this.setLastResult) ⇒ <code>String</code>
+  * [.this.setExtras(array)](#LottoSchema.this.setExtras) ⇒ <code>String</code>
+  * [.this.setLastResultStars(array)](#LottoSchema.this.setLastResultStars) ⇒ <code>String</code>
+  * [.this.setMostRepeated(count)](#LottoSchema.this.setMostRepeated) ⇒ <code>String</code>
+  * [.this.setMostRepeatedStars(count)](#LottoSchema.this.setMostRepeatedStars) ⇒ <code>String</code>
+  * [.this.setAllResults(lastResult)](#LottoSchema.this.setAllResults) ⇒ <code>Array</code>
+  * [.this.setAllResultStars(lastResult)](#LottoSchema.this.setAllResultStars) ⇒ <code>Array</code>
+  * [.this.setStatistics(array, kind)](#LottoSchema.this.setStatistics) ⇒ <code>Array</code>
+  * [.this.setStatisticStars(array, kind)](#LottoSchema.this.setStatisticStars) ⇒ <code>Array</code>
+  * [.this.setStatisticsAfterColorSet(array)](#LottoSchema.this.setStatisticsAfterColorSet) ⇒ <code>Array</code>
+  * [.this.getLastResult()](#LottoSchema.this.getLastResult) ⇒ <code>String</code>
+  * [.this.getAllResults()](#LottoSchema.this.getAllResults) ⇒ <code>Array</code>
+  * [.this.getAllResultsStars()](#LottoSchema.this.getAllResultsStars) ⇒ <code>Array</code>
+  * [.this.getCountAllResults(array, kind)](#LottoSchema.this.getCountAllResults) ⇒ <code>Array</code>
+  * [.this.getStatistics()](#LottoSchema.this.getStatistics) ⇒ <code>Object</code>
+  * [.this.getStatisticStars()](#LottoSchema.this.getStatisticStars) ⇒ <code>Object</code>
+
+<a name="new_LottoSchema_new"></a>
+### new LottoSchema({lottoID: lottoID})
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -537,3 +558,188 @@ Main mongoose Schema
 | mostRepeated | <code>String</code> | Most repeated numbers for that raffle |
 | statistics | <code>Array</code> | Array with objects for each raffle ball, |
 | allResults | <code>Array</code> | Storage for all the results |
+
+<a name="LottoSchema.this.setNewDate"></a>
+### LottoSchema.this.setNewDate() ⇒ <code>String</code>
+Sets date property for Schema
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>String</code> - - Formatted Date (this.date)  
+**See**: [SchemaHelper.setNewFormatedDate](#SchemaHelper.this.setNewFormatedDate)  
+<a name="LottoSchema.this.setLastResult"></a>
+### LottoSchema.this.setLastResult(array) ⇒ <code>String</code>
+Sets lastResult property for Schema
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>String</code> - - Array converted to a single String (this.lastResult)  
+**See**: [schemaHelper.setXrayArrayToSave](#SchemaHelper.this.setXrayArrayToSave)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| array | <code>Array</code> | Array result from Xray |
+
+<a name="LottoSchema.this.setExtras"></a>
+### LottoSchema.this.setExtras(array) ⇒ <code>String</code>
+Sets last result extras for Schema
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>String</code> - - Array converted to a single String (this.extras)  
+**See**: [schemaHelper.modifyExtras](#schemaHelper.this.modifyExtras)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| array | <code>Array</code> | Array result from Xray |
+
+<a name="LottoSchema.this.setLastResultStars"></a>
+### LottoSchema.this.setLastResultStars(array) ⇒ <code>String</code>
+Sets last result stars for Schema and euromillions instance
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>String</code> - - Array converted to a single String (this.stars.lastResult)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| array | <code>Array</code> | Array result from Xray |
+
+<a name="LottoSchema.this.setMostRepeated"></a>
+### LottoSchema.this.setMostRepeated(count) ⇒ <code>String</code>
+Sets most repeated values for a lotto kind, internally sets new statistics with color property
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>String</code> - - String of numbers with the most repeated values for a raffle (this.mostRepeated)  
+**See**
+
+- [SchemaHelper.findMostRepeatedValues](#SchemaHelper.this.findMostRepeatedValues)
+- [SchemaHelper.orderStringMostRepeated](#SchemaHelper.this.orderStringMostRepeated)
+- [LottoSchema.setStatisticsAfterColorSet](#LottoSchema.this.setStatisticsAfterColorSet)
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| count | <code>Integer</code> | Number of balls for a raffle |
+
+<a name="LottoSchema.this.setMostRepeatedStars"></a>
+### LottoSchema.this.setMostRepeatedStars(count) ⇒ <code>String</code>
+Sets most repeated values for euro stars, internally sets new statistics with color property
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>String</code> - - String of numbers with the most repeated values for a raffle (this.stars.mostRepeated)  
+**See**
+
+- [SchemaHelper.findMostRepeatedValues](#SchemaHelper.this.findMostRepeatedValues)
+- [SchemaHelper.orderStringMostRepeated](#SchemaHelper.this.orderStringMostRepeated)
+- [LottoSchema.setStatisticsAfterColorSet](#LottoSchema.this.setStatisticsAfterColorSet)
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| count | <code>Integer</code> | Number of balls for a raffle |
+
+<a name="LottoSchema.this.setAllResults"></a>
+### LottoSchema.this.setAllResults(lastResult) ⇒ <code>Array</code>
+Sets all results by adding the las result every time
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>Array</code> - - this.allResults + lastResult  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| lastResult | <code>String</code> | this.lastResult |
+
+<a name="LottoSchema.this.setAllResultStars"></a>
+### LottoSchema.this.setAllResultStars(lastResult) ⇒ <code>Array</code>
+Sets all stars by adding the las result every time
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>Array</code> - - this.allResults + lastResult  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| lastResult | <code>String</code> | this.lastResult |
+
+<a name="LottoSchema.this.setStatistics"></a>
+### LottoSchema.this.setStatistics(array, kind) ⇒ <code>Array</code>
+Sets first data for the statistics, internally calls this.getCountAllResults
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>Array</code> - - Array with objects (this.statistics)  
+**See**: [LottoSchema.getCountAllResults](#LottoSchema.this.getCountAllResults)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| array | <code>Array</code> | All the result numbers as a single strings |
+| kind | <code>String</code> | type of lotto to interact with |
+
+<a name="LottoSchema.this.setStatisticStars"></a>
+### LottoSchema.this.setStatisticStars(array, kind) ⇒ <code>Array</code>
+Sets first data for the statistics, internally calls this.getCountAllResults
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>Array</code> - - Array with objects (this.stars.statistics)  
+**See**: [LottoSchema.getCountAllResults](#LottoSchema.this.getCountAllResults)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| array | <code>Array</code> | All the result stars as a single strings |
+| kind | <code>String</code> | type of lotto to interact with |
+
+<a name="LottoSchema.this.setStatisticsAfterColorSet"></a>
+### LottoSchema.this.setStatisticsAfterColorSet(array) ⇒ <code>Array</code>
+Sets new statistics with color property
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>Array</code> - - Same array but with the new values  
+**See**: [SchemaHelper.setColorPropertyStatistics](#SchemaHelper.this.setColorPropertyStatistics)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| array | <code>Array</code> | Array of objects containing the previous statistics |
+
+<a name="LottoSchema.this.getLastResult"></a>
+### LottoSchema.this.getLastResult() ⇒ <code>String</code>
+Gets the last result
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>String</code> - - this.lastResult  
+<a name="LottoSchema.this.getAllResults"></a>
+### LottoSchema.this.getAllResults() ⇒ <code>Array</code>
+Gets all the results and formats them for a better data structure
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>Array</code> - - this.allResults split for each single number as string and sorted in ascendent order  
+<a name="LottoSchema.this.getAllResultsStars"></a>
+### LottoSchema.this.getAllResultsStars() ⇒ <code>Array</code>
+Gets all the stars and formats them for a better data structure
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>Array</code> - - this.stars.allResults split for each single number as string and sorted in ascendent order  
+<a name="LottoSchema.this.getCountAllResults"></a>
+### LottoSchema.this.getCountAllResults(array, kind) ⇒ <code>Array</code>
+Gets the total number of repetitions for every single number
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Summary**: Internally calls this.getAllResults() or this.getAllResultsStars() depending on the &#x27;kind&#x27; parameter  
+**Returns**: <code>Array</code> - - Array of objects with the total count for each number  
+**See**
+
+- [SchemaHelper.setKindOfLotto](#SchemaHelper.this.setKindOfLotto)
+- [SchemaHelper.createObjectCount](#SchemaHelper.this.createObjectCount)
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| array | <code>Array</code> | Array to interact with, the value will depend on the 'kind' parameter |
+| kind | <code>String</code> | The type of lotto |
+
+<a name="LottoSchema.this.getStatistics"></a>
+### LottoSchema.this.getStatistics() ⇒ <code>Object</code>
+Gets the statistics
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>Object</code> - - this.statistics  
+<a name="LottoSchema.this.getStatisticStars"></a>
+### LottoSchema.this.getStatisticStars() ⇒ <code>Object</code>
+Gets the stars statistics
+
+**Kind**: static method of <code>[LottoSchema](#LottoSchema)</code>  
+**Returns**: <code>Object</code> - - this.stars.statistics  

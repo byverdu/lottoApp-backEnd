@@ -45,6 +45,7 @@ lottoSchema = mongoose.Schema({
 
 /**
  * Sets date property for Schema
+ * @memberof lottoSchema
  * @return {String} - Formatted Date (this.date)
  * @see {@link SchemaHelper}.setNewFormatedDate
  */
@@ -63,7 +64,7 @@ lottoSchema.methods.setNewDate = function() {
  * @memberof lottoSchema
  * @param  {Array} array - Array result from Xray
  * @return {String}      - Array converted to a single String (this.lastResult)
- * @see {@link schemaHelper}.setXrayArrayToSave
+ * @see {@link SchemaHelper}.setXrayArrayToSave
  */
 lottoSchema.methods.setLastResult = function(array) {
   this.lastResult = schemaHelper.setXrayArrayToSave(array);
@@ -75,7 +76,7 @@ lottoSchema.methods.setLastResult = function(array) {
  * @memberof lottoSchema
  * @param  {Array} array - Array result from Xray
  * @return {String}      - Array converted to a single String (this.extras)
- * @see {@link schemaHelper}.modifyExtras
+ * @see {@link SchemaHelper}.modifyExtras
  */
 lottoSchema.methods.setExtras = function(array) {
   this.extras = schemaHelper.modifyExtras(array);
@@ -98,8 +99,8 @@ lottoSchema.methods.setLastResultStars = function(array) {
  * @memberof lottoSchema
  * @param  {Integer} count - Number of balls for a raffle
  * @return {String}        - String of numbers with the most repeated values for a raffle (this.mostRepeated)
- * @see {@link schemaHelper}.findMostRepeatedValues
- * @see {@link schemaHelper}.orderStringMostRepeated
+ * @see {@link SchemaHelper}.findMostRepeatedValues
+ * @see {@link SchemaHelper}.orderStringMostRepeated
  * @see {@link lottoSchema}.setStatisticsAfterColorSet
  */
 lottoSchema.methods.setMostRepeated = function(count) {
@@ -118,8 +119,8 @@ lottoSchema.methods.setMostRepeated = function(count) {
  * @memberof lottoSchema
  * @param  {Integer} count - Number of balls for a raffle
  * @return {String}        - String of numbers with the most repeated values for a raffle (this.stars.mostRepeated)
- * @see {@link schemaHelper}.findMostRepeatedValues
- * @see {@link schemaHelper}.orderStringMostRepeated
+ * @see {@link SchemaHelper}.findMostRepeatedValues
+ * @see {@link SchemaHelper}.orderStringMostRepeated
  * @see {@link lottoSchema}.setStatisticsAfterColorSet
  */
 lottoSchema.methods.setMostRepeatedStars = function(count) {
@@ -184,7 +185,7 @@ lottoSchema.methods.setStatisticStars = function(array, kind){
  * @memberof lottoSchema
  * @param  {Array} array - Array of objects containing the previous statistics
  * @return {Array}       - Same array but with the new values
- * @see {@link schemaHelper}.setColorPropertyStatistics
+ * @see {@link SchemaHelper}.setColorPropertyStatistics
  */
 lottoSchema.methods.setStatisticsAfterColorSet = function(array){
   return schemaHelper.setColorPropertyStatistics(array);
