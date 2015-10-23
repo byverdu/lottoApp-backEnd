@@ -37,8 +37,8 @@ Class for String manipulation
   * [.this.addStringNumZero(elem)](#HelperString.this.addStringNumZero) ⇒ <code>String</code>
   * [.this.orderString(elem, sortMethod, concatMethod)](#HelperString.this.orderString) ⇒ <code>String</code>
 
-<a name="this.deleteWhiteSpace"></a>
-### this.deleteWhiteSpace(elem) ⇒ <code>String</code>
+<a name="HelperString.this.deleteWhiteSpace"></a>
+### HelperString.this.deleteWhiteSpace(elem) ⇒ <code>String</code>
 Deletes white spaces for the element passed
 
 **Kind**: static method of <code>[HelperString](#HelperString)</code>  
@@ -75,7 +75,7 @@ Sorts an string in descendent order
 **Returns**: <code>String</code> - - ordered numbers  
 **See**
 
-- sortMethod() => [HelperArray.sortArrayFromFirstToLast](#this.sortArrayFromFirstToLast)
+- sortMethod() => [HelperArray.sortArrayFromFirstToLast](#HelperArray.this.sortArrayFromFirstToLast)
 - concatMethod() => [HelperArray](#HelperArray).concatToSingleString()
 
 
@@ -92,14 +92,14 @@ Class for Array manipulation
 **Kind**: global class  
 
 * [HelperArray](#HelperArray)
-  * [.this.sortArrayFromFirstToLast(array)](#this.sortArrayFromFirstToLast) ⇒ <code>Array</code>
+  * [.this.sortArrayFromFirstToLast(array)](#HelperArray.this.sortArrayFromFirstToLast) ⇒ <code>Array</code>
   * [.this.sortArrayByCount(array)](#HelperArray.this.sortArrayByCount) ⇒ <code>Array</code>
   * [.this.concatToSingleString(array)](#HelperArray.this.concatToSingleString) ⇒ <code>String</code>
   * [.this.splitArray(array)](#HelperArray.this.splitArray) ⇒ <code>Array</code>
   * [.this.sliceArrayByCount(array, count)](#HelperArray.this.sliceArrayByCount) ⇒ <code>Array</code>
 
-<a name="this.sortArrayFromFirstToLast"></a>
-### this.sortArrayFromFirstToLast(array) ⇒ <code>Array</code>
+<a name="HelperArray.this.sortArrayFromFirstToLast"></a>
+### HelperArray.this.sortArrayFromFirstToLast(array) ⇒ <code>Array</code>
 Sorts an array in descendent order
 
 **Kind**: static method of <code>[HelperArray](#HelperArray)</code>  
@@ -492,7 +492,7 @@ Modifies an Array of Objects by adding a new 'color' property, heavy internally 
 **Returns**: <code>Array</code> - - Single array with all the new properties populated  
 **See**
 
-- [HelperNumber.findFractionNumber](#HelperNumber.findFractionNumber)
+- [HelperNumber](#HelperNumber).findFractionNumber
 - [HelperObject](#HelperObject).setColorProperty
 - [HelperObject](#HelperObject).objectColorProperty
 
