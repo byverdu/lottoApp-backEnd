@@ -1,5 +1,5 @@
 #### This file contains the project structure
-
+```
 |-- lottoApp
     |-- .gitignore
     |-- .jsbeautifyrc
@@ -48,3 +48,4 @@
         |-- sampleData.js
         |-- schemaHelperSpec.js
         |-- schemaSpec.js
+```
