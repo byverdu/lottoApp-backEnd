@@ -4,7 +4,7 @@ Node server app that will scrape a website to find the latest results for the Sp
 
 #### Lotto Schema
 
-The main Schema will be Lotto, from this schema we'll create 3 different instances, **euromillions, primitiva and bonoloto.** The will share the same properties.
+The main Schema will be Lotto, from this schema we'll create 3 different instances, **euromillions, primitiva and bonoloto.** They will share the same properties.
 
 > Schema extensible for another lotteries in the future.
 
