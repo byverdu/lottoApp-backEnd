@@ -21,16 +21,16 @@ In order to use the app follow this steps:
 
 ## Dependencies
 1. nodejs: v4.0.0 (ES6 features)
-2. babel: ^5.8.23, <!-- ES6 compiler -->
-3. express: ^4.13.3, <!-- node framework -->
-4. jshint: ^2.8.0, <!-- javascript linter -->
-5. mongodb: ^2.0.40, <!-- NOSQL database-->
-6. mongodb-uri: ^0.9.7, <!-- prepares mongodb uri to parse -->
-7. mongoose: ^4.1.1, <!-- mongodb ODM -->
-8. node-persist: 0.0.6, <!-- window.localStorage for node -->
-9. nodemon: ^1.7.1, <!-- tool that restarts node after changes -->
+2. babel: ^5.8.23, --> ES6 compiler
+3. express: ^4.13.3, --> node framework
+4. jshint: ^2.8.0, --> javascript linter
+5. mongodb: ^2.0.40, --> NOSQL database
+6. mongodb-uri: ^0.9.7, --> prepares mongodb uri to parse
+7. mongoose: ^4.1.1, --> mongodb ODM
+8. node-persist: 0.0.6, --> window.localStorage for node
+9. nodemon: ^1.7.1, --> tool that restarts node after changes
 10. request: ^2.61.0,
-11. x-ray: ^2.0.2 <!-- web scrapper -->
+11. x-ray: ^2.0.2 --> web scrapper
 
 ### Useful npm packages that I have found
 1. mddir: creates a markdown file with the tree folders from your project
@@ -43,6 +43,8 @@ The starting point for this project is `app/bin/init` which calls `server.js`.
 On the server file there is a timing loop that will run every 10 minutes. Inside this timing there is a Date constructor that will be called every time to create a new instance of Date that will be used to check certain conditions e.g. day number and hour number.
 
 ```js
+// server.js
+
 let configBono = require('./config/config')(),.lotto.bonoloto;
 
 setInterval(() => {
@@ -69,6 +71,8 @@ If the condition success, a web scrapper module will be called to find the lates
 If the result from the scrapper is different to the on that is stored the app will call the instances file.
 
 ```js
+// bonoXray.js
+
 import Xray from '../config/xray';
 import {GlobalHelper} from '../helpers/globalHelper';
 let configBono = require('../config/config')().lotto.bonoloto,
@@ -98,6 +102,8 @@ module.exports = () => {
 If the result stored is equal to the latest result the module that instantiates the db will be called. In this module is going to be checked that the stored result is equal to the value stored on the database. If they are different the new values will be stored on db.
 
 ```js
+// bono.js
+
 import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
 import {SchemaHelper} from '../helpers/schemaHelper';
@@ -143,5 +149,4 @@ setTimeout(() => {
     mongoose.disconnect();
   }, 1000);
 };
-
 ```
