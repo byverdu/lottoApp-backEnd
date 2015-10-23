@@ -75,7 +75,7 @@ Sorts an string in descendent order
 **Returns**: <code>String</code> - - ordered numbers  
 **See**
 
-- sortMethod() => [HelperArray.sortArrayFromFirstToLast](#HelperArray.sortArrayFromFirstToLast)
+- sortMethod() => [HelperArray.sortArrayFromFirstToLast](#this.sortArrayFromFirstToLast)
 - concatMethod() => [HelperArray](#HelperArray).concatToSingleString()
 
 
