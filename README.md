@@ -11,7 +11,9 @@ The main Schema will be Lotto, from this schema we'll create 3 different instanc
 These are the properties for the Schema:
   1. date: String,
   1. lastResult: Array of Strings for the last result (length depending instance Lotto),
+  1. extras: String,
   1. mostRepeated: Array of Strings for the most repeated values (length depending instance Lotto),
+  1. allResults: Array with all the values,
   1. statistics: Array of Objects that will keep a count for the number of repetitions for each number.
 
 The Schema will have several methods attached to help to convert the initial data into a more appropriate format so it can be stored and retrieve easily.
@@ -22,6 +24,7 @@ Some methods:
 var euromillions = new Lotto();
 euromillions.setNewDate() // will be called when a new result is available
 ```
+###### [Here you can find the documentation for this project](https://github.com/byverdu/lottoApp-backEnd/tree/development/docs/api.md)
 
 #### Lotto Schema for the money results
 
@@ -35,3 +38,5 @@ These are the properties for the Schema:
 #### Some Helpers
 
 A class Helpers will exist in order to help the Schema methods to convert the data into the correct format.
+
+###### [Here you can find the documentation for this project](https://github.com/byverdu/lottoApp-backEnd/tree/development/docs/api.md)
