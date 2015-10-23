@@ -87,7 +87,10 @@ export function SchemaHelper() {
    * @param  {Array} array - Array of objects with data from statistics
    * @param  {Integer} count - Number of balls for the raffle
    * @return {String}       - String made with numbers separated by comma with the same length than the count parameter
-   * @see This method uses Helpers from {@link HelperArray} and {@link HelperObject}
+   * @see {@link HelperArray}.sortArrayByCount
+   * @see {@link HelperArray}.sliceArrayByCount
+   * @see {@link HelperObject}.extractValueByIndex
+   * @see {@link HelperArray}.concatToSingleString
    * @example
    * var statistics = [ { index: '12', count: 4 },{ index: '16', count: 3 },{ index: '23', count: 3 },{ index: '28', count: 3 },{ index: '15', count: 3 }]
    * console.log(SchemaHelper.findMostRepeatedValues(statistics, 3));
@@ -106,7 +109,9 @@ export function SchemaHelper() {
    * @memberof SchemaHelper
    * @param  {String} string - unordered string of numbers
    * @return {String}        - ordered string of numbers
-   * @see This method uses internally {@link HelperString}.orderString, {@link HelperArray}.sortArrayFromFirstToLast and {@link HelperArray}.concatToSingleString
+   * @see {@link HelperString}.orderString
+   * @see {@link HelperArray}.sortArrayFromFirstToLast
+   * @see {@link HelperArray}.concatToSingleString
    */
   this.orderStringMostRepeated = (string) => {
     return _String.orderString(string, _Array.sortArrayFromFirstToLast, _Array.concatToSingleString);
@@ -127,7 +132,9 @@ export function SchemaHelper() {
    * @memberof SchemaHelper
    * @param  {Array} array - Array of objects from the statistics
    * @return {Array}      - Single array with all the new properties populated
-   * @see {@link HelperNumber}, {@link HelperObject}.setColorProperty and {@link HelperObject}.objectColorProperty
+   * @see {@link HelperNumber}.findFractionNumber
+   * @see {@link HelperObject}.setColorProperty
+   * @see {@link HelperObject}.objectColorProperty
    */
   this.setColorPropertyStatistics = (array) => {
     let oneThird = _Number.findFractionNumber(array, fractionNumber),

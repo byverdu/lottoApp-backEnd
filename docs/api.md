@@ -22,6 +22,9 @@
 <dd><p>Helper Class that interacts with the Lotto Schema, uses other helpers.
 References on each method</p>
 </dd>
+<dt><a href="#lottoSchema">lottoSchema</a></dt>
+<dd><p>Main mongoose Schema</p>
+</dd>
 </dl>
 <a name="HelperString"></a>
 ## HelperString
@@ -434,7 +437,13 @@ Finds most repeated values for a raffle game
 
 **Kind**: static method of <code>[SchemaHelper](#SchemaHelper)</code>  
 **Returns**: <code>String</code> - - String made with numbers separated by comma with the same length than the count parameter  
-**See**: This method uses Helpers from [HelperArray](#HelperArray) and [HelperObject](#HelperObject)  
+**See**
+
+- [HelperArray](#HelperArray).sortArrayByCount
+- [HelperArray](#HelperArray).sliceArrayByCount
+- [HelperObject](#HelperObject).extractValueByIndex
+- [HelperArray](#HelperArray).concatToSingleString
+
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -453,7 +462,12 @@ Sorts a string of numbers in ascendent order, splits the string then sorts it an
 
 **Kind**: static method of <code>[SchemaHelper](#SchemaHelper)</code>  
 **Returns**: <code>String</code> - - ordered string of numbers  
-**See**: This method uses internally [HelperString](#HelperString).orderString, [HelperArray](#HelperArray).sortArrayFromFirstToLast and [HelperArray](#HelperArray).concatToSingleString  
+**See**
+
+- [HelperString](#HelperString).orderString
+- [HelperArray](#HelperArray).sortArrayFromFirstToLast
+- [HelperArray](#HelperArray).concatToSingleString
+
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -476,7 +490,12 @@ Modifies an Array of Objects by adding a new 'color' property, heavy internally 
 
 **Kind**: static method of <code>[SchemaHelper](#SchemaHelper)</code>  
 **Returns**: <code>Array</code> - - Single array with all the new properties populated  
-**See**: [HelperNumber](#HelperNumber), [HelperObject](#HelperObject).setColorProperty and [HelperObject](#HelperObject).objectColorProperty  
+**See**
+
+- [HelperNumber.findFractionNumber](#HelperNumber.findFractionNumber)
+- [HelperObject](#HelperObject).setColorProperty
+- [HelperObject](#HelperObject).objectColorProperty
+
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -496,3 +515,25 @@ Switch statement that assigns a get method to the 'array' parameter depending on
 | lottoMethod | <code>function</code> | Gets all values for lotto |
 | starsMethod | <code>function</code> | Gets all values for lotto |
 
+<a name="lottoSchema"></a>
+## lottoSchema
+Main mongoose Schema
+
+**Kind**: global class  
+<a name="new_lottoSchema_new"></a>
+### new lottoSchema(lottoID, date, extras, lastResult, mostRepeated, statistics, allResults, stars, lastResult-, mostRepeated, statistics, allResults)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| lottoID | <code>String</code> | Unique identifier |
+| date | <code>String</code> | Last result date |
+| extras | <code>String</code> | Extra raffle numbers |
+| lastResult | <code>String</code> | Last result raffle |
+| mostRepeated | <code>String</code> | Most repeated numbers for that raffle |
+| statistics | <code>Array</code> | Array with objects for each raffle ball, |
+| allResults | <code>Array</code> | Storage for all the results |
+| stars | <code>Object</code> | Just for Euromillions |
+| lastResult- | <code>String</code> | Last result raffle |
+| mostRepeated | <code>String</code> | Most repeated numbers for that raffle |
+| statistics | <code>Array</code> | Array with objects for each raffle ball, |
+| allResults | <code>Array</code> | Storage for all the results |

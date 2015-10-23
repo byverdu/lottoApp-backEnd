@@ -36,4 +36,6 @@ A class Helpers will exist in order to help the Schema methods to convert the da
 
 ###### [Here you can find the documentation for all the  Classes](https://github.com/byverdu/lottoApp-backEnd/tree/development/docs/api.md)
 
-###### [Here you can find the project structure](https://github.com/byverdu/lottoApp-backEnd/tree/development/docs/sstructure.md)
+###### [Here you can find the project structure](https://github.com/byverdu/lottoApp-backEnd/tree/development/docs/structure.md)
+
+###### [Here you can find the workflow for the App](https://github.com/byverdu/lottoApp-backEnd/tree/development/docs/workflow.md)
