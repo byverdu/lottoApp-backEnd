@@ -1,19 +1,31 @@
 'use strict';
 
 /**
- * Helper Class
+ * @class
+ * Helper Class that will act on the global scope,
  */
 export function GlobalHelper() {
 
-  this.compare2arrays = (first, second, lottoCount) => {
+  /**
+   * Compares if two arrays has the same items
+   * @memberof GlobalHelper
+   * @param  {Array} firstArray  - Array with numbers
+   * @param  {Array} secondArray - Array with numbers
+   * @param  {Integer} lottoCount - determines the count of items that need to be equal
+   * @return {Boolean}      - true or false
+   * @example
+   * console.log(GlobalHelper.compare2arrays(['23','34'],['23','35'],2)) // false
+   * console.log(GlobalHelper.compare2arrays(['23','34'],['23','34'],2)) // true
+   */
+  this.compare2arrays = (firstArray, secondArray, lottoCount) => {
     var assertion = false,
       count = 0;
 
-    for (var i = 0; i < first.length; i++) {
-      first[i] = first[i].trim();
-      second[i] = second[i].trim();
+    for (var i = 0; i < firstArray.length; i++) {
+      firstArray[i] = firstArray[i].trim();
+      secondArray[i] = secondArray[i].trim();
 
-      if (first[i].includes(second[i])) {
+      if (firstArray[i].includes(secondArray[i])) {
         count++;
 
         if (count === lottoCount) {
@@ -25,6 +37,13 @@ export function GlobalHelper() {
     return assertion;
   };
 
+  /**
+   * Callback for findOne mongoDB method, so it can be stored in a variable
+   * @memberof GlobalHelper
+   * @param  {Schema}   Model       - Schema to query against
+   * @param  {Object}   ObjectQuery - Object that will contain the field to query
+   * @param  {Function} callback    - Callback function to execute
+   */
   this.customFindOneMongoose = (Model, ObjectQuery, callback) => {
     Model.findOne(ObjectQuery, (err, lotto) => {
       if (err) {
@@ -52,7 +71,13 @@ export function GlobalHelper() {
     }
   };
 
-  this.getPricesInfo = function(lottoObject) {
+  /**
+   * Iterates over arrays in order to get the data
+   * @memberof GlobalHelper
+   * @param  {Object} lottoObject - Object containing arrays
+   * @return {Array}             - Array with objects formatted and ordered
+   */
+  this.getPricesInfo = (lottoObject) => {
 
     var resultArray = [];
 
@@ -82,6 +107,13 @@ export function GlobalHelper() {
     return resultArray;
   };
 
+  /**
+   * Creates a new Date
+   * @memberof GlobalHelper
+   * @return {String} - Formatted date.
+   * @example
+   * console.log(GlobalHelper.hackyDate()) // "Thu Oct 22 2015 22:44:54"
+   */
   this.hackyDate = () => {
     return new Date().toString().split('GMT').shift();
   };

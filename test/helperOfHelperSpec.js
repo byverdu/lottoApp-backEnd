@@ -1,4 +1,4 @@
-/*global before, describe, it, xit */
+/*global before, describe, it*/
 
 'use strict';
 
@@ -165,20 +165,20 @@ describe('helper of helper?', () => {
       let dataToExtract = _Array.sliceArrayByCount(data.allResultLongObjOrdered, data.sliceCountBall);
       expect(_Object.extractValueByIndex(dataToExtract)).to.eql([ '12', '16', '23', '28', '15', '49' ]);
     });
-    it('#HelperObject.objectColorProp, is defined', () => {
-      expect(_Object.objectColorProp).to.be.an('Object');
+    it('#HelperObject.objectColorProperty, is defined', () => {
+      expect(_Object.objectColorProperty).to.be.an('Object');
     });
-    it('#HelperObject.objectColorProp, returns an Object with 3 properties for colours', () => {
-      expect(_Object.objectColorProp).to.have.property('green').eq('greenItem');
-      expect(_Object.objectColorProp).to.have.property('orange').eq('orangeItem');
-      expect(_Object.objectColorProp).to.have.property('red').eq('redItem');
+    it('#HelperObject.objectColorProperty, returns an Object with 3 properties for colours', () => {
+      expect(_Object.objectColorProperty).to.have.property('green').eq('greenItem');
+      expect(_Object.objectColorProperty).to.have.property('orange').eq('orangeItem');
+      expect(_Object.objectColorProperty).to.have.property('red').eq('redItem');
     });
-    it('#HelperObject.setColorProp, is defined', () => {
-      expect(_Object.setColorProp).to.be.a('Function');
+    it('#HelperObject.setColorProperty, is defined', () => {
+      expect(_Object.setColorProperty).to.be.a('Function');
     });
-    it('#HelperObject.setColorProp({ index: "12", count: 4 }), returns { index: "12", count: 4, color: "greenItem"}', () => {
+    it('#HelperObject.setColorProperty({ index: "12", count: 4 }), returns { index: "12", count: 4, color: "greenItem"}', () => {
 
-      expect(_Object.setColorProp([{ index: '12', count: 4 }], _Object.objectColorProp, 'green')).to.contain({ index: '12', count: 4, color: 'greenItem' });
+      expect(_Object.setColorProperty([{ index: '12', count: 4 }], _Object.objectColorProperty, 'green')).to.contain({ index: '12', count: 4, color: 'greenItem' });
     });
   });
 

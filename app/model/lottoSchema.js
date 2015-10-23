@@ -92,7 +92,7 @@ lottoSchema.methods.setStatisticStars = function(array, string){
 };
 
 lottoSchema.methods.setStatisticsAfterColorSet = function(array){
-  return schemaHelper.setColorPropStatistics(array);
+  return schemaHelper.setColorPropertyStatistics(array);
 };
 
 

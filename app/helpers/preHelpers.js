@@ -55,7 +55,7 @@ function HelperString() {
     addStringNumZero: this.addStringNumZero,
     orderString: this.orderString
   };
-};
+}
 
 /**
  * @class
@@ -173,7 +173,7 @@ function HelperObject() {
    * Container for color values
    * @memberof HelperObject
    */
-  this.objectColorProp = {
+  this.objectColorProperty = {
       green: 'greenItem',
       orange: 'orangeItem',
       red: 'redItem'
@@ -186,10 +186,10 @@ function HelperObject() {
    * @param  {Object} objColor - Container with color values
    * @param  {String} thisColor - Reference value as index for the container
    * @return {Object}            - Object with new color property
-   * @example console.log(HelperObject.setColorProp({ index: '12', count: 4 }, HelperObject.objectColorProp, 'green'))
+   * @example console.log(HelperObject.setColorProperty({ index: '12', count: 4 }, HelperObject.objectColorProperty, 'green'))
    * // { index: '12', count: 4 , color: 'greenItem' }
    */
-  this.setColorProp = (array, objColor, thisColor) => {
+  this.setColorProperty = (array, objColor, thisColor) => {
     array.forEach((el, ind, arr) => {
         arr[ind].color = objColor[thisColor];
         return arr;
@@ -199,8 +199,8 @@ function HelperObject() {
 
   return {
     extractValueByIndex: this.extractValueByIndex,
-    objectColorProp: this.objectColorProp,
-    setColorProp: this.setColorProp
+    objectColorProperty: this.objectColorProperty,
+    setColorProperty: this.setColorProperty
   };
 }
 

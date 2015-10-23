@@ -59,11 +59,11 @@ describe('Helper and methods', () => {
   it('#Helper.modifyExtras(["9","7"]), returns "07,09"', () => {
     expect(schemaHelper.modifyExtras(['9','7'])).to.be.eq('07,09');
   });
-  it('#Helper.setColorPropStatistics, is defined', () => {
-    expect(schemaHelper.setColorPropStatistics).to.be.a('Function');
+  it('#Helper.setColorPropertyStatistics, is defined', () => {
+    expect(schemaHelper.setColorPropertyStatistics).to.be.a('Function');
   });
-  it('#Helper.setColorPropStatistics(({[ index: "12", count: 4 },..]), returns [{ index: "12", count: 4, color: "greenItem"}...]', () => {
-    var result = schemaHelper.setColorPropStatistics(data.allResultLongObjOrdered, data.fraction);
+  it('#Helper.setColorPropertyStatistics(({[ index: "12", count: 4 },..]), returns [{ index: "12", count: 4, color: "greenItem"}...]', () => {
+    var result = schemaHelper.setColorPropertyStatistics(data.allResultLongObjOrdered, data.fraction);
     expect(result[0]).to.contain({ index: '12', count: 4, color: 'greenItem' });
     expect(result[result.length - 1]).to.contain({ index: '19', count: 1, color: 'redItem' });
   });
@@ -71,7 +71,7 @@ describe('Helper and methods', () => {
     expect(schemaHelper.setKindOfLotto).to.be.a('Function');
   });
   it('#Helper.setKindOfLotto(), returns an Array', () => {
-    expect(schemaHelper.setKindOfLotto([])).to.be.an('Array')
+    expect(schemaHelper.setKindOfLotto([])).to.be.an('Array');
   });
   it('#Helper.setKindOfLotto([]), first argument is an Array', () => {
     var array = [];
