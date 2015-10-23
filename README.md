@@ -9,6 +9,7 @@ The main Schema will be Lotto, from this schema we'll create 3 different instanc
 > Schema extensible for another lotteries in the future.
 
 These are the properties for the Schema:
+  1. lottoID: String,
   1. date: String,
   1. lastResult: Array of Strings for the last result (length depending instance Lotto),
   1. extras: String,
@@ -18,25 +19,19 @@ These are the properties for the Schema:
 
 The Schema will have several methods attached to help to convert the initial data into a more appropriate format so it can be stored and retrieve easily.
 
-Some methods:
-
-```javaScript
-var euromillions = new Lotto();
-euromillions.setNewDate() // will be called when a new result is available
-```
-###### [Here you can find the documentation for this project](https://github.com/byverdu/lottoApp-backEnd/tree/development/docs/api.md)
 
 #### Lotto Schema for the money results
 
 This Schema will handle the information for winners and money prices. Will not have any dependency on the other Schema but will be dependent from the same lottery that shares data.
 
 These are the properties for the Schema:
+  1. lottoID: String,
   1. date: String,
-  1. lastResult: Array of Objects with the winners and money prices,
+  1. allWinners: Array of Objects with the winners and money prices,
   1. extraInfo: Array of Strings wit information for the next lottery drawing.
 
 #### Some Helpers
 
 A class Helpers will exist in order to help the Schema methods to convert the data into the correct format.
 
-###### [Here you can find the documentation for this project](https://github.com/byverdu/lottoApp-backEnd/tree/development/docs/api.md)
+###### [Here you can find the documentation for all the  Classes](https://github.com/byverdu/lottoApp-backEnd/tree/development/docs/api.md)
