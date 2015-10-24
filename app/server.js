@@ -1,65 +1,65 @@
 'use strict';
 
+import {GlobalHelper} from './helpers/globalHelper';
+
 let config = require('./config/config')(),
-  configBono = config.lotto.bonoloto,
-  configPrimi = config.lotto.primitiva,
-  configEuro = config.lotto.euromillions;
+  globalHelper = new GlobalHelper(),
+  bonoRaffles = config.lotto.bonoloto.raffleDays,
+  primiRaffles = config.lotto.primitiva.raffleDays,
+  euroRaffles = config.lotto.euromillions.raffleDays;
 
 setInterval(() => {
   console.log('server file called');
 
   let newDate = new Date(),
     day = newDate.getDay(),
-    hour = newDate.getHours(),
-    checkDayBono = configBono.raffleDays.includes(day),
-    checkDayPrimi = configPrimi.raffleDays.includes(day),
-    checkDayEuro = configEuro.raffleDays.includes(day);
+    hour = newDate.getHours();
 
-  if (hour === 20) {
+  if (hour === 10) {
     console.log('checking hour raffle');
 
-    if (checkDayBono) {
+    if (globalHelper.checkRaffleDay(bonoRaffles, day)) {
       console.log('checkDayBono');
       require('./lottoXray/bonoXray')();
     }
 
     setTimeout(()=>{
-      if (checkDayPrimi) {
+      if (globalHelper.checkRaffleDay(primiRaffles, day)) {
         console.log('checkDayPrimi');
         require('./lottoXray/primiXray')();
       }
-    }, 3000);
+    }, 5000);
 
     setTimeout(()=>{
-      if (checkDayEuro) {
+      if (globalHelper.checkRaffleDay(euroRaffles, day)) {
         console.log('checkDayEuro');
         require('./lottoXray/euroXray')();
       }
-    }, 6000);
+    }, 5000);
 
   }
 
-  if (hour === 21) {
+  if (hour === 0) {
     console.log('checking hour winner');
 
-    if (checkDayBono) {
+    if (globalHelper.checkRaffleDay(bonoRaffles, day)) {
       console.log('checkDayBono');
       require('./lottoXray/bonoWinnerXray')();
     }
 
     setTimeout(()=>{
-      if (checkDayPrimi) {
+      if (globalHelper.checkRaffleDay(primiRaffles, day)) {
         console.log('checkDayPrimi');
         require('./lottoXray/primiWinnerXray')();
       }
-    }, 3000);
+    }, 5000);
 
     setTimeout(()=>{
-      if (checkDayEuro) {
+      if (globalHelper.checkRaffleDay(euroRaffles, day)) {
         console.log('checkDayEuro');
         require('./lottoXray/euroWinnerXray')();
       }
-    }, 6000);
+    }, 5000);
   }
 }, 600000);
 

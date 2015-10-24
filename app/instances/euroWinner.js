@@ -18,7 +18,7 @@ module.exports = () => {
 
     console.log('open connection euromillionsWinner');
 
-    globalHelper.customFindOneMongoose(Winner, {lottoID: 'euromillionsWinner'}, (err, winner) => {
+    globalHelper.customFindOneMongoose(Winner, {lottoID: 'euromillionsWinner'}).then((err, winner) => {
 
       if (err) {
         console.log(err);

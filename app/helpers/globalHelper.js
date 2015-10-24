@@ -120,10 +120,21 @@ export function GlobalHelper() {
     return new Date().toString().split('GMT').shift();
   };
 
+  /**
+   * [description]
+   * @param  {Array} lottoKind - raffleDays property for each lotto from config file
+   * @param  {Integer} dayNumber - Integer from invoking Date.getDay
+   * @return {Boolean}
+   */
+  this.checkRaffleDay = (lottoKind, dayNumber) => {
+    return lottoKind.includes(dayNumber);
+  };
+
   return {
     compare2arrays: this.compare2arrays,
     customFindOneMongoose: this.customFindOneMongoose,
     getPricesInfo: this.getPricesInfo,
-    hackyDate: this.hackyDate
+    hackyDate: this.hackyDate,
+    checkRaffleDay: this.checkRaffleDay
   };
 }
