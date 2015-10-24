@@ -44,13 +44,15 @@ export function GlobalHelper() {
    * @param  {Object}   ObjectQuery - Object that will contain the field to query
    * @param  {Function} callback    - Callback function to execute
    */
-  this.customFindOneMongoose = (Model, ObjectQuery, callback) => {
-    Model.findOne(ObjectQuery, (err, lotto) => {
-      if (err) {
-        callback(err, null);
-      } else {
-        callback(null, lotto);
-      }
+  this.customFindOneMongoose = (Model, ObjectQuery) => {
+    return new Promise((resolve, reject) => {
+      Model.findOne(ObjectQuery, (err, lotto) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(lotto);
+        }
+      });
     });
   };
 

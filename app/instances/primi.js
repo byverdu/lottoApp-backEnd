@@ -22,7 +22,7 @@ module.exports = () => {
 
     console.log('open connection primitiva');
 
-    globalHelper.customFindOneMongoose(Lotto, {lottoID: 'primitiva'}, (err, lotto) => {
+    globalHelper.customFindOneMongoose(Lotto, {lottoID: 'primitiva'}).then((err, lotto) => {
 
       if (err) {
         console.log(err);
@@ -53,9 +53,9 @@ module.exports = () => {
           });
         }
       }
+      setTimeout(() => {
+        mongoose.disconnect();
+      }, 1000);
     });
   });
-  setTimeout(() => {
-    mongoose.disconnect();
-  }, 1000);
 };

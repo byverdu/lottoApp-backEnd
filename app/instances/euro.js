@@ -20,7 +20,7 @@ module.exports = () => {
 
     console.log('open connection euromillions');
 
-    globalHelper.customFindOneMongoose(Lotto, { lottoID: 'euromillions' }, (err, lotto) => {
+    globalHelper.customFindOneMongoose(Lotto, { lottoID: 'euromillions' }).then((err, lotto) => {
       if (err) {
         console.log(err);
       } else {
@@ -55,9 +55,9 @@ module.exports = () => {
           });
         }
       }
+      setTimeout(() => {
+        mongoose.disconnect();
+      }, 1000);
     });
   });
-  setTimeout(() => {
-    mongoose.disconnect();
-  }, 1000);
 };

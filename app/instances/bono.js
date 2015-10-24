@@ -22,7 +22,7 @@ db.once('open', function() {
 
   console.log('open connection bonoloto');
 
-  globalHelper.customFindOneMongoose(Lotto, { lottoID: 'bonoloto' }, (err, lotto) => {
+  globalHelper.customFindOneMongoose(Lotto, { lottoID: 'bonoloto' }).then((err, lotto) => {
     if (err) {
       console.log(err);
     } else {
@@ -52,9 +52,9 @@ db.once('open', function() {
         });
       }
     }
+    setTimeout(() => {
+        mongoose.disconnect();
+      }, 1000);
   });
 });
-setTimeout(() => {
-    mongoose.disconnect();
-  }, 1000);
 };
