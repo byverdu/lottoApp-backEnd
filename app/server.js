@@ -15,7 +15,7 @@ setInterval(() => {
     day = newDate.getDay(),
     hour = newDate.getHours();
 
-  if (hour === 10) {
+  if (hour === 21) {
     console.log('checking hour raffle');
 
     if (globalHelper.checkRaffleDay(bonoRaffles, day)) {
@@ -39,7 +39,7 @@ setInterval(() => {
 
   }
 
-  if (hour === 0) {
+  if (hour === 22) {
     console.log('checking hour winner');
 
     if (globalHelper.checkRaffleDay(bonoRaffles, day)) {
