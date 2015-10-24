@@ -2,11 +2,11 @@
 
 import {GlobalHelper} from './helpers/globalHelper';
 
-let config = require('./config/config')(),
+let config = require('./config/config')().lotto,
   globalHelper = new GlobalHelper(),
-  bonoRaffles = config.lotto.bonoloto.raffleDays,
-  primiRaffles = config.lotto.primitiva.raffleDays,
-  euroRaffles = config.lotto.euromillions.raffleDays;
+  bonoRaffles = config.bonoloto.raffleDays,
+  primiRaffles = config.primitiva.raffleDays,
+  euroRaffles = config.euromillions.raffleDays;
 
 setInterval(() => {
   console.log('server file called');
