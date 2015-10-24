@@ -15,44 +15,52 @@ setInterval(() => {
     checkDayPrimi = configPrimi.raffleDays.includes(day),
     checkDayEuro = configEuro.raffleDays.includes(day);
 
-    if (hour === 20) {
-      console.log('checking hour raffle');
+  if (hour === 20) {
+    console.log('checking hour raffle');
 
-      if (checkDayBono) {
-        console.log('checkDayBono');
-        require('./lottoXray/bonoXray')();
-      }
+    if (checkDayBono) {
+      console.log('checkDayBono');
+      require('./lottoXray/bonoXray')();
+    }
 
+    setTimeout(()=>{
       if (checkDayPrimi) {
         console.log('checkDayPrimi');
         require('./lottoXray/primiXray')();
       }
+    }, 3000);
 
+    setTimeout(()=>{
       if (checkDayEuro) {
         console.log('checkDayEuro');
         require('./lottoXray/euroXray')();
       }
+    }, 6000);
+
+  }
+
+  if (hour === 21) {
+    console.log('checking hour winner');
+
+    if (checkDayBono) {
+      console.log('checkDayBono');
+      require('./lottoXray/bonoWinnerXray')();
     }
 
-    if (hour === 21) {
-      console.log('checking hour winner');
-
-      if (checkDayBono) {
-        console.log('checkDayBono');
-        require('./lottoXray/bonoWinnerXray')();
-      }
-
+    setTimeout(()=>{
       if (checkDayPrimi) {
         console.log('checkDayPrimi');
         require('./lottoXray/primiWinnerXray')();
       }
+    }, 3000);
 
+    setTimeout(()=>{
       if (checkDayEuro) {
         console.log('checkDayEuro');
         require('./lottoXray/euroWinnerXray')();
       }
-    }
-
+    }, 6000);
+  }
 }, 600000);
 
 module.exports = require('express')();
