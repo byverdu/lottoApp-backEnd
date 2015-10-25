@@ -45,24 +45,26 @@ On the server file there is a timing loop that will run every 10 minutes. Inside
 ```js
 // server.js
 
-let configBono = require('./config/config')(),.lotto.bonoloto;
+let bonoRaffles = require('./config/config')().lotto.bonoloto.raffleDays, // [1,2,3,5]
+  globalHelper = new GlobalHelper();
 
 setInterval(() => {
 
   let newDate = new Date(),
     day = newDate.getDay(),
-    hour = newDate.getHours(),
-    checkDayBono = configBono.raffleDays.includes(day); // [1,2,3,5]
+    hour = newDate.getHours();
 
   if (hour === 20) {
-    if (checkDayBono) {
-      require('./lottoXray/bonoXray')(); // scrapper for last result
+    if (globalHelper.checkRaffleDay(bonoRaffles, day)) {
+      require('./lottoXray/bonoXray')(); // Scrapper las result
     }
+    {Other checking conditions for the other lottos with setTimeout}
   }
   if (hour === 21) {
-    if (checkDayBono) {
-      require('./lottoXray/bonoWinnerXray')(); // scrapper for breakdown prices
+    if (globalHelper.checkRaffleDay(bonoRaffles, day)) {
+      require('./lottoXray/bonoWinnerXray')(); // Scrapper for wiiners
     }
+    {Other checking conditions for the other lottos with setTimeout}
   }
 }, 600000);
 ```
