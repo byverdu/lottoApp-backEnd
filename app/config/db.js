@@ -1,5 +1,7 @@
 'use strict';
 
+// mongodb connection
+
 module.exports = () => {
 
   var uriUtil = require('mongodb-uri'),
@@ -19,10 +21,11 @@ module.exports = () => {
       }
     }
   },
+  // mongo url development or production
    configUrl = [config.mongoUrlTest, config.mongoUrlProduction],
 
    mongoUri = configUrl[0],
-   mongooseUri = uriUtil.formatMongoose(mongoUri);
+   mongooseUri = uriUtil.formatMongoose(mongoUri); // formatting url for better parsing 
 
 	 mongoose.connect(mongooseUri, options);
 

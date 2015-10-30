@@ -1,3 +1,4 @@
+// Web Scrapper settings, using  Promise to avoid null result
 import Xray from 'x-ray';
 
 export default class {

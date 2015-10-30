@@ -1,3 +1,4 @@
+// storage configuration, saves Xray values
 var storage = require('node-persist');
 storage.init({
     dir:'json/',

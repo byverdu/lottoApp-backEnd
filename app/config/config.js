@@ -1,5 +1,5 @@
 'use strict';
-
+// General Configuration for Xray, db ... 
 module.exports = () => {
   return {
     globals: {

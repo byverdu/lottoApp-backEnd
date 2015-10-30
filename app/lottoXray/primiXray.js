@@ -1,4 +1,5 @@
 'use strict';
+// Scrapper for the primitiva  draw
 
 import Xray from '../config/xray';
 import {GlobalHelper} from '../helpers/globalHelper';
@@ -12,29 +13,34 @@ console.log('primiXray file called');
 
 module.exports = () => {
 
-xray.get(configPrimi.url, {numbers:[configPrimi.numbers],extras:[configPrimi.extras]} ).then(result => {
+  xray.get(configPrimi.url, { // creating object with scrapped values
+    numbers: [configPrimi.numbers],
+    extras: [configPrimi.extras]
+  }).then(result => { // Promise resolved
 
-  let primiStorage = storage.getItem('primiNumbers').numbers;
+    let primiStorage = storage.getItem('primiNumbers').numbers;
 
-  console.log(result.numbers, 'result.numbers');
-  console.log(primiStorage, 'presistent node-persist primiNumbers');
+    console.log(result.numbers, 'result.numbers');
+    console.log(primiStorage, 'presistent node-persist primiNumbers');
+    // Comparing numbers array from storage and result numbers,
+    // sliceCountBall is an integer that depends on the draw type
+    if (!globalHelper.compare2arrays(primiStorage, result.numbers, configPrimi.sliceCountBall)) {
 
-  if (!globalHelper.compare2arrays(primiStorage, result.numbers, configPrimi.sliceCountBall)) {
+      let newStorage = {
+        numbers: result.numbers,
+        extras: result.extras
+      };
 
-    let newStorage = {
-      numbers: result.numbers,
-      extras: result.extras
-    };
-
-    storage.setItem('primiNumbers', newStorage).then(
-      function() {
-        console.log('setItems for primiNumbers');
-        require('../instances/primi')();
-      },
-      function() {
-        console.log('fuck it');
-      });
-  }
-      console.log('setTimeout Xray primi');
-});
+      storage.setItem('primiNumbers', newStorage).then(
+        function() {
+          console.log('setItems for primiNumbers');
+          // Calling instance file after promise is solved
+          require('../instances/primi')();
+        },
+        function() {
+          console.log('fuck it');
+        });
+    }
+    console.log('setTimeout Xray primi');
+  });
 };
