@@ -31,14 +31,14 @@ setInterval(() => {
         console.log('checkDayPrimi');
         require('./lottoXray/primiXray')();
       }
-    }, 5000);
+    }, 15000);
 
     setTimeout(()=>{
       if (globalHelper.checkRaffleDay(euroRaffles, day)) {
         console.log('checkDayEuro');
         require('./lottoXray/euroXray')();
       }
-    }, 5000);
+    }, 24000);
 
   }
   // 10pm, draw winners hour
@@ -55,14 +55,14 @@ setInterval(() => {
         console.log('checkDayPrimi');
         require('./lottoXray/primiWinnerXray')();
       }
-    }, 5000);
+    }, 15000);
 
     setTimeout(()=>{
       if (globalHelper.checkRaffleDay(euroRaffles, day)) {
         console.log('checkDayEuro');
         require('./lottoXray/euroWinnerXray')();
       }
-    }, 5000);
+    }, 24000);
   }
 }, 600000);
 
