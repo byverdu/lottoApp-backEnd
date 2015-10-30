@@ -4,6 +4,7 @@ import {GlobalHelper} from './helpers/globalHelper';
 
 let config = require('./config/config')().lotto,
   globalHelper = new GlobalHelper(),
+  // Array with numbers representing the draw days
   bonoRaffles = config.bonoloto.raffleDays,
   primiRaffles = config.primitiva.raffleDays,
   euroRaffles = config.euromillions.raffleDays;
@@ -15,14 +16,16 @@ setInterval(() => {
     day = newDate.getDay(),
     hour = newDate.getHours();
 
+  // 9pm, draw hour
   if (hour === 21) {
     console.log('checking hour raffle');
 
+    // checkRaffleDay returns true if the array withs draw days contains the actual day
     if (globalHelper.checkRaffleDay(bonoRaffles, day)) {
       console.log('checkDayBono');
       require('./lottoXray/bonoXray')();
     }
-
+    // Setting a delay to avoid db crashing
     setTimeout(()=>{
       if (globalHelper.checkRaffleDay(primiRaffles, day)) {
         console.log('checkDayPrimi');
@@ -38,7 +41,7 @@ setInterval(() => {
     }, 5000);
 
   }
-
+  // 10pm, draw winners hour
   if (hour === 22) {
     console.log('checking hour winner');
 
