@@ -2,14 +2,15 @@
   "name": "lottoAppMongoDB",
   "version": "1.0.0",
   "description": "lottoApp using MongoDB",
-  "main": "server.js",
+  "main": "./app/bin/init",
   "repository": {
     "type": "git",
     "url": "https://github.com/byverdu/lottoApp-backEnd"
   },
   "scripts": {
-    "babel-node": "babel-node --stage 0 --ignore='foo|bar|baz'",
-    "test": "mocha --compilers js:babel/register"
+    "nodemon": "nodemon -e js,json,jsx --exec babel-node ./app/bin/init",
+    "test": "mocha --compilers js:babel/register",
+    "start": "babel-node ./app/bin/init"
   },
   "author": "Albert Vallverdu <byverdu@gmail.com>",
   "license": "no",
@@ -21,7 +22,6 @@
     "mongodb-uri": "^0.9.7",
     "mongoose": "^4.1.1",
     "node-persist": "0.0.6",
-    "nodemon": "^1.7.1",
     "x-ray": "^2.0.2"
   },
   "devDependencies": {
