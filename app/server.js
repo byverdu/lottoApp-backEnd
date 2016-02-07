@@ -36,7 +36,7 @@ let config = require('./config/config')().lotto,
 //     setTimeout(()=>{
 //       // if (globalHelper.checkRaffleDay(euroRaffles, day)) {
 //         console.log('checkDayEuro');
-//         require('./lottoXray/euroXray')();
+        // require('./lottoXray/euroXray')();
 //       // }
 //     }, 24000);
 //
@@ -47,7 +47,7 @@ let config = require('./config/config')().lotto,
 //
 //     // if (globalHelper.checkRaffleDay(bonoRaffles, day)) {
 //       console.log('checkDayBono');
-      require('./lottoXray/bonoWinnerXray')();
+      // require('./lottoXray/bonoWinnerXray')();
 //     // }
 //
 //     setTimeout(()=>{
@@ -60,7 +60,7 @@ let config = require('./config/config')().lotto,
 //     setTimeout(()=>{
 //       // if (globalHelper.checkRaffleDay(euroRaffles, day)) {
 //         console.log('checkDayEuro');
-//         require('./lottoXray/euroWinnerXray')();
+        require('./lottoXray/euroWinnerXray')();
 //       // }
 //     }, 24000);
 //   // }

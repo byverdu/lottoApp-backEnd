@@ -20,7 +20,7 @@ module.exports = () => {
 
     console.log('open connection euromillions');
 
-    globalHelper.customFindOneMongoose(Lotto, { lottoID: 'euromillions' }).then((err, lotto) => {
+    globalHelper.customFindOneMongoose(Lotto, { lottoID: 'euromillions' }, (err, lotto) => {
       if (err) {
         console.log(err);
       } else {
