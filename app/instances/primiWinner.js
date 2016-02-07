@@ -18,10 +18,9 @@ module.exports = () => {
 
     console.log('open connection primitivaWinner');
 
-    globalHelper.customFindOneMongoose(Winner, {lottoID: 'primitivaWinner'}).then((err, winner) => {
-
+    globalHelper.customFindOneMongoose(Winner, {lottoID: 'primitivaWinner'}, (err, winner) => {
       if (err) {
-        console.log(err);
+        console.log(err, 'err customFindOneMongoose primitivaWinner');
       } else {
 
         let primiStorage = storage.getItem('primiWinners'),
@@ -29,7 +28,6 @@ module.exports = () => {
           newWinner = primiStorage.allWinners[4].winners;
 
           console.log(oldWinner, newWinner);
-
         if (oldWinner !== newWinner) {
 
           winner.date = globalHelper.hackyDate();
@@ -43,10 +41,9 @@ module.exports = () => {
             }
           });
         }
-
       }
     });
-  });
+});
   setTimeout(() => {
     mongoose.disconnect();
   }, 1000);

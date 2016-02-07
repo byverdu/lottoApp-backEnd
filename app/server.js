@@ -22,16 +22,16 @@ let config = require('./config/config')().lotto,
 
     // checkRaffleDay returns true if the array withs draw days contains the actual day
     // if (globalHelper.checkRaffleDay(bonoRaffles, day)) {
-      console.log('checkDayBono');
-      require('./lottoXray/bonoXray')();
+      // console.log('checkDayBono');
+      // require('./lottoXray/bonoXray')();
     // }
     // Setting a delay to avoid db crashing
-//     setTimeout(()=>{
+    // setTimeout(()=>{
 //       // if (globalHelper.checkRaffleDay(primiRaffles, day)) {
 //         console.log('checkDayPrimi');
-//         require('./lottoXray/primiXray')();
+        // require('./lottoXray/primiXray')();
 //       // }
-//     }, 15000);
+    // }, 1500);
 //
 //     setTimeout(()=>{
 //       // if (globalHelper.checkRaffleDay(euroRaffles, day)) {
@@ -47,13 +47,13 @@ let config = require('./config/config')().lotto,
 //
 //     // if (globalHelper.checkRaffleDay(bonoRaffles, day)) {
 //       console.log('checkDayBono');
-//       require('./lottoXray/bonoWinnerXray')();
+      require('./lottoXray/bonoWinnerXray')();
 //     // }
 //
 //     setTimeout(()=>{
 //       // if (globalHelper.checkRaffleDay(primiRaffles, day)) {
 //         console.log('checkDayPrimi');
-//         require('./lottoXray/primiWinnerXray')();
+        // require('./lottoXray/primiWinnerXray')();
 //       // }
 //     }, 15000);
 //

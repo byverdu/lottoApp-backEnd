@@ -11,7 +11,12 @@ let xray = new Xray(),
 module.exports = () => {
   console.log('bonoWinnerXray file called');
 
-  xray.get(configBono.urlPrice, { // creating object with scrapped values
+  let random = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+  let url = [configBono.urlPrice,require( '../config/config' )().lotto.primitiva.urlPrice];
+  let lol = url[random];
+  console.log(lol, 'BONOLOTO');
+
+  xray.get( lol , { // creating object with scrapped values
     categoryPrice: [configBono.categoryPrice],
     winnerPrice: [configBono.winnerPrice],
     moneyPrice: [configBono.moneyPrice],

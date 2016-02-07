@@ -18,11 +18,9 @@ module.exports = () => {
 
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', function() {
-
-
     console.log('open connection primitiva');
 
-    globalHelper.customFindOneMongoose(Lotto, {lottoID: 'primitiva'}).then((err, lotto) => {
+    globalHelper.customFindOneMongoose(Lotto, {lottoID: 'primitiva'}, (err, lotto) => {
 
       if (err) {
         console.log(err);
@@ -30,13 +28,13 @@ module.exports = () => {
         console.log(lotto.lastResult, 'outside if condition primitiva');
 
         let primiStorage = storage.getItem('primiNumbers'),
-          storedLastResult = lotto.getLastResult(),
+          DBlastResult = lotto.getLastResult(),
           newPrimiStorage = schemaHelper.setXrayArrayToSave(primiStorage.numbers);
 
         console.log(newPrimiStorage, 'newPrimiStorage');
-        console.log(storedLastResult, 'storedLastResult');
+        console.log(DBlastResult, 'DBlastResult');
 
-        if (newPrimiStorage !== storedLastResult) {
+        if (newPrimiStorage !== DBlastResult) {
 
           lotto.setNewDate();
           lotto.setLastResult(primiStorage.numbers);

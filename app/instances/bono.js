@@ -21,34 +21,32 @@ module.exports = () => {
 
     globalHelper.customFindOneMongoose(Lotto, { lottoID: 'bonoloto' }, (err, lotto) => {
       if ( !err ) {
-              console.log(lotto.lastResult, 'outside if condition bonoloto');
+        console.log(lotto.lastResult, 'outside if condition bonoloto');
 
+          let bonoStorage = storage.getItem('bonoNumbers'),
+            DBLastResult = lotto.getLastResult(),
+            newPrimiStorage = schemaHelper.setXrayArrayToSave(bonoStorage.numbers);
 
-                let bonoStorage = storage.getItem('bonoNumbers'),
-                  DBLastResult = lotto.getLastResult(),
-                  newPrimiStorage = schemaHelper.setXrayArrayToSave(bonoStorage.numbers);
+          console.log(newPrimiStorage, 'newPrimiStorage');
+          console.log(DBLastResult, 'DBLastResult');
 
-                console.log(newPrimiStorage, 'newPrimiStorage');
-                console.log(DBLastResult, 'DBLastResult');
+        if (newPrimiStorage !== DBLastResult) {
 
-              if (newPrimiStorage !== DBLastResult) {
-
-                lotto.setNewDate();
-                lotto.setLastResult(bonoStorage.numbers);
-                lotto.setExtras(bonoStorage.extras);
-                lotto.setAllResults(lotto.lastResult);
-                lotto.setStatistics(lotto.getAllResults, 'lotto');
-                lotto.setMostRepeated(configBono.sliceCountBall);
-                lotto.save((err, lotto) => {
-                  if (err) {
-                    console.log(err);
-                  } else {
-                    console.log(lotto, 'inside if condition bonoloto');
-                  }
-                });
-              }
+          lotto.setNewDate();
+          lotto.setLastResult(bonoStorage.numbers);
+          lotto.setExtras(bonoStorage.extras);
+          lotto.setAllResults(lotto.lastResult);
+          lotto.setStatistics(lotto.getAllResults, 'lotto');
+          lotto.setMostRepeated(configBono.sliceCountBall);
+          lotto.save((err, lotto) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log(lotto, 'inside if condition bonoloto');
             }
-
+          });
+        }
+      }
       setTimeout(() => {
         mongoose.disconnect();
       }, 1000);

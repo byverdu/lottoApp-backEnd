@@ -16,7 +16,7 @@ module.exports = () => {
   let random = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
   let url = [configBono.url,require( '../config/config' )().lotto.primitiva.url]
   let lol = url[random];
-  console.log(lol);
+  console.log(lol, 'BONOLOTO');
   xray.get( lol, { // creating object with scrapped values
     numbers: [ configBono.numbers ],
     extras: [ configBono.extras ]
