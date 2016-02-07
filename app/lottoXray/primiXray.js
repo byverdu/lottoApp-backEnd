@@ -15,12 +15,7 @@ console.log('primiXray file called');
 
 module.exports = () => {
 
-  let random = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
-  let url = [configPrimi.url,require( '../config/config' )().lotto.bonoloto.url]
-  let lol = url[random];
-  console.log(lol, 'PRIMITICVA');
-
-  xray.get(lol, { // creating object with scrapped values
+  xray.get( configPrimi.url, { // creating object with scrapped values
     numbers: [configPrimi.numbers],
     extras: [configPrimi.extras]
   }).then(result => { // Promise resolved

@@ -11,14 +11,7 @@ let xray = new Xray(),
 module.exports = () => {
   console.log('primiWinnerXray file called');
 
-  // require('../instances/primiWinner')();
-
-  let random = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
-  let url = [configPrimi.urlPrice,require( '../config/config' )().lotto.bonoloto.urlPrice];
-  let lol = url[random];
-  console.log(lol, 'PRIMITIVA');
-
-  xray.get(lol, { // creating object with scrapped values
+  xray.get( configPrimi.urlPrice, { // creating object with scrapped values
     categoryPrice: [configPrimi.categoryPrice],
     winnerPrice: [configPrimi.winnerPrice],
     moneyPrice: [configPrimi.moneyPrice],
