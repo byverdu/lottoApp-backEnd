@@ -4,57 +4,54 @@ import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
 import {SchemaHelper} from '../helpers/schemaHelper';
 import {GlobalHelper} from '../helpers/globalHelper';
-let configBono = require('../config/config')().lotto.bonoloto,
+let configBono = require( '../config/config' )().lotto.bonoloto,
   globalHelper = new GlobalHelper(),
   schemaHelper = new SchemaHelper(),
-  storage = require('../config/storage');
+  storage = require( '../config/storage' );
 
 module.exports = () => {
 
   require('../config/db')();
   let db = mongoose.connection;
 
-console.log('instances file called bonoloto');
+  console.log('instances file called bonoloto');
+
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('open', function() {
+
+    globalHelper.customFindOneMongoose(Lotto, { lottoID: 'bonoloto' }, (err, lotto) => {
+      if ( !err ) {
+              console.log(lotto.lastResult, 'outside if condition bonoloto');
 
 
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
+                let bonoStorage = storage.getItem('bonoNumbers'),
+                  DBLastResult = lotto.getLastResult(),
+                  newPrimiStorage = schemaHelper.setXrayArrayToSave(bonoStorage.numbers);
 
-  console.log('open connection bonoloto');
+                console.log(newPrimiStorage, 'newPrimiStorage');
+                console.log(DBLastResult, 'DBLastResult');
 
-  globalHelper.customFindOneMongoose(Lotto, { lottoID: 'bonoloto' }).then((err, lotto) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(lotto.lastResult, 'outside if condition bonoloto');
+              if (newPrimiStorage !== DBLastResult) {
 
-      let bonoStorage = storage.getItem('bonoNumbers'),
-          storedLastResult = lotto.getLastResult(),
-          newPrimiStorage = schemaHelper.setXrayArrayToSave(bonoStorage.numbers);
+                lotto.setNewDate();
+                lotto.setLastResult(bonoStorage.numbers);
+                lotto.setExtras(bonoStorage.extras);
+                lotto.setAllResults(lotto.lastResult);
+                lotto.setStatistics(lotto.getAllResults, 'lotto');
+                lotto.setMostRepeated(configBono.sliceCountBall);
+                lotto.save((err, lotto) => {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    console.log(lotto, 'inside if condition bonoloto');
+                  }
+                });
+              }
+            }
 
-        console.log(newPrimiStorage, 'newPrimiStorage');
-        console.log(storedLastResult, 'storedLastResult');
-
-      if (newPrimiStorage !== storedLastResult) {
-
-        lotto.setNewDate();
-        lotto.setLastResult(bonoStorage.numbers);
-        lotto.setExtras(bonoStorage.extras);
-        lotto.setAllResults(lotto.lastResult);
-        lotto.setStatistics(lotto.getAllResults, 'lotto');
-        lotto.setMostRepeated(configBono.sliceCountBall);
-        lotto.save((err, lotto) => {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log(lotto, 'inside if condition bonoloto');
-          }
-        });
-      }
-    }
-    setTimeout(() => {
+      setTimeout(() => {
         mongoose.disconnect();
       }, 1000);
+    });
   });
-});
 };
