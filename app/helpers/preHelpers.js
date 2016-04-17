@@ -1,11 +1,8 @@
-'use strict';
-
 /**
  * @class
  * Class for String manipulation
  */
 function HelperString() {
-
   /**
    * Deletes white spaces for the element passed
    * @memberof HelperString
@@ -14,9 +11,9 @@ function HelperString() {
    * @example
    * console.log(HelperString.deleteWhiteSpace(' 09')); // '09'
    */
-  this.deleteWhiteSpace = (elem) => {
-    elem = elem.trim();
-    return elem;
+  this.deleteWhiteSpace = ( element ) => {
+    const newElement = element.trim();
+    return newElement;
   };
 
   /**
@@ -27,11 +24,12 @@ function HelperString() {
    * @example
    * console.log(HelperString.addStringNumZero('9')); // '09'
    */
-  this.addStringNumZero = (elem) => {
-    if (elem <= 9 && elem.length < 2) {
-      elem = `0${elem}`;
+  this.addStringNumZero = ( element ) => {
+    let newElement = element;
+    if ( element <= 9 && element.length < 2 ) {
+      newElement = `0${element}`;
     }
-    return elem;
+    return newElement;
   };
 
   /**
@@ -44,10 +42,10 @@ function HelperString() {
    * @see concatMethod() => {@link HelperArray}.concatToSingleString()
    * @return {String}              - ordered numbers
    */
-  this.orderString = (elem, sortMethod, concatMethod) => {
-    let tempArray = elem.split(',');
-    let sortedArray = sortMethod(tempArray);
-    return concatMethod(sortedArray);
+  this.orderString = ( elem, sortMethod, concatMethod ) => {
+    const tempArray = elem.split( ',' );
+    const sortedArray = sortMethod( tempArray );
+    return concatMethod( sortedArray );
   };
 
   return {
@@ -62,7 +60,6 @@ function HelperString() {
  * Class for Array manipulation
  */
 function HelperArray() {
-
   /**
    * Sorts an array in descendent order
    * @memberof HelperArray
@@ -71,9 +68,9 @@ function HelperArray() {
    * @example console.log(HelperArray.sortArrayFromFirstToLast(['29', '11'])) // ['11', '29']
    * @link{HelperString}
    */
-  this.sortArrayFromFirstToLast = (array) => {
-    return array.sort((a, b) => {
-      return (a - b);
+  this.sortArrayFromFirstToLast = ( array ) => {
+    return array.sort(( a, b ) => {
+      return ( a - b );
     });
   };
 
@@ -82,12 +79,12 @@ function HelperArray() {
    * @memberof HelperArray
    * @param  {Array} array - Array of objects
    * @return {Array}      - Array with objects ordered by "count" property
-   * @example console.log(HelperArray.sortArrayByCount([{index: '07', count: 1},{index: '12', count: 4}]))
+   * @example HelperArray.sortArrayByCount([{index: '07', count: 1},{index: '12', count: 4}])
    * // [{index: '12', count: 4},{index: '07', count: 1}]
    */
-  this.sortArrayByCount = (array) => {
-    return array.sort(function(a, b) {
-      return (b.count - a.count);
+  this.sortArrayByCount = ( array ) => {
+    return array.sort( function(a, b) {
+      return ( b.count - a.count );
     });
   };
 
@@ -99,13 +96,13 @@ function HelperArray() {
    * @example console.log(HelperArray.concatToSingleString(['29', '11'])) // '11,29'
    * @link{HelperString}
    */
-  this.concatToSingleString = (array) => {
-
-    var result = '';
-    array.map((el) => {
-      result = result.concat(el, ',');
+  this.concatToSingleString = ( array ) => {
+    let result = '';
+    array.map(( el ) => {
+      result = result.concat( el, ',' );
+      return result;
     });
-    return result.slice(0, -1);
+    return result.slice( 0, -1 );
   };
 
   /**
@@ -115,11 +112,10 @@ function HelperArray() {
    * @return {Array}      - Array populated with strings
    * @example console.log(HelperArray.splitArray(['29,11'])) // ['11','29']
    */
-  this.splitArray = (array) => {
-
-    let tempArray = [];
-    array.map((el) => {
-      tempArray.push(el.split(','));
+  this.splitArray = ( array ) => {
+    const tempArray = [];
+    array.forEach(( el ) => {
+      tempArray.push( el.split( ',' ));
     });
     return tempArray;
   };
@@ -130,11 +126,12 @@ function HelperArray() {
    * @param  {Array} array - Array with objects ordered by "count" property
    * @param  {Number} count - Number of items to slice
    * @return {Array}      - Array sliced by the count specified
-   * @example console.log(HelperArray.sliceArrayByCount([{index: '12', count: 4},{index: '07', count: 8}]))
+   * @example HelperArray.sliceArrayByCount([{index: '12', count: 4},{index: '07', count: 8}])
    * // [{index: '07', count: 8},{index: '12', count: 4}]
    */
-  this.sliceArrayByCount = (array, count) => {
-    return array.slice(0, count);
+  this.sliceArrayByCount = ( array, count ) => {
+    const slicedArray = array.slice( 0, count );
+    return slicedArray;
   };
 
   return {
@@ -151,19 +148,19 @@ function HelperArray() {
  * Class for Object manipulation
  */
 function HelperObject() {
-
   /**
    * Gets value from a property
    * @memberof HelperObject
    * @param  {Array} array - Array with objects ordered by "index" property
    * @return {Array}      - Array populated with values of property "index"
-   * @example console.log(HelperObject.extractValueByIndex([{index: '07', count: 8},{index: '12', count: 4}])) // ['07','12']
+   * @example HelperObject.extractValueByIndex([{index: '07', count: 8},{index: '12', count: 4}])
+   * // ['07','12']
    */
-  this.extractValueByIndex = (array) => {
-    let mostRepeated = [];
+  this.extractValueByIndex = ( array ) => {
+    const mostRepeated = [];
 
-    array.map(el => {
-      mostRepeated.push(el.index);
+    array.forEach( el => {
+      mostRepeated.push( el.index );
     });
 
     return mostRepeated;
@@ -174,25 +171,23 @@ function HelperObject() {
    * @memberof HelperObject
    */
   this.objectColorProperty = {
-      green: 'greenItem',
-      orange: 'orangeItem',
-      red: 'redItem'
+    green: 'greenItem',
+    orange: 'orangeItem',
+    red: 'redItem'
   };
 
   /**
    * Adds new "color" property to an object
    * @memberof HelperObject
-   * @param  {Object} object   - Object containing other properties
+   * @param  {Array} array   - Container with all objects to work with
    * @param  {Object} objColor - Container with color values
    * @param  {String} thisColor - Reference value as index for the container
    * @return {Object}            - Object with new color property
-   * @example console.log(HelperObject.setColorProperty({ index: '12', count: 4 }, HelperObject.objectColorProperty, 'green'))
-   * // { index: '12', count: 4 , color: 'greenItem' }
    */
-  this.setColorProperty = (array, objColor, thisColor) => {
-    array.forEach((el, ind, arr) => {
-        arr[ind].color = objColor[thisColor];
-        return arr;
+  this.setColorProperty = ( array, objColor, thisColor ) => {
+    array.forEach(( el, ind, arr ) => {
+      arr[ ind ].color = objColor[ thisColor ];
+      return arr;
     });
     return array;
   };
@@ -209,7 +204,6 @@ function HelperObject() {
  * Class for Number manipulation
  */
 function HelperNumber() {
-
   /**
    * Divides a number
    * @memberof HelperNumber
@@ -219,8 +213,8 @@ function HelperNumber() {
    * @example var array = new Array(49);
    * console.log(HelperNumber.findFractionNumber(array, 3)) // 17
    */
-  this.findFractionNumber = (array, fraction) => {
-    let result = Math.ceil(array.length/fraction);
+  this.findFractionNumber = ( array, fraction ) => {
+    const result = Math.ceil( array.length / fraction );
     return result;
   };
 
@@ -235,17 +229,16 @@ function HelperNumber() {
  * Converts Date into a custom format
  */
 function HelperDate() {
-
   /**
    * Container for the Spanish date values
    * @type {Object}
    */
-  var spanishValues = {
+  const spanishValues = {
     days: [
-      'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado',
+      'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'
     ],
     months: [
-      'Dic', 'Ene', 'Feb', 'Mar', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov',
+      'Dic', 'Ene', 'Feb', 'Mar', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov'
     ]
   };
 
@@ -255,17 +248,17 @@ function HelperDate() {
    * @param  {Number} index - numeric value from getValuesNewDate()
    * @return {String}       - Spanish value
    */
-  var getSpanishValues = (array, index) => {
-    return array[index];
+  const getSpanishValues = ( array, index ) => {
+    const result = array[ index ];
+    return result;
   };
 
   /**
    * Getter for Date values [day,month...]
    * @return {Object} Container with numeric values from calling Date() methods
    */
-  var getValuesNewDate = () => {
-
-    let date = new Date();
+  const getValuesNewDate = () => {
+    const date = new Date();
 
     return {
       getDayWeek: date.getDay(),
@@ -281,15 +274,11 @@ function HelperDate() {
    * @return {String} - A formatted Spanish date e.g 'Lunes, 12-Oct-2015'
    */
   this.buildSpanishDate = () => {
-
-    let day, dayNumber, month, year, DateValues;
-
-    DateValues = getValuesNewDate();
-
-    day = getSpanishValues(spanishValues.days, DateValues.getDayWeek);
-    dayNumber = DateValues.getDayMonth;
-    month = getSpanishValues(spanishValues.months, DateValues.getMonth);
-    year = DateValues.getYear;
+    const DateValues = getValuesNewDate();
+    const day = getSpanishValues( spanishValues.days, DateValues.getDayWeek );
+    const dayNumber = DateValues.getDayMonth;
+    const month = getSpanishValues( spanishValues.months, DateValues.getMonth );
+    const year = DateValues.getYear;
 
     return `${day}, ${dayNumber}-${month}-${year}`;
   };

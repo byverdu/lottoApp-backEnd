@@ -4,16 +4,15 @@
 import { SchemaHelper } from '../app/helpers/schemaHelper';
 import chai from 'chai';
 
-var data = require('./sampleData')(),
-expect = chai.expect,
-  schemaHelper;
+const data = require('./sampleData')();
+const expect = chai.expect;
+let schemaHelper;
 
-before(()    => {
-  schemaHelper     = new SchemaHelper();
+before(() => {
+  schemaHelper = new SchemaHelper();
 });
 
 describe('Helper and methods', () => {
-
   it('#Helper.setNewFormatedDate, is defined', () => {
     expect(schemaHelper.setNewFormatedDate).to.be.a('Function');
   });

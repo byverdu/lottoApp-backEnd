@@ -1,13 +1,10 @@
-'use strict';
-
 // mongodb connection
 
-module.exports = () => {
-
-  var uriUtil = require('mongodb-uri'),
-   mongoose = require('mongoose'),
-   config = require('./config')().globals,
-   options = {
+module.exports = function () {
+  const uriUtil = require( 'mongodb-uri' );
+  const mongoose = require( 'mongoose' );
+  const config = require( './config' ).globals;
+  const options = {
     server: {
       socketOptions: {
         keepAlive: 1,
@@ -20,14 +17,14 @@ module.exports = () => {
         connectTimeoutMS: 30000
       }
     }
-  },
+  };
   // mongo url development or production
-   configUrl = [config.mongoUrlTest, config.mongoUrlProduction],
+  const configUrl = [config.mongoUrlTest, config.mongoUrlProduction];
 
-   mongoUri = configUrl[0],
-   mongooseUri = uriUtil.formatMongoose(mongoUri); // formatting url for better parsing 
+  const mongoUri = configUrl[ 0 ];
+  const mongooseUri = uriUtil.formatMongoose( mongoUri ); // formatting url for better parsing
 
-	 mongoose.connect(mongooseUri, options);
+  mongoose.connect( mongooseUri, options );
 
-  console.log('database file called');
+  console.log( 'database file called' );
 };

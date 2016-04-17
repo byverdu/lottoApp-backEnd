@@ -1,48 +1,43 @@
-'use strict';
 // Scrapper for the primitiva  draw
 
 import Xray from '../config/xray';
-import {GlobalHelper} from '../helpers/globalHelper';
-var configPrimi = require('../config/config')().lotto.primitiva,
-  storage = require('../config/storage');
+import { GlobalHelper } from '../helpers/globalHelper';
+const configPrimi = require( '../config/config' ).lotto.primitiva;
+const storage = require( '../config/storage' );
+const globalHelper = new GlobalHelper();
+const xray = new Xray();
 
-let globalHelper = new GlobalHelper(),
-  xray = new Xray();
-
-console.log('primiXray file called');
+console.log( 'primiXray file called' );
 
 // require('../instances/primi')();
 
 module.exports = () => {
-
   xray.get( configPrimi.url, { // creating object with scrapped values
     numbers: [configPrimi.numbers],
     extras: [configPrimi.extras]
-  }).then(result => { // Promise resolved
+  }).then( result => { // Promise resolved
+    const primiStorage = storage.getItem( 'primiNumbers' ).numbers;
 
-    let primiStorage = storage.getItem('primiNumbers').numbers;
-
-    console.log(result.numbers, 'result.numbers');
-    console.log(primiStorage, 'presistent node-persist primiNumbers');
+    console.log( result.numbers, 'result.numbers' );
+    console.log( primiStorage, 'presistent node-persist primiNumbers' );
     // Comparing numbers array from storage and result numbers,
     // sliceCountBall is an integer that depends on the draw type
-    if (!globalHelper.compare2arrays(primiStorage, result.numbers, configPrimi.sliceCountBall)) {
-
-      let newStorage = {
+    if ( !globalHelper.compare2arrays( primiStorage, result.numbers, configPrimi.sliceCountBall )) {
+      const newStorage = {
         numbers: result.numbers,
         extras: result.extras
       };
 
-      storage.setItem('primiNumbers', newStorage).then(
-        function() {
-          console.log('setItems for primiNumbers');
+      storage.setItem( 'primiNumbers', newStorage ).then(
+        () => {
+          console.log( 'setItems for primiNumbers' );
           // Calling instance file after promise is solved
-          require('../instances/primi')();
+          require( '../instances/primi' )();
         },
-        function() {
-          console.log('fuck it');
+        () => {
+          console.log( 'fuck it' );
         });
     }
-    console.log('setTimeout Xray primi');
+    console.log( 'setTimeout Xray primi' );
   });
 };

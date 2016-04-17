@@ -1,63 +1,60 @@
-'use strict';
-
+// Euro Mongo instance
 import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
-import {SchemaHelper} from '../helpers/schemaHelper';
-import {GlobalHelper} from '../helpers/globalHelper';
-var configEuro = require('../config/config')().lotto.euromillions,
-storage = require('../config/storage'),
-globalHelper = new GlobalHelper(),
-schemaHelper = new SchemaHelper();
+import { SchemaHelper } from '../helpers/schemaHelper';
+import { GlobalHelper } from '../helpers/globalHelper';
+const configEuro = require( '../config/config' ).lotto.euromillions;
+const storage = require( '../config/storage' );
+const globalHelper = new GlobalHelper();
+const schemaHelper = new SchemaHelper();
 
 module.exports = () => {
-  console.log('instances file called euromillions');
+  console.log( 'instances file called euromillions' );
 
-  require('../config/db')();
-  var db = mongoose.connection;
+  require( '../config/db' )();
+  const db = mongoose.connection;
 
-  db.on('error', console.error.bind(console, 'connection error:'));
-  db.once('open', function() {
+  db.on( 'error', console.error.bind( console, 'connection error:' ));
+  db.once( 'open', () => {
+    console.log( 'open connection euromillions' );
 
-    console.log('open connection euromillions');
-
-    globalHelper.customFindOneMongoose(Lotto, { lottoID: 'euromillions' }, (err, lotto) => {
-      if (err) {
-        console.log(err);
+    globalHelper.customFindOneMongoose( Lotto, { lottoID: 'euromillions' }, ( err, lotto ) => {
+      if ( err ) {
+        console.log( err );
       } else {
-        console.log(lotto.lastResult, 'outside if condition euromillions');
+        console.log( lotto.lastResult, 'outside if condition euromillions' );
 
-        let euroStorage = storage.getItem('euroNumbers'),
-          storedLastResult = lotto.getLastResult(),
-          newEuroStorage = schemaHelper.setXrayArrayToSave(euroStorage.numbers);
+        const euroStorage = storage.getItem( 'euroNumbers' );
+        const storedLastResult = lotto.getLastResult();
+        const newEuroStorage = schemaHelper.setXrayArrayToSave( euroStorage.numbers );
 
-        console.log(newEuroStorage, 'newEuroStorage');
-        console.log(storedLastResult, 'storedLastResult');
+        console.log( newEuroStorage, 'newEuroStorage' );
+        console.log( storedLastResult, 'storedLastResult' );
 
-        if (newEuroStorage !== storedLastResult) {
-
+        if ( newEuroStorage !== storedLastResult ) {
           lotto.setNewDate();
-          lotto.setLastResult(euroStorage.numbers);
-          lotto.setAllResults(lotto.lastResult);
-          lotto.setExtras(euroStorage.extras);
-          lotto.setStatistics(this.getAllResults, 'lotto');
-          lotto.setMostRepeated(configEuro.sliceCountBall);
+          lotto.setLastResult( euroStorage.numbers );
+          lotto.setAllResults( lotto.lastResult );
+          lotto.setExtras( euroStorage.extras );
+          lotto.setStatistics( lotto.getAllResults, 'lotto' );
+          lotto.setMostRepeated( configEuro.sliceCountBall );
 
-          lotto.setLastResultStars(euroStorage.extras);
+          lotto.setLastResultStars( euroStorage.extras );
           lotto.setAllResultStars();
-          lotto.setStatisticStars(this.getAllResultsStars, 'stars');
-          lotto.setMostRepeatedStars(configEuro.sliceCountBallStar);
-          lotto.save((err, lotto) => {
-            if (err) {
-              console.log(err);
+          lotto.setStatisticStars( lotto.getAllResultsStars, 'stars' );
+          lotto.setMostRepeatedStars( configEuro.sliceCountBallStar );
+          lotto.save(( saveErr, saveLotto ) => {
+            if ( saveErr ) {
+              console.log( saveErr );
             } else {
-              console.log(lotto, 'inside if condition euromillions');
+              console.log( saveLotto, 'inside if condition euromillions' );
             }
           });
         }
       }
       setTimeout(() => {
         mongoose.disconnect();
-      }, 1000);
+      }, 1000 );
     });
   });
 };

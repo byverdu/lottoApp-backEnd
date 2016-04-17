@@ -1,50 +1,47 @@
-'use strict';
-
+//  Instance file for primitivaWinner
 import mongoose from 'mongoose';
 import Winner from '../model/winnerSchema';
-import {GlobalHelper} from '../helpers/globalHelper';
-let storage = require('../config/storage'),
-globalHelper = new GlobalHelper();
+import { GlobalHelper } from '../helpers/globalHelper';
+const storage = require( '../config/storage' );
+const globalHelper = new GlobalHelper();
 
 module.exports = () => {
-  require('../config/db')();
+  require( '../config/db' )();
 
-  console.log('instances file called primitivaWinner');
+  console.log( 'instances file called primitivaWinner' );
 
-  var db = mongoose.connection;
+  const db = mongoose.connection;
 
-  db.on('error', console.error.bind(console, 'connection error:'));
-  db.once('open', function() {
+  db.on( 'error', console.error.bind( console, 'connection error:' ));
+  db.once( 'open', () => {
+    console.log( 'open connection primitivaWinner' );
 
-    console.log('open connection primitivaWinner');
-
-    globalHelper.customFindOneMongoose(Winner, {lottoID: 'primitivaWinner'}, (err, winner) => {
-      if (err) {
-        console.log(err, 'err customFindOneMongoose primitivaWinner');
+    globalHelper.customFindOneMongoose( Winner, { lottoID: 'primitivaWinner' }, ( err, winner ) => {
+      if ( err ) {
+        console.log( err, 'err customFindOneMongoose primitivaWinner' );
       } else {
+        const primiStorage = storage.getItem( 'primiWinners' );
+        const oldWinner = winner.allWinners[ 4 ].winners;
+        const newWinner = primiStorage.allWinners[ 4 ].winners;
+        const innerWinner = winner;
 
-        let primiStorage = storage.getItem('primiWinners'),
-          oldWinner = winner.allWinners[4].winners,
-          newWinner = primiStorage.allWinners[4].winners;
-
-          console.log(oldWinner, newWinner);
-        if (oldWinner !== newWinner) {
-
-          winner.date = globalHelper.hackyDate();
-          winner.allWinners = primiStorage.allWinners;
-          winner.extraInfo = primiStorage.extraInfo;
-          winner.save((err, winner) => {
-            if (err) {
-              console.log(err);
+        console.log( oldWinner, newWinner );
+        if ( oldWinner !== newWinner ) {
+          innerWinner.date = globalHelper.hackyDate();
+          innerWinner.allWinners = primiStorage.allWinners;
+          innerWinner.extraInfo = primiStorage.extraInfo;
+          innerWinner.save(( saveErr, saveWinner ) => {
+            if ( saveErr ) {
+              console.log( saveErr );
             } else {
-              console.log(winner, 'saved primitivaWinner');
+              console.log( saveWinner, 'saved primitivaWinner' );
             }
           });
         }
       }
     });
-});
+  });
   setTimeout(() => {
     mongoose.disconnect();
-  }, 1000);
+  }, 1000 );
 };

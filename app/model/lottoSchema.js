@@ -201,7 +201,7 @@ lottoSchema.methods.setStatisticsAfterColorSet = function(array){
  * @memberof lottoSchema
  * @return {String} - this.lastResult
  */
-lottoSchema.methods.getLastResult = function(){
+lottoSchema.methods.getLastResult = function() {
   return this.lastResult;
 };
 

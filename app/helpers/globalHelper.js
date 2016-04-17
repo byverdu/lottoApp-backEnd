@@ -1,11 +1,8 @@
-'use strict';
-
 /**
  * @class
  * Helper Class that will act on the global scope,
  */
 export function GlobalHelper() {
-
   /**
    * Compares if two arrays has the same items
    * @memberof GlobalHelper
@@ -17,23 +14,25 @@ export function GlobalHelper() {
    * console.log(GlobalHelper.compare2arrays(['23','34'],['23','35'],2)) // false
    * console.log(GlobalHelper.compare2arrays(['23','34'],['23','34'],2)) // true
    */
-  this.compare2arrays = (firstArray, secondArray, lottoCount) => {
-    var assertion = false,
-      count = 0;
+  this.compare2arrays = ( firstArray, secondArray, lottoCount ) => {
+    let assertion = false;
+    let count = 0;
+    const tempFirstArray = firstArray;
+    const tempSecondArray = secondArray;
 
-    for (var i = 0; i < firstArray.length; i++) {
-      firstArray[i] = firstArray[i].trim();
-      secondArray[i] = secondArray[i].trim();
+    for ( let i = 0; i < firstArray.length; i++ ) {
+      tempFirstArray[ i ] = firstArray[ i ].trim();
+      tempSecondArray[ i ] = secondArray[ i ].trim();
 
-      if (firstArray[i].includes(secondArray[i])) {
+      if ( firstArray[ i ].includes( secondArray[ i ])) {
         count++;
 
-        if (count === lottoCount) {
+        if ( count === lottoCount ) {
           assertion = true;
         }
       }
     }
-    console.log(assertion, 'compare2arrays boolean');
+    console.log( assertion, 'compare2arrays boolean' );
     return assertion;
   };
 
@@ -44,31 +43,33 @@ export function GlobalHelper() {
    * @param  {Object}   ObjectQuery - Object that will contain the field to query
    * @param  {Function} callback    - Callback function to execute
    */
-  this.customFindOneMongoose = (Model, ObjectQuery, callback) => {
-    Model.findOne(ObjectQuery, (err, lotto) => {
-      if (err) {
-        callback(err, null);
+  this.customFindOneMongoose = ( Model, ObjectQuery, callback ) => {
+    Model.findOne( ObjectQuery, ( err, lotto ) => {
+      if ( err ) {
+        callback( err, null );
       } else {
-        callback(null, lotto);
+        callback( null, lotto );
       }
     });
   };
 
-  var setValuesObjectForWinners = (value, value2, value3, value4) => {
-    if (value4 === undefined) {
+  /**
+   * Used on the method below this one
+   */
+  const setValuesObjectForWinners = ( value, value2, value3, value4 ) => {
+    if ( value4 === undefined ) {
       return {
         category: value,
         winners: value2,
-        price: value3
-      };
-    } else {
-      return {
-        category: value,
-        winners: value2,
-        spanish: value4,
         price: value3
       };
     }
+    return {
+      category: value,
+      winners: value2,
+      spanish: value4,
+      price: value3
+    };
   };
 
   /**
@@ -77,30 +78,24 @@ export function GlobalHelper() {
    * @param  {Object} lottoObject - Object containing arrays
    * @return {Array}             - Array with objects formatted and ordered
    */
-  this.getPricesInfo = (lottoObject) => {
+  this.getPricesInfo = ( lottoObject ) => {
+    const resultArray = [];
 
-    var resultArray = [];
+    lottoObject.categoryPrice.forEach(( el, ind, array ) => {
+      let obj;
 
-    lottoObject.categoryPrice.forEach((el, ind, arr) => {
-      var obj;
-
-      lottoObject.winnerPrice.forEach((el2, ind2, arr2) => {
-
-        lottoObject.moneyPrice.forEach((el3, ind3, arr3) => {
-
-          if (lottoObject.hasOwnProperty('spanishWinners')) {
-
-            lottoObject.spanishWinners.forEach((el, ind4, arr4) => {
-
-              obj = setValuesObjectForWinners(arr[ind], arr2[ind], arr3[ind], arr4[ind]);
+      lottoObject.winnerPrice.forEach(( el2, ind2, array2 ) => {
+        lottoObject.moneyPrice.forEach(( el3, ind3, array3 ) => {
+          if ( lottoObject.hasOwnProperty( 'spanishWinners' )) {
+            lottoObject.spanishWinners.forEach(( el4, ind4, array4 ) => {
+              obj = setValuesObjectForWinners( array[ ind ], array2[ ind ], array3[ ind ], array4[ ind ]);
             });
           } else {
-            obj = setValuesObjectForWinners(arr[ind], arr2[ind], arr3[ind]);
+            obj = setValuesObjectForWinners( array[ ind ], array2[ ind ], array3[ ind ]);
           }
-
         });
       });
-      resultArray.push(obj);
+      resultArray.push( obj );
     });
     resultArray.shift();
 
@@ -115,7 +110,7 @@ export function GlobalHelper() {
    * console.log(GlobalHelper.hackyDate()) // "Thu Oct 22 2015 22:44:54"
    */
   this.hackyDate = () => {
-    return new Date().toString().split('GMT').shift();
+    return new Date().toString().split( 'GMT' ).shift();
   };
 
   /**
@@ -124,8 +119,8 @@ export function GlobalHelper() {
    * @param  {Integer} dayNumber - Integer from invoking Date.getDay
    * @return {Boolean}
    */
-  this.checkRaffleDay = (lottoKind, dayNumber) => {
-    return lottoKind.includes(dayNumber);
+  this.checkRaffleDay = ( lottoKind, dayNumber ) => {
+    return lottoKind.includes( dayNumber );
   };
 
   return {

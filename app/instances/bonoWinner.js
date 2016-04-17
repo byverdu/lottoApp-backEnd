@@ -1,53 +1,48 @@
-'use strict';
-
+// Result prices bonoloto
 import mongoose from 'mongoose';
 import Winner from '../model/winnerSchema';
-import {GlobalHelper} from '../helpers/globalHelper';
-let storage = require('../config/storage'),
-globalHelper = new GlobalHelper();
+import { GlobalHelper } from '../helpers/globalHelper';
+const storage = require( '../config/storage' );
+const globalHelper = new GlobalHelper();
 
 module.exports = () => {
-  require('../config/db')();
+  require( '../config/db' )();
 
-  console.log('instances file called bonolotoWinner');
+  console.log( 'instances file called bonolotoWinner' );
 
-  var db = mongoose.connection;
+  const db = mongoose.connection;
 
-  db.on('error', console.error.bind(console, 'connection error:'));
-  db.once('open', function() {
+  db.on( 'error', console.error.bind( console, 'connection error:' ));
+  db.once( 'open', () => {
+    console.log( 'open connection bonolotoWinner' );
 
-    console.log('open connection bonolotoWinner');
-
-    globalHelper.customFindOneMongoose(Winner, {lottoID: 'bonolotoWinner'}, (err, winner) => {
-
-      if (err) {
-        console.log(err);
+    globalHelper.customFindOneMongoose( Winner, { lottoID: 'bonolotoWinner' }, ( err, winner ) => {
+      if ( err ) {
+        console.log( err );
       } else {
+        const bonoStorage = storage.getItem( 'bonoWinners' );
+        const oldWinner = winner.allWinners[ 4 ].winners;
+        const newWinner = bonoStorage.allWinners[ 4 ].winners;
+        const innerWinner = winner;
 
-        let bonoStorage = storage.getItem('bonoWinners'),
-          oldWinner = winner.allWinners[4].winners,
-          newWinner = bonoStorage.allWinners[4].winners;
+        console.log( oldWinner, newWinner );
 
-          console.log(oldWinner, newWinner);
-
-        if (oldWinner !== newWinner) {
-
-          winner.date = globalHelper.hackyDate();
-          winner.allWinners = bonoStorage.allWinners;
-          winner.extraInfo = bonoStorage.extraInfo;
-          winner.save((err, winner) => {
-            if (err) {
-              console.log(err);
+        if ( oldWinner !== newWinner ) {
+          innerWinner.date = globalHelper.hackyDate();
+          innerWinner.allWinners = bonoStorage.allWinners;
+          innerWinner.extraInfo = bonoStorage.extraInfo;
+          innerWinner.save(( saveError, saveWinner ) => {
+            if ( saveError ) {
+              console.log( saveError );
             } else {
-              console.log(winner, 'saved bonolotoWinner');
+              console.log( saveWinner, 'saved bonolotoWinner' );
             }
           });
         }
-
       }
     });
   });
   setTimeout(() => {
     mongoose.disconnect();
-  }, 1000);
+  }, 1000 );
 };

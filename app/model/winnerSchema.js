@@ -1,13 +1,11 @@
-'use strict';
-
+// Schema for winners on each lottery
 import mongoose from 'mongoose';
 
-let winnerSchema = mongoose.Schema({
-
+const winnerSchema = mongoose.Schema({
   lottoID: String,
   date: String,
   allWinners: Array,
   extraInfo: Array
 });
 
-module.exports = mongoose.model('Winner', winnerSchema);
+module.exports = mongoose.model( 'Winner', winnerSchema );
