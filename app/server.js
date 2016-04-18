@@ -8,10 +8,10 @@ const bonoRaffles = config.bonoloto.raffleDays;
 const primiRaffles = config.primitiva.raffleDays;
 const euroRaffles = config.euromillions.raffleDays;
 
-require( './instances/primi' )();
+console.log( 'server file called' );
 
 setInterval(() => {
-  console.log( 'server file called' );
+  console.log( 'global setInterval' );
 
   const newDate = new Date();
   const day = newDate.getDay();
@@ -63,6 +63,6 @@ setInterval(() => {
       }
     }, 24000 );
   }
-}, 600000 );
+// }, 600000 );
 
 module.exports = require( 'express' )();

@@ -9,7 +9,7 @@ const globalHelper = new GlobalHelper();
 const schemaHelper = new SchemaHelper();
 const storage = require( '../config/storage' );
 
-module.exports = function () {
+module.exports = () => {
   require( '../config/db' )();
   const db = mongoose.connection;
 

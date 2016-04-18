@@ -17,7 +17,7 @@ module.exports = () => {
     const bonoStorage = storage.getItem( 'bonoNumbers' ).numbers;
 
     console.log( result.numbers, 'result.numbers' );
-    console.log( bonoStorage, 'presistent node-persist bonoNumbers' );
+    console.log( bonoStorage, 'node-persist bonoNumbers' );
 
     // Comparing numbers array from storage and result numbers,
     // sliceCountBall is an integer that depends on the draw type

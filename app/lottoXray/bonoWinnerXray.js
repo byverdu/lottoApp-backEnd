@@ -23,7 +23,9 @@ module.exports = () => {
       // stored value, same as newWinner
     const oldWinner = storage.getItem( 'bonoWinners' ).allWinners[ 4 ].winners;
 
-    if ( oldWinner !== newWinner ) {
+    console.log( oldWinner, newWinner, 'bonoWinnerXray' );
+
+    if ( oldWinner == newWinner ) {
       // Object with new values to store
       const newStorage = {
         allWinners: convertedResult,

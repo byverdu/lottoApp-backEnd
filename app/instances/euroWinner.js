@@ -25,7 +25,7 @@ module.exports = () => {
         const newWinner = euroStorage.allWinners[ 4 ].winners;
         const innerWinner = winner;
 
-          console.log( oldWinner, newWinner );
+          console.log( oldWinner, newWinner, 'euromillionsWinner' );
 
         if ( oldWinner !== newWinner ) {
           innerWinner.date = globalHelper.hackyDate();

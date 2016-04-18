@@ -17,7 +17,7 @@ module.exports = () => {
     const euroStorage = storage.getItem( 'euroNumbers' ).numbers;
 
     console.log( result.numbers, 'result.numbers' );
-    console.log( euroStorage, 'presistent node-persist euroNumbers' );
+    console.log( euroStorage, 'node-persist euroNumbers' );
     // Comparing numbers array from storage and result numbers,
     // sliceCountBall is an integer that depends on the draw type
     if ( !globalHelper.compare2arrays( euroStorage, result.numbers, configEuro.sliceCountBall )) {

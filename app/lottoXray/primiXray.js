@@ -19,7 +19,7 @@ module.exports = () => {
     const primiStorage = storage.getItem( 'primiNumbers' ).numbers;
 
     console.log( result.numbers, 'result.numbers' );
-    console.log( primiStorage, 'presistent node-persist primiNumbers' );
+    console.log( primiStorage, 'node-persist primiNumbers' );
     // Comparing numbers array from storage and result numbers,
     // sliceCountBall is an integer that depends on the draw type
     if ( !globalHelper.compare2arrays( primiStorage, result.numbers, configPrimi.sliceCountBall )) {
