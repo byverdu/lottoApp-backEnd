@@ -8,6 +8,8 @@ const bonoRaffles = config.bonoloto.raffleDays;
 const primiRaffles = config.primitiva.raffleDays;
 const euroRaffles = config.euromillions.raffleDays;
 
+require( './instances/primi' )();
+
 setInterval(() => {
   console.log( 'server file called' );
 

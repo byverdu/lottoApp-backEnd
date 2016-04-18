@@ -1,5 +1,3 @@
-'use strict';
-
 import { HelperDate, HelperString, HelperArray, HelperObject, HelperNumber } from './preHelpers';
 const _Date = new HelperDate();
 const _String = new HelperString();
