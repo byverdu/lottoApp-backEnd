@@ -63,6 +63,6 @@ setInterval(() => {
       }
     }, 24000 );
   }
-// }, 600000 );
+}, 600000 );
 
 module.exports = require( 'express' )();
