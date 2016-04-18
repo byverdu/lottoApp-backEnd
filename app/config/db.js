@@ -19,9 +19,9 @@ module.exports = function () {
     }
   };
   // mongo url development or production
-  const configUrl = [config.mongoUrlTest, config.mongoUrlProduction];
+  // const configUrl = [config.mongoUrlTest, config.mongoUrlProduction];
 
-  const mongoUri = configUrl[ 0 ];
+  const mongoUri = config.mongoUrlProduction
   const mongooseUri = uriUtil.formatMongoose( mongoUri ); // formatting url for better parsing
 
   mongoose.connect( mongooseUri, options );

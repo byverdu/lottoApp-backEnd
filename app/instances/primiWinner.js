@@ -43,5 +43,5 @@ module.exports = () => {
   });
   setTimeout(() => {
     mongoose.disconnect();
-  }, 1000 );
+  }, 10000 );
 };
