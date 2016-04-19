@@ -1,12 +1,12 @@
 // Primi instance fiel
 import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
-import { GlobalHelper } from '../helpers/globalHelper';
-import { SchemaHelper } from '../helpers/schemaHelper';
+import { globalHelper } from '../helpers/globalHelper';
+import { schemaHelper } from '../helpers/schemaHelper';
 const configPrimi = require( '../config/config' ).lotto.primitiva;
 const storage = require( '../config/storage' );
-const globalHelper = new GlobalHelper();
-const schemaHelper = new SchemaHelper();
+// const globalHelper = new GlobalHelper();
+// const schemaHelper = new SchemaHelper();
 
 module.exports = () => {
   require( '../config/db' )();
@@ -50,7 +50,8 @@ module.exports = () => {
       }
       setTimeout(() => {
         mongoose.disconnect();
-      }, 1000 );
+        console.log( 'primi disconnect mongoDB' );
+      }, 2000 );
     });
   });
 };

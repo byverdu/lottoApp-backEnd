@@ -1,24 +1,19 @@
 
-import { GlobalHelper } from '../app/helpers/globalHelper';
+import { globalHelper } from '../app/helpers/globalHelper';
 import chai from 'chai';
 const data = require( './sampleData' )();
 
 const expect = chai.expect;
-let globalHelper;
-
-before(() => {
-  globalHelper = new GlobalHelper();
-});
 
 describe( 'Helper and methods', () => {
   it( '#Helper, has a compare2arrays method', () => {
     expect( globalHelper.compare2arrays ).not.to.equal( undefined );
   });
   it( '#Helper.compare2arrays() returns true when they are equal', () => {
-    expect( globalHelper.compare2arrays(data.compare2arraysOne, data.compare2arraysTwo, data.sliceCountBall)).to.eq(true);
+    expect( globalHelper.compare2arrays(data.compare2arraysOne, data.compare2arraysTwo, data.sliceCountBall)).to.eq( true );
   });
   it( '#Helper.compare2arrays() returns false when they are not equal', () => {
-    expect( globalHelper.compare2arrays(data.compare2arraysOne, data.compare2arraysThree, data.sliceCountBall)).to.eq(false);
+    expect( globalHelper.compare2arrays(data.compare2arraysOne, data.compare2arraysThree, data.sliceCountBall)).to.eq( false );
   });
 
   it( '#Helper, has a customFindOneMongoose method', () => {

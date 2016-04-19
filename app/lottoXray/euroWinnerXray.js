@@ -1,10 +1,10 @@
 // Scrapper for the euromillions winners draw
 
 import Xray from '../config/xray';
-import { GlobalHelper } from '../helpers/globalHelper';
+import { globalHelper } from '../helpers/globalHelper';
 import storage from '../config/storage';
 const xray = new Xray();
-const globalHelper = new GlobalHelper();
+// const globalHelper = new GlobalHelper();
 const configEuro = require( '../config/config' ).lotto.euromillions;
 
 module.exports = () => {
@@ -26,7 +26,7 @@ module.exports = () => {
 
     console.log( oldWinner, newWinner, 'euroWinnerXray' );
 
-    if ( oldWinner !== newWinner ) {
+    // if ( oldWinner !== newWinner ) {
       // Object with new values to store
       const newStorage = {
         allWinners: convertedResult,
@@ -41,7 +41,7 @@ module.exports = () => {
         }, () => {
           console.log( 'error setting euroWinners' );
       });
-    }
+    // }
     console.log( 'euroWinners xray end call' );
   });
 };

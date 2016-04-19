@@ -1,9 +1,10 @@
-import { HelperDate, HelperString, HelperArray, HelperObject, HelperNumber } from './preHelpers';
-const _Date = new HelperDate();
-const _String = new HelperString();
-const _Array = new HelperArray();
-const _Object = new HelperObject();
-const _Number = new HelperNumber();
+import { helperString as _String,
+         helperDate as _Date,
+         helperArray as _Array,
+         helperObject as _Object,
+         helperNumber as _Number
+       } from './preHelpers';
+
 const fractionNumber = require( '../config/config' ).lotto.fractionNumber;
 
 /**
@@ -11,16 +12,16 @@ const fractionNumber = require( '../config/config' ).lotto.fractionNumber;
  * Helper Class that interacts with the Lotto Schema, uses other helpers.
  * References on each method
  */
-export function SchemaHelper() {
+exports.schemaHelper = {
   /**
    * Creates a new Spanish date
    * @memberof SchemaHelper
    * @return {String} - Spanish date.
    * @see {@link HelperDate}.buildSpanishDate()
    */
-  this.setNewFormatedDate = () => {
+  setNewFormatedDate() {
     return _Date.buildSpanishDate();
-  };
+  },
 
   /**
    * Formats array of numbers to a single String
@@ -32,7 +33,7 @@ export function SchemaHelper() {
    * @see {@link HelperArray}.concatToSingleString()
    * @see {@link HelperArray}.sortArrayFromFirstToLast()
    */
-  this.setXrayArrayToSave = ( array ) => {
+  setXrayArrayToSave( array ) {
     array.map(( el, ind, arr ) => {
       const innerArray = arr;
       innerArray[ ind ] = _String.deleteWhiteSpace( arr[ ind ]);
@@ -42,7 +43,7 @@ export function SchemaHelper() {
     });
 
     return _Array.concatToSingleString( _Array.sortArrayFromFirstToLast( array ));
-  };
+  },
 
   /**
    * Manipulates an array with strings separated by comma
@@ -55,7 +56,7 @@ export function SchemaHelper() {
    *console.log(SchemaHelper.setAllResulstArrayToCount(["07,09","37,40","18,28","30,30","34,40"]))
    * //[ '07', '09', '18', '28', '30', '30', '34', '37', '40', '40' ]
    */
-  this.setAllResulstArrayToCount = ( array ) => {
+  setAllResulstArrayToCount( array ) {
     const tempArray = _Array.splitArray( array );
     const result = [];
 
@@ -65,7 +66,7 @@ export function SchemaHelper() {
       });
     });
     return _Array.sortArrayFromFirstToLast( result );
-  };
+  },
 
   /**
    * Creates an object within the values passed
@@ -74,9 +75,9 @@ export function SchemaHelper() {
    * @param  {Integer} count - Repeated times that a ball appears
    * @return {Object} - Formatted object with index and count properties with the respective values
    */
-  this.createObjectCount = ( index, count ) => {
-    return {'index': index, 'count': count};
-  };
+  createObjectCount( index, count ) {
+    return { index: index, count: count };
+  },
 
   /**
    * Finds most repeated values for a raffle game
@@ -97,13 +98,13 @@ export function SchemaHelper() {
    * console.log(SchemaHelper.findMostRepeatedValues(statistics, 3));
    * // '12,15,16'
    */
-  this.findMostRepeatedValues = ( array, count ) => {
+  findMostRepeatedValues( array, count ) {
     const sortedArray = _Array.sortArrayByCount( array );
     const slicedArray = _Array.sliceArrayByCount( sortedArray, count );
     const extractedArray = _Object.extractValueByIndex( slicedArray );
 
     return _Array.concatToSingleString( extractedArray );
-  };
+  },
 
   /**
    * Sorts a string of numbers in ascendent order,
@@ -115,12 +116,12 @@ export function SchemaHelper() {
    * @see {@link HelperArray}.sortArrayFromFirstToLast
    * @see {@link HelperArray}.concatToSingleString
    */
-  this.orderStringMostRepeated = ( string ) => {
+  orderStringMostRepeated( string ) {
     const sortArrayFromFirstToLast = _Array.sortArrayFromFirstToLast;
     const concatToSingleString = _Array.concatToSingleString;
 
     return _String.orderString( string, sortArrayFromFirstToLast, concatToSingleString );
-  };
+  },
 
   /**
    * Copycat from setXrayArrayToSave but for the extra info data
@@ -128,13 +129,13 @@ export function SchemaHelper() {
    * @param  {Array} array - Array from Xray scrapper
    * @return {String}      - Ordered and concatenated String from the array values
    */
-  this.modifyExtras = ( array ) => {
+  modifyExtras( array ) {
     return this.setXrayArrayToSave( array );
-  };
+  },
 
   /**
-   * Modifies an Array of Objects by adding a new 'color' property, heavy internally use of other Helpers.
-   * Divides the array in 3 and to each third adds the 'green', 'orange' and 'red' properties respectively.
+   * Modifies an Array of Objects by adding a new 'color' property, heavy internally use of Helpers.
+   * Divides the array in 3 and to each third adds the 'green', 'orange' and 'red' properties.
    * @memberof SchemaHelper
    * @param  {Array} array - Array of objects from the statistics
    * @return {Array}      - Single array with all the new properties populated
@@ -142,7 +143,7 @@ export function SchemaHelper() {
    * @see {@link HelperObject}.setColorProperty
    * @see {@link HelperObject}.objectColorProperty
    */
-  this.setColorPropertyStatistics = ( array ) => {
+  setColorPropertyStatistics( array ) {
     const oneThird = _Number.findFractionNumber( array, fractionNumber );
     const greenItems = array.splice( 0, oneThird );
     const orangeItems = array.splice( 0, oneThird );
@@ -154,10 +155,11 @@ export function SchemaHelper() {
     _Object.setColorProperty( redItems, _Object.objectColorProperty, 'red' );
 
     return result.concat( greenItems, orangeItems, redItems );
-  };
+  },
 
   /**
-   * Switch statement that assigns a get method to the 'array' parameter depending on the 'kind' parameter passed
+   * Switch statement that assigns a get method to the 'array' parameter
+   * depending on the 'kind' parameter passed
    * @memberof SchemaHelper
    * @param  {Array} array    - Array of strings with all repeated balls
    * @param  {String} kind    - Kind of lotto
@@ -165,7 +167,7 @@ export function SchemaHelper() {
    * @param  {Function} starsMethod - Gets all values for lotto
    * @return {Array}                - Array containing the selection
    */
-  this.setKindOfLotto = ( array, kind, lottoMethod, starsMethod ) => {
+  setKindOfLotto( array, kind, lottoMethod, starsMethod ) {
     let tempArray = array;
     switch ( kind ) {
       case 'lotto':
@@ -177,17 +179,5 @@ export function SchemaHelper() {
       default:
     }
     return tempArray;
-  };
-
-  return {
-    setNewFormatedDate: this.setNewFormatedDate,
-    setXrayArrayToSave: this.setXrayArrayToSave,
-    setAllResulstArrayToCount: this.setAllResulstArrayToCount,
-    createObjectCount: this.createObjectCount,
-    findMostRepeatedValues: this.findMostRepeatedValues,
-    orderStringMostRepeated: this.orderStringMostRepeated,
-    modifyExtras: this.modifyExtras,
-    setColorPropertyStatistics: this.setColorPropertyStatistics,
-    setKindOfLotto: this.setKindOfLotto
-  };
-}
+  }
+};

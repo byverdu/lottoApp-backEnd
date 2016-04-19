@@ -1,12 +1,12 @@
 // Euro Mongo instance
 import mongoose from 'mongoose';
 import Lotto from '../model/lottoSchema';
-import { SchemaHelper } from '../helpers/schemaHelper';
-import { GlobalHelper } from '../helpers/globalHelper';
+import { schemaHelper } from '../helpers/schemaHelper';
+import { globalHelper } from '../helpers/globalHelper';
 const configEuro = require( '../config/config' ).lotto.euromillions;
 const storage = require( '../config/storage' );
-const globalHelper = new GlobalHelper();
-const schemaHelper = new SchemaHelper();
+// const globalHelper = new GlobalHelper();
+// const schemaHelper = new SchemaHelper();
 
 module.exports = () => {
   console.log( 'instances file called euromillions' );
@@ -54,7 +54,8 @@ module.exports = () => {
       }
       setTimeout(() => {
         mongoose.disconnect();
-      }, 1000 );
+        console.log( 'euro disconnect mongoDB' );
+      }, 3000 );
     });
   });
 };

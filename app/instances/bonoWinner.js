@@ -1,9 +1,9 @@
 // Result prices bonoloto
 import mongoose from 'mongoose';
 import Winner from '../model/winnerSchema';
-import { GlobalHelper } from '../helpers/globalHelper';
+import { globalHelper } from '../helpers/globalHelper';
 const storage = require( '../config/storage' );
-const globalHelper = new GlobalHelper();
+// const globalHelper = new GlobalHelper();
 
 module.exports = () => {
   require( '../config/db' )();
@@ -44,5 +44,6 @@ module.exports = () => {
   });
   setTimeout(() => {
     mongoose.disconnect();
-  }, 10000 );
+    console.log( 'bonoWinners disconnect mongoDB' );
+  }, 1000 );
 };

@@ -1,9 +1,8 @@
 // Entry point, setInterval for raffleDays
-import { GlobalHelper } from './helpers/globalHelper';
-
+import { globalHelper } from './helpers/globalHelper';
 const config = require( './config/config' ).lotto;
-const globalHelper = new GlobalHelper();
-  // Array with numbers representing the draw days
+
+// Array with numbers representing the draw days
 const bonoRaffles = config.bonoloto.raffleDays;
 const primiRaffles = config.primitiva.raffleDays;
 const euroRaffles = config.euromillions.raffleDays;

@@ -1,9 +1,11 @@
 /* global before, describe, it*/
 
-import {
-  HelperString, HelperDate, HelperArray, HelperObject, HelperNumber
-}
-from '../app/helpers/preHelpers';
+import { helperString as _String,
+         helperDate as _Date,
+         helperArray as _Array,
+         helperObject as _Object,
+         helperNumber as _Number
+       } from '../app/helpers/preHelpers';
 
 import chai from 'chai';
 import sinon from 'sinon';
@@ -12,19 +14,7 @@ chai.use( sinonChai );
 
 const data = require( './sampleData' )();
 const expect = chai.expect;
-let _Date;
-let _String;
-let _Array;
-let _Object;
-let _Number;
 
-before(() => {
-  _Date = new HelperDate();
-  _Array = new HelperArray();
-  _String = new HelperString();
-  _Object = new HelperObject();
-  _Number = new HelperNumber();
-});
 
 describe( 'helper of helper?', () => {
   describe( 'HelperDate', () => {

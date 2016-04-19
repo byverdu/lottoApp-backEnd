@@ -1,10 +1,10 @@
 // Scrapper for the primitiva  draw
 
 import Xray from '../config/xray';
-import { GlobalHelper } from '../helpers/globalHelper';
+import { globalHelper } from '../helpers/globalHelper';
 const configPrimi = require( '../config/config' ).lotto.primitiva;
 const storage = require( '../config/storage' );
-const globalHelper = new GlobalHelper();
+// const globalHelper = new GlobalHelper();
 const xray = new Xray();
 
 console.log( 'primiXray file called' );
@@ -22,7 +22,7 @@ module.exports = () => {
     console.log( primiStorage, 'node-persist primiNumbers' );
     // Comparing numbers array from storage and result numbers,
     // sliceCountBall is an integer that depends on the draw type
-    if ( !globalHelper.compare2arrays( primiStorage, result.numbers, configPrimi.sliceCountBall )) {
+    // if ( !globalHelper.compare2arrays( primiStorage, result.numbers, configPrimi.sliceCountBall )) {
       const newStorage = {
         numbers: result.numbers,
         extras: result.extras
@@ -37,7 +37,7 @@ module.exports = () => {
         () => {
           console.log( 'fuck it' );
         });
-    }
+    // }
     console.log( 'setTimeout Xray primi' );
   });
 };

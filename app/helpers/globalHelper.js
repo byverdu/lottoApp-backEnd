@@ -1,20 +1,39 @@
 /**
+ * Used inside globalHelper.getPricesInfo()
+ */
+const setValuesObjectForWinners = ( value, value2, value3, value4 ) => {
+  if ( value4 === undefined ) {
+    return {
+      category: value,
+      winners: value2,
+      price: value3
+    };
+  }
+  return {
+    category: value,
+    winners: value2,
+    spanish: value4,
+    price: value3
+  };
+};
+
+/**
  * @class
  * Helper Class that will act on the global scope,
  */
-export function GlobalHelper() {
+exports.globalHelper = {
   /**
    * Compares if two arrays has the same items
-   * @memberof GlobalHelper
+   * @memberof globalHelper
    * @param  {Array} firstArray  - Array with numbers
    * @param  {Array} secondArray - Array with numbers
    * @param  {Integer} lottoCount - determines the count of items that need to be equal
    * @return {Boolean}      - true or false
    * @example
-   * console.log(GlobalHelper.compare2arrays(['23','34'],['23','35'],2)) // false
-   * console.log(GlobalHelper.compare2arrays(['23','34'],['23','34'],2)) // true
+   * console.log(globalHelper.compare2arrays(['23','34'],['23','35'],2)) // false
+   * console.log(globalHelper.compare2arrays(['23','34'],['23','34'],2)) // true
    */
-  this.compare2arrays = ( firstArray, secondArray, lottoCount ) => {
+  compare2arrays( firstArray, secondArray, lottoCount ) {
     let assertion = false;
     let count = 0;
     const tempFirstArray = firstArray;
@@ -34,16 +53,16 @@ export function GlobalHelper() {
     }
     console.log( assertion, 'compare2arrays boolean' );
     return assertion;
-  };
+  },
 
   /**
    * Callback for findOne mongoDB method, so it can be stored in a variable
-   * @memberof GlobalHelper
+   * @memberof globalHelper
    * @param  {Schema}   Model       - Schema to query against
    * @param  {Object}   ObjectQuery - Object that will contain the field to query
    * @param  {Function} callback    - Callback function to execute
    */
-  this.customFindOneMongoose = ( Model, ObjectQuery, callback ) => {
+  customFindOneMongoose( Model, ObjectQuery, callback ) {
     Model.findOne( ObjectQuery, ( err, lotto ) => {
       if ( err ) {
         callback( err, null );
@@ -51,34 +70,15 @@ export function GlobalHelper() {
         callback( null, lotto );
       }
     });
-  };
-
-  /**
-   * Used on the method below this one
-   */
-  const setValuesObjectForWinners = ( value, value2, value3, value4 ) => {
-    if ( value4 === undefined ) {
-      return {
-        category: value,
-        winners: value2,
-        price: value3
-      };
-    }
-    return {
-      category: value,
-      winners: value2,
-      spanish: value4,
-      price: value3
-    };
-  };
+  },
 
   /**
    * Iterates over arrays in order to get the data
-   * @memberof GlobalHelper
+   * @memberof globalHelper
    * @param  {Object} lottoObject - Object containing arrays
    * @return {Array}             - Array with objects formatted and ordered
    */
-  this.getPricesInfo = ( lottoObject ) => {
+  getPricesInfo( lottoObject ) {
     const resultArray = [];
 
     lottoObject.categoryPrice.forEach(( el, ind, array ) => {
@@ -100,18 +100,18 @@ export function GlobalHelper() {
     resultArray.shift();
 
     return resultArray;
-  };
+  },
 
   /**
    * Creates a new Date
-   * @memberof GlobalHelper
+   * @memberof globalHelper
    * @return {String} - Formatted date.
    * @example
-   * console.log(GlobalHelper.hackyDate()) // "Thu Oct 22 2015 22:44:54"
+   * console.log(globalHelper.hackyDate()) // "Thu Oct 22 2015 22:44:54"
    */
-  this.hackyDate = () => {
+  hackyDate() {
     return new Date().toString().split( 'GMT' ).shift();
-  };
+  },
 
   /**
    * [description]
@@ -119,15 +119,7 @@ export function GlobalHelper() {
    * @param  {Integer} dayNumber - Integer from invoking Date.getDay
    * @return {Boolean}
    */
-  this.checkRaffleDay = ( lottoKind, dayNumber ) => {
+  checkRaffleDay( lottoKind, dayNumber ) {
     return lottoKind.includes( dayNumber );
-  };
-
-  return {
-    compare2arrays: this.compare2arrays,
-    customFindOneMongoose: this.customFindOneMongoose,
-    getPricesInfo: this.getPricesInfo,
-    hackyDate: this.hackyDate,
-    checkRaffleDay: this.checkRaffleDay
-  };
-}
+  }
+};

@@ -1,10 +1,10 @@
 // Scrapper for the euromillions  draw
 
 import Xray from '../config/xray';
-import { GlobalHelper } from '../helpers/globalHelper';
+import { globalHelper } from '../helpers/globalHelper';
 const configBono = require( '../config/config' ).lotto.bonoloto;
 const storage = require( '../config/storage' );
-const globalHelper = new GlobalHelper();
+// const globalHelper = new GlobalHelper();
 const xray = new Xray();
 
 console.log( 'bonoXray file called' );
@@ -21,7 +21,7 @@ module.exports = () => {
 
     // Comparing numbers array from storage and result numbers,
     // sliceCountBall is an integer that depends on the draw type
-    if ( !globalHelper.compare2arrays( bonoStorage, result.numbers, configBono.sliceCountBall )) {
+    // if ( !globalHelper.compare2arrays( bonoStorage, result.numbers, configBono.sliceCountBall )) {
         // Object with new values to store
       const newStorage = {
         numbers: result.numbers,
@@ -37,7 +37,7 @@ module.exports = () => {
         }, () => {
         console.log( 'fuck it' );
       });
-    }
+    // }
     console.log( 'after if Xray bono' );
   });
 };
