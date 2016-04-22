@@ -20,7 +20,7 @@ module.exports = () => {
     console.log( euroStorage, 'node-persist euroNumbers' );
     // Comparing numbers array from storage and result numbers,
     // sliceCountBall is an integer that depends on the draw type
-    // if ( !globalHelper.compare2arrays( euroStorage, result.numbers, configEuro.sliceCountBall )) {
+    if ( !globalHelper.compare2arrays( euroStorage, result.numbers, configEuro.sliceCountBall )) {
       // Object with new values to store
       const newStorage = {
         numbers: result.numbers,
@@ -36,7 +36,7 @@ module.exports = () => {
         () => {
           console.log( 'fuck it' );
         });
-    // }
+    }
     console.log( 'setTimeout Xray euro' );
   });
 };

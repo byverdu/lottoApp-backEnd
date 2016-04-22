@@ -25,7 +25,7 @@ module.exports = () => {
 
     console.log( oldWinner, newWinner, 'primiWinnerXray' );
 
-    // if ( oldWinner !== newWinner ) {
+    if ( oldWinner !== newWinner ) {
       // Object with new values to store
       const newStorage = {
         allWinners: convertedResult,
@@ -40,7 +40,7 @@ module.exports = () => {
         }, () => {
         console.log( 'error setting primiWinners' );
       });
-    // }
+    }
     console.log( 'primiWinners xray end call' );
   });
 };

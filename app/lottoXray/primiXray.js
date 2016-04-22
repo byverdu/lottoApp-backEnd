@@ -22,7 +22,7 @@ module.exports = () => {
     console.log( primiStorage, 'node-persist primiNumbers' );
     // Comparing numbers array from storage and result numbers,
     // sliceCountBall is an integer that depends on the draw type
-    // if ( !globalHelper.compare2arrays( primiStorage, result.numbers, configPrimi.sliceCountBall )) {
+    if ( !globalHelper.compare2arrays( primiStorage, result.numbers, configPrimi.sliceCountBall )) {
       const newStorage = {
         numbers: result.numbers,
         extras: result.extras
@@ -37,7 +37,7 @@ module.exports = () => {
         () => {
           console.log( 'fuck it' );
         });
-    // }
+    }
     console.log( 'setTimeout Xray primi' );
   });
 };
