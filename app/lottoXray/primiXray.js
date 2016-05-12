@@ -4,12 +4,9 @@ import Xray from '../config/xray';
 import { globalHelper } from '../helpers/globalHelper';
 const configPrimi = require( '../config/config' ).lotto.primitiva;
 const storage = require( '../config/storage' );
-// const globalHelper = new GlobalHelper();
 const xray = new Xray();
 
 console.log( 'primiXray file called' );
-
-// require('../instances/primi')();
 
 module.exports = () => {
   xray.get( configPrimi.url, { // creating object with scrapped values

@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import Winner from '../model/winnerSchema';
 import { globalHelper } from '../helpers/globalHelper';
 const storage = require( '../config/storage' );
-// const globalHelper = new GlobalHelper();
 
 module.exports = () => {
   require( '../config/db' )();
