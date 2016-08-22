@@ -4,7 +4,6 @@ import Xray from '../config/xray';
 import { globalHelper } from '../helpers/globalHelper';
 const configEuro = require( '../config/config' ).lotto.euromillions;
 const storage = require( '../config/storage' );
-// const globalHelper = new GlobalHelper();
 const xray = new Xray();
 
 console.log( 'euroXray file called' );

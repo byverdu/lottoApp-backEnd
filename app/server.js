@@ -9,6 +9,8 @@ const euroRaffles = config.euromillions.raffleDays;
 
 console.log( 'server file called' );
 
+let countForMail = 0;
+
 setInterval(() => {
   console.log( 'global setInterval' );
 
@@ -16,10 +18,20 @@ setInterval(() => {
   const day = newDate.getDay();
   const hour = newDate.getHours();
 
+  if ( hour === 17 ) {
+    countForMail += 1;
+    if ( globalHelper.checkRaffleDay( bonoRaffles, day ) && countForMail < 2 ) {
+      console.log( 'checkDayEuro for mail' );
+      require( './instances/euroMail' )();
+    }
+  }
+
   // 9pm, draw hour
   if ( hour === 21 ) {
     console.log( 'checking hour raffle' );
 
+    // reseting counter for euroMail
+    countForMail = 0;
     // checkRaffleDay returns true if the array withs draw days contains the actual day
     if ( globalHelper.checkRaffleDay( bonoRaffles, day )) {
       console.log( 'checkDayBono' );

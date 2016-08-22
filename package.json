@@ -24,6 +24,8 @@
     "mongodb-uri": "^0.9.7",
     "mongoose": "^4.1.1",
     "node-persist": "0.0.6",
+    "nodemailer": "^2.5.0",
+    "nodemailer-wellknown": "^0.1.10",
     "x-ray": "^2.0.2"
   },
   "devDependencies": {
