@@ -20,7 +20,7 @@ setInterval(() => {
 
   if ( hour === 17 ) {
     countForMail += 1;
-    if ( globalHelper.checkRaffleDay( bonoRaffles, day ) && countForMail < 2 ) {
+    if ( globalHelper.checkRaffleDay( euroRaffles, day ) && countForMail < 2 ) {
       console.log( 'checkDayEuro for mail' );
       require( './instances/euroMail' )();
     }
