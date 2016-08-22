@@ -1,4 +1,4 @@
-## Domain model for LottoApp
+## Domain model for LottoApp :rage:
 
 Node server app that will scrape a website to find the latest results for the Spanish lotteries and manipulate the data so it can be stored in a Mongo database.
 
