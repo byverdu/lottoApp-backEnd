@@ -4,7 +4,6 @@ import Xray from '../config/xray';
 import { globalHelper } from '../helpers/globalHelper';
 const configBono = require( '../config/config' ).lotto.bonoloto;
 const storage = require( '../config/storage' );
-// const globalHelper = new GlobalHelper();
 const xray = new Xray();
 
 console.log( 'bonoXray file called' );

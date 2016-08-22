@@ -5,8 +5,6 @@ import { globalHelper } from '../helpers/globalHelper';
 import { schemaHelper } from '../helpers/schemaHelper';
 const configPrimi = require( '../config/config' ).lotto.primitiva;
 const storage = require( '../config/storage' );
-// const globalHelper = new GlobalHelper();
-// const schemaHelper = new SchemaHelper();
 
 module.exports = () => {
   require( '../config/db' )();

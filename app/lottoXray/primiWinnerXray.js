@@ -4,7 +4,6 @@ import Xray from '../config/xray';
 import { globalHelper } from '../helpers/globalHelper';
 import storage from '../config/storage';
 const xray = new Xray();
-// const globalHelper = new GlobalHelper();
 const configPrimi = require( '../config/config' ).lotto.primitiva;
 
 module.exports = () => {

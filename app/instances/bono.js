@@ -5,8 +5,6 @@ import Lotto from '../model/lottoSchema';
 import { schemaHelper } from '../helpers/schemaHelper';
 import { globalHelper } from '../helpers/globalHelper';
 const configBono = require( '../config/config' ).lotto.bonoloto;
-// const globalHelper = new GlobalHelper();
-// const schemaHelper = new SchemaHelper();
 const storage = require( '../config/storage' );
 
 module.exports = () => {

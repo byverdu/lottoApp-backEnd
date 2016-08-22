@@ -5,8 +5,6 @@ import { schemaHelper } from '../helpers/schemaHelper';
 import { globalHelper } from '../helpers/globalHelper';
 const configEuro = require( '../config/config' ).lotto.euromillions;
 const storage = require( '../config/storage' );
-// const globalHelper = new GlobalHelper();
-// const schemaHelper = new SchemaHelper();
 
 module.exports = () => {
   console.log( 'instances file called euromillions' );
