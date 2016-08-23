@@ -5,6 +5,7 @@ module.exports = {
     mongoUrlProduction: process.env.MONGO_LOTTO_URL
   },
   lotto: {
+    sendMailDays: [1, 2, 4, 5],
     fractionNumber: 3,
     euromillions: {
       lottoID: 'euromillions',

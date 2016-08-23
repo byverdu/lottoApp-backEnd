@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 
 const mailOptions = {
   from: '"Lucky Lotto 👥" <foo@blurdybloop.com>',
-  to: 'byverdu@gmail.com',
+  to: 'byverdu@gmail.com, marlasulbaran@yahoo.com',
   subject: `Most repeated for ${new Date()} ✔`
 };
 

@@ -76,7 +76,7 @@ exports.schemaHelper = {
    * @return {Object} - Formatted object with index and count properties with the respective values
    */
   createObjectCount( index, count ) {
-    return { index: index, count: count };
+    return { index, count };
   },
 
   /**
