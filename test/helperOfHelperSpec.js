@@ -97,16 +97,16 @@ describe( 'helper of helper?', () => {
       expect( _Array.sortArrayByCount( data.allResultLongObjCounted )).to.be.an( 'Array' );
     });
     it( '#HelperArray.sortArrayByCount(array) returns the statistics ordered by count property', () => {
-      expect( _Array.sortArrayByCount(data.allResultLongObjCounted)[0] ).to.eql( {index: '12', count: 4} );
+      expect( _Array.sortArrayByCount( data.allResultLongObjCounted ) ).to.eql( data.allResultLongObjOrdered );
     });
     it( '#HelperArray.sliceArrayByCount is defined', () => {
       expect( _Array.sliceArrayByCount ).not.to.equal( undefined );
     });
     it( '#HelperArray.sliceArrayByCount() returns an Array', () => {
-      expect( _Array.sliceArrayByCount( data.allResultLongObjOrdered, data.sliceCountBall)).to.be.an( 'Array' );
+      expect( _Array.sliceArrayByCount( data.allResultLongObjCounted, data.sliceCountBall)).to.be.an( 'Array' );
     });
     it( '#HelperArray.sliceArrayByCount(array, count) returns "x" first most repeated values ', () => {
-      expect( _Array.sliceArrayByCount(data.allResultLongObjOrdered, data.sliceCountBall)).to.contain({ index: '12', count: 4 },{ index: '16', count: 3 },{ index: '23', count: 3 },{ index: '28', count: 3 },{ index: '15', count: 3 },{ index: '49', count: 2 });
+      expect( _Array.sliceArrayByCount(data.allResultLongObjCounted, data.sliceCountBall)).to.contain({ index: '44', count: 21 },{ index: '05', count: 18 },{ index: '24', count: 18 },{ index: '30', count: 17 },{ index: '37', count: 16 },{ index: '26', count: 16 });
     });
   });
 
@@ -152,7 +152,7 @@ describe( 'helper of helper?', () => {
     });
     it( '#HelperObject.extractValueByIndex(),  returns an Array with populated values from index property', () => {
       const dataToExtract = _Array.sliceArrayByCount(data.allResultLongObjOrdered, data.sliceCountBall);
-      expect( _Object.extractValueByIndex( dataToExtract)).to.eql( [ '12', '16', '23', '28', '15', '49' ] );
+      expect( _Object.extractValueByIndex( dataToExtract)).to.eql( [ '44', '05', '24', '30', '37', '39' ] );
     });
     it( '#HelperObject.objectColorProperty, is defined', () => {
       expect( _Object.objectColorProperty ).to.be.an( 'Object' );

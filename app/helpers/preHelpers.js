@@ -63,9 +63,7 @@ exports.helperArray = {
    * @link{HelperString}
    */
   sortArrayFromFirstToLast( array ) {
-    return array.sort( function( a, b ) {
-      return ( a - b );
-    });
+    return array.sort(( a, b ) => ( a - b ));
   },
 
   /**
@@ -77,9 +75,7 @@ exports.helperArray = {
    * // [{index: '12', count: 4},{index: '07', count: 1}]
    */
   sortArrayByCount( array ) {
-    return array.sort( function( a, b ) {
-      return ( b.count - a.count );
-    });
+    return array.sort(( a, b ) => ( b.count - a.count ));
   },
 
   /**

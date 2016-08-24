@@ -102,7 +102,6 @@ exports.schemaHelper = {
     const sortedArray = _Array.sortArrayByCount( array );
     const slicedArray = _Array.sliceArrayByCount( sortedArray, count );
     const extractedArray = _Object.extractValueByIndex( slicedArray );
-
     return _Array.concatToSingleString( extractedArray );
   },
 
