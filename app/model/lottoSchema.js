@@ -103,8 +103,7 @@ lottoSchema.methods.setMostRepeated = function ( count ) {
   const mostRepeated = schemaHelper.findMostRepeatedValues( this.getStatistics(), count );
 
   this.mostRepeated = schemaHelper.orderStringMostRepeated( mostRepeated );
-  const newStatistics = this.setStatisticsAfterColorSet( this.getStatistics());
-  this.statistics = newStatistics;
+  this.statistics = this.setStatisticsAfterColorSet( this.getStatistics());
 
   return this.mostRepeated;
 };
@@ -119,11 +118,10 @@ lottoSchema.methods.setMostRepeated = function ( count ) {
  * @see {@link lottoSchema}.setStatisticsAfterColorSet
  */
 lottoSchema.methods.setMostRepeatedStars = function ( count ) {
-  const mostRepeated = schemaHelper.findMostRepeatedValues( this.getStatisticStars(), count );
+  const mostRepeatedStars = schemaHelper.findMostRepeatedValues( this.getStatisticStars(), count );
 
-  this.stars.mostRepeated = schemaHelper.orderStringMostRepeated( mostRepeated );
-  const newStatistics = this.setStatisticsAfterColorSet( this.getStatisticStars());
-  this.stars.statistics = newStatistics;
+  this.stars.mostRepeated = schemaHelper.orderStringMostRepeated( mostRepeatedStars );
+  this.stars.statistics = this.setStatisticsAfterColorSet( this.getStatisticStars());
 
   return this.stars.mostRepeated;
 };
@@ -239,8 +237,8 @@ lottoSchema.methods.getCountAllResults = function ( array, kind, totalNumberBall
 
   for ( let counter = 1; counter <= totalNumberBalls; counter++ ) {
     const newIndex = counter < 10 ? `0${counter}` : `${counter}`;
-    const lengthCount = tempArray.filter( item => item === newIndex );
-    result.push( schemaHelper.createObjectCount( newIndex, lengthCount.length ));
+    const lengthCount = tempArray.filter( item => item === newIndex ).length;
+    result.push( schemaHelper.createObjectCount( newIndex, lengthCount ));
   }
 
   return result;

@@ -166,9 +166,8 @@ describe( 'helper of helper?', () => {
       expect( _Object.setColorProperty ).to.be.a( 'Function' );
     });
     it( '#HelperObject.setColorProperty({ index: "12", count: 4 }), returns { index: "12", count: 4, color: "greenItem"}', () => {
-
-      expect( _Object.setColorProperty([{ index: '12', count: 4 }], _Object.objectColorProperty, 'green'))
-        .to.contain({ index: '12', count: 4, color: 'greenItem' });
+      const result =  _Object.setColorProperty(data.allResultLongObjOrdered, _Object.objectColorProperty, 'green');
+      expect( result[ 0 ]).to.contain({ index: '44', count: 21, color: 'greenItem' });
     });
   });
 

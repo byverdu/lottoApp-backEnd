@@ -12,8 +12,8 @@ exports.helperString = {
    * console.log(HelperString.deleteWhiteSpace(' 09')); // '09'
    */
   deleteWhiteSpace( element ) {
-    const newElement = element.trim();
-    return newElement;
+    // const newElement = element.trim();
+    return element.trim();
   },
 
   /**
@@ -25,11 +25,11 @@ exports.helperString = {
    * console.log(HelperString.addStringNumZero('9')); // '09'
    */
   addStringNumZero( element ) {
-    let newElement = element;
-    if ( element <= 9 && element.length < 2 ) {
-      newElement = `0${element}`;
-    }
-    return newElement;
+    // let newElement = element;
+    // if ( element <= 9 && element.length < 2 ) {
+    //   newElement = `0${element}`;
+    // }
+    return element <= 9 ? `0${element}` : `${element}`;
   },
 
   /**
@@ -44,8 +44,8 @@ exports.helperString = {
    */
   orderString( elem, sortMethod, concatMethod ) {
     const tempArray = elem.split( ',' );
-    const sortedArray = sortMethod( tempArray );
-    return concatMethod( sortedArray );
+    // const sortedArray = sortMethod( tempArray );
+    return concatMethod( sortMethod( tempArray ));
   }
 };
 
@@ -87,12 +87,14 @@ exports.helperArray = {
    * @link{HelperString}
    */
   concatToSingleString( array ) {
-    let result = '';
-    array.map(( el ) => {
-      result = result.concat( el, ',' );
-      return result;
-    });
-    return result.slice( 0, -1 );
+    // let result = '';
+    // let result2 = '';
+    // array.map(( el ) => {
+    //   result = result.concat( el, ',' );
+    //   return result;
+    // });
+
+    return array.join( ',' );
   },
 
   /**
@@ -103,11 +105,12 @@ exports.helperArray = {
    * @example console.log(HelperArray.splitArray(['29,11'])) // ['11','29']
    */
   splitArray( array ) {
-    const tempArray = [];
-    array.forEach(( el ) => {
-      tempArray.push( el.split( ',' ));
-    });
-    return tempArray;
+    // const tempArray = [];
+    // array.forEach(( el ) => {
+    //   tempArray.push( el.split( ',' ));
+    // });
+    // return tempArray;
+    return array.map( item => item.split( ',' ));
   },
 
   /**
@@ -120,8 +123,8 @@ exports.helperArray = {
    * // [{index: '07', count: 8},{index: '12', count: 4}]
    */
   sliceArrayByCount( array, count ) {
-    const slicedArray = array.slice( 0, count );
-    return slicedArray;
+    // const slicedArray = array.slice( 0, count );
+    return array.slice( 0, count );
   }
 };
 
@@ -139,13 +142,12 @@ exports.helperObject = {
    * // ['07','12']
    */
   extractValueByIndex( array ) {
-    const mostRepeated = [];
-
-    array.forEach( el => {
-      mostRepeated.push( el.index );
-    });
-
-    return mostRepeated;
+    // const mostRepeated = [];
+    //
+    // array.forEach( el => {
+    //   mostRepeated.push( el.index );
+    // });
+    return array.map( item => item.index );
   },
 
   /**
@@ -167,11 +169,16 @@ exports.helperObject = {
    * @return {Object}            - Object with new color property
    */
   setColorProperty( array, objColor, thisColor ) {
-    array.forEach(( el, ind, arr ) => {
-      arr[ ind ].color = objColor[ thisColor ];
-      return arr;
+    // array.forEach(( el, ind, arr ) => {
+    //   arr[ ind ].color = objColor[ thisColor ];
+    //   return arr;
+    // });
+    // return array;
+    const tempObj = {};
+    return array.map( item => {
+      tempObj.color = objColor[ thisColor ];
+      return Object.assign( item, tempObj );
     });
-    return array;
   }
 };
 
@@ -190,8 +197,8 @@ exports.helperNumber = {
    * console.log(HelperNumber.findFractionNumber(array, 3)) // 17
    */
   findFractionNumber( array, fraction ) {
-    const result = Math.ceil( array.length / fraction );
-    return result;
+    // const result = Math.ceil( array.length / fraction );
+    return Math.ceil( array.length / fraction );
   }
 };
 
@@ -214,10 +221,7 @@ const spanishValues = {
  * @param  {Number} index - numeric value from getValuesNewDate()
  * @return {String}       - Spanish value
  */
-const getSpanishValues = ( array, index ) => {
-  const result = array[ index ];
-  return result;
-};
+const getSpanishValues = ( array, index ) => array[ index ];
 
 /**
  * Getter for Date values [day,month...]
