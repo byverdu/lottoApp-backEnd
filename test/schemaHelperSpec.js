@@ -15,8 +15,8 @@ describe( 'schemaHelper and methods', () => {
   it( 'setXrayArrayToSave, is defined', () => {
     expect( schemaHelper.setXrayArrayToSave ).to.be.a( 'Function' );
   });
-  it( 'setXrayArrayToSave(["34", "9", "23"," 7", "5"]), returns "05,07,09,23,34"', () => {
-    expect( schemaHelper.setXrayArrayToSave(['34', '9', '23', '7', '5'])).to.eq( '05,07,09,23,34' );
+  it( 'setXrayArrayToSave(["34", "9 ", "23"," 7", "5"]), returns "05,07,09,23,34"', () => {
+    expect( schemaHelper.setXrayArrayToSave(['34', '9 ', ' 23', '7', '5'])).to.eq( '05,07,09,23,34' );
   });
   it( 'setAllResulstArrayToCount, is defined', () => {
     expect( schemaHelper.setAllResulstArrayToCount ).to.be.a( 'Function' );
@@ -74,7 +74,7 @@ describe( 'schemaHelper and methods', () => {
     expect( array ).to.be.argumnents;
     expect( array ).to.be.an( 'Array' );
   });
-  it( 'setKindOfLotto([]), first argument is an Array', () => {
+  it( 'setKindOfLotto([]), second argument is a String', () => {
     const string = 'string';
     schemaHelper.setKindOfLotto( string );
 

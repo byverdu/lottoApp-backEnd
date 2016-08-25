@@ -154,10 +154,10 @@ describe( 'helper of helper?', () => {
       const dataToExtract = _Array.sliceArrayByCount(data.allResultLongObjOrdered, data.sliceCountBall);
       expect( _Object.extractValueByIndex( dataToExtract)).to.eql( [ '44', '05', '24', '30', '37', '39' ] );
     });
-    it( '#HelperObject.objectColorProperty, is defined', () => {
+    xit( '#HelperObject.objectColorProperty, is defined', () => {
       expect( _Object.objectColorProperty ).to.be.an( 'Object' );
     });
-    it( '#HelperObject.objectColorProperty, returns an Object with 3 properties for colors', () => {
+    xit( '#HelperObject.objectColorProperty, returns an Object with 3 properties for colors', () => {
       expect( _Object.objectColorProperty ).to.have.property( 'green' ).eq( 'greenItem' );
       expect( _Object.objectColorProperty ).to.have.property( 'orange' ).eq( 'orangeItem' );
       expect( _Object.objectColorProperty ).to.have.property( 'red' ).eq( 'redItem' );
@@ -165,9 +165,26 @@ describe( 'helper of helper?', () => {
     it( '#HelperObject.setColorProperty, is defined', () => {
       expect( _Object.setColorProperty ).to.be.a( 'Function' );
     });
+    it( '_Object.setColorProperty, first argument is an Array', () => {
+      const array = [];
+      _Object.setColorProperty( array, 3 );
+      expect( array ).to.be.argumnents;
+      expect( array ).to.be.an( 'Array' );
+    });
+    it( '_Object.setColorProperty, second argument is a String', () => {
+      const string = 3;
+      _Object.setColorProperty([], string );
+
+      expect( string ).to.be.argumnents;
+      expect( string ).to.be.a( 'Number' );
+    });
     it( '#HelperObject.setColorProperty({ index: "12", count: 4 }), returns { index: "12", count: 4, color: "greenItem"}', () => {
-      const result =  _Object.setColorProperty(data.allResultLongObjOrdered, _Object.objectColorProperty, 'green');
+      const dataNumber = data.allResultLongObjOrdered;
+      const fractionNumber = _Number.findFractionNumber( data.allResultLongObjOrdered, 3 );
+      const result = _Object.setColorProperty( dataNumber, fractionNumber );
       expect( result[ 0 ]).to.contain({ index: '44', count: 21, color: 'greenItem' });
+      expect( result[ 20 ]).to.contain({ index: '20', count: 13, color: 'orangeItem' });
+      expect( result[ 40 ]).to.contain({ index: '01', count: 9, color: 'redItem' });
     });
   });
 

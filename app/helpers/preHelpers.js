@@ -154,11 +154,11 @@ exports.helperObject = {
    * Container for color values
    * @memberof HelperObject
    */
-  objectColorProperty: {
-    green: 'greenItem',
-    orange: 'orangeItem',
-    red: 'redItem'
-  },
+  // objectColorProperty: {
+  //   green: 'greenItem',
+  //   orange: 'orangeItem',
+  //   red: 'redItem'
+  // },
 
   /**
    * Adds new "color" property to an object
@@ -168,16 +168,27 @@ exports.helperObject = {
    * @param  {String} thisColor - Reference value as index for the container
    * @return {Object}            - Object with new color property
    */
-  setColorProperty( array, objColor, thisColor ) {
+  setColorProperty( array, fractionNumber ) {
     // array.forEach(( el, ind, arr ) => {
     //   arr[ ind ].color = objColor[ thisColor ];
     //   return arr;
     // });
     // return array;
-    const tempObj = {};
-    return array.map( item => {
-      tempObj.color = objColor[ thisColor ];
-      return Object.assign( item, tempObj );
+    // const tempObj = {};
+    // return array.map( item => {
+    //   tempObj.color = objColor[ thisColor ];
+    //   return Object.assign( item, tempObj );
+    // });
+    return array.map(( item, index ) => {
+      const innerItem = {};
+      if ( index <= fractionNumber ) {
+        innerItem.color = 'greenItem';
+      } else if ( index > fractionNumber && index <= ( fractionNumber * 2 )) {
+        innerItem.color = 'orangeItem';
+      } else {
+        innerItem.color = 'redItem';
+      }
+      return Object.assign( item, innerItem );
     });
   }
 };

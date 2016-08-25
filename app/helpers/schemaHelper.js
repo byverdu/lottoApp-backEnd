@@ -34,15 +34,22 @@ exports.schemaHelper = {
    * @see {@link HelperArray}.sortArrayFromFirstToLast()
    */
   setXrayArrayToSave( array ) {
-    array.map(( el, ind, arr ) => {
-      const innerArray = arr;
-      innerArray[ ind ] = _String.deleteWhiteSpace( arr[ ind ]);
-      innerArray[ ind ] = _String.addStringNumZero( arr[ ind ]);
-
-      return arr;
-    });
-
-    return _Array.concatToSingleString( _Array.sortArrayFromFirstToLast( array ));
+    // console.log(array);
+    // array.map(( el, ind, arr ) => {
+    //   const innerArray = arr;
+    //   innerArray[ ind ] = _String.deleteWhiteSpace( arr[ ind ]);
+    //   innerArray[ ind ] = _String.addStringNumZero( arr[ ind ]);
+    //
+    //   return arr;
+    // });
+    // console.log(array);
+    //
+    // return _Array.concatToSingleString( _Array.sortArrayFromFirstToLast( array ));
+    const arrayReduced = array.reduce(( prev, current ) => {
+      prev.push( _String.addStringNumZero( _String.deleteWhiteSpace( current )));
+      return prev;
+    }, []);
+    return _Array.concatToSingleString( _Array.sortArrayFromFirstToLast( arrayReduced ));
   },
 
   /**
@@ -57,14 +64,17 @@ exports.schemaHelper = {
    * //[ '07', '09', '18', '28', '30', '30', '34', '37', '40', '40' ]
    */
   setAllResulstArrayToCount( array ) {
+    // const tempArray = _Array.splitArray( array );
+    // const result = [];
+    // tempArray.forEach(( outerEl ) => {
+    //   outerEl.forEach(( innerEl ) => {
+    //     result.push( innerEl );
+    //   });
+    // });
+    // return _Array.sortArrayFromFirstToLast( result );
     const tempArray = _Array.splitArray( array );
-    const result = [];
+    const result = tempArray.toString().split( ',' );
 
-    tempArray.forEach(( outerEl ) => {
-      outerEl.forEach(( innerEl ) => {
-        result.push( innerEl );
-      });
-    });
     return _Array.sortArrayFromFirstToLast( result );
   },
 
@@ -143,17 +153,18 @@ exports.schemaHelper = {
    * @see {@link HelperObject}.objectColorProperty
    */
   setColorPropertyStatistics( array ) {
+    // const oneThird = _Number.findFractionNumber( array, fractionNumber );
+    // const greenItems = array.splice( 0, oneThird );
+    // const orangeItems = array.splice( 0, oneThird );
+    // const redItems = array;
+    // const result = [];
+    // _Object.setColorProperty( greenItems, _Object.objectColorProperty, 'green' );
+    // _Object.setColorProperty( orangeItems, _Object.objectColorProperty, 'orange' );
+    // _Object.setColorProperty( redItems, _Object.objectColorProperty, 'red' );
+    // return result.concat( greenItems, orangeItems, redItems );
+
     const oneThird = _Number.findFractionNumber( array, fractionNumber );
-    const greenItems = array.splice( 0, oneThird );
-    const orangeItems = array.splice( 0, oneThird );
-    const redItems = array;
-    const result = [];
-
-    _Object.setColorProperty( greenItems, _Object.objectColorProperty, 'green' );
-    _Object.setColorProperty( orangeItems, _Object.objectColorProperty, 'orange' );
-    _Object.setColorProperty( redItems, _Object.objectColorProperty, 'red' );
-
-    return result.concat( greenItems, orangeItems, redItems );
+    return _Object.setColorProperty( array, oneThird );
   },
 
   /**
@@ -167,16 +178,17 @@ exports.schemaHelper = {
    * @return {Array}                - Array containing the selection
    */
   setKindOfLotto( array, kind, lottoMethod, starsMethod ) {
-    let tempArray = array;
-    switch ( kind ) {
-      case 'lotto':
-        tempArray = lottoMethod;
-        break;
-      case 'stars':
-        tempArray = starsMethod;
-        break;
-      default:
-    }
-    return tempArray;
+    // let tempArray = array;
+    // switch ( kind ) {
+    //   case 'lotto':
+    //     tempArray = lottoMethod;
+    //     break;
+    //   case 'stars':
+    //     tempArray = starsMethod;
+    //     break;
+    //   default:
+    // }
+    // return tempArray;
+    return kind === 'lotto' ? Object.assign( array, lottoMethod ) : Object.assign( array, starsMethod );
   }
 };
