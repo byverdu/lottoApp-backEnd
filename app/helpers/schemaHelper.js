@@ -149,8 +149,16 @@ exports.schemaHelper = {
    * @return {Array}                - Array containing the selection
    */
   setKindOfLotto( array, kind, lottoMethod, starsMethod ) {
-    return kind === 'lotto' ?
-      Object.assign( array, lottoMethod ) :
-      Object.assign( array, starsMethod );
+    let tempArray = array;
+    switch ( kind ) {
+      case 'lotto':
+        tempArray = lottoMethod;
+        break;
+      case 'stars':
+        tempArray = starsMethod;
+        break;
+      default:
+    }
+    return tempArray;
   }
 };

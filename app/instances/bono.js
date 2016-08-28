@@ -31,7 +31,7 @@ module.exports = () => {
           lotto.setLastResult( bonoStorage.numbers );
           lotto.setExtras( bonoStorage.extras );
           lotto.setAllResults( lotto.lastResult );
-          lotto.setStatistics( lotto.getAllResults, 'lotto' );
+          lotto.setStatistics( lotto.getAllResults, 'lotto', configBono.totalNumberBalls );
           lotto.setMostRepeated( configBono.sliceCountBall );
           lotto.save(( saveError, saveLotto ) => {
             if ( saveError ) {
