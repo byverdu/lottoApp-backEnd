@@ -27,6 +27,8 @@ before( done => {
 
 after( done => {
   connection.close(() => done());
+  mongoose.models = {};
+  mongoose.modelSchemas = {};
 });
 
 describe( 'LottoSchema methods and properties', () => {

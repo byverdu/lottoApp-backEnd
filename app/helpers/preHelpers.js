@@ -12,7 +12,6 @@ exports.helperString = {
    * console.log(HelperString.deleteWhiteSpace(' 09')); // '09'
    */
   deleteWhiteSpace( element ) {
-    // const newElement = element.trim();
     return element.trim();
   },
 
@@ -25,10 +24,6 @@ exports.helperString = {
    * console.log(HelperString.addStringNumZero('9')); // '09'
    */
   addStringNumZero( element ) {
-    // let newElement = element;
-    // if ( element <= 9 && element.length < 2 ) {
-    //   newElement = `0${element}`;
-    // }
     return element <= 9 ? `0${element}` : `${element}`;
   },
 
@@ -44,7 +39,6 @@ exports.helperString = {
    */
   orderString( elem, sortMethod, concatMethod ) {
     const tempArray = elem.split( ',' );
-    // const sortedArray = sortMethod( tempArray );
     return concatMethod( sortMethod( tempArray ));
   }
 };
@@ -87,13 +81,6 @@ exports.helperArray = {
    * @link{HelperString}
    */
   concatToSingleString( array ) {
-    // let result = '';
-    // let result2 = '';
-    // array.map(( el ) => {
-    //   result = result.concat( el, ',' );
-    //   return result;
-    // });
-
     return array.join( ',' );
   },
 
@@ -105,11 +92,6 @@ exports.helperArray = {
    * @example console.log(HelperArray.splitArray(['29,11'])) // ['11','29']
    */
   splitArray( array ) {
-    // const tempArray = [];
-    // array.forEach(( el ) => {
-    //   tempArray.push( el.split( ',' ));
-    // });
-    // return tempArray;
     return array.map( item => item.split( ',' ));
   },
 
@@ -123,7 +105,6 @@ exports.helperArray = {
    * // [{index: '07', count: 8},{index: '12', count: 4}]
    */
   sliceArrayByCount( array, count ) {
-    // const slicedArray = array.slice( 0, count );
     return array.slice( 0, count );
   }
 };
@@ -142,43 +123,18 @@ exports.helperObject = {
    * // ['07','12']
    */
   extractValueByIndex( array ) {
-    // const mostRepeated = [];
-    //
-    // array.forEach( el => {
-    //   mostRepeated.push( el.index );
-    // });
     return array.map( item => item.index );
   },
 
   /**
-   * Container for color values
-   * @memberof HelperObject
-   */
-  // objectColorProperty: {
-  //   green: 'greenItem',
-  //   orange: 'orangeItem',
-  //   red: 'redItem'
-  // },
-
-  /**
    * Adds new "color" property to an object
+   * when iterating and array. Different values depending on params
    * @memberof HelperObject
    * @param  {Array} array   - Container with all objects to work with
-   * @param  {Object} objColor - Container with color values
-   * @param  {String} thisColor - Reference value as index for the container
-   * @return {Object}            - Object with new color property
+   * @param  {Number} fractionNumber - Number to split the array and assign Different values
+   * @return {Array}            - Array with objects
    */
   setColorProperty( array, fractionNumber ) {
-    // array.forEach(( el, ind, arr ) => {
-    //   arr[ ind ].color = objColor[ thisColor ];
-    //   return arr;
-    // });
-    // return array;
-    // const tempObj = {};
-    // return array.map( item => {
-    //   tempObj.color = objColor[ thisColor ];
-    //   return Object.assign( item, tempObj );
-    // });
     return array.map(( item, index ) => {
       const innerItem = {};
       if ( index <= fractionNumber ) {
@@ -190,6 +146,38 @@ exports.helperObject = {
       }
       return Object.assign( item, innerItem );
     });
+  },
+
+  /**
+   * Creates objects with the property passed as parameter
+   * @memberof HelperObject
+   * @param  {Array} array   - Container with all objects to work with
+   * @param  {String} propName - Name of the prop that will contain the value
+   * @return {Array}            - Array with objects
+   */
+  buildObjectForProp( array, propName ) {
+    const tempArray = array.map( item => {
+      return {
+        [ propName ]: item
+      };
+    });
+    tempArray.shift();
+    return tempArray;
+  },
+
+  /**
+   * Merge objects from 2 arrays
+   * @memberof HelperObject
+   * @param  {Array} parent   - Container parent with all objects to work with
+   * @param  {Array} child - Container child with all objects to merge
+   * @return {Array}            - Parent array
+   */
+  mergePropsObjects( parent, child ) {
+    child.reduce(( prev, current, index ) => {
+      Object.assign( prev[ index ], current );
+      return prev;
+    }, parent );
+    return parent;
   }
 };
 
@@ -208,7 +196,6 @@ exports.helperNumber = {
    * console.log(HelperNumber.findFractionNumber(array, 3)) // 17
    */
   findFractionNumber( array, fraction ) {
-    // const result = Math.ceil( array.length / fraction );
     return Math.ceil( array.length / fraction );
   }
 };

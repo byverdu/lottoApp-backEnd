@@ -1,21 +1,4 @@
-/**
- * Used inside globalHelper.getPricesInfo()
- */
-const setValuesObjectForWinners = ( value, value2, value3, value4 ) => {
-  if ( value4 === undefined ) {
-    return {
-      category: value,
-      winners: value2,
-      price: value3
-    };
-  }
-  return {
-    category: value,
-    winners: value2,
-    spanish: value4,
-    price: value3
-  };
-};
+import { helperObject as _Object } from './preHelpers';
 
 /**
  * @class
@@ -33,26 +16,18 @@ exports.globalHelper = {
    * console.log(globalHelper.compare2arrays(['23','34'],['23','35'],2)) // false
    * console.log(globalHelper.compare2arrays(['23','34'],['23','34'],2)) // true
    */
-  compare2arrays( firstArray, secondArray, lottoCount ) {
-    let assertion = false;
-    let count = 0;
-    const tempFirstArray = firstArray;
-    const tempSecondArray = secondArray;
+  compare2arrays( firstArray, secondArray ) {
+    console.log(
+      firstArray.every(( item, index ) => item.trim() === secondArray[ index ].trim()),
+      'compare2arrays boolean'
+    );
 
-    for ( let i = 0; i < firstArray.length; i++ ) {
-      tempFirstArray[ i ] = firstArray[ i ].trim();
-      tempSecondArray[ i ] = secondArray[ i ].trim();
-
-      if ( firstArray[ i ].includes( secondArray[ i ])) {
-        count++;
-
-        if ( count === lottoCount ) {
-          assertion = true;
-        }
-      }
+    if ( firstArray.length !== secondArray.length ) {
+      return false;
     }
-    console.log( assertion, 'compare2arrays boolean' );
-    return assertion;
+    return firstArray.every(
+      ( item, index ) => item.trim() === secondArray[ index ].trim()
+    );
   },
 
   /**
@@ -79,27 +54,18 @@ exports.globalHelper = {
    * @return {Array}             - Array with objects formatted and ordered
    */
   getPricesInfo( lottoObject ) {
-    const resultArray = [];
+    const category = _Object.buildObjectForProp( lottoObject.categoryPrice, 'category' );
+    const winners = _Object.buildObjectForProp( lottoObject.winnerPrice, 'winners' );
+    const price = _Object.buildObjectForProp( lottoObject.moneyPrice, 'price' );
 
-    lottoObject.categoryPrice.forEach(( el, ind, array ) => {
-      let obj;
+    _Object.mergePropsObjects( category, winners );
+    _Object.mergePropsObjects( category, price );
 
-      lottoObject.winnerPrice.forEach(( el2, ind2, array2 ) => {
-        lottoObject.moneyPrice.forEach(( el3, ind3, array3 ) => {
-          if ( lottoObject.hasOwnProperty( 'spanishWinners' )) {
-            lottoObject.spanishWinners.forEach(( el4, ind4, array4 ) => {
-              obj = setValuesObjectForWinners( array[ ind ], array2[ ind ], array3[ ind ], array4[ ind ]);
-            });
-          } else {
-            obj = setValuesObjectForWinners( array[ ind ], array2[ ind ], array3[ ind ]);
-          }
-        });
-      });
-      resultArray.push( obj );
-    });
-    resultArray.shift();
-
-    return resultArray;
+    if ( lottoObject.hasOwnProperty( 'spanishWinners' )) {
+      const spanish = _Object.buildObjectForProp( lottoObject.spanishWinners, 'spanish' );
+      _Object.mergePropsObjects( category, spanish );
+    }
+    return category;
   },
 
   /**

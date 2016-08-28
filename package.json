@@ -10,6 +10,8 @@
   "scripts": {
     "nodemon": "nodemon -e js,json,jsx --exec babel-node ./app/bin/init",
     "test": "mocha --compilers js:babel-core/register",
+    "test:watch": "mocha --watch --compilers js:babel-core/register",
+    "shitTest": " nodemon --exec \"mocha --compilers js:babel-core/register\" test",
     "start": "babel-node ./app/bin/init"
   },
   "author": "Albert Vallverdu <byverdu@gmail.com>",

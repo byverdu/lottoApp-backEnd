@@ -186,6 +186,39 @@ describe( 'helper of helper?', () => {
       expect( result[ 20 ]).to.contain({ index: '20', count: 13, color: 'orangeItem' });
       expect( result[ 40 ]).to.contain({ index: '01', count: 9, color: 'redItem' });
     });
+    it( '#HelperObject.buildObjectForProp, is defined', () => {
+      expect( _Object.buildObjectForProp ).to.be.a( 'Function' );
+    });
+
+    it( '#HelperObject.buildObjectForProp, returns an array of objects', () => {
+      expect( _Object.buildObjectForProp( data.getPricesInfoXray.categoryPrice, 'category' ))
+        .to.be.an( 'Array' ).that.contains.at.least({});
+    });
+    it( '#HelperObject.buildObjectForProp, returns objects with the property passed as string', () => {
+      const resultCat = _Object.buildObjectForProp( data.getPricesInfoXray.categoryPrice, 'category' )[0];
+      const resultPrice = _Object.buildObjectForProp( data.getPricesInfoXray.moneyPrice, 'price' )[0];
+      expect( resultCat ).to.have.keys( 'category' );
+      expect( resultPrice ).to.have.keys( 'price' );
+    });
+    it( '#HelperObject.buildObjectForProp, deletes first item of the array', () => {
+      const resultCat = _Object.buildObjectForProp( data.getPricesInfoXray.categoryPrice, 'category')[ 0 ];
+      expect( resultCat ).to.eql({ category: '1ª (6 aciertos)' });
+    });
+    it( '#HelperObject.mergePropsObjects, is defined', () => {
+      expect( _Object.mergePropsObjects ).not.to.eq( undefined );
+    });
+    it( '#HelperObject.mergePropsObjects, returns an array', () => {
+      expect( _Object.mergePropsObjects( data.categoryData, data.winnersData )).to.be.an( 'Array' );
+    });
+    it( '#HelperObject.mergePropsObjects, merge objects from 2 arrays', () => {
+      const categoryData = data.categoryData;
+      const winnersData = data.winnersData;
+      const priceData = data.priceData;
+      expect( _Object.mergePropsObjects( categoryData, winnersData )[ 0 ])
+      .to.have.keys( 'category', 'winners' );
+      expect( _Object.mergePropsObjects( categoryData, priceData )[ 0 ])
+      .to.have.keys( 'category', 'winners', 'price' );
+    });
   });
 
   describe( 'HelperNumber', () => {
