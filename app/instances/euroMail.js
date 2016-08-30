@@ -20,10 +20,15 @@ module.exports = () => {
       } else {
         console.log( lotto.date, 'outside if condition euromillions' );
 
-        nodemailer.mailOptions.html = nodemailer.htmlToSend(
-          lotto.mostRepeated,
-          lotto.stars.mostRepeated
-        );
+        const mailSetup = {
+          html: nodemailer.htmlToSend(
+            lotto.mostRepeated,
+            lotto.stars.mostRepeated
+          ),
+          subject: `Most repeated for ${globalHelper.hackyDate()} ✔`
+        };
+
+        Object.assign( nodemailer.mailOptions, mailSetup );
 
         // send mail with defined transport object
         nodemailer.transporter.sendMail( nodemailer.mailOptions, function( error, info ){
