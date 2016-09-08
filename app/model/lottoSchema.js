@@ -103,8 +103,7 @@ lottoSchema.methods.setMostRepeated = function ( count ) {
   const mostRepeated = schemaHelper.findMostRepeatedValues( this.getStatistics(), count );
 
   this.mostRepeated = schemaHelper.orderStringMostRepeated( mostRepeated );
-  const newStatistics = this.setStatisticsAfterColorSet( this.getStatistics());
-  this.statistics = newStatistics;
+  this.statistics = this.setStatisticsAfterColorSet( this.getStatistics());
 
   return this.mostRepeated;
 };
@@ -119,11 +118,10 @@ lottoSchema.methods.setMostRepeated = function ( count ) {
  * @see {@link lottoSchema}.setStatisticsAfterColorSet
  */
 lottoSchema.methods.setMostRepeatedStars = function ( count ) {
-  const mostRepeated = schemaHelper.findMostRepeatedValues( this.getStatisticStars(), count );
+  const mostRepeatedStars = schemaHelper.findMostRepeatedValues( this.getStatisticStars(), count );
 
-  this.stars.mostRepeated = schemaHelper.orderStringMostRepeated( mostRepeated );
-  const newStatistics = this.setStatisticsAfterColorSet( this.getStatisticStars());
-  this.stars.statistics = newStatistics;
+  this.stars.mostRepeated = schemaHelper.orderStringMostRepeated( mostRepeatedStars );
+  this.stars.statistics = this.setStatisticsAfterColorSet( this.getStatisticStars());
 
   return this.stars.mostRepeated;
 };
@@ -156,8 +154,8 @@ lottoSchema.methods.setAllResultStars = function () {
  * @return {Array}       - Array with objects (this.statistics)
  * @see {@link lottoSchema}.getCountAllResults
  */
-lottoSchema.methods.setStatistics = function ( array, kind ) {
-  this.statistics = this.getCountAllResults( array, kind );
+lottoSchema.methods.setStatistics = function ( array, kind, totalNumberBalls ) {
+  this.statistics = this.getCountAllResults( array, kind, totalNumberBalls );
   return this.statistics;
 };
 
@@ -169,8 +167,8 @@ lottoSchema.methods.setStatistics = function ( array, kind ) {
  * @return {Array}       - Array with objects (this.stars.statistics)
  * @see {@link lottoSchema}.getCountAllResults
  */
-lottoSchema.methods.setStatisticStars = function ( array, kind ) {
-  this.stars.statistics = this.getCountAllResults( array, kind );
+lottoSchema.methods.setStatisticStars = function ( array, kind, totalNumberBalls ) {
+  this.stars.statistics = this.getCountAllResults( array, kind, totalNumberBalls );
   return this.stars.statistics;
 };
 
@@ -228,23 +226,20 @@ lottoSchema.methods.getAllResultsStars = function () {
  * @see {@link SchemaHelper}.setKindOfLotto
  * @see {@link SchemaHelper}.createObjectCount
  */
-lottoSchema.methods.getCountAllResults = function ( array, kind ) {
-  const tempArray = schemaHelper.setKindOfLotto(array, kind, this.getAllResults(), this.getAllResultsStars());
-  const copyAllResults = tempArray.slice( 0 );
+lottoSchema.methods.getCountAllResults = function ( array, kind, totalNumberBalls ) {
+  const tempArray = schemaHelper.setKindOfLotto(
+    array,
+    kind,
+    this.getAllResults(),
+    this.getAllResultsStars()
+  );
   const result = [];
 
-  tempArray.forEach(( outerEl, outerInd, outerArr ) => {
-    let count = 0;
-    copyAllResults.forEach(( innerEl, innerInd, innerArr ) => {
-      if ( outerArr[ outerInd ] === innerArr[ innerInd ]) {
-        count++;
-        delete innerArr[ innerInd ];
-      }
-    });
-    if ( count > 0 ) {
-      result.push( schemaHelper.createObjectCount( outerEl, count ));
-    }
-  });
+  for ( let counter = 1; counter <= totalNumberBalls; counter++ ) {
+    const newIndex = counter < 10 ? `0${counter}` : `${counter}`;
+    const lengthCount = tempArray.filter( item => item === newIndex ).length;
+    result.push( schemaHelper.createObjectCount( newIndex, lengthCount ));
+  }
 
   return result;
 };

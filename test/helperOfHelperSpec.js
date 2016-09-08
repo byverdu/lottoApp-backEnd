@@ -97,16 +97,16 @@ describe( 'helper of helper?', () => {
       expect( _Array.sortArrayByCount( data.allResultLongObjCounted )).to.be.an( 'Array' );
     });
     it( '#HelperArray.sortArrayByCount(array) returns the statistics ordered by count property', () => {
-      expect( _Array.sortArrayByCount(data.allResultLongObjCounted)[0] ).to.eql( {index: '12', count: 4} );
+      expect( _Array.sortArrayByCount( data.allResultLongObjCounted ) ).to.eql( data.allResultLongObjOrdered );
     });
     it( '#HelperArray.sliceArrayByCount is defined', () => {
       expect( _Array.sliceArrayByCount ).not.to.equal( undefined );
     });
     it( '#HelperArray.sliceArrayByCount() returns an Array', () => {
-      expect( _Array.sliceArrayByCount( data.allResultLongObjOrdered, data.sliceCountBall)).to.be.an( 'Array' );
+      expect( _Array.sliceArrayByCount( data.allResultLongObjCounted, data.sliceCountBall)).to.be.an( 'Array' );
     });
     it( '#HelperArray.sliceArrayByCount(array, count) returns "x" first most repeated values ', () => {
-      expect( _Array.sliceArrayByCount(data.allResultLongObjOrdered, data.sliceCountBall)).to.contain({ index: '12', count: 4 },{ index: '16', count: 3 },{ index: '23', count: 3 },{ index: '28', count: 3 },{ index: '15', count: 3 },{ index: '49', count: 2 });
+      expect( _Array.sliceArrayByCount(data.allResultLongObjCounted, data.sliceCountBall)).to.contain({ index: '44', count: 21 },{ index: '05', count: 18 },{ index: '24', count: 18 },{ index: '30', count: 17 },{ index: '37', count: 16 },{ index: '26', count: 16 });
     });
   });
 
@@ -152,12 +152,12 @@ describe( 'helper of helper?', () => {
     });
     it( '#HelperObject.extractValueByIndex(),  returns an Array with populated values from index property', () => {
       const dataToExtract = _Array.sliceArrayByCount(data.allResultLongObjOrdered, data.sliceCountBall);
-      expect( _Object.extractValueByIndex( dataToExtract)).to.eql( [ '12', '16', '23', '28', '15', '49' ] );
+      expect( _Object.extractValueByIndex( dataToExtract)).to.eql( [ '44', '05', '24', '30', '37', '39' ] );
     });
-    it( '#HelperObject.objectColorProperty, is defined', () => {
+    xit( '#HelperObject.objectColorProperty, is defined', () => {
       expect( _Object.objectColorProperty ).to.be.an( 'Object' );
     });
-    it( '#HelperObject.objectColorProperty, returns an Object with 3 properties for colors', () => {
+    xit( '#HelperObject.objectColorProperty, returns an Object with 3 properties for colors', () => {
       expect( _Object.objectColorProperty ).to.have.property( 'green' ).eq( 'greenItem' );
       expect( _Object.objectColorProperty ).to.have.property( 'orange' ).eq( 'orangeItem' );
       expect( _Object.objectColorProperty ).to.have.property( 'red' ).eq( 'redItem' );
@@ -165,10 +165,59 @@ describe( 'helper of helper?', () => {
     it( '#HelperObject.setColorProperty, is defined', () => {
       expect( _Object.setColorProperty ).to.be.a( 'Function' );
     });
-    it( '#HelperObject.setColorProperty({ index: "12", count: 4 }), returns { index: "12", count: 4, color: "greenItem"}', () => {
+    it( '_Object.setColorProperty, first argument is an Array', () => {
+      const array = [];
+      _Object.setColorProperty( array, 3 );
+      expect( array ).to.be.argumnents;
+      expect( array ).to.be.an( 'Array' );
+    });
+    it( '_Object.setColorProperty, second argument is a String', () => {
+      const string = 3;
+      _Object.setColorProperty([], string );
 
-      expect( _Object.setColorProperty([{ index: '12', count: 4 }], _Object.objectColorProperty, 'green'))
-        .to.contain({ index: '12', count: 4, color: 'greenItem' });
+      expect( string ).to.be.argumnents;
+      expect( string ).to.be.a( 'Number' );
+    });
+    it( '#HelperObject.setColorProperty({ index: "12", count: 4 }), returns { index: "12", count: 4, color: "greenItem"}', () => {
+      const dataNumber = data.allResultLongObjOrdered;
+      const fractionNumber = _Number.findFractionNumber( data.allResultLongObjOrdered, 3 );
+      const result = _Object.setColorProperty( dataNumber, fractionNumber );
+      expect( result[ 0 ]).to.contain({ index: '44', count: 21, color: 'greenItem' });
+      expect( result[ 20 ]).to.contain({ index: '20', count: 13, color: 'orangeItem' });
+      expect( result[ 40 ]).to.contain({ index: '01', count: 9, color: 'redItem' });
+    });
+    it( '#HelperObject.buildObjectForProp, is defined', () => {
+      expect( _Object.buildObjectForProp ).to.be.a( 'Function' );
+    });
+
+    it( '#HelperObject.buildObjectForProp, returns an array of objects', () => {
+      expect( _Object.buildObjectForProp( data.getPricesInfoXray.categoryPrice, 'category' ))
+        .to.be.an( 'Array' ).that.contains.at.least({});
+    });
+    it( '#HelperObject.buildObjectForProp, returns objects with the property passed as string', () => {
+      const resultCat = _Object.buildObjectForProp( data.getPricesInfoXray.categoryPrice, 'category' )[0];
+      const resultPrice = _Object.buildObjectForProp( data.getPricesInfoXray.moneyPrice, 'price' )[0];
+      expect( resultCat ).to.have.keys( 'category' );
+      expect( resultPrice ).to.have.keys( 'price' );
+    });
+    it( '#HelperObject.buildObjectForProp, deletes first item of the array', () => {
+      const resultCat = _Object.buildObjectForProp( data.getPricesInfoXray.categoryPrice, 'category')[ 0 ];
+      expect( resultCat ).to.eql({ category: '1ª (6 aciertos)' });
+    });
+    it( '#HelperObject.mergePropsObjects, is defined', () => {
+      expect( _Object.mergePropsObjects ).not.to.eq( undefined );
+    });
+    it( '#HelperObject.mergePropsObjects, returns an array', () => {
+      expect( _Object.mergePropsObjects( data.categoryData, data.winnersData )).to.be.an( 'Array' );
+    });
+    it( '#HelperObject.mergePropsObjects, merge objects from 2 arrays', () => {
+      const categoryData = data.categoryData;
+      const winnersData = data.winnersData;
+      const priceData = data.priceData;
+      expect( _Object.mergePropsObjects( categoryData, winnersData )[ 0 ])
+      .to.have.keys( 'category', 'winners' );
+      expect( _Object.mergePropsObjects( categoryData, priceData )[ 0 ])
+      .to.have.keys( 'category', 'winners', 'price' );
     });
   });
 

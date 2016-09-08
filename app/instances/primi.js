@@ -35,7 +35,7 @@ module.exports = () => {
           lotto.setLastResult( primiStorage.numbers );
           lotto.setExtras( primiStorage.extras );
           lotto.setAllResults( lotto.lastResult );
-          lotto.setStatistics( lotto.getAllResults, 'lotto' );
+          lotto.setStatistics( lotto.getAllResults, 'lotto', configPrimi.totalNumberBalls );
           lotto.setMostRepeated( configPrimi.sliceCountBall );
           lotto.save(( saveErr, saveLotto ) => {
             if ( saveErr ) {

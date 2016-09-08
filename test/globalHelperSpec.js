@@ -9,11 +9,14 @@ describe( 'Helper and methods', () => {
   it( '#Helper, has a compare2arrays method', () => {
     expect( globalHelper.compare2arrays ).not.to.equal( undefined );
   });
+  it( '#Helper.compare2arrays() returns false when they do not have same length', () => {
+    expect( globalHelper.compare2arrays(data.compare2arraysOne, data.compare2arraysFour)).to.eq( false );
+  });
   it( '#Helper.compare2arrays() returns true when they are equal', () => {
-    expect( globalHelper.compare2arrays(data.compare2arraysOne, data.compare2arraysTwo, data.sliceCountBall)).to.eq( true );
+    expect( globalHelper.compare2arrays(data.compare2arraysOne, data.compare2arraysTwo)).to.eq( true );
   });
   it( '#Helper.compare2arrays() returns false when they are not equal', () => {
-    expect( globalHelper.compare2arrays(data.compare2arraysOne, data.compare2arraysThree, data.sliceCountBall)).to.eq( false );
+    expect( globalHelper.compare2arrays(data.compare2arraysOne, data.compare2arraysThree)).to.eq( false );
   });
 
   it( '#Helper, has a customFindOneMongoose method', () => {

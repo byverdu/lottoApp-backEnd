@@ -1,5 +1,5 @@
-/*global before, after, describe, it*/
-'use strict';
+/* global before, after, describe, it */
+/* eslint-disable*/
 
 import chai from 'chai';
 import mongoose from 'mongoose';
@@ -13,7 +13,7 @@ let Lotto;
 let lotto;
 
 function createDummyData() {
-  data.allResultLong.forEach(( el ) => {
+  data.realData.forEach(( el ) => {
     lotto.setAllResults( el );
   });
 }
@@ -27,6 +27,8 @@ before( done => {
 
 after( done => {
   connection.close(() => done());
+  mongoose.models = {};
+  mongoose.modelSchemas = {};
 });
 
 describe( 'LottoSchema methods and properties', () => {
@@ -66,8 +68,8 @@ describe( 'LottoSchema methods and properties', () => {
   });
   it( 'LottoSchema.setMostRepeated, returns the most repeated sliced by count', done => {
     createDummyData();
-    lotto.setStatistics(lotto.allResults, 'lotto');
-    expect( lotto.setMostRepeated(data.sliceCountBall)).to.eql( '12,15,16,23,28,49' );
+    lotto.setStatistics(lotto.allResults, 'lotto', data.totalNumberBalls);
+    expect( lotto.setMostRepeated(data.sliceCountBall)).to.eql( '05,24,30,37,42,44' );
     done();
   });
   it( 'After calling LottoSchema.setMostRepeated, new statistics are created', done => {
@@ -75,8 +77,8 @@ describe( 'LottoSchema methods and properties', () => {
     lotto.statistics = data.allResultLongObjOrdered;
     result = lotto.setStatisticsAfterColorSet(lotto.statistics);
 
-    expect( result[0]).to.contain({ index: '12', count: 4, color: 'greenItem' } );
-    expect( result[result.length - 1]).to.contain({ index: '19', count: 1, color: 'redItem' } );
+    expect( result[0]).to.contain({ index: '44', count: 21, color: 'greenItem' } );
+    expect( result[result.length - 1]).to.contain({ index: '09', count: 3, color: 'redItem' } );
     done();
   });
   it( 'LottoSchema.setAllResults, is defined', done => {
@@ -112,7 +114,7 @@ describe( 'LottoSchema methods and properties', () => {
   });
   it( 'LottoSchema.getCountAllResults(allResults, string) returns ordered objects [{index: "12",count: 4}...]', done => {
     createDummyData();
-    expect( lotto.getCountAllResults(lotto.allResults, 'lotto')).to.eql( data.allResultLongObjCounted );
+    expect( lotto.getCountAllResults(lotto.allResults, 'lotto', data.totalNumberBalls)).to.contain.at.least( data.allResultLongObjCounted );
     done();
     lotto.allResults = [];
   });
@@ -122,8 +124,8 @@ describe( 'LottoSchema methods and properties', () => {
   });
   it( 'LottoSchema.setStatistics() sets lotto.statistics', done => {
     createDummyData();
-    lotto.setStatistics(lotto.allResults, 'lotto');
-    expect( lotto.statistics).to.have.length.above(12 );
+    lotto.setStatistics(lotto.allResults, 'lotto', data.totalNumberBalls );
+    expect( lotto.statistics ).to.have.length.above(12 );
     lotto.allResults = [];
 		done();
   });
@@ -173,7 +175,7 @@ describe( 'LottoSchema methods and properties', () => {
   });
   it( 'LottoSchema.setStatisticStars() sets lotto.statistics', done => {
     data.cretateDataStars( lotto );
-    lotto.setStatisticStars( lotto.stars.allResults, 'stars' );
+    lotto.setStatisticStars( lotto.stars.allResults, 'stars', data.totalNumberBalls );
     expect( lotto.stars.statistics).to.contain({'index':'34','count':1},{'index':'37','count':1} );
     lotto.allResults = [];
     done();
@@ -192,7 +194,7 @@ describe( 'LottoSchema methods and properties', () => {
   });
   it( 'LottoSchema.setMostRepeatedStars, sets the most repeated stars', done => {
     data.cretateDataStars(lotto);
-    lotto.setStatisticStars(lotto.stars.allResults, 'stars');
+    lotto.setStatisticStars(lotto.stars.allResults, 'stars', data.totalNumberBalls);
     expect( lotto.setMostRepeatedStars(data.sliceStars)).to.eql( '30,40' );
     done();
   });
@@ -202,8 +204,8 @@ describe( 'LottoSchema methods and properties', () => {
   });
   it( 'LottoSchema.setStatisticsAfterColorSet, sets this.allResults with a new property', done => {
     var result = lotto.setStatisticsAfterColorSet(data.allResultLongObjOrdered);
-    expect( result[0]).to.contain({ index: '12', count: 4, color: 'greenItem' } );
-    expect( result[result.length - 1]).to.contain({ index: '19', count: 1, color: 'redItem' } );
+    expect( result[0]).to.contain({ index: '44', count: 21, color: 'greenItem' } );
+    expect( result[result.length - 1]).to.contain({ index: '09', count: 3, color: 'redItem' } );
     done();
   });
 

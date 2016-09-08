@@ -15,8 +15,8 @@ describe( 'schemaHelper and methods', () => {
   it( 'setXrayArrayToSave, is defined', () => {
     expect( schemaHelper.setXrayArrayToSave ).to.be.a( 'Function' );
   });
-  it( 'setXrayArrayToSave(["34", "9", "23"," 7", "5"]), returns "05,07,09,23,34"', () => {
-    expect( schemaHelper.setXrayArrayToSave(['34', '9', '23', '7', '5'])).to.eq( '05,07,09,23,34' );
+  it( 'setXrayArrayToSave(["34", "9 ", "23"," 7", "5"]), returns "05,07,09,23,34"', () => {
+    expect( schemaHelper.setXrayArrayToSave(['34', '9 ', ' 23', '7', '5'])).to.eq( '05,07,09,23,34' );
   });
   it( 'setAllResulstArrayToCount, is defined', () => {
     expect( schemaHelper.setAllResulstArrayToCount ).to.be.a( 'Function' );
@@ -39,7 +39,7 @@ describe( 'schemaHelper and methods', () => {
   });
   it( 'findMostRepeatedValues(array) returns index value for most repeated', () => {
     expect( schemaHelper.findMostRepeatedValues( data.allResultLongObjCounted, data.sliceCountBall ))
-      .to.eql( '12,15,16,23,28,49' );
+      .to.eql( '44,05,24,30,37,42' );
   });
   it( 'has a orderStringMostRepeated method', () => {
     expect( schemaHelper.orderStringMostRepeated ).not.to.equal( undefined );
@@ -58,8 +58,8 @@ describe( 'schemaHelper and methods', () => {
   });
   it( 'setColorPropertyStatistics adds a color property to the statistics object', () => {
     const result = schemaHelper.setColorPropertyStatistics( data.allResultLongObjOrdered, data.fraction );
-    expect( result[ 0 ]).to.contain({ index: '12', count: 4, color: 'greenItem' });
-    expect( result[ result.length - 1 ]).to.contain({ index: '19', count: 1, color: 'redItem' });
+    expect( result[ 0 ]).to.contain({ index: '44', count: 21, color: 'greenItem' });
+    expect( result[ result.length - 1 ]).to.contain({ index: '09', count: 3, color: 'redItem' });
   });
   it( 'setKindOfLotto, is defined', () => {
     expect( schemaHelper.setKindOfLotto ).to.be.a( 'Function' );
@@ -74,7 +74,7 @@ describe( 'schemaHelper and methods', () => {
     expect( array ).to.be.argumnents;
     expect( array ).to.be.an( 'Array' );
   });
-  it( 'setKindOfLotto([]), first argument is an Array', () => {
+  it( 'setKindOfLotto([]), second argument is a String', () => {
     const string = 'string';
     schemaHelper.setKindOfLotto( string );
 

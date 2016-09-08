@@ -34,12 +34,12 @@ module.exports = () => {
           lotto.setLastResult( euroStorage.numbers );
           lotto.setAllResults( lotto.lastResult );
           lotto.setExtras( euroStorage.extras );
-          lotto.setStatistics( lotto.getAllResults, 'lotto' );
+          lotto.setStatistics( lotto.getAllResults, 'lotto', configEuro.totalNumberBalls );
           lotto.setMostRepeated( configEuro.sliceCountBall );
 
           lotto.setLastResultStars( euroStorage.extras );
           lotto.setAllResultStars();
-          lotto.setStatisticStars( lotto.getAllResultsStars, 'stars' );
+          lotto.setStatisticStars( lotto.getAllResultsStars, 'stars', configEuro.totalNumberStars );
           lotto.setMostRepeatedStars( configEuro.sliceCountBallStar );
           lotto.save(( saveErr, saveLotto ) => {
             if ( saveErr ) {
