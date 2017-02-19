@@ -15,46 +15,33 @@ function getUrlFor( raffle ) {
 }
 
 function getSelectorsFor( raffle ) {
-  const { numbers, moneyPrice } = config[ raffle ];
+  const { numbers, winnerPrice } = config[ raffle ];
 
   return {
     numbers,
-    moneyPrice
+    winnerPrice
   };
 }
 
-function getNumberValuesFor( raffle ) {
-  const url = getUrlFor( raffle ).url;
-  const selector = getSelectorsFor( raffle ).numbers;
+function getXrayValuesFor( raffle, urlProp, selectorProp ) {
+  const url = getUrlFor( raffle );
+  const selector = getSelectorsFor( raffle );
   xray.get(
-    url, {
-      numbers: [selector]
+    url[ urlProp ], {
+      [ selectorProp ]: [selector[ selectorProp ]]
     }
   ).then( result =>
-    console.log( `${raffle}: ${result.numbers}` )
+    console.log( `${raffle}: ${result[ selectorProp ]}` )
   );
 }
-
-function getPriceValuesFor( raffle ) {
-  const url = getUrlFor( raffle ).urlPrice;
-  const selector = getSelectorsFor( raffle ).moneyPrice;
-  xray.get(
-    url, {
-      moneyPrice: [selector]
-    }
-  ).then( result =>
-    console.log( `${raffle}: ${result.moneyPrice}` )
-  );
-}
-
 
 function *executeXray() {
-  yield getNumberValuesFor( 'bonoloto' );
-  yield getPriceValuesFor( 'bonoloto' );
-  yield getNumberValuesFor( 'primitiva' );
-  yield getPriceValuesFor( 'primitiva' );
-  yield getNumberValuesFor( 'euromillions' );
-  yield getPriceValuesFor( 'euromillions' );
+  yield getXrayValuesFor( 'bonoloto', 'url', 'numbers' );
+  yield getXrayValuesFor( 'bonoloto', 'urlPrice', 'winnerPrice' );
+  yield getXrayValuesFor( 'primitiva', 'url', 'numbers' );
+  yield getXrayValuesFor( 'primitiva', 'urlPrice', 'winnerPrice' );
+  yield getXrayValuesFor( 'euromillions', 'url', 'numbers' );
+  yield getXrayValuesFor( 'euromillions', 'urlPrice', 'winnerPrice' );
 }
 
 const executor = executeXray();
