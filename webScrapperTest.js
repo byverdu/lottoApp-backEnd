@@ -30,9 +30,14 @@ function getXrayValuesFor( raffle, urlProp, selectorProp ) {
     url[ urlProp ], {
       [ selectorProp ]: [selector[ selectorProp ]]
     }
-  ).then( result =>
-    console.log( `${raffle}: ${result[ selectorProp ]}` )
-  );
+  ).then( result => {
+    console.log( `${raffle}: ${result[ selectorProp ]}` );
+    if ( result[ selectorProp ].length === 0 ) {
+      throw Error( `something went wrong for ${raffle} => ${selectorProp}` );
+    }
+  }
+  )
+  .catch( error => console.log( error.message ));
 }
 
 function *executeXray() {
