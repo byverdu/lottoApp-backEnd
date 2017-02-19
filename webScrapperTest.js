@@ -4,7 +4,7 @@ import Xray from './app/config/xray';
 const xray = new Xray();
 const config = require( './app/config/config' ).lotto;
 const iterations = 6;
-import nodemailerXray from './app/config/nodemailerXray';
+import xraySendMail from './app/config/nodemailerXray';
 
 function getUrlFor( raffle ) {
   const { url, urlPrice } = config[ raffle ];
@@ -36,7 +36,7 @@ function getXrayValuesFor( raffle, urlProp, selectorProp ) {
     if ( result[ selectorProp ].length === 0 ) {
       const errorMsg = `something went wrong for ${raffle} => ${selectorProp}`;
 
-      nodemailerXray.sendEmail( raffle, errorMsg );
+      xraySendMail( raffle, errorMsg );
       throw Error( errorMsg );
     }
   }

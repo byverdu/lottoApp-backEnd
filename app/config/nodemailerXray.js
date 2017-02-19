@@ -1,4 +1,4 @@
-// nodemailer config
+// nodemailer config for xray checker
 
 const nodemailer = require( 'nodemailer' );
 const transporter = nodemailer.createTransport({
@@ -9,20 +9,13 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// const mailOptions = {
-//   from: '"Lucky Lotto 👥" <foo@blurdybloop.com>',
-//   to: 'byverdu@gmail.com'
-// };
-
-function sendEmail( raffle, errorMsg ) {
+export default function xraySendMail( raffle, errorMsg ) {
   const mailOptions = {
     from: '"Lucky Lotto 👥" <foo@blurdybloop.com>',
     to: 'byverdu@gmail.com',
     html: errorMsg,
     subject: `Error for ${raffle}`
   };
-
-  // Object.assign( nodemailerXray.mailOptions, mailSetup );
 
   // send mail with defined transport object
   transporter.sendMail( mailOptions, ( error, info ) => {
@@ -32,10 +25,3 @@ function sendEmail( raffle, errorMsg ) {
     console.log( `Message sent: ${info.response}` );
   });
 }
-
-export default {
-  sendEmail
-  // transporter,
-  // mailOptions,
-  // htmlToSend
-};
