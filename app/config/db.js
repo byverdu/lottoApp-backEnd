@@ -3,7 +3,7 @@
 module.exports = function () {
   const uriUtil = require( 'mongodb-uri' );
   const mongoose = require( 'mongoose' );
-  const config = require( './config' ).globals;
+  const config = require( './config' );
   const options = {
     server: {
       socketOptions: {
@@ -18,9 +18,17 @@ module.exports = function () {
       }
     }
   };
+  let dbURL;
 
-  const mongoUri = config.mongoUrlProduction;
-  const mongooseUri = uriUtil.formatMongoose( mongoUri ); // formatting url for better parsing
+  if ( process.env.NODE_ENV === 'development' ) {
+    dbURL = config.database.development;
+  }
+
+  if ( process.env.NODE_ENV === 'production' ) {
+    dbURL = config.database.production;
+  }
+
+  const mongooseUri = uriUtil.formatMongoose( dbURL ); // formatting url for better parsing
 
   mongoose.connect( mongooseUri, options );
 
