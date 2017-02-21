@@ -1,4 +1,5 @@
 import { helperObject as _Object } from './preHelpers';
+const config = require( '../config/config' ).lotto;
 
 /**
  * @class
@@ -87,5 +88,18 @@ exports.globalHelper = {
    */
   checkRaffleDay( lottoKind, dayNumber ) {
     return lottoKind.includes( dayNumber );
+  },
+
+
+  /**
+   * getArrayRaffleDays - Returns the raffleDays array for the
+   * lottoID passed
+   *
+   * @param  {String} lottoID - raffle name
+   * @param  {Object} configObj - config object
+   * @return {Array}            - raffleDays array
+   */
+  getArrayRaffleDays( lottoID ) {
+    return config[ lottoID ].raffleDays;
   }
 };
