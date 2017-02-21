@@ -1,8 +1,9 @@
 // Primi instance fiel
 import mongoose from 'mongoose';
-import Lotto from '../model/lottoSchema';
 import { globalHelper } from '../helpers/globalHelper';
 import { schemaHelper } from '../helpers/schemaHelper';
+import LottoSchema from '../model/lottoSchema';
+const Lotto = mongoose.model( 'Lotto', LottoSchema );
 const configPrimi = require( '../config/config' ).lotto.primitiva;
 const storage = require( '../config/storage' );
 

@@ -19,7 +19,7 @@ const Schema = mongoose.Schema;
  * @param {Array} statistics - Array with objects for each raffle ball,
  * @param {Array} allResults - Storage for all the results
  */
-const lottoSchema = new Schema({
+const LottoSchema = new Schema({
   lottoID: String,
   date: String,
   extras: String,
@@ -41,11 +41,11 @@ const lottoSchema = new Schema({
 
 /**
  * Sets date property for Schema
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @return {String} - Formatted Date (this.date)
  * @see {@link SchemaHelper}.setNewFormatedDate
  */
-lottoSchema.methods.setNewDate = function () {
+LottoSchema.methods.setNewDate = function () {
   console.log( 'setNewDate called' );
   try {
     this.date = schemaHelper.setNewFormatedDate();
@@ -57,49 +57,49 @@ lottoSchema.methods.setNewDate = function () {
 
 /**
  * Sets lastResult property for Schema
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @param  {Array} array - Array result from Xray
  * @return {String}      - Array converted to a single String (this.lastResult)
  * @see {@link SchemaHelper}.setXrayArrayToSave
  */
-lottoSchema.methods.setLastResult = function ( array ) {
+LottoSchema.methods.setLastResult = function ( array ) {
   this.lastResult = schemaHelper.setXrayArrayToSave( array );
   return this.lastResult;
 };
 
 /**
  * Sets last result extras for Schema
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @param  {Array} array - Array result from Xray
  * @return {String}      - Array converted to a single String (this.extras)
  * @see {@link SchemaHelper}.modifyExtras
  */
-lottoSchema.methods.setExtras = function ( array ) {
+LottoSchema.methods.setExtras = function ( array ) {
   this.extras = schemaHelper.modifyExtras( array );
   return this.extras;
 };
 
 /**
  * Sets last result stars for Schema and euromillions instance
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @param  {Array} array - Array result from Xray
  * @return {String}      - Array converted to a single String (this.stars.lastResult)
  */
-lottoSchema.methods.setLastResultStars = function ( array ) {
+LottoSchema.methods.setLastResultStars = function ( array ) {
   this.stars.lastResult = this.setExtras( array );
   return this.stars.lastResult;
 };
 
 /**
  * Sets most repeated values for a lotto kind, internally sets new statistics with color property
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @param  {Integer} count - Number of balls for a raffle
  * @return {String} - String of numbers with the most repeated values for a raffle (mostRepeated)
  * @see {@link SchemaHelper}.findMostRepeatedValues
  * @see {@link SchemaHelper}.orderStringMostRepeated
- * @see {@link lottoSchema}.setStatisticsAfterColorSet
+ * @see {@link LottoSchema}.setStatisticsAfterColorSet
  */
-lottoSchema.methods.setMostRepeated = function ( count ) {
+LottoSchema.methods.setMostRepeated = function ( count ) {
   const mostRepeated = schemaHelper.findMostRepeatedValues( this.getStatistics(), count );
 
   this.mostRepeated = schemaHelper.orderStringMostRepeated( mostRepeated );
@@ -110,14 +110,14 @@ lottoSchema.methods.setMostRepeated = function ( count ) {
 
 /**
  * Sets most repeated values for euro stars, internally sets new statistics with color property
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @param  {Integer} count - Number of balls for a raffle
  * @return {String}- String of numbers with the most repeated values for a raffle stars.mostRepeated
  * @see {@link SchemaHelper}.findMostRepeatedValues
  * @see {@link SchemaHelper}.orderStringMostRepeated
- * @see {@link lottoSchema}.setStatisticsAfterColorSet
+ * @see {@link LottoSchema}.setStatisticsAfterColorSet
  */
-lottoSchema.methods.setMostRepeatedStars = function ( count ) {
+LottoSchema.methods.setMostRepeatedStars = function ( count ) {
   const mostRepeatedStars = schemaHelper.findMostRepeatedValues( this.getStatisticStars(), count );
 
   this.stars.mostRepeated = schemaHelper.orderStringMostRepeated( mostRepeatedStars );
@@ -128,58 +128,58 @@ lottoSchema.methods.setMostRepeatedStars = function ( count ) {
 
 /**
  * Sets all results by adding the las result every time
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @param  {String} lastResult - this.lastResult
  * @return {Array}             - this.allResults + lastResult
  */
-lottoSchema.methods.setAllResults = function ( lastResult ) {
+LottoSchema.methods.setAllResults = function ( lastResult ) {
   return this.allResults.push( lastResult );
 };
 
 /**
  * Sets all stars by adding the las result every time
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @param  {String} lastResult - this.lastResult
  * @return {Array}             - this.allResults + lastResult
  */
-lottoSchema.methods.setAllResultStars = function () {
+LottoSchema.methods.setAllResultStars = function () {
   return this.stars.allResults.push( this.stars.lastResult );
 };
 
 /**
  * Sets first data for the statistics, internally calls this.getCountAllResults
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @param  {Array} array - All the result numbers as a single strings
  * @param  {String} kind - type of lotto to interact with
  * @return {Array}       - Array with objects (this.statistics)
- * @see {@link lottoSchema}.getCountAllResults
+ * @see {@link LottoSchema}.getCountAllResults
  */
-lottoSchema.methods.setStatistics = function ( array, kind, totalNumberBalls ) {
+LottoSchema.methods.setStatistics = function ( array, kind, totalNumberBalls ) {
   this.statistics = this.getCountAllResults( array, kind, totalNumberBalls );
   return this.statistics;
 };
 
 /**
  * Sets first data for the statistics, internally calls this.getCountAllResults
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @param  {Array} array - All the result stars as a single strings
  * @param  {String} kind - type of lotto to interact with
  * @return {Array}       - Array with objects (this.stars.statistics)
- * @see {@link lottoSchema}.getCountAllResults
+ * @see {@link LottoSchema}.getCountAllResults
  */
-lottoSchema.methods.setStatisticStars = function ( array, kind, totalNumberBalls ) {
+LottoSchema.methods.setStatisticStars = function ( array, kind, totalNumberBalls ) {
   this.stars.statistics = this.getCountAllResults( array, kind, totalNumberBalls );
   return this.stars.statistics;
 };
 
 /**
  * Sets new statistics with color property
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @param  {Array} array - Array of objects containing the previous statistics
  * @return {Array}       - Same array but with the new values
  * @see {@link SchemaHelper}.setColorPropertyStatistics
  */
-lottoSchema.methods.setStatisticsAfterColorSet = function ( array ) {
+LottoSchema.methods.setStatisticsAfterColorSet = function ( array ) {
   return schemaHelper.setColorPropertyStatistics( array );
 };
 
@@ -190,35 +190,35 @@ lottoSchema.methods.setStatisticsAfterColorSet = function ( array ) {
 
 /**
  * Gets the last result
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @return {String} - this.lastResult
  */
-lottoSchema.methods.getLastResult = function () {
+LottoSchema.methods.getLastResult = function () {
   return this.lastResult;
 };
 
 /**
  * Gets all the results and formats them for a better data structure
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @return {Array} - allResults split for each single number as string and sorted in ascendent order
  */
-lottoSchema.methods.getAllResults = function () {
+LottoSchema.methods.getAllResults = function () {
   return schemaHelper.setAllResulstArrayToCount( this.allResults );
 };
 
 /**
  * Gets all the stars and formats them for a better data structure
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @return {Array} - stars.allResults split for each single number as string
  * and sorted in ascendent order
  */
-lottoSchema.methods.getAllResultsStars = function () {
+LottoSchema.methods.getAllResultsStars = function () {
   return schemaHelper.setAllResulstArrayToCount( this.stars.allResults );
 };
 
 /**
  * Gets the total number of repetitions for every single number
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @param  {Array} array - Array to interact with, the value will depend on the 'kind' parameter
  * @param  {String} kind - The type of lotto
  * @return {Array}      - Array of objects with the total count for each number
@@ -226,7 +226,7 @@ lottoSchema.methods.getAllResultsStars = function () {
  * @see {@link SchemaHelper}.setKindOfLotto
  * @see {@link SchemaHelper}.createObjectCount
  */
-lottoSchema.methods.getCountAllResults = function ( array, kind, totalNumberBalls ) {
+LottoSchema.methods.getCountAllResults = function ( array, kind, totalNumberBalls ) {
   const tempArray = schemaHelper.setKindOfLotto(
     array,
     kind,
@@ -246,20 +246,20 @@ lottoSchema.methods.getCountAllResults = function ( array, kind, totalNumberBall
 
 /**
  * Gets the statistics
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @return {Object} - this.statistics
  */
-lottoSchema.methods.getStatistics = function () {
+LottoSchema.methods.getStatistics = function () {
   return this.statistics;
 };
 
 /**
  * Gets the stars statistics
- * @memberof lottoSchema
+ * @memberof LottoSchema
  * @return {Object} - this.stars.statistics
  */
-lottoSchema.methods.getStatisticStars = function () {
+LottoSchema.methods.getStatisticStars = function () {
   return this.stars.statistics;
 };
 
-module.exports = mongoose.model( 'Lotto', lottoSchema );
+module.exports = LottoSchema;

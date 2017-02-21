@@ -1,8 +1,9 @@
 // Euro Mongo instance
 import mongoose from 'mongoose';
-import Lotto from '../model/lottoSchema';
 import { schemaHelper } from '../helpers/schemaHelper';
 import { globalHelper } from '../helpers/globalHelper';
+import LottoSchema from '../model/lottoSchema';
+const Lotto = mongoose.model( 'Lotto', LottoSchema );
 const configEuro = require( '../config/config' ).lotto.euromillions;
 const storage = require( '../config/storage' );
 
