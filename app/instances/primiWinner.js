@@ -1,8 +1,9 @@
 //  Instance file for primitivaWinner
 import mongoose from 'mongoose';
-import Winner from '../model/winnerSchema';
 import { globalHelper } from '../helpers/globalHelper';
 const storage = require( '../config/storage' );
+import WinnerSchema from '../model/winnerSchema';
+const Winner = mongoose.model( 'Winner', WinnerSchema );
 
 module.exports = () => {
   require( '../config/db' )();

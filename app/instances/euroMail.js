@@ -1,8 +1,9 @@
 // EuroMail Mongo instance
 import mongoose from 'mongoose';
-import Lotto from '../model/lottoSchema';
 import { globalHelper } from '../helpers/globalHelper';
 import euroRaffleSendMail from '../config/nodemailerEuro';
+import LottoSchema from '../model/lottoSchema';
+const Lotto = mongoose.model( 'Lotto', LottoSchema );
 
 module.exports = () => {
   console.log( 'instances file called mail' );
