@@ -3,7 +3,6 @@ import { globalHelper } from '../app/helpers/globalHelper';
 import chai from 'chai';
 import sinon from 'sinon';
 const data = require( './sampleData' )();
-const config = require( '../app/config/config' ).lotto;
 
 const expect = chai.expect;
 
