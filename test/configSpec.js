@@ -8,10 +8,10 @@ describe( 'Configuration file', () => {
     expect( config ).not.to.equal( undefined );
   });
   it( 'It has a "globals" property that is an object with global settings', () => {
-    expect( config ).to.have.property( 'globals' ).and.is.an( 'Object' );
+    expect( config ).to.have.property( 'database' ).and.is.an( 'Object' );
   });
   it( 'mongoUrl is a property for "globals"', () => {
-    expect( config.globals ).to.have.deep.property( 'mongoUrlTest' ).and.is.a( 'String' );
+    expect( config.database ).to.have.deep.property( 'development' ).and.is.a( 'String' );
   });
   it( 'It has a "lotto" property that is an object with lotto settings', () => {
     expect( config ).to.have.property( 'lotto' ).and.is.an( 'Object' );
