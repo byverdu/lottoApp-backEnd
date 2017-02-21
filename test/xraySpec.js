@@ -3,7 +3,6 @@ import sinon from 'sinon';
 import chai from 'chai';
 import globalXray from 'x-ray';
 const expect = chai.expect;
-const config = require( '../app/config/config' ).lotto.euromillions;
 class XrayWrapper {
   getValues( urlRaffle, selector ) {
     return new Promise(( resolve, reject ) => {
@@ -19,18 +18,20 @@ class XrayWrapper {
     });
   }
 }
+
 // variables used
+const config = require( '../app/config/config' ).lotto.euromillions;
 const {
   url,
   numbers,
   extras,
-  sliceCountBall
+  sliceCountBall,
+  sliceCountBallStar
 } = config;
 const selectors = {
   numbers: [numbers],
   extras: [extras]
 };
-let spy;
 let xrayWrapper;
 
 beforeEach(() => {
@@ -51,9 +52,20 @@ describe( 'wrapper for xray web scrapper', () => {
     expect( xrayWrapper.getValues()).to.be.instanceof( Promise );
   });
   it( 'will use a url parameter and a selector parameter', () => {
-    spy = sinon.spy( xrayWrapper, 'getValues' );
+    const spy = sinon.spy( xrayWrapper, 'getValues' );
     xrayWrapper.getValues( url, selectors );
     expect( spy ).to.have.been.calledOnce;
     expect( spy ).to.be.calledWithExactly( url, selectors );
+  });
+  it( 'the resolved Promise returns an Object with numbers and extras properties', () => {
+    return xrayWrapper.getValues( url, selectors )
+      .then( result => {
+        expect( result ).to.have.property( 'numbers' )
+          .to.be.instanceof( Array )
+          .and.have.length( sliceCountBall );
+        expect( result ).to.have.property( 'extras' )
+          .to.be.instanceof( Array )
+          .and.have.length( sliceCountBallStar );
+      });
   });
 });
