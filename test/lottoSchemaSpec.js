@@ -50,7 +50,7 @@ describe( 'LottoSchema methods and properties', () => {
     done();
   });
   it( 'LottoSchema.setLastResult(["34", "9", "23"," 7", "5"]), returns "05,07,09,23,34"', done => {
-    const newStorage = storage.getItem( 'bonoNumbers' );
+    const newStorage = storage.getItem( 'bonolotoNumbers' );
     expect( lotto.setLastResult( newStorage.numbers )).to.have.length.least( data.sliceCountBall );
     done();
   });
@@ -216,7 +216,7 @@ describe( 'LottoSchema methods and properties', () => {
     done();
   });
   it( 'LottoSchema.lastResult, is defined and is a String', done => {
-    var newStorage = storage.getItem('bonoNumbers');
+    var newStorage = storage.getItem('bonolotoNumbers');
     lotto.setLastResult(newStorage.numbers);
     expect( lotto.lastResult).to.be.a('String' );
     done();
