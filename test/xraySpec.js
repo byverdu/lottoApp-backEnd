@@ -3,6 +3,7 @@ import sinon from 'sinon';
 import chai from 'chai';
 import globalXray from 'x-ray';
 import xrayUtils from '../app/config/xray';
+import { globalHelper } from '../app/helpers/globalHelper';
 const util = require ('util');
 const expect = chai.expect;
 class XrayWrapper {
@@ -25,16 +26,11 @@ class XrayWrapper {
 const config = require( '../app/config/config' ).lotto.euromillions;
 const {
   url,
-  numbers,
-  extras,
   sliceCountBall,
   sliceCountBallStar,
   lottoID
 } = config;
-const selectors = {
-  numbers: [numbers],
-  extras: [extras]
-};
+const selectors = globalHelper.getCommonSelectorsRaffle( 'euromillions' );
 let xrayWrapper;
 let spy;
 

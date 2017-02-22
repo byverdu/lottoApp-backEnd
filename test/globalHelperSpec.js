@@ -76,4 +76,28 @@ describe( 'Helper and methods', () => {
     expect( globalHelper.createParamsXrayModule( 'bonoloto' ))
       .to.have.property( 'promise' ).and.is.instanceof( Promise );
   });
+  it( '#Helper, has a getCommonSelectorsRaffle method', () => {
+    expect( globalHelper.getCommonSelectorsRaffle )
+      .not.to.equal( undefined );
+  });
+  it( '#Helper.getCommonSelectorsRaffle is a function', () => {
+    expect( globalHelper.getCommonSelectorsRaffle )
+      .to.be.a( 'function' );
+  });
+  it( '#Helper.getCommonSelectorsRaffle returns an object', () => {
+    expect( globalHelper.getCommonSelectorsRaffle( 'bonoloto' ))
+      .to.have.property( 'numbers' ).and.is.a( 'array' );
+    expect( globalHelper.getCommonSelectorsRaffle( 'bonoloto' ))
+      .to.have.property( 'extras' ).and.is.a( 'array' );
+  });
+  it( '#Helper.getCommonSelectorsRaffle is called with a lottoID and returns numbers and extras props', () => {
+    const spy = sinon.spy( globalHelper, 'getCommonSelectorsRaffle' );
+    globalHelper.getCommonSelectorsRaffle( 'bonoloto' );
+    expect( spy ).to.have.been.calledOnce;
+    expect( spy ).to.have.been.calledWithExactly( 'bonoloto' );
+    expect( spy ).to.have.returned({
+      numbers: ['.cuerpoRegionIzq li'],
+      extras: ['.cuerpoRegionDerecha li']
+    });
+  });
 });

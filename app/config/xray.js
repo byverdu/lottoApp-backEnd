@@ -1,6 +1,7 @@
 // Web Scrapper settings, using  Promise to avoid null result
 import globalXray from 'x-ray';
 const config = require( './config' ).lotto;
+import { globalHelper } from '../helpers/globalHelper';
 
 class XrayWrapper {
   getValues( urlRaffle, selector ) {
@@ -21,9 +22,7 @@ class XrayWrapper {
 const xray = new XrayWrapper();
 
 exports.getRaffleInfo = function ( lottoID ) {
-  const { url, numbers, extras } = config[ lottoID ];
-  return xray.getValues( url, {
-    numbers: [numbers],
-    extras: [extras]
-  });
+  const selectors = globalHelper.getCommonSelectorsRaffle( lottoID );
+  const { url } = config[ lottoID ];
+  return xray.getValues( url, selectors );
 };

@@ -91,7 +91,6 @@ exports.globalHelper = {
     return lottoKind.includes( dayNumber );
   },
 
-
   /**
    * getArrayRaffleDays - Returns the raffleDays array for the
    * lottoID passed
@@ -103,7 +102,6 @@ exports.globalHelper = {
   getArrayRaffleDays( lottoID ) {
     return config[ lottoID ].raffleDays;
   },
-
 
   /**
    * createParamsXrayModule - Container for parameters
@@ -117,6 +115,19 @@ exports.globalHelper = {
       lottoID,
       sliceCountBall: config[ lottoID ].sliceCountBall,
       promise: xrayUtils.getRaffleInfo( lottoID )
+    };
+  },
+
+
+  /**
+   * getCommonSelectorsRaffle - Gets common props from config
+   * @param  {String} lottoID - raffle name
+   * @return {Object}         - props with selectors
+   */
+  getCommonSelectorsRaffle( lottoID ) {
+    return {
+      numbers: [config[ lottoID ].numbers],
+      extras: [config[ lottoID ].extras]
     };
   }
 };
