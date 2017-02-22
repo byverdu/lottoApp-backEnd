@@ -1,12 +1,13 @@
 // Web Scrapper settings, using  Promise to avoid null result
 import globalXray from 'x-ray';
+const config = require( './config' ).lotto;
 
-export default class {
-  get( url, data ) {
+class XrayWrapper {
+  getValues( urlRaffle, selector ) {
     return new Promise(( resolve, reject ) => {
       const xray = globalXray();
 
-      xray( url, data )(( error, result ) => {
+      xray( urlRaffle, selector )(( error, result ) => {
         if ( error ) {
           reject( error );
         } else {
@@ -16,3 +17,13 @@ export default class {
     });
   }
 }
+
+const xray = new XrayWrapper();
+
+exports.getRaffle = function ( raffle ) {
+  const { url, numbers, extras } = config[ raffle ];
+  return xray.getValues( url, {
+    numbers: [numbers],
+    extras: [extras]
+  });
+};

@@ -2,6 +2,8 @@
 import sinon from 'sinon';
 import chai from 'chai';
 import globalXray from 'x-ray';
+import xrayUtils from '../app/config/xray';
+const util = require ('util');
 const expect = chai.expect;
 class XrayWrapper {
   getValues( urlRaffle, selector ) {
@@ -26,16 +28,22 @@ const {
   numbers,
   extras,
   sliceCountBall,
-  sliceCountBallStar
+  sliceCountBallStar,
+  lottoID
 } = config;
 const selectors = {
   numbers: [numbers],
   extras: [extras]
 };
 let xrayWrapper;
+let spy;
 
 beforeEach(() => {
   xrayWrapper = new XrayWrapper();
+});
+
+after(() => {
+  spy.restore();
 });
 
 describe( 'wrapper for xray web scrapper', () => {
@@ -52,7 +60,7 @@ describe( 'wrapper for xray web scrapper', () => {
     expect( xrayWrapper.getValues()).to.be.instanceof( Promise );
   });
   it( 'will use a url parameter and a selector parameter', () => {
-    const spy = sinon.spy( xrayWrapper, 'getValues' );
+    spy = sinon.spy( xrayWrapper, 'getValues' );
     xrayWrapper.getValues( url, selectors );
     expect( spy ).to.have.been.calledOnce;
     expect( spy ).to.be.calledWithExactly( url, selectors );
@@ -67,5 +75,24 @@ describe( 'wrapper for xray web scrapper', () => {
           .to.be.instanceof( Array )
           .and.have.length( sliceCountBallStar );
       });
+  });
+});
+
+describe( 'xrayUtils', () => {
+  it( 'is defined', () => {
+    expect( xrayUtils ).not.to.eq( undefined );
+  });
+  it( 'has a getRaffle exported method', () => {
+    expect( xrayUtils.getRaffle ).not.to.eq( undefined );
+  });
+  it( 'getRaffle accepts one string parameter', () => {
+    spy = sinon.spy( xrayUtils, 'getRaffle' );
+    xrayUtils.getRaffle( 'euromillions' );
+    expect( spy ).to.have.been.calledOnce;
+    expect( spy ).to.be.calledWithExactly( lottoID );
+  });
+  it( 'getRaffle returns a XrayWrapper promise', () => {
+    const pending = xrayUtils.getRaffle( 'euromillions' );
+    expect( util.inspect( pending )).to.eq( 'Promise { <pending> }' );
   });
 });

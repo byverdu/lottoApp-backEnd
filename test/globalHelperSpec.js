@@ -53,7 +53,7 @@ describe( 'Helper and methods', () => {
     expect( globalHelper.getArrayRaffleDays( 'primitiva' ))
       .to.be.an.instanceof( Array );
   });
-  it( '#Helper.getArrayRaffleDays returns the array for raffleDays config\' property', () => {
+  it( '#Helper.getArrayRaffleDays returns the array for raffleDays config\'s property', () => {
     const spy = sinon.spy( globalHelper, 'getArrayRaffleDays' );
     globalHelper.getArrayRaffleDays( 'primitiva' );
     expect( spy ).to.have.been.calledOnce;
