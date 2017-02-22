@@ -15,7 +15,6 @@ module.exports = {
     production: process.env.MONGO_LOTTO_URL
   },
   lotto: {
-    sendMailDays: [2, 5],
     fractionNumber: 3,
     euromillions: buildPropsFor( 'euromillones', specificEuroProps ),
     primitiva: buildPropsFor( 'primitiva', specificPrimiProps ),

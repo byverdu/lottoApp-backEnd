@@ -60,4 +60,20 @@ describe( 'Helper and methods', () => {
     expect( spy ).to.have.been.calledWithExactly( 'primitiva' );
     expect( spy ).to.returned([4, 6]);
   });
+  it( '#Helper, has a createParamsXrayModule method', () => {
+    expect( globalHelper.createParamsXrayModule )
+      .not.to.equal( undefined );
+  });
+  it( '#Helper.createParamsXrayModule is a function', () => {
+    expect( globalHelper.createParamsXrayModule )
+      .to.be.a( 'function' );
+  });
+  it( '#Helper.createParamsXrayModule returns an object', () => {
+    expect( globalHelper.createParamsXrayModule( 'bonoloto' ))
+      .to.have.property( 'lottoID' ).and.is.a( 'string' );
+    expect( globalHelper.createParamsXrayModule( 'bonoloto' ))
+      .to.have.property( 'sliceCountBall' ).and.is.a( 'number' );
+    expect( globalHelper.createParamsXrayModule( 'bonoloto' ))
+      .to.have.property( 'promise' ).and.is.instanceof( Promise );
+  });
 });

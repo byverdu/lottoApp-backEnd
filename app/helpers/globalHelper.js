@@ -104,7 +104,14 @@ exports.globalHelper = {
     return config[ lottoID ].raffleDays;
   },
 
-  // Maybe a test? :rage:
+
+  /**
+   * createParamsXrayModule - Container for parameters
+   * passed to xray module
+   * @param  {String} lottoID - raffle type
+   * @return {Object}         - props used in xray module
+   * (i.e) lottoID, sliceCountBall, promise
+   */
   createParamsXrayModule( lottoID ) {
     return {
       lottoID,
