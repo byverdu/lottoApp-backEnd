@@ -1,5 +1,6 @@
 import { helperObject as _Object } from './preHelpers';
 const config = require( '../config/config' ).lotto;
+const xrayUtils = require( '../config/xray' );
 
 /**
  * @class
@@ -101,5 +102,14 @@ exports.globalHelper = {
    */
   getArrayRaffleDays( lottoID ) {
     return config[ lottoID ].raffleDays;
+  },
+
+  // Maybe a test? :rage:
+  createParamsXrayModule( lottoID ) {
+    return {
+      lottoID,
+      sliceCountBall: config[ lottoID ].sliceCountBall,
+      promise: xrayUtils.getRaffleInfo( lottoID )
+    };
   }
 };

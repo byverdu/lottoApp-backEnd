@@ -8,7 +8,9 @@ const storage = require( '../config/storage' );
 
 console.log( 'Xray file called' );
 
-module.exports = ( promise, lottoID, sliceCountBall ) => {
+module.exports = ( xrayParams ) => {
+  const { promise, lottoID, sliceCountBall } = xrayParams;
+
   promise.then( result => {
     const storedNumbers = storage.getItem( `${lottoID}Numbers` ).numbers;
 
