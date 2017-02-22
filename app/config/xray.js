@@ -20,8 +20,8 @@ class XrayWrapper {
 
 const xray = new XrayWrapper();
 
-exports.getRaffle = function ( raffle ) {
-  const { url, numbers, extras } = config[ raffle ];
+exports.getRaffleInfo = function ( lottoID ) {
+  const { url, numbers, extras } = config[ lottoID ];
   return xray.getValues( url, {
     numbers: [numbers],
     extras: [extras]

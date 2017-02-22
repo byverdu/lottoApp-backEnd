@@ -82,17 +82,30 @@ describe( 'xrayUtils', () => {
   it( 'is defined', () => {
     expect( xrayUtils ).not.to.eq( undefined );
   });
-  it( 'has a getRaffle exported method', () => {
-    expect( xrayUtils.getRaffle ).not.to.eq( undefined );
+  it( 'has a getRaffleInfo exported method', () => {
+    expect( xrayUtils.getRaffleInfo ).not.to.eq( undefined );
   });
-  it( 'getRaffle accepts one string parameter', () => {
-    spy = sinon.spy( xrayUtils, 'getRaffle' );
-    xrayUtils.getRaffle( 'euromillions' );
+  it( 'getRaffleInfo accepts one string parameter', () => {
+    spy = sinon.spy( xrayUtils, 'getRaffleInfo' );
+    xrayUtils.getRaffleInfo( 'euromillions' );
     expect( spy ).to.have.been.calledOnce;
     expect( spy ).to.be.calledWithExactly( lottoID );
   });
-  it( 'getRaffle returns a XrayWrapper promise', () => {
-    const pending = xrayUtils.getRaffle( 'euromillions' );
+  it( 'getRaffleInfo returns a XrayWrapper promise', () => {
+    const pending = xrayUtils.getRaffleInfo( 'euromillions' );
+    expect( util.inspect( pending )).to.eq( 'Promise { <pending> }' );
+  });
+  xit( 'has a getWinnersRaffle exported method', () => {
+    expect( xrayUtils.getWinnersRaffle ).not.to.eq( undefined );
+  });
+  xit( 'getWinnersRaffle accepts one string parameter', () => {
+    spy = sinon.spy( xrayUtils, 'getWinnersRaffle' );
+    xrayUtils.getWinnersRaffle( 'euromillions' );
+    expect( spy ).to.have.been.calledOnce;
+    expect( spy ).to.be.calledWithExactly( lottoID );
+  });
+  xit( 'getWinnersRaffle returns a XrayWrapper promise', () => {
+    const pending = xrayUtils.getWinnersRaffle( 'euromillions' );
     expect( util.inspect( pending )).to.eq( 'Promise { <pending> }' );
   });
 });
