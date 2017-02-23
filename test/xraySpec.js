@@ -30,7 +30,7 @@ const {
   lottoID
 } = config;
 const selectors = globalHelper.getCommonSelectorsRaffle( lottoID );
-const url = globalHelper.getRaffleUrl( lottoID );
+const url = globalHelper.getRaffleUrlForType( 'url', lottoID );
 let xrayWrapper;
 let spy;
 

@@ -100,25 +100,25 @@ describe( 'Helper and methods', () => {
       extras: ['.cuerpoRegionDerecha li']
     });
   });
-  it( '#Helper, has a getRaffleUrl method', () => {
-    expect( globalHelper.getRaffleUrl )
+  it( '#Helper, has a getRaffleUrlForType method', () => {
+    expect( globalHelper.getRaffleUrlForType )
       .not.to.equal( undefined );
   });
-  it( '#Helper.getRaffleUrl is a function', () => {
-    expect( globalHelper.getRaffleUrl )
+  it( '#Helper.getRaffleUrlForType is a function', () => {
+    expect( globalHelper.getRaffleUrlForType )
       .to.be.a( 'function' );
   });
-  it( '#Helper.getRaffleUrl returns a string', () => {
-    expect( globalHelper.getRaffleUrl( 'primitiva' ) ).to.be.a( 'String' );
+  it( '#Helper.getRaffleUrlForType returns a string', () => {
+    expect( globalHelper.getRaffleUrlForType( 'url', 'primitiva' )).to.be.a( 'String' );
   });
-  it( '#Helper.getRaffleUrl returns a the url for the raffle used as parameter', () => {
-    const spy = sinon.spy( globalHelper, 'getRaffleUrl' );
-    globalHelper.getRaffleUrl( 'primitiva' );
-    expect( spy).to.have.been.calledOnce;
-    expect( spy).to.have.been.calledWithExactly( 'primitiva' );
-    expect( spy).to.have.returned( 'http://www.loteriasyapuestas.es/es/la-primitiva' );
+  it( '#Helper.getRaffleUrlForType returns the url for the raffle used as parameter', () => {
+    const spy = sinon.spy( globalHelper, 'getRaffleUrlForType' );
+    globalHelper.getRaffleUrlForType( 'url', 'primitiva' );
+    expect( spy ).to.have.been.calledOnce;
+    expect( spy ).to.have.been.calledWithExactly( 'url', 'primitiva' );
+    expect( spy ).to.have.returned( 'http://www.loteriasyapuestas.es/es/la-primitiva' );
   });
-  it( '#Helper.getRaffleUrl returns a the url for the raffle used as parameter', () => {
-    expect( globalHelper.getRaffleUrl( 'bonoloto' )).to.eql( 'http://www.loteriasyapuestas.es/es/bonoloto' );
+  it( '#Helper.getRaffleUrlForType returns the url for the raffle used as parameter', () => {
+    expect( globalHelper.getRaffleUrlForType( 'urlPrice', 'bonoloto' )).to.eql( 'http://bonoloto.combinacionganadora.com/' );
   });
 });

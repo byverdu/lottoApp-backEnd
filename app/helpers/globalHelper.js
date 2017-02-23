@@ -118,7 +118,6 @@ exports.globalHelper = {
     };
   },
 
-
   /**
    * getCommonSelectorsRaffle - Gets common props from config
    * @param  {String} lottoID - raffle name
@@ -131,14 +130,14 @@ exports.globalHelper = {
     };
   },
 
-
   /**
    * getRaffleUrl - get config url prop
    *
+   * @param  {String} urlType - endpoint url
    * @param  {String} lottoID - raffle name
    * @return {String}         - url desired
    */
-  getRaffleUrl( lottoID ) {
-    return config[ lottoID ].url;
+  getRaffleUrlForType( urlType, lottoID ) {
+    return config[ lottoID ][ urlType ];
   }
 };
