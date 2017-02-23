@@ -23,6 +23,6 @@ const xray = new XrayWrapper();
 
 exports.getRaffleInfo = function ( lottoID ) {
   const selectors = globalHelper.getCommonSelectorsRaffle( lottoID );
-  const { url } = config[ lottoID ];
+  const url = globalHelper.getRaffleUrl( lottoID );
   return xray.getValues( url, selectors );
 };

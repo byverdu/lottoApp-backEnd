@@ -100,4 +100,25 @@ describe( 'Helper and methods', () => {
       extras: ['.cuerpoRegionDerecha li']
     });
   });
+  it( '#Helper, has a getRaffleUrl method', () => {
+    expect( globalHelper.getRaffleUrl )
+      .not.to.equal( undefined );
+  });
+  it( '#Helper.getRaffleUrl is a function', () => {
+    expect( globalHelper.getRaffleUrl )
+      .to.be.a( 'function' );
+  });
+  it( '#Helper.getRaffleUrl returns a string', () => {
+    expect( globalHelper.getRaffleUrl( 'primitiva' ) ).to.be.a( 'String' );
+  });
+  it( '#Helper.getRaffleUrl returns a the url for the raffle used as parameter', () => {
+    const spy = sinon.spy( globalHelper, 'getRaffleUrl' );
+    globalHelper.getRaffleUrl( 'primitiva' );
+    expect( spy).to.have.been.calledOnce;
+    expect( spy).to.have.been.calledWithExactly( 'primitiva' );
+    expect( spy).to.have.returned( 'http://www.loteriasyapuestas.es/es/la-primitiva' );
+  });
+  it( '#Helper.getRaffleUrl returns a the url for the raffle used as parameter', () => {
+    expect( globalHelper.getRaffleUrl( 'bonoloto' )).to.eql( 'http://www.loteriasyapuestas.es/es/bonoloto' );
+  });
 });

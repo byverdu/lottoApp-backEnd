@@ -4,7 +4,7 @@ import chai from 'chai';
 import globalXray from 'x-ray';
 import xrayUtils from '../app/config/xray';
 import { globalHelper } from '../app/helpers/globalHelper';
-const util = require ('util');
+const util = require( 'util' );
 const expect = chai.expect;
 class XrayWrapper {
   getValues( urlRaffle, selector ) {
@@ -25,12 +25,12 @@ class XrayWrapper {
 // variables used
 const config = require( '../app/config/config' ).lotto.euromillions;
 const {
-  url,
   sliceCountBall,
   sliceCountBallStar,
   lottoID
 } = config;
-const selectors = globalHelper.getCommonSelectorsRaffle( 'euromillions' );
+const selectors = globalHelper.getCommonSelectorsRaffle( lottoID );
+const url = globalHelper.getRaffleUrl( lottoID );
 let xrayWrapper;
 let spy;
 
