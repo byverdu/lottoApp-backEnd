@@ -51,7 +51,8 @@ describe( 'LottoSchema methods and properties', () => {
   });
   it( 'LottoSchema.setLastResult(["34", "9", "23"," 7", "5"]), returns "05,07,09,23,34"', done => {
     const newStorage = storage.getItem( 'bonolotoNumbers' );
-    expect( lotto.setLastResult( newStorage.numbers )).to.have.length.least( data.sliceCountBall );
+    lotto.setLastResult( newStorage.numbers )
+    expect(lotto.lastResult).to.have.length.least( data.sliceCountBall );
     done();
   });
   it( 'LottoSchema.setExtras, is defined', done => {
@@ -59,7 +60,8 @@ describe( 'LottoSchema methods and properties', () => {
     done();
   });
   it( 'LottoSchema.setExtras(["9","7"]), returns "07,09"', done => {
-    expect( lotto.setExtras( ['9','7'] )).to.be.eq( '07,09' );
+    lotto.setExtras( ['9','7']);
+    expect( lotto.extras ).to.be.eq( '07,09' );
     done();
   });
   it( 'LottoSchema.setMostRepeated, is defined', done => {
@@ -69,7 +71,8 @@ describe( 'LottoSchema methods and properties', () => {
   it( 'LottoSchema.setMostRepeated, returns the most repeated sliced by count', done => {
     createDummyData();
     lotto.setStatistics(lotto.allResults, 'lotto', data.totalNumberBalls);
-    expect( lotto.setMostRepeated(data.sliceCountBall)).to.eql( '05,24,30,37,42,44' );
+    lotto.setMostRepeated(data.sliceCountBall)
+    expect( lotto.mostRepeated ).to.eql( '05,24,30,37,42,44' );
     done();
   });
   it( 'After calling LottoSchema.setMostRepeated, new statistics are created', done => {
@@ -143,7 +146,7 @@ describe( 'LottoSchema methods and properties', () => {
   });
   it( 'LottoSchema.setLastResultStars(["9","7"]), returns "07,09"', done => {
     lotto.setLastResultStars(['9','7 ']);
-    expect( lotto.stars.lastResult).to.be.eq('07,09' );
+    expect( lotto.stars.lastResult ).to.be.eq('07,09' );
     done();
   });
   it( 'LottoSchema.setAllResultStars, is defined', done => {
@@ -195,7 +198,8 @@ describe( 'LottoSchema methods and properties', () => {
   it( 'LottoSchema.setMostRepeatedStars, sets the most repeated stars', done => {
     data.cretateDataStars(lotto);
     lotto.setStatisticStars(lotto.stars.allResults, 'stars', data.totalNumberBalls);
-    expect( lotto.setMostRepeatedStars(data.sliceStars)).to.eql( '30,40' );
+    lotto.setMostRepeatedStars(data.sliceStars)
+    expect( lotto.stars.mostRepeated ).to.eql( '30,40' );
     done();
   });
   it( 'LottoSchema.setStatisticsAfterColorSet, is defined', done => {

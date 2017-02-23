@@ -64,7 +64,6 @@ LottoSchema.methods.setNewDate = function () {
  */
 LottoSchema.methods.setLastResult = function ( array ) {
   this.lastResult = schemaHelper.setXrayArrayToSave( array );
-  return this.lastResult;
 };
 
 /**
@@ -76,7 +75,6 @@ LottoSchema.methods.setLastResult = function ( array ) {
  */
 LottoSchema.methods.setExtras = function ( array ) {
   this.extras = schemaHelper.modifyExtras( array );
-  return this.extras;
 };
 
 /**
@@ -86,8 +84,7 @@ LottoSchema.methods.setExtras = function ( array ) {
  * @return {String}      - Array converted to a single String (this.stars.lastResult)
  */
 LottoSchema.methods.setLastResultStars = function ( array ) {
-  this.stars.lastResult = this.setExtras( array );
-  return this.stars.lastResult;
+  this.stars.lastResult = schemaHelper.modifyExtras( array );
 };
 
 /**
@@ -104,8 +101,6 @@ LottoSchema.methods.setMostRepeated = function ( count ) {
 
   this.mostRepeated = schemaHelper.orderStringMostRepeated( mostRepeated );
   this.statistics = this.setStatisticsAfterColorSet( this.getStatistics());
-
-  return this.mostRepeated;
 };
 
 /**
@@ -122,8 +117,6 @@ LottoSchema.methods.setMostRepeatedStars = function ( count ) {
 
   this.stars.mostRepeated = schemaHelper.orderStringMostRepeated( mostRepeatedStars );
   this.stars.statistics = this.setStatisticsAfterColorSet( this.getStatisticStars());
-
-  return this.stars.mostRepeated;
 };
 
 /**
@@ -133,7 +126,7 @@ LottoSchema.methods.setMostRepeatedStars = function ( count ) {
  * @return {Array}             - this.allResults + lastResult
  */
 LottoSchema.methods.setAllResults = function ( lastResult ) {
-  return this.allResults.push( lastResult );
+  this.allResults.push( lastResult );
 };
 
 /**
@@ -143,7 +136,7 @@ LottoSchema.methods.setAllResults = function ( lastResult ) {
  * @return {Array}             - this.allResults + lastResult
  */
 LottoSchema.methods.setAllResultStars = function () {
-  return this.stars.allResults.push( this.stars.lastResult );
+  this.stars.allResults.push( this.stars.lastResult );
 };
 
 /**
@@ -156,7 +149,6 @@ LottoSchema.methods.setAllResultStars = function () {
  */
 LottoSchema.methods.setStatistics = function ( array, kind, totalNumberBalls ) {
   this.statistics = this.getCountAllResults( array, kind, totalNumberBalls );
-  return this.statistics;
 };
 
 /**
@@ -169,7 +161,6 @@ LottoSchema.methods.setStatistics = function ( array, kind, totalNumberBalls ) {
  */
 LottoSchema.methods.setStatisticStars = function ( array, kind, totalNumberBalls ) {
   this.stars.statistics = this.getCountAllResults( array, kind, totalNumberBalls );
-  return this.stars.statistics;
 };
 
 /**
