@@ -119,11 +119,11 @@ exports.globalHelper = {
   },
 
   /**
-   * getCommonSelectorsRaffle - Gets common props from config
+   * getSelectorsRaffle - Gets common props from config
    * @param  {String} lottoID - raffle name
    * @return {Object}         - props with selectors
    */
-  getCommonSelectorsRaffle( lottoID ) {
+  getSelectorsRaffle( lottoID ) {
     return {
       numbers: [config[ lottoID ].numbers],
       extras: [config[ lottoID ].extras]
@@ -139,5 +139,28 @@ exports.globalHelper = {
    */
   getRaffleUrlForType( urlType, lottoID ) {
     return config[ lottoID ][ urlType ];
+  },
+
+  /**
+   * getSelectorsWinnersRaffle - getting selectors for winners raffle
+   *
+   * @param  {String} lottoID - raffle name
+   * @return {Object}         - props needed for winners raffle
+   */
+  getSelectorsWinnersRaffle( lottoID ) {
+    const props = {
+      categoryPrice: [config[ lottoID ].categoryPrice],
+      winnerPrice: [config[ lottoID ].winnerPrice],
+      extraInfoPrice: [config[ lottoID ].extraInfoPrice],
+      moneyPrice: [config[ lottoID ].moneyPrice]
+    };
+
+    if ( lottoID === 'euromillions' ) {
+      const extraProps = {
+        spanishWinners: [config[ lottoID ].spanishWinners]
+      };
+      Object.assign( props, extraProps );
+    }
+    return props;
   }
 };

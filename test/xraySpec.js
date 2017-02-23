@@ -29,7 +29,7 @@ const {
   sliceCountBallStar,
   lottoID
 } = config;
-const selectors = globalHelper.getCommonSelectorsRaffle( lottoID );
+const selectors = globalHelper.getSelectorsRaffle( lottoID );
 const url = globalHelper.getRaffleUrlForType( 'url', lottoID );
 let xrayWrapper;
 let spy;

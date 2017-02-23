@@ -21,7 +21,7 @@ class XrayWrapper {
 const xray = new XrayWrapper();
 
 exports.getRaffleInfo = function ( lottoID ) {
-  const selectors = globalHelper.getCommonSelectorsRaffle( lottoID );
+  const selectors = globalHelper.getSelectorsRaffle( lottoID );
   const url = globalHelper.getRaffleUrlForType( 'url', lottoID );
   return xray.getValues( url, selectors );
 };

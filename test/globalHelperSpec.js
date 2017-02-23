@@ -76,23 +76,23 @@ describe( 'Helper and methods', () => {
     expect( globalHelper.createParamsXrayModule( 'bonoloto' ))
       .to.have.property( 'promise' ).and.is.instanceof( Promise );
   });
-  it( '#Helper, has a getCommonSelectorsRaffle method', () => {
-    expect( globalHelper.getCommonSelectorsRaffle )
+  it( '#Helper, has a getSelectorsRaffle method', () => {
+    expect( globalHelper.getSelectorsRaffle )
       .not.to.equal( undefined );
   });
-  it( '#Helper.getCommonSelectorsRaffle is a function', () => {
-    expect( globalHelper.getCommonSelectorsRaffle )
+  it( '#Helper.getSelectorsRaffle is a function', () => {
+    expect( globalHelper.getSelectorsRaffle )
       .to.be.a( 'function' );
   });
-  it( '#Helper.getCommonSelectorsRaffle returns an object', () => {
-    expect( globalHelper.getCommonSelectorsRaffle( 'bonoloto' ))
+  it( '#Helper.getSelectorsRaffle returns an object', () => {
+    expect( globalHelper.getSelectorsRaffle( 'bonoloto' ))
       .to.have.property( 'numbers' ).and.is.a( 'array' );
-    expect( globalHelper.getCommonSelectorsRaffle( 'bonoloto' ))
+    expect( globalHelper.getSelectorsRaffle( 'bonoloto' ))
       .to.have.property( 'extras' ).and.is.a( 'array' );
   });
-  it( '#Helper.getCommonSelectorsRaffle is called with a lottoID and returns numbers and extras props', () => {
-    const spy = sinon.spy( globalHelper, 'getCommonSelectorsRaffle' );
-    globalHelper.getCommonSelectorsRaffle( 'bonoloto' );
+  it( '#Helper.getSelectorsRaffle is called with a lottoID and returns numbers and extras props', () => {
+    const spy = sinon.spy( globalHelper, 'getSelectorsRaffle' );
+    globalHelper.getSelectorsRaffle( 'bonoloto' );
     expect( spy ).to.have.been.calledOnce;
     expect( spy ).to.have.been.calledWithExactly( 'bonoloto' );
     expect( spy ).to.have.returned({
@@ -120,5 +120,49 @@ describe( 'Helper and methods', () => {
   });
   it( '#Helper.getRaffleUrlForType returns the url for the raffle used as parameter', () => {
     expect( globalHelper.getRaffleUrlForType( 'urlPrice', 'bonoloto' )).to.eql( 'http://bonoloto.combinacionganadora.com/' );
+  });
+  it( '#Helper, has a getSelectorsWinnersRaffle method', () => {
+    expect( globalHelper.getSelectorsWinnersRaffle )
+      .not.to.equal( undefined );
+  });
+  it( '#Helper.getSelectorsWinnersRaffle is a function', () => {
+    expect( globalHelper.getSelectorsWinnersRaffle )
+      .to.be.a( 'function' );
+  });
+  it( '#Helper.getSelectorsWinnersRaffle returns an object', () => {
+    expect( globalHelper.getSelectorsWinnersRaffle( 'bonoloto' ))
+      .to.have.property( 'categoryPrice' ).and.is.a( 'array' );
+    expect( globalHelper.getSelectorsWinnersRaffle( 'bonoloto' ))
+      .to.have.property( 'winnerPrice' ).and.is.a( 'array' );
+    expect( globalHelper.getSelectorsWinnersRaffle( 'bonoloto' ))
+      .to.have.property( 'extraInfoPrice' ).and.is.a( 'array' );
+    expect( globalHelper.getSelectorsWinnersRaffle( 'bonoloto' ))
+      .to.have.property( 'moneyPrice' ).and.is.a( 'array' );
+  });
+  it( '#Helper.getSelectorsWinnersRaffle is called with a lottoID and returns numbers and extras props', () => {
+    const spy = sinon.spy( globalHelper, 'getSelectorsWinnersRaffle' );
+    globalHelper.getSelectorsWinnersRaffle( 'bonoloto' );
+    expect( spy ).to.have.been.calledOnce;
+    expect( spy ).to.have.been.calledWithExactly( 'bonoloto' );
+    expect( spy ).to.have.returned({
+      categoryPrice: ['.escrutinioBox_premios .col1'],
+      winnerPrice: ['.escrutinioBox_premios .col2'],
+      extraInfoPrice: ['.escrutinioBox_premios .ctrlFloat'],
+      moneyPrice: ['.escrutinioBox_premios .col3']
+    });
+    spy.restore();
+  });
+  it( '#Helper.getSelectorsWinnersRaffle returns different props if lottoID is "euromillions"', () => {
+    const spy = sinon.spy( globalHelper, 'getSelectorsWinnersRaffle' );
+    globalHelper.getSelectorsWinnersRaffle( 'euromillions' );
+    expect( spy ).to.have.been.calledOnce;
+    expect( spy ).to.have.been.calledWithExactly( 'euromillions' );
+    expect( spy ).to.have.returned({
+      categoryPrice: ['.escrutinioBox_premios .col1'],
+      winnerPrice: ['.escrutinioBox_premios .col2'],
+      extraInfoPrice: ['.escrutinioBox_premios .ctrlFloat'],
+      moneyPrice: ['.escrutinioBox_premios .col4'],
+      spanishWinners: ['.escrutinioBox_premios .col3']
+    });
   });
 });
