@@ -23,7 +23,7 @@ module.exports = () => {
       } else {
         console.log( lotto.lastResult, 'outside if condition euromillions' );
 
-        const euroStorage = storage.getItem( 'euroNumbers' );
+        const euroStorage = storage.getItem( 'euromillionsNumbers' );
         const storedLastResult = lotto.getLastResult();
         const newEuroStorage = schemaHelper.setXrayArrayToSave( euroStorage.numbers );
 

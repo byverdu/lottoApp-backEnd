@@ -24,7 +24,7 @@ module.exports = () => {
       } else {
         console.log( lotto.lastResult, 'outside if condition primitiva' );
 
-        const primiStorage = storage.getItem( 'primiNumbers' );
+        const primiStorage = storage.getItem( 'primitivaNumbers' );
         const DBlastResult = lotto.getLastResult();
         const newPrimiStorage = schemaHelper.setXrayArrayToSave( primiStorage.numbers );
 

@@ -20,7 +20,7 @@ module.exports = () => {
       if ( !err ) {
         console.log( lotto.lastResult, 'outside if condition bonoloto' );
 
-        const bonoStorage = storage.getItem( 'bonoNumbers' );
+        const bonoStorage = storage.getItem( 'bonolotoNumbers' );
         const DBLastResult = lotto.getLastResult();
         const newPrimiStorage = schemaHelper.setXrayArrayToSave( bonoStorage.numbers );
 
