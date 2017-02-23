@@ -1,40 +1,42 @@
-//  Instance file for primitivaWinner
+// Winners instance for euromillions
 import mongoose from 'mongoose';
 import { globalHelper } from '../helpers/globalHelper';
 const storage = require( '../config/storage' );
 import WinnerSchema from '../model/winnerSchema';
 const Winner = mongoose.model( 'Winner', WinnerSchema );
 
+
 module.exports = () => {
   require( '../config/db' )();
 
-  console.log( 'instances file called primitivaWinner' );
+  console.log( 'instances file called euromillionsWinner' );
 
   const db = mongoose.connection;
 
   db.on( 'error', console.error.bind( console, 'connection error:' ));
   db.once( 'open', () => {
-    console.log( 'open connection primitivaWinner' );
+    console.log( 'open connection euromillionsWinner' );
 
-    globalHelper.customFindOneMongoose( Winner, { lottoID: 'primitivaWinner' }, ( err, winner ) => {
+    globalHelper.customFindOneMongoose( Winner, { lottoID: 'euromillionsWinner' }, ( err, winner ) => {
       if ( err ) {
-        console.log( err, 'err customFindOneMongoose primitivaWinner' );
+        console.log( err );
       } else {
-        const primiStorage = storage.getItem( 'primiWinners' );
+        const euroStorage = storage.getItem( 'euromillionsWinner' );
         const oldWinner = winner.allWinners[ 4 ].winners;
-        const newWinner = primiStorage.allWinners[ 4 ].winners;
+        const newWinner = euroStorage.allWinners[ 4 ].winners;
         const innerWinner = winner;
 
-        console.log( oldWinner, newWinner, 'primitivaWinner' );
+          console.log( oldWinner, newWinner, 'euromillionsWinner' );
+
         if ( oldWinner !== newWinner ) {
           innerWinner.date = globalHelper.hackyDate();
-          innerWinner.allWinners = primiStorage.allWinners;
-          innerWinner.extraInfo = primiStorage.extraInfo;
+          innerWinner.allWinners = euroStorage.allWinners;
+          innerWinner.extraInfo = euroStorage.extraInfo;
           innerWinner.save(( saveErr, saveWinner ) => {
             if ( saveErr ) {
               console.log( saveErr );
             } else {
-              console.log( saveWinner, 'saved primitivaWinner' );
+              console.log( saveWinner, 'saved euromillionsWinner' );
             }
           });
         }
@@ -43,6 +45,6 @@ module.exports = () => {
   });
   setTimeout(() => {
     mongoose.disconnect();
-    console.log( 'primiWinners disconnect mongoDB' );
-  }, 2000 );
+    console.log( 'euroWinners disconnect mongoDB' );
+  }, 3000 );
 };

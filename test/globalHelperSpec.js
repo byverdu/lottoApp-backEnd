@@ -68,12 +68,12 @@ describe( 'Helper and methods', () => {
     expect( globalHelper.createParamsXrayModule )
       .to.be.a( 'function' );
   });
-  it( '#Helper.createParamsXrayModule returns an object', () => {
-    expect( globalHelper.createParamsXrayModule( 'bonoloto' ))
+  it( '#Helper.createParamsXrayModule returns an object with lottoID, sliceCountBall and promise props', () => {
+    expect( globalHelper.createParamsXrayModule( 'bonoloto', 'getRaffleInfo' ))
       .to.have.property( 'lottoID' ).and.is.a( 'string' );
-    expect( globalHelper.createParamsXrayModule( 'bonoloto' ))
+    expect( globalHelper.createParamsXrayModule( 'bonoloto', 'getRaffleInfo' ))
       .to.have.property( 'sliceCountBall' ).and.is.a( 'number' );
-    expect( globalHelper.createParamsXrayModule( 'bonoloto' ))
+    expect( globalHelper.createParamsXrayModule( 'bonoloto', 'getRaffleInfo' ))
       .to.have.property( 'promise' ).and.is.instanceof( Promise );
   });
   it( '#Helper, has a getSelectorsRaffle method', () => {

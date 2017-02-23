@@ -3,8 +3,8 @@
 // TODO extract all values and define them as parameters
 // passed to module.exports so we can have only one file
 
-import { globalHelper } from '../helpers/globalHelper';
-const storage = require( '../config/storage' );
+import { globalHelper } from '../../helpers/globalHelper';
+const storage = require( '../../config/storage' );
 
 console.log( 'Xray file called' );
 
@@ -34,7 +34,7 @@ module.exports = ( xrayParams ) => {
       storage.setItem( `${lottoID}Numbers`, newStorage ).then(() => {
           console.log( `setItems for ${lottoID}` );
           // Calling instance file after promise is solved
-          require( `../instances/${lottoID}` )();
+          require( `../../instances/${lottoID}` )();
         }, () => {
         console.log( 'fuck it' );
       });

@@ -20,7 +20,7 @@ module.exports = () => {
       if ( err ) {
         console.log( err );
       } else {
-        const bonoStorage = storage.getItem( 'bonoWinners' );
+        const bonoStorage = storage.getItem( 'bonolotoWinner' );
         const oldWinner = winner.allWinners[ 4 ].winners;
         const newWinner = bonoStorage.allWinners[ 4 ].winners;
         const innerWinner = winner;

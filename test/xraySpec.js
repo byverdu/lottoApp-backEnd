@@ -91,17 +91,17 @@ describe( 'xrayUtils', () => {
     const pending = xrayUtils.getRaffleInfo( 'euromillions' );
     expect( util.inspect( pending )).to.eq( 'Promise { <pending> }' );
   });
-  it( 'has a getWinnersRaffle exported method', () => {
-    expect( xrayUtils.getWinnersRaffle ).not.to.eq( undefined );
+  it( 'has a getWinnersInfo exported method', () => {
+    expect( xrayUtils.getWinnersInfo ).not.to.eq( undefined );
   });
-  it( 'getWinnersRaffle accepts one string parameter', () => {
-    spy = sinon.spy( xrayUtils, 'getWinnersRaffle' );
-    xrayUtils.getWinnersRaffle( 'euromillions' );
+  it( 'getWinnersInfo accepts one string parameter', () => {
+    spy = sinon.spy( xrayUtils, 'getWinnersInfo' );
+    xrayUtils.getWinnersInfo( 'euromillions' );
     expect( spy ).to.have.been.calledOnce;
     expect( spy ).to.be.calledWithExactly( lottoID );
   });
-  it( 'getWinnersRaffle returns a XrayWrapper promise', () => {
-    const pending = xrayUtils.getWinnersRaffle( 'euromillions' );
+  it( 'getWinnersInfo returns a XrayWrapper promise', () => {
+    const pending = xrayUtils.getWinnersInfo( 'euromillions' );
     expect( util.inspect( pending )).to.eq( 'Promise { <pending> }' );
   });
 });

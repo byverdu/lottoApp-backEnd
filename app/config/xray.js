@@ -26,8 +26,8 @@ exports.getRaffleInfo = function ( lottoID ) {
   return xray.getValues( url, selectors );
 };
 
-exports.getWinnersRaffle = function ( lottoID ) {
-  const selectors = globalHelper.getSelectorsRaffle( lottoID );
+exports.getWinnersInfo = function ( lottoID ) {
+  const selectors = globalHelper.getSelectorsWinnersRaffle( lottoID );
   const url = globalHelper.getRaffleUrlForType( 'urlPrice', lottoID );
   return xray.getValues( url, selectors );
 };

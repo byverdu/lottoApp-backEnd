@@ -10,7 +10,7 @@ console.log( 'server file called' );
 
 let countForMail = 0;
 
-// setInterval(() => {
+setInterval(() => {
   console.log( 'global setInterval' );
 
   const newDate = new Date();
@@ -19,60 +19,65 @@ let countForMail = 0;
 
   if ( hour === 17 ) {
     countForMail += 1;
-    if ( globalHelper.checkRaffleDay( primiRaffles, day ) && countForMail < 2 ) {
+    if ( globalHelper.checkRaffleDay( euroRaffles, day ) && countForMail < 2 ) {
       console.log( 'checkDayEuro for mail' );
       require( './instances/euroMail' )();
     }
   }
 
   // 9pm, draw hour
-  // if ( hour === 21 ) {
+  if ( hour === 21 ) {
     console.log( 'checking hour raffle' );
-
     // reseting counter for euroMail
     countForMail = 0;
     // checkRaffleDay returns true if the array withs draw days contains the actual day
-    // if ( globalHelper.checkRaffleDay( bonoRaffles, day )) {
+    if ( globalHelper.checkRaffleDay( bonoRaffles, day )) {
       console.log( 'checkDayBono' );
-      require( './lottoXray' )( globalHelper.createParamsXrayModule( 'bonoloto' ));
-    // }
+      const xrayParams = globalHelper.createParamsXrayModule( 'bonoloto', 'getRaffleInfo' );
+      require( './scrapper/lotto' )( xrayParams );
+    }
     // Setting a delay to avoid db crashing
     setTimeout(() => {
-      // if ( globalHelper.checkRaffleDay( primiRaffles, day )) {
+      if ( globalHelper.checkRaffleDay( primiRaffles, day )) {
+        const xrayParams = globalHelper.createParamsXrayModule( 'primitiva', 'getRaffleInfo' );
         console.log( 'checkDayPrimi' );
-        require( './lottoXray' )( globalHelper.createParamsXrayModule( 'primitiva' ));
-      // }
+        require( './scrapper/lotto' )( xrayParams );
+      }
     }, 15000 );
     setTimeout(() => {
-      // if ( globalHelper.checkRaffleDay( euroRaffles, day )) {
+      if ( globalHelper.checkRaffleDay( euroRaffles, day )) {
         console.log( 'checkDayEuro' );
-        require( './lottoXray' )( globalHelper.createParamsXrayModule( 'euromillions' ));
-      // }
+        const xrayParams = globalHelper.createParamsXrayModule( 'euromillions', 'getRaffleInfo' );
+        require( './scrapper/lotto' )( xrayParams );
+      }
     }, 24000 );
-  // }
+  }
   // 10pm, draw winners hour
   if ( hour === 22 ) {
     console.log( 'checking hour winner' );
 
     if ( globalHelper.checkRaffleDay( bonoRaffles, day )) {
       console.log( 'checkDayBono' );
-      require( './lottoXray/bonoWinnerXray' )();
+      const xrayParams = globalHelper.createParamsXrayModule( 'bonoloto', 'getWinnersInfo' );
+      require( './scrapper/winners' )( xrayParams );
     }
 
     setTimeout(() => {
       if ( globalHelper.checkRaffleDay( primiRaffles, day )) {
         console.log( 'checkDayPrimi' );
-        require( './lottoXray/primiWinnerXray' )();
+        const xrayParams = globalHelper.createParamsXrayModule( 'primitiva', 'getWinnersInfo' );
+        require( './scrapper/winners' )( xrayParams );
       }
     }, 15000 );
 
     setTimeout(() => {
       if ( globalHelper.checkRaffleDay( euroRaffles, day )) {
         console.log( 'checkDayEuro' );
-        require( './lottoXray/euroWinnerXray' )();
+        const xrayParams = globalHelper.createParamsXrayModule( 'euromillions', 'getWinnersInfo' );
+        require( './scrapper/winners' )( xrayParams );
       }
     }, 24000 );
   }
-// }, 600000 );
+}, 600000 );
 
 module.exports = require( 'express' )();

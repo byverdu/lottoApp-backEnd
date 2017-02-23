@@ -107,14 +107,15 @@ exports.globalHelper = {
    * createParamsXrayModule - Container for parameters
    * passed to xray module
    * @param  {String} lottoID - raffle type
+   * @param  {String} xrayMethod - xray method
    * @return {Object}         - props used in xray module
    * (i.e) lottoID, sliceCountBall, promise
    */
-  createParamsXrayModule( lottoID ) {
+  createParamsXrayModule( lottoID, xrayMethod ) {
     return {
       lottoID,
       sliceCountBall: config[ lottoID ].sliceCountBall,
-      promise: xrayUtils.getRaffleInfo( lottoID )
+      promise: xrayUtils[ xrayMethod ]( lottoID )
     };
   },
 
