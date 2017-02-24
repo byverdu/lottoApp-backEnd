@@ -123,12 +123,23 @@ describe( 'xrayUtils', () => {
       numbers: ['lol'],
       extras: ['BFF']
     };
+    const wrongSelector = {
+      numbers: ['.cuerpoRegionIzq li'],
+      extras: ['BFF']
+    };
     spy.restore();
-    return xrayWrapper.getValues( url, wrongSelectors )
+    xrayWrapper.getValues( url, wrongSelectors )
       .then( result => {
         spy = sinon.spy( xrayUtils, 'checkForEmptyPromise' );
         xrayUtils.checkForEmptyPromise( result );
         expect( spy ).to.have.returned( 'numbers - extras' );
+      });
+    spy.restore();
+    return xrayWrapper.getValues( url, wrongSelector )
+      .then( result => {
+        spy = sinon.spy( xrayUtils, 'checkForEmptyPromise' );
+        xrayUtils.checkForEmptyPromise( result );
+        expect( spy ).to.have.returned( 'extras' );
       });
   });
 });
