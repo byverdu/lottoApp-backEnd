@@ -31,3 +31,13 @@ exports.getWinnersInfo = function ( lottoID ) {
   const url = globalHelper.getRaffleUrlForType( 'urlPrice', lottoID );
   return xray.getValues( url, selectors );
 };
+
+exports.checkForEmptyPromise = function ( result ) {
+  let errored = '';
+  for ( const item in result ) {
+    if ( result[ item ].length === 0 ) {
+      errored += `${item} - `;
+    }
+  }
+  return errored.slice( 0, -3 );
+};

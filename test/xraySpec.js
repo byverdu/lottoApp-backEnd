@@ -104,4 +104,31 @@ describe( 'xrayUtils', () => {
     const pending = xrayUtils.getWinnersInfo( 'euromillions' );
     expect( util.inspect( pending )).to.eq( 'Promise { <pending> }' );
   });
+  it( 'has a checkForEmptyPromise exported method', () => {
+    expect( xrayUtils.checkForEmptyPromise ).not.to.eq( undefined );
+  });
+  it( 'checkForEmptyPromise returns a string', () => {
+    expect( xrayUtils.checkForEmptyPromise()).to.be.a( 'String' );
+  });
+  it( 'checkForEmptyPromise returns empty string with correct selectors', function () {
+    return xrayWrapper.getValues( url, selectors )
+      .then( result => {
+        spy = sinon.spy( xrayUtils, 'checkForEmptyPromise' );
+        xrayUtils.checkForEmptyPromise( result );
+        expect( spy ).to.have.returned( '' );
+      });
+  });
+  it( 'checkForEmptyPromise returns the result property that is wrong', function () {
+    const wrongSelectors = {
+      numbers: ['lol'],
+      extras: ['BFF']
+    };
+    spy.restore();
+    return xrayWrapper.getValues( url, wrongSelectors )
+      .then( result => {
+        spy = sinon.spy( xrayUtils, 'checkForEmptyPromise' );
+        xrayUtils.checkForEmptyPromise( result );
+        expect( spy ).to.have.returned( 'numbers - extras' );
+      });
+  });
 });

@@ -1,17 +1,23 @@
 // Scrapper for the euromillions  draw
 
-// TODO extract all values and define them as parameters
-// passed to module.exports so we can have only one file
-
 import { globalHelper } from '../../helpers/globalHelper';
+import xraySendMail from '../../config/nodemailerXray';
+import { checkForEmptyPromise } from '../../config/xray';
 const storage = require( '../../config/storage' );
 
 console.log( 'Xray file called' );
 
 module.exports = ( xrayParams ) => {
   const { promise, lottoID, sliceCountBall } = xrayParams;
-
   promise.then( result => {
+    const isEmptyPromise = checkForEmptyPromise( result );
+
+    if ( isEmptyPromise.length > 0 ) {
+      const errorMsg = `something went wrong for ${lottoID} => ${isEmptyPromise}`;
+
+      xraySendMail( lottoID, errorMsg );
+      throw Error( errorMsg );
+    }
     const storedNumbers = storage.getItem( `${lottoID}Numbers` ).numbers;
 
     console.log( result.numbers, 'result.numbers' );
@@ -40,5 +46,6 @@ module.exports = ( xrayParams ) => {
       });
     }
     console.log( `after if Xray ${lottoID}` );
-  });
+  })
+  .catch( error => console.log( error.message ));
 };

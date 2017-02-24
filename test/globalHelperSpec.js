@@ -3,7 +3,6 @@ import { globalHelper } from '../app/helpers/globalHelper';
 import chai from 'chai';
 import sinon from 'sinon';
 const data = require( './sampleData' )();
-
 const expect = chai.expect;
 
 describe( 'Helper and methods', () => {
@@ -97,7 +96,7 @@ describe( 'Helper and methods', () => {
     expect( spy ).to.have.been.calledWithExactly( 'bonoloto' );
     expect( spy ).to.have.returned({
       numbers: ['.cuerpoRegionIzq li'],
-      extras: ['.cuerpoRegionDerecha li']
+      extras: ['.cuerpoRegionDerecha .bolaPeq']
     });
   });
   it( '#Helper, has a getRaffleUrlForType method', () => {

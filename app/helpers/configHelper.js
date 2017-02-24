@@ -2,7 +2,6 @@
 
 const commonXraySelectors = {
   numbers: '.cuerpoRegionIzq li',
-  extras: '.cuerpoRegionDerecha li',
   categoryPrice: '.escrutinioBox_premios .col1',
   winnerPrice: '.escrutinioBox_premios .col2',
   extraInfoPrice: '.escrutinioBox_premios .ctrlFloat'
@@ -51,6 +50,12 @@ const buildPropsFor = ( raffle, specificProps ) => {
     url: getUrlRaffles( raffle ),
     urlPrice: getUrlRafflesPrices( raffle )
   };
+
+  if ( raffle === 'euromillones' ) {
+    commonXraySelectors.extras = '.cuerpoRegionDerecha li';
+  } else {
+    commonXraySelectors.extras = '.cuerpoRegionDerecha .bolaPeq';
+  }
 
   return Object.assign( tempProps, commonXraySelectors, specificProps );
 };
