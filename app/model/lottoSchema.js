@@ -253,4 +253,9 @@ LottoSchema.methods.getStatisticStars = function () {
   return this.stars.statistics;
 };
 
+LottoSchema.methods.customSaveLotto = function ( storage ) {
+  this.setNewDate();
+  this.setLastResult( storage.numbers );
+};
+
 module.exports = LottoSchema;
