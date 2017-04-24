@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { schemaHelper } from '../helpers/schemaHelper';
 const Schema = mongoose.Schema;
 
+mongoose.Promise = global.Promise;
 /**
  * @class
  * Main mongoose Schema

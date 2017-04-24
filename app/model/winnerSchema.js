@@ -2,6 +2,8 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
+mongoose.Promise = global.Promise;
+
 const WinnerSchema = new Schema({
   lottoID: String,
   date: String,
