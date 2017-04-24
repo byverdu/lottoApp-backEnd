@@ -13,8 +13,8 @@ const specificEuroProps = {
   totalNumberStars: 11,
   sliceCountBall: 5,
   sliceCountBallStar: 2,
-  spanishWinners: '.escrutinioTable tbody tr td:nth-of-type(3)',
   raffleDays: [2, 5],
+  spanishWinners: '.escrutinioTable tbody tr td:nth-of-type(3)',
   moneyPrice: '.escrutinioTable tbody tr td:nth-of-type(4)'
 };
 

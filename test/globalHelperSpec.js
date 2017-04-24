@@ -144,10 +144,10 @@ describe( 'Helper and methods', () => {
     expect( spy ).to.have.been.calledOnce;
     expect( spy ).to.have.been.calledWithExactly( 'bonoloto' );
     expect( spy ).to.have.returned({
-      categoryPrice: ['.escrutinioBox_premios .col1'],
-      winnerPrice: ['.escrutinioBox_premios .col2'],
-      extraInfoPrice: ['.escrutinioBox_premios .ctrlFloat'],
-      moneyPrice: ['.escrutinioBox_premios .col3']
+      categoryPrice: ['.escrutinioTable tbody tr td:nth-of-type(1)'],
+      winnerPrice: ['.escrutinioTable tbody tr td:nth-of-type(2)'],
+      extraInfoPrice: ['.escrutinioTable tfoot tr td span'],
+      moneyPrice: ['.escrutinioTable tbody tr td:nth-of-type(3)']
     });
     spy.restore();
   });
@@ -157,11 +157,11 @@ describe( 'Helper and methods', () => {
     expect( spy ).to.have.been.calledOnce;
     expect( spy ).to.have.been.calledWithExactly( 'euromillions' );
     expect( spy ).to.have.returned({
-      categoryPrice: ['.escrutinioBox_premios .col1'],
-      winnerPrice: ['.escrutinioBox_premios .col2'],
-      extraInfoPrice: ['.escrutinioBox_premios .ctrlFloat'],
-      moneyPrice: ['.escrutinioBox_premios .col4'],
-      spanishWinners: ['.escrutinioBox_premios .col3']
+      categoryPrice: ['.escrutinioTable tbody tr td:nth-of-type(1)'],
+      winnerPrice: ['.escrutinioTable tbody tr td:nth-of-type(2)'],
+      extraInfoPrice: ['.escrutinioTable tfoot tr td span'],
+      moneyPrice: ['.escrutinioTable tbody tr td:nth-of-type(4)'],
+      spanishWinners: ['.escrutinioTable tbody tr td:nth-of-type(3)']
     });
   });
 });
