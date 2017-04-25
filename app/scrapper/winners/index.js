@@ -39,7 +39,7 @@ module.exports = ( xrayParams ) => {
       storage.setItem( `${lottoID}Winner`, newStorage ).then(() => {
         console.log( `setItem for ${lottoID}Winner` );
           // Calling instance file after promise is solved
-        require( `../../instances/${lottoID}Winner` )();
+        require( '../../instances/winners' )( `${lottoID}Winner` );
       }, () => {
         console.log( `error setting ${lottoID}Winners` );
       });

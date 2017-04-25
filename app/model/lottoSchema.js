@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { schemaHelper } from '../helpers/schemaHelper';
 const Schema = mongoose.Schema;
 
+mongoose.Promise = global.Promise;
 /**
  * @class
  * Main mongoose Schema
@@ -251,6 +252,11 @@ LottoSchema.methods.getStatistics = function () {
  */
 LottoSchema.methods.getStatisticStars = function () {
   return this.stars.statistics;
+};
+
+LottoSchema.methods.customSaveLotto = function ( storage ) {
+  this.setNewDate();
+  this.setLastResult( storage.numbers );
 };
 
 module.exports = LottoSchema;

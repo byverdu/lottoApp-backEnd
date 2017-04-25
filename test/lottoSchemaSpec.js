@@ -4,6 +4,7 @@
 import chai from 'chai';
 import mongoose from 'mongoose';
 import LottoSchema from '../app/model/lottoSchema';
+import sinon from 'sinon';
 
 const data = require( './sampleData' )();
 const expect = chai.expect;
@@ -31,7 +32,7 @@ after( done => {
   mongoose.modelSchemas = {};
 });
 
-describe( 'LottoSchema methods and properties', () => {
+describe( 'LottoSchema methods', () => {
   it( 'LottoSchema.setNewDate, is defined', done => {
     expect( lotto.setNewDate ).to.be.a( 'Function' );
     done();
@@ -207,20 +208,47 @@ describe( 'LottoSchema methods and properties', () => {
     done();
   });
   it( 'LottoSchema.setStatisticsAfterColorSet, sets this.allResults with a new property', done => {
-    var result = lotto.setStatisticsAfterColorSet(data.allResultLongObjOrdered);
+    const result = lotto.setStatisticsAfterColorSet(data.allResultLongObjOrdered);
     expect( result[0]).to.contain({ index: '44', count: 21, color: 'greenItem' } );
     expect( result[result.length - 1]).to.contain({ index: '09', count: 3, color: 'redItem' } );
     done();
   });
+  describe( 'customSaveLotto', () => {
+    let spy;
+    let newStorage;
+    function setSinonSpy( method ) {
+      return sinon.spy( lotto, method );
+    }
+    beforeEach(() => {
+      newStorage = storage.getItem('euromillionsNumbers');
+    });
+    it( 'customSaveLotto, is defined', () => {
+      expect( lotto.customSaveLotto ).not.eq( undefined );
+    });
+    it( 'customSaveLotto, will set a new date', () => {
+      spy = setSinonSpy( 'setNewDate' );
+      lotto.customSaveLotto( newStorage );
+      expect( spy ).to.have.been.calledOnce;
+    });
+    it( 'customSaveLotto, will set the last reult', () => {
+      spy = setSinonSpy( 'setLastResult' );
+      console.log(newStorage);
+      lotto.customSaveLotto( newStorage );
+      expect( spy ).to.have.been.calledOnce;
+      expect( spy ).to.have.been.calledWithExactly( newStorage.numbers );
+      expect( lotto.lastResult ).to.be.a( 'String' );
+    });
+  });
+});
 
-
+describe( 'LottoSchema properties', () => {
   it( 'LottoSchema.date, is defined and is a String', done => {
     lotto.setNewDate();
     expect( lotto.date).to.be.a('String' );
     done();
   });
   it( 'LottoSchema.lastResult, is defined and is a String', done => {
-    var newStorage = storage.getItem('bonolotoNumbers');
+    const newStorage = storage.getItem('bonolotoNumbers');
     lotto.setLastResult(newStorage.numbers);
     expect( lotto.lastResult).to.be.a('String' );
     done();

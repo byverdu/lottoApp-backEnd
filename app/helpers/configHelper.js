@@ -2,9 +2,9 @@
 
 const commonXraySelectors = {
   numbers: '.cuerpoRegionIzq li',
-  categoryPrice: '.escrutinioBox_premios .col1',
-  winnerPrice: '.escrutinioBox_premios .col2',
-  extraInfoPrice: '.escrutinioBox_premios .ctrlFloat'
+  categoryPrice: '.escrutinioTable tbody tr td:nth-of-type(1)',
+  winnerPrice: '.escrutinioTable tbody tr td:nth-of-type(2)',
+  extraInfoPrice: '.escrutinioTable tfoot tr td span'
 };
 
 const specificEuroProps = {
@@ -14,8 +14,8 @@ const specificEuroProps = {
   sliceCountBall: 5,
   sliceCountBallStar: 2,
   raffleDays: [2, 5],
-  spanishWinners: '.escrutinioBox_premios .col3',
-  moneyPrice: '.escrutinioBox_premios .col4'
+  spanishWinners: '.escrutinioTable tbody tr td:nth-of-type(3)',
+  moneyPrice: '.escrutinioTable tbody tr td:nth-of-type(4)'
 };
 
 const specificPrimiProps = {
@@ -24,7 +24,7 @@ const specificPrimiProps = {
   totalNumberBalls: 49,
   sliceCountBall: 6,
   raffleDays: [4, 6],
-  moneyPrice: '.escrutinioBox_premios .col3'
+  moneyPrice: '.escrutinioTable tbody tr td:nth-of-type(3)'
 };
 
 const specificBonoProps = {
@@ -33,7 +33,7 @@ const specificBonoProps = {
   totalNumberBalls: 49,
   sliceCountBall: 6,
   raffleDays: [1, 2, 3, 5],
-  moneyPrice: '.escrutinioBox_premios .col3'
+  moneyPrice: '.escrutinioTable tbody tr td:nth-of-type(3)'
 };
 
 function getUrlRaffles( raffle ) {

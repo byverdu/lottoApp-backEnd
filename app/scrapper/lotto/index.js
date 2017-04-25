@@ -38,10 +38,10 @@ module.exports = ( xrayParams ) => {
       };
       // Setting new values to store, returns a promise
       storage.setItem( `${lottoID}Numbers`, newStorage ).then(() => {
-          console.log( `setItems for ${lottoID}` );
+        console.log( `setItems for ${lottoID}` );
           // Calling instance file after promise is solved
-          require( `../../instances/${lottoID}` )();
-        }, () => {
+        require( '../../instances/lotto' )( `${lottoID}` );
+      }, () => {
         console.log( 'fuck it' );
       });
     }
