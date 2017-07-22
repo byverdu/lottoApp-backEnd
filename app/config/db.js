@@ -32,5 +32,5 @@ module.exports = function () {
 
   mongoose.connect( mongooseUri, options );
 
-  console.log( 'database file called' );
+  console.log( `database file called for ${process.env.NODE_ENV}` );
 };

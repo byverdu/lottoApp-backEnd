@@ -25,7 +25,7 @@ module.exports = ( lottoID ) => {
         const newWinner = lottoStorage.allWinners[ 4 ].winners;
         const innerWinner = winner;
 
-        console.log( oldWinner, newWinner, lottoID );
+        console.log( oldWinner, newWinner, `${lottoID}Instance` );
 
         if ( oldWinner !== newWinner ) {
           innerWinner.date = globalHelper.hackyDate();
