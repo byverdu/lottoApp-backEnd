@@ -132,6 +132,9 @@ describe( 'helper of helper?', () => {
     it( '#HelperString.addStringNumZero("0"), returns "00"', () => {
       expect( _String.addStringNumZero( '0' )).to.eq( '00' );
     });
+    it( '#HelperString.addStringNumZero("03"), returns "03"', () => {
+      expect( _String.addStringNumZero( '03' )).to.eq( '03' );
+    });
     it( '#HelperString, has a orderString method', () => {
       expect( _String.orderString ).not.to.equal( undefined );
     });

@@ -24,7 +24,7 @@ exports.helperString = {
    * console.log(HelperString.addStringNumZero('9')); // '09'
    */
   addStringNumZero( element ) {
-    return element <= 9 ? `0${element}` : `${element}`;
+    return ( Number( element ) <= 9 && element.length === 1 ) ? `0${element}` : `${element}`;
   },
 
   /**

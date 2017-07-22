@@ -39,3 +39,14 @@ A class Helpers will exist in order to help the Schema methods to convert the da
 ###### [Here you can find the project structure](https://github.com/byverdu/lottoApp-backEnd/tree/development/docs/structure.md)
 
 ###### [Here you can find the workflow for the App](https://github.com/byverdu/lottoApp-backEnd/tree/development/docs/workflow.md)
+
+##### Utilization
+
+```json
+"scripts": {
+    "nodemon": "nodemon -e js,json,jsx --exec babel-node ./app/bin/init",
+    "test": "mocha --compilers js:babel-core/register",
+    "test:watch": "mocha --watch --compilers js:babel-core/register",
+    "start": "babel-node ./app/bin/init"
+  }
+```
