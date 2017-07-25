@@ -11,15 +11,6 @@ module.exports = ( xrayParams ) => {
   const { promise, lottoID } = xrayParams;
 
   promise.then( result => {
-    const isEmptyPromise = checkForEmptyPromise( result );
-
-    if ( isEmptyPromise.length > 0 ) {
-      const errorMsg = `something went wrong for ${lottoID} => ${isEmptyPromise}`;
-
-      xraySendMail( lottoID, errorMsg );
-      throw Error( errorMsg );
-    }
-
     const convertedResult = globalHelper.getPricesInfo( result );
       // getting 4th winners value from result,
       // assures that the values changes on every draw

@@ -10,14 +10,6 @@ console.log( 'Xray file called' );
 module.exports = ( xrayParams ) => {
   const { promise, lottoID, sliceCountBall } = xrayParams;
   promise.then( result => {
-    const isEmptyPromise = checkForEmptyPromise( result );
-
-    if ( isEmptyPromise.length > 0 ) {
-      const errorMsg = `something went wrong for ${lottoID} => ${isEmptyPromise}`;
-
-      xraySendMail( lottoID, errorMsg );
-      throw Error( errorMsg );
-    }
     const storedNumbers = storage.getItem( `${lottoID}Numbers` ).numbers;
 
     console.log( result.numbers, 'result.numbers' );

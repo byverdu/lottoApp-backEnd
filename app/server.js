@@ -1,5 +1,6 @@
 // Entry point, setInterval for raffleDays
 import { globalHelper } from './helpers/globalHelper';
+import * as xrayUtils from './config/xray';
 
 // Array with numbers representing the draw days
 const bonoRaffles = globalHelper.getArrayRaffleDays( 'bonoloto' );
@@ -77,6 +78,26 @@ setInterval(() => {
         require( './scrapper/winners' )( xrayParams );
       }
     }, 24000 );
+  }
+
+  // midnight, check if xray selectors has changed
+  if ( hour === 0 ) {
+    const lottoID = 'euromillions';
+    xrayUtils.getRaffleInfo( lottoID )
+      .then(( result ) => {
+        const isEmptyPromise = xrayUtils.checkForEmptyPromise( result );
+        xrayUtils.emptyPromiseAction( isEmptyPromise, lottoID );
+      })
+      .catch( err => console.log( err ));
+
+    setTimeout(() => {
+      xrayUtils.getWinnersInfo( lottoID )
+        .then(( result ) => {
+          const isEmptyPromise = xrayUtils.checkForEmptyPromise( result );
+          xrayUtils.emptyPromiseAction( isEmptyPromise, lottoID );
+        })
+        .catch( err => console.log( err ));
+    }, 6000 );
   }
 }, 600000 );
 
